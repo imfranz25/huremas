@@ -72,7 +72,7 @@ include 'includes/header.php';
                                 <div class="card-header pb-4">
                                   <h5>
                                     <i class="ti-files mx-2" aria-hidden="true"></i> 
-                                    <label id="archive_title">Archive Title</label>
+                                    <label id="archive_title">Archived Folders</label>
                                   </h5>
                                 </div>
                               </div>
@@ -85,9 +85,9 @@ include 'includes/header.php';
                                     <table id="archive_table" class="table table-striped table-bordered" style="width:100%">
                                       <thead>
                                         <tr>
-                                          <th>Folder Name</th>
-                                          <th>Folder Created</th>
-                                          <th>Created By</th>
+                                          <th id="name">Folder Name</th>
+                                          <th>Date Created</th>
+                                          <th id="created">Created By</th>
                                           <th style="max-width: 60px;">Action</th>
                                         </tr>
                                       </thead>
@@ -109,16 +109,18 @@ include 'includes/header.php';
                             <div class="card mb-0 pb-3" style="min-height: 100vh;">
                               <div class="card-header">
                                 <h5>
-                                  <i class="fa fa-archive-o mr-2" aria-hidden="true"></i> Archive List
+                                  <i class="fa fa-archive mr-2" aria-hidden="true"></i> Archive List
                                 </h5>
                               </div>
 
                               <div class="box-body container-fluid text-dark">
                                 <ul class="list-group">
                                   <li class="nav-item ">
-                                    <a class="nav-link active rounded p-1 pl-3 mb-0 list-group-item border-0" data-toggle="list" data-archive="folder" href="javascript:void(0)">Folders</a>
+                                    <a class="nav-link active rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="folder" href="javascript:void(0)">Folders</a>
                                   </li>
-
+                                  <li class="nav-item ">
+                                    <a class="nav-link active rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="document" href="javascript:void(0)">Documents</a>
+                                  </li>
                                 </ul>
                               </div>
 
@@ -154,6 +156,9 @@ function getFolder(){
     data:{archive_type:'folder'},
     dataType: 'json',
     success : (response) => {
+      $('#name').html('Folder Name');
+      $('#created').html('Created By');
+      $('#archive_title').html("Archived Folder");
       const len = response.length; 
       for (var i = 0; i < len; i++) {
         archive_table.row.add ([
@@ -162,6 +167,32 @@ function getFolder(){
           (response)[i].firstname + ' ' + (response)[i].lastname,
           '<button class="btn btn-warning btn-sm text-dark btn-round data-id="'+
           (response)[i].folder_id+'"><i class="fa fa-file"></i> Retrieve</button>'
+        ]).draw();
+      }
+    }
+  });
+}
+
+
+// GET Documents ARCHIVES
+function getDocuments(){
+  $.ajax({
+    url: 'function/archive_row.php',
+    type: 'POST',
+    data:{archive_type:'docu'},
+    dataType: 'json',
+    success : (response) => {
+      $('#name').html('Document Name');
+      $('#created').html('Owner');
+      $('#archive_title').html("Archived Documents");
+      const len = response.length; 
+      for (var i = 0; i < len; i++) {
+        archive_table.row.add ([
+          (response)[i].document_name,
+          (new Date((response)[i].document_date).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})),
+          ((response)[i].document_owner != '')? (response)[i].document_owner: 'N/A',
+          '<button class="btn btn-warning btn-sm text-dark btn-round data-id="'+
+          (response)[i].document_id+'"><i class="fa fa-file"></i> Retrieve</button>'
         ]).draw();
       }
     }
@@ -179,8 +210,19 @@ $(document).ready(function() {
     }
   });
 
- 
+  $(document).on('click','.archive-list', function () {
+    const archive_type = $(this).data('archive');
+    archive_table.clear().draw();
+    if (archive_type=='folder') {
+      getFolder();
+    }else if(archive_type=='document') {
+      getDocuments();
+    }
+  });
+  
 
+ 
+  // GET FOLDER DETAILS (FOR STARTER)
   getFolder();
 
 
