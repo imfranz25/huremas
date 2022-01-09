@@ -137,7 +137,7 @@
 
 
 <!-- Delete Event -->
-<div class="modal fade" id="eventsDelete">
+<div class="modal fade" id="retreiveModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -146,22 +146,15 @@
                   <span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="function/events_delete.php">
-                <input type="hidden" class="reference_id" name="id">
                 <div class="text-center">
-                    <label>Are you sure you want to delete the following event(s)?</label>
-                    <h2 id="del_events" class="bold"></h2>
-                    <label id="del_reference"></label>
-                    <div class="text-center text-danger" >
-                      <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
-                    </div>
+                  <label>Are you sure you want to retrieve this archive?</label>
+                  <h2 id="del_events" class="bold"></h2>
+                  <label id="del_reference"></label>
                 </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
-              </form>
+              <button type="button" class="btn btn-danger btn-flat" id="retrieve_archive"><i class="fa fa-archive"></i> Retrieve</button>
             </div>
         </div>
     </div>

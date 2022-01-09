@@ -119,7 +119,10 @@ include 'includes/header.php';
                                     <a class="nav-link active rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="folder" href="javascript:void(0)">Folders</a>
                                   </li>
                                   <li class="nav-item ">
-                                    <a class="nav-link active rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="document" href="javascript:void(0)">Documents</a>
+                                    <a class="nav-link rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="document" href="javascript:void(0)">Documents</a>
+                                  </li>
+                                  <li class="nav-item ">
+                                    <a class="nav-link rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="employee" href="javascript:void(0)">Employees</a>
                                   </li>
                                 </ul>
                               </div>
@@ -136,6 +139,33 @@ include 'includes/header.php';
                   <!--Pcoded  COntent **end**-->
         </div>
     </div>
+
+
+
+    <!-- Archive Retrieve -->
+    <div class="modal fade" id="retrieveModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title"><b>Retrieve</b></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <label>Are you sure you want to retrieve this archive?</label>
+                        <h2 id="retrieve_title" class="bold"></h2>
+                        <label id="archive_created"></label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                  <button type="submit" class="btn btn-warning text-dark btn-flat" id="retrieveSubmit"><i class="fa fa-archive"></i> Retrieve</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <?php 
@@ -158,15 +188,15 @@ function getFolder(){
     success : (response) => {
       $('#name').html('Folder Name');
       $('#created').html('Created By');
-      $('#archive_title').html("Archived Folder");
+      $('#archive_title').html("Folder Archived");
       const len = response.length; 
       for (var i = 0; i < len; i++) {
         archive_table.row.add ([
           (response)[i].folder_name,
           (new Date((response)[i].folder_date).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})),
           (response)[i].firstname + ' ' + (response)[i].lastname,
-          '<button class="btn btn-warning btn-sm text-dark btn-round data-id="'+
-          (response)[i].folder_id+'"><i class="fa fa-file"></i> Retrieve</button>'
+          '<button class="btn btn-warning btn-sm text-dark retrieve_btn btn-round" data-id="'+
+          (response)[i].folder_id+'" data-type="folder" ><i class="fa fa-file"></i> Retrieve</button>'
         ]).draw();
       }
     }
@@ -184,21 +214,94 @@ function getDocuments(){
     success : (response) => {
       $('#name').html('Document Name');
       $('#created').html('Owner');
-      $('#archive_title').html("Archived Documents");
+      $('#archive_title').html("Documents Archive");
       const len = response.length; 
       for (var i = 0; i < len; i++) {
         archive_table.row.add ([
           (response)[i].document_name,
           (new Date((response)[i].document_date).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})),
           ((response)[i].document_owner != '')? (response)[i].document_owner: 'N/A',
-          '<button class="btn btn-warning btn-sm text-dark btn-round data-id="'+
-          (response)[i].document_id+'"><i class="fa fa-file"></i> Retrieve</button>'
+          '<button class="btn btn-warning btn-sm text-dark retrieve_btn btn-round" data-id="'+
+          (response)[i].document_id+'" data-type="docu"><i class="fa fa-file"></i> Retrieve</button>'
         ]).draw();
       }
     }
   });
 }
 
+
+// GET Documents ARCHIVES
+function getEmployees(){
+  $.ajax({
+    url: 'function/archive_row.php',
+    type: 'POST',
+    data:{archive_type:'emp'},
+    dataType: 'json',
+    success : (response) => {
+      $('#name').html('Employee Name');
+      $('#created').html('Date Hired');
+      $('#archive_title').html("Employees Archive");
+      const len = response.length; 
+      for (var i = 0; i < len; i++) {
+        archive_table.row.add ([
+          (response)[i].firstname + ' ' + (response)[i].lastname,
+          (new Date((response)[i].date_hired).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})),
+          ((response)[i].document_owner != '')? (response)[i].document_owner: 'N/A',
+          '<button class="btn btn-warning btn-sm text-dark retrieve_btn btn-round" data-id="'+
+          (response)[i].employee_id+'" data-type="employee" ><i class="fa fa-file"></i> Retrieve</button>'
+        ]).draw();
+      }
+    }
+  });
+}
+
+// RETRIEVE DATA
+function retrieveArchive(type,id){
+  $.ajax({
+    async:'false',
+    url: 'function/archive_retrieve.php',
+    type: 'POST',
+    data:{archive_type:type,id:id},
+    dataType: 'json',
+    success : (response) => {
+      if (response=='1'){ // 1 Successful
+        $('#successModal').modal('show');
+        $('#success_msg').html('Archive retrieved successfully');
+      }else{
+        $('#errorModal').modal('show');
+        $('#error_msg').html('Archive retrieval failed');
+      }
+    }
+  });
+  getArchive(archive_type);  //GET UPDATED ARCHIVE AFTER RETRIEVING
+}
+
+
+
+function specificArchive(type,id){
+  $.ajax({
+    async:'false',
+    url: 'function/archive_row.php',
+    type: 'POST',
+    data:{s_type:type,s_id:id},
+    dataType: 'json',
+    success : (response) => {
+      alert(response.document_name);
+    }
+  });
+}
+
+//GET THE ARCHIVE DETAILS BY TYPE
+function getArchive(archive_type){
+  archive_table.clear().draw();
+  if (archive_type=='folder') {
+    getFolder();
+  }else if(archive_type=='document') {
+    getDocuments();
+  }else if (archive_type=='employee') {
+    getEmployees();
+  }
+}
 
 
 $(document).ready(function() {
@@ -210,54 +313,36 @@ $(document).ready(function() {
     }
   });
 
+  // ARCHIVE LIST BTN
   $(document).on('click','.archive-list', function () {
     const archive_type = $(this).data('archive');
-    archive_table.clear().draw();
-    if (archive_type=='folder') {
-      getFolder();
-    }else if(archive_type=='document') {
-      getDocuments();
-    }
-  });
-  
-
- 
-  // GET FOLDER DETAILS (FOR STARTER)
-  getFolder();
-
-
-  /*
-
-  // FOLDER NAVIGATION
-  $(document).on('click','.folder-list', function (e) {
-    e.preventDefault();
-    let prev_folder_id =  $(".folder_insert").data("folder_id");
-    let folder_type = $(this).data("folder");
-    let folder_id = $(this).data("folder_id");
-    $(".close_docu").data("folder_id",folder_id);
-    // CHANGE DOCUMENT VIEW IF ITS NOT THE SAME TAB/FOLDER
-    if (prev_folder_id!=folder_id) {
-      document_list(folder_id);
-      set_document_infos(folder_type,folder_id);
-      //STORE TO SESSION STORAGE
-      sessionStorage.setItem('folder_id_session',folder_id);
-      sessionStorage.setItem('folder_type_session',folder_type);
-    }
+    getArchive(archive_type);
+    sessionStorage.setItem('archive_session',archive_type);
   });
 
-  // SHOW SELECTED FOLDER -> IF PAGE IS RELOADED
-  var folder_id_session = sessionStorage.getItem('folder_id_session');
-  var folder_type_session = sessionStorage.getItem('folder_type_session');
-  if(folder_id_session){
-    $('.list-group .nav-item').removeClass("active");
-    $('.list-group').find('a[data-folder_id="' + folder_id_session + '"]').addClass('active');
-    set_document_infos(folder_type_session,folder_id_session);
-    document_list(folder_id_session);
-    $(".close_docu").data('folder_id',folder_id_session);
+  // RETRIEVE ARCHIVE DATA FOLDER/DOCU/EMPLOYEE
+  $(document).on('click','.retrieve_btn', function () {
+    let type = $(this).data('type');
+    let id = $(this).data('id');
+    $('#retrieveSubmit').data('type', type);
+    $('#retrieveSubmit').data('id', id);
+    // get the archive details (specific)
+    specificArchive(type,id);
+    $('#retrieveModal').modal('show');
+    //retrieveArchive(archive_type,id); 
+  });
+
+  // SHOW SELECTED ARCHIVE LIST -> IF PAGE IS RELOADED
+  var archive_session = sessionStorage.getItem('archive_session');
+  if(archive_session){
+    $('.list-group .nav-item .nav-link').removeClass("active");
+    $('.list-group').find('li a[data-archive="' + archive_session + '"]').addClass('active');
+    getArchive(archive_session);
+  }else{
+    getFolder(); //default
   }
   //ACTIVE TAB **END**
 
-  */
 
 });
 </script>

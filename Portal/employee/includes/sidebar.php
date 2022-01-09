@@ -1,11 +1,12 @@
 <script>
-if (isset($_SESSION['type'])) {
-   if ($_SESSION['type']!='employee') {
-  ?>
-  wind  <?php 
-  ow.location.replace('../../index.php');
+<?php
+  if (isset($_SESSION['type'])) {
+    if ($_SESSION['type']!='employee') {
+?>
+  window.location.replace('../../index.php');
 <?php }} ?>
 </script>
+
           <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
