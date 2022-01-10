@@ -6,7 +6,7 @@
         <div class="modal-content">
           	<div class="modal-header">
 
-            	<h4 class="modal-title"><b>Delete</b></h4>
+            	<h4 class="modal-title"><b>Archive</b></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               		<span aria-hidden="true">&times;</span></button>
           	</div>
@@ -15,12 +15,12 @@
             	<form class="form-horizontal" method="POST" action="function/employee_delete.php">
             		<input type="hidden" class="empid" name="id">
             		<div class="text-center">
-	                	<p>Are you sure you want to delete Employee? </p>
+	                	<p>Are you sure you want to move this employee to archive? </p>
 	                	<h2 class="bold del_employee_name"></h2>
                     <label>Employee ID : <span class="employee_id text-dark"></span></label>
-                    <div class="text-center text-danger" >
+                    <div class="text-center text-info" >
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
+                      <label> Info : You can retrieve this employee at archive section anytime</label>
                     </div>
 	            	</div>
           	</div>
@@ -28,7 +28,7 @@
 
 
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
+            	<button type="submit" class="btn btn-warning text-dark btn-flat" name="delete"><i class="fa fa-archive"></i> Archive</button>
             	</form>
           	</div>
         </div>

@@ -5,7 +5,7 @@ include 'includes/header.php';
 
 ?>
   <body>
-  <?php include 'includes/preloader.php'; ?>
+  <?php //include 'includes/preloader.php'; ?>
   
   <div id="pcoded" class="pcoded">
       
@@ -69,11 +69,13 @@ include 'includes/header.php';
                             <section class="content">
 						      <div class="container-fluid">
 						         <?php 
-						            $page = $_GET['page'];
+                        if (isset($_GET['page'])) {
+                          $page = $_GET['page'];
+                        }else{
+                          $page='employee_list';
+                        }
 
 						            include $page.'.php';
-
-					
 						          ?>
 						      </div><!--/. container-fluid -->
 						    </section>

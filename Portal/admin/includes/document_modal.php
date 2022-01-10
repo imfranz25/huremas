@@ -173,7 +173,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" class="btn btn-warning btn-flat text-dark" name="archive"><i class="ti-archive"></i> Move to archive</button>
+              <button type="submit" class="btn btn-warning btn-flat text-dark" name="archive" id="archiveSubmit"><i class="ti-archive"></i> Move to archive</button>
               </form>
             </div>
         </div>

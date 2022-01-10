@@ -147,7 +147,7 @@ include 'includes/header.php';
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                  <h4 class="modal-title"><b>Retrieve</b></h4>
+                  <h4 class="modal-title"><b id="r-title">Retrieve</b></h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span></button>
                 </div>
@@ -195,8 +195,7 @@ function getFolder(){
           (response)[i].folder_name,
           (new Date((response)[i].folder_date).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})),
           (response)[i].firstname + ' ' + (response)[i].lastname,
-          '<button class="btn btn-warning btn-sm text-dark retrieve_btn btn-round" data-id="'+
-          (response)[i].folder_id+'" data-type="folder" ><i class="fa fa-file"></i> Retrieve</button>'
+          '<button class="btn btn-warning btn-sm text-dark retrieve_btn btn-round" data-id="'+(response)[i].folder_id+'" data-type="folder" ><i class="fa fa-file"></i> Retrieve</button>'
         ]).draw();
       }
     }
@@ -245,10 +244,10 @@ function getEmployees(){
       for (var i = 0; i < len; i++) {
         archive_table.row.add ([
           (response)[i].firstname + ' ' + (response)[i].lastname,
+          (new Date((response)[i].created_date).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})),
           (new Date((response)[i].date_hired).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})),
-          ((response)[i].document_owner != '')? (response)[i].document_owner: 'N/A',
           '<button class="btn btn-warning btn-sm text-dark retrieve_btn btn-round" data-id="'+
-          (response)[i].employee_id+'" data-type="employee" ><i class="fa fa-file"></i> Retrieve</button>'
+          (response)[i].employee_id+'" data-type="emp" ><i class="fa fa-file"></i> Retrieve</button>'
         ]).draw();
       }
     }
@@ -273,7 +272,7 @@ function retrieveArchive(type,id){
       }
     }
   });
-  getArchive(archive_type);  //GET UPDATED ARCHIVE AFTER RETRIEVING
+  getArchive(type);  //GET UPDATED ARCHIVE AFTER RETRIEVING
 }
 
 
@@ -286,7 +285,23 @@ function specificArchive(type,id){
     data:{s_type:type,s_id:id},
     dataType: 'json',
     success : (response) => {
-      alert(response.document_name);
+
+
+      if (type=='folder') {
+        $('#r-title').html('Retrieve Folder');
+        $('#retrieve_title').html(response.folder_name);
+        $('#archive_created').html('Date Created: '+(new Date(response.folder_date).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})));
+      }else if(type=='docu') {
+        $('#r-title').html('Retrieve Document');
+        $('#retrieve_title').html(response.document_name);
+        $('#archive_created').html('Date Created: '+(new Date(response.document_date).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})));
+      }else {
+        $('#r-title').html('Retrieve Employee');
+        $('#retrieve_title').html(response.firstname+
+          ' '+response.lastname);
+        $('#archive_created').html('Date Hired: '+ (new Date(response.date_hired).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})));
+      }
+
     }
   });
 }
@@ -294,6 +309,8 @@ function specificArchive(type,id){
 //GET THE ARCHIVE DETAILS BY TYPE
 function getArchive(archive_type){
   archive_table.clear().draw();
+  archive_type = (archive_type=='docu')? 'document': archive_type;
+  archive_type = (archive_type=='emp')? 'employee': archive_type;
   if (archive_type=='folder') {
     getFolder();
   }else if(archive_type=='document') {
@@ -329,8 +346,19 @@ $(document).ready(function() {
     // get the archive details (specific)
     specificArchive(type,id);
     $('#retrieveModal').modal('show');
-    //retrieveArchive(archive_type,id); 
   });
+
+  $(document).on('click','#retrieveSubmit', function () {
+    let type = $(this).data('type');
+    let id = $(this).data('id');
+    $('#retrieveSubmit').attr('data-type','');
+    $('#retrieveSubmit').attr('data-id', '');
+    if (type!='') {
+      retrieveArchive(type,id); 
+    }
+    $('#retrieveModal').modal('hide');
+  });
+  
 
   // SHOW SELECTED ARCHIVE LIST -> IF PAGE IS RELOADED
   var archive_session = sessionStorage.getItem('archive_session');

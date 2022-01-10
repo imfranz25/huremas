@@ -40,12 +40,15 @@
     	 	}
     	 	$sel = $_POST['depts'];
     	 }
-        $sql = "SELECT *, e.id AS empid,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name FROM employees e LEFT JOIN position p ON p.id=e.position_id LEFT JOIN department_category dc ON dc.id = e.department_id  LEFT JOIN schedules s ON s.id=e.schedule_id $adds";
+        $sql = "SELECT *,e.employee_id AS eid, e.id AS empid,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name FROM employees e LEFT JOIN position p ON p.id=e.position_id LEFT JOIN department_category dc ON dc.id = e.department_id  LEFT JOIN schedules s ON s.id=e.schedule_id LEFT JOIN admin ON admin.employee_id = e.employee_id  $adds";
         $query = $conn->query($sql);
         while($row = $query->fetch_assoc()){
+           if ($row['employee_archive']==1) {
+               continue;
+           }
         ?>
             <tr>
-            <td><?php echo $row['employee_id']; ?></td>
+            <td><?php echo $row['eid']; ?></td>
             <td class="text-center"><img src="<?php echo (!empty($row['photo']))? 'images/'.$row['photo']:'images/profile.jpg'; ?>" width="45px" height="45px"> </td>
             <td><?php echo $row['name']; ?></td>
             <td><?php echo $row['description']; ?></td>
@@ -61,8 +64,12 @@
                           <a class="dropdown-item view" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-eye"></i>View Profile</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-edit"></i>Edit</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                          <?php 
+                            if ($row['type']=='employee' || $row['type']=='') { 
+                          ?>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-archive"></i>Archive</a>
+                          <?php } ?>
                         </div>
             </td>
             </tr>

@@ -18,8 +18,16 @@ session_start();
 		else{
 			$row = $query->fetch_assoc();
 			if(password_verify($password, $row['password'])){
-				$_SESSION['id'] = $row['employee_id'];
-				$_SESSION['type'] = $row['type'];
+				$id = $row['employee_id'];
+				$check_archive = "SELECT employee_archive FROM employees WHERE employee_id = '$id'";
+				$check_query = $conn->query($check_archive);
+				// CONTINUE TO EMPLOYEE PAGE -> EMPLOYEE IS NOT IN ARCHIVED
+				if ($check_query->num_rows < 1) {
+					$_SESSION['id'] = $row['employee_id'];
+					$_SESSION['type'] = $row['type'];
+				}else{
+					$_SESSION['error'] = 'Sorry your account is not active at the moment, please contact your administrator';
+				}
 			}
 			else{
                 $_SESSION['error'] = 'Incorrect password';

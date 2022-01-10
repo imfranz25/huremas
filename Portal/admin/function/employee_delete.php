@@ -3,9 +3,9 @@
 
 	if(isset($_POST['delete'])){
 		$id = $_POST['id'];
-		$sql = "DELETE FROM employees WHERE id = '$id'";
+		$sql = "UPDATE employees SET employee_archive=1 WHERE id = '$id'";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Employee deleted successfully';
+			$_SESSION['success'] = 'Employee archived successfully';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
@@ -15,6 +15,6 @@
 		$_SESSION['error'] = 'Select item to delete first';
 	}
 
-	header('location: ../employee.php');
+	header('location: ../employee.php?page=employee_list');
 	
 ?>

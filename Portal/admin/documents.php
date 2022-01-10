@@ -843,6 +843,12 @@ $(document).ready(function() {
     }
   });
 
+
+  $(document).on('click','#archiveSubmit', function (e) {
+    localStorage.removeItem("folder_id_session");
+    localStorage.removeItem("folder_type_session");
+  });
+
   // SHOW SELECTED FOLDER -> IF PAGE IS RELOADED
   var folder_id_session = sessionStorage.getItem('folder_id_session');
   var folder_type_session = sessionStorage.getItem('folder_type_session');
