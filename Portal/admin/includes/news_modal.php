@@ -13,9 +13,9 @@
             <form class="form-horizontal" method="POST" action="function/news_add.php" enctype="multipart/form-data">
 
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Date</label>
+                  <label class="col-sm-2 col-form-label req">Date</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control border border-secondary" value="<?php echo date('F d, Y'); ?>"readonly>
+                    <input type="date" class="form-control border border-secondary" min="<?php echo date('Y-m-d');  ?>" value="<?php echo date('Y-m-d');  ?>" name="date" required>
                   </div>
                 </div>
 
@@ -53,6 +53,57 @@
 
 
 
+
+<!-- Edit News -->
+<div class="modal fade" id="viewNews">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+              
+              <h4 class="modal-title"><b>View News</b></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Date</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control border border-secondary news_datetext" min="<?php echo date('Y-m-d');  ?>"  readonly>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Display Image</label>
+                  <div class="col-sm-10">
+                    <label class="col-form-label"><a class="news_image" target="_blank" href=""></a></label>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Headline</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control border border-secondary news_headline"  readonly >
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-2">News Detail</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control border border-secondary news_detail"  readonly rows="10"></textarea>
+                  </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Edit News -->
 <div class="modal fade" id="editNews">
     <div class="modal-dialog modal-lg">
@@ -72,7 +123,7 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">Date</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control border border-secondary news_date" readonly>
+                    <input type="date" class="form-control border border-secondary news_date" min="<?php echo date('Y-m-d');  ?>" name="date" required>
                   </div>
                 </div>
 

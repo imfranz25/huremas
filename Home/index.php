@@ -299,10 +299,10 @@ include 'includes/head.php';
   <!-- end event section -->
 
 
-
   <?php 
     //news 
-    $sql = "SELECT * FROM news";
+    $date_today = date('Y-m-d');
+    $sql = "SELECT * FROM news WHERE news_date >= '$date_today' ;";
     $query = $conn->query($sql);
     $count = $query->num_rows;
 

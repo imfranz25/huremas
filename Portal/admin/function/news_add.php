@@ -4,6 +4,7 @@
 
 	if (isset($_POST['add'])) {
 
+		$date = trim($_POST['date']);
 		$headline = trim($_POST['headline']);
 		$details = trim($_POST['details']);
 		$display =  $_FILES["display"]["name"];
@@ -29,7 +30,7 @@
 		$new_filename = $reference_id.".".$extension;
 
 	
-		$sql = "INSERT INTO news (reference_id,news_headline,display_image,news_details) VALUES ('$reference_id','$headline','$new_filename','$details')";
+		$sql = "INSERT INTO news (reference_id,news_headline,display_image,news_details,news_date) VALUES ('$reference_id','$headline','$new_filename','$details','$date')";
 
 		if (!in_array($extension, $valid_extension)) {
 		    $_SESSION['error'] = 'Invalid File Type';

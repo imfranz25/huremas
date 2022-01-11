@@ -4,6 +4,7 @@
 
 	if (isset($_POST['edit'])) {
 		$reference_id = trim($_POST['reference_id']);
+		$date = trim($_POST['date']);
 		$headline = trim($_POST['headline']);
 		$details = trim($_POST['details']);
 		$display =  isset($_FILES["display"]["name"])? $_FILES["display"]["name"] : '';
@@ -28,7 +29,7 @@
 		
 
 	
-		$sql = "UPDATE news SET news_headline='$headline', news_details='$details' $image_query WHERE reference_id='$reference_id' ";
+		$sql = "UPDATE news SET news_headline='$headline', news_details='$details',news_date='$date'  $image_query WHERE reference_id='$reference_id' ";
 
 		if ($display!= '') {
 			if (!in_array($extension, $valid_extension)) {

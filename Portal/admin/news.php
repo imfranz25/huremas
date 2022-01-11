@@ -4,7 +4,7 @@ include 'includes/session.php';
 include 'includes/header.php';
 
 ?>
-  <body>
+<body>
   <?php include 'includes/preloader.php'; ?>
   
   <div id="pcoded" class="pcoded">
@@ -73,7 +73,6 @@ include 'includes/header.php';
 
                             <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addNews"><i class="fa fa-plus"></i>Add News</button>
                             <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" id="deleteAllNews"><i class="fa fa-trash"></i>Delete</button>
-
                             
                             <div class="card">
                             <div class="card-header">
@@ -123,7 +122,7 @@ include 'includes/header.php';
                                               <td><?php echo (new Datetime($row['news_date']))->format('F d, Y'); ?></td>
                                               <td><?php echo $row['news_headline']; ?></td>
                                               <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>
-                                                <a href='#view_desc' data-toggle='modal' class='pull-right desc' data-id='<?php echo $row['id']; ?>'><span class='fa fa-eye ml-3'></span></a>
+                                                <a href='#viewNews' data-toggle='modal' class='pull-right desc' data-id='<?php echo $row['reference_id']; ?>'><span class='fa fa-eye ml-3'></span></a>
                                                 <?php echo $row['news_details']; ?>
                                               </td>
                                               <td>
@@ -172,9 +171,11 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-
-
-
+  $('.desc').click(function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    getRow(id);
+  });
 });
 
 
@@ -192,7 +193,8 @@ function getRow(id){
       $('#del_date').html('Date Published : '+ new Date(response.news_date).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
       //edit
       $('.reference_id').val(response.reference_id);
-      $('.news_date').val(new Date(response.news_date).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
+      $('.news_date').val(response.news_date);
+      $('.news_datetext').val((new Date(response.news_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
       $('.news_image').attr('href','/HUREMAS/Portal/admin/uploads/news/'+response.display_image);
       $('.news_image').html(response.display_image);
       $('.news_headline').val(response.news_headline);
