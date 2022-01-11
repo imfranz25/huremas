@@ -1,6 +1,6 @@
 <!-- contact section -->
 
-  <section class="contact_section mb-0">
+  <section class="contact_section mb-0" id="contact">
     <div class="container">
       <div class="row">
         <div class="col-md-6">

@@ -12,62 +12,24 @@
 
           <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item mx-2">
-                <a class="nav-link active" aria-current="page" href="/HUREMAS/Home/index.php">
+              <li class="nav-item mx-2" data-link="/HUREMAS/Home/index.php?#home">
+                <a class="nav-link" aria-current="page" href="/HUREMAS/Home/index.php?#home">
                   <i class="fas fa-home fa-2xs"></i> Home</a>
               </li>
-              <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  About</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Campus History</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Vision, Mission, Goals,<br>And Objectives</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">University Seal and Hymn</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Contact</a></li>
-                </ul>
+              <li class="nav-item mx-2" data-link="/HUREMAS/Home/index.php?#about">
+                <a class="nav-link" aria-current="page" href="/HUREMAS/Home/index.php?#about">About</a>
               </li>
-              <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Administration
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Board of Regents</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">University Officials</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Campus Officials</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Administrative Offices</a></li>
-                </ul>
+              <li class="nav-item mx-2" data-link="/HUREMAS/Home/job/jobs.php">
+                <a class="nav-link" aria-current="page" href="/HUREMAS/Home/job/jobs.php">Job Offerings</a>
               </li>
-              <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Jobs
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Application Requirements And <br /> Procedures</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="/HUREMAS/Home/job/jobs.php">Job Offerings</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Faculty</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Academic Calendar</a></li>
-                </ul>
+              <li class="nav-item mx-2" data-link="/HUREMAS/Home/index.php?#news">
+                <a class="nav-link" aria-current="page" href="/HUREMAS/Home/index.php?#news">News & Updates</a>
               </li>
-              <li class="nav-item dropdown mx-2">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Links
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">News And Updates</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Research</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Downloadables</a></li>
-                </ul>
+              <li class="nav-item mx-2" data-link="/HUREMAS/Home/index.php?#events">
+                <a class="nav-link" aria-current="page" href="/HUREMAS/Home/index.php?#events">Events</a>
+              </li>
+              <li class="nav-item mx-2" data-link="/HUREMAS/Home/index.php?#contact">
+                <a class="nav-link" aria-current="page" href="/HUREMAS/Home/index.php?#contact">Contact</a>
               </li>
             </ul>
           </div>
@@ -75,3 +37,24 @@
       </div>
     </header>
     <!-- end header section -->
+
+
+    <script>
+      $(document).ready(function(){
+
+        var active_link = sessionStorage.getItem("link");
+        $(".nav-item").removeClass('active');
+        if (active_link) { 
+          $(".navbar-nav").find('[data-link="'+active_link+'"]').addClass('active');
+        }else{
+          $(".navbar-nav").find('[data-link="/HUREMAS/Home/index.php"]').addClass('active');
+        }  
+
+        $(document).on("click",".nav-item",function(){
+          let link = $(this).data('link');
+          sessionStorage.setItem("link",link);
+        });
+
+
+      });
+    </script>

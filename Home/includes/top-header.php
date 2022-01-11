@@ -1,4 +1,4 @@
-<div class="hero_area" >
+<div class="hero_area" id="home">
   <div class="top mx-5 pt-2">
     <h1 class="header-left" >
       <div class="header-l" >

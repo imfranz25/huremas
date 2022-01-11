@@ -18,7 +18,6 @@ include 'includes/head.php';
     <!-- slider section -->
     <section class=" slider_section position-relative">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="container">
@@ -30,45 +29,7 @@ include 'includes/head.php';
                       <h1 class="theme">HUREMAS</h1>
                       <h2>CAVITE STATE UNIVERSITY</h2>
                       <h6>IMUS CAMPUS</h6>
-                      <a href="">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <div class="detail-box">
-                    <div>
-                      <h6>WELCOME TO</h6>
-                      <h1 class="theme">HUREMAS</h1>
-                      <h2>CAVITE STATE UNIVERSITY</h2>
-                      <h6>IMUS CAMPUS</h6>
-                      <a href="">
-                        Read More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item ">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <div class="detail-box">
-                    <div>
-                      <h6>WELCOME TO</h6>
-                      <h1 class="theme">HUREMAS</h1>
-                      <h2>CAVITE STATE UNIVERSITY</h2>
-                      <h6>IMUS CAMPUS</h6>
-                      <a href="">
+                      <a href="#about">
                         Read More
                       </a>
                     </div>
@@ -105,7 +66,7 @@ include 'includes/head.php';
               BEST <br />
               INDUSTRY LEADERS
             </h4>
-            <a href="">
+            <a href="#about">
               Read More
             </a>
           </div>
@@ -119,7 +80,7 @@ include 'includes/head.php';
               JOB <br />
               OPPURTUNITIES
             </h4>
-            <a href="">
+            <a href="#about">
               Read More
             </a>
           </div>
@@ -133,7 +94,7 @@ include 'includes/head.php';
               QUALITY <br />
               EDUCATION
             </h4>
-            <a href="">
+            <a href="#about">
               Read More
             </a>
           </div>
@@ -145,7 +106,7 @@ include 'includes/head.php';
   <!-- end special section -->
 
   <!-- about section -->
-  <section class="about_section layout_padding mb-5">
+  <section class="about_section layout_padding mb-5" id="about">
     <div class="side_img">
       <img src="assets/images/side-image.png" alt="" />
     </div>
@@ -170,7 +131,7 @@ include 'includes/head.php';
               <p style="text-align: justify;">
                 Cavite  State  University’s  vision  of  being  the  premier university  in  historic  Cavite,  prompted  the  launching  of the  College  of  Business  and  Entrepreneurship  in  Imus  on August 15, 2003. By  virtue  of  the  Memorandum  of  Agreement  among  the Cavite  Provincial  Governor,  Erineo  “Ayong”  Maliksi,  Imus Municipality  Mayor,  Homer  Saquilayan  and  University President,  Dr.  Ruperto  Sangalang,  the  use  of  the  building which  was  originally  proposed  to  be  the  Cavite  Convention and  Trade  Center,  was  granted  to  the  college  for  it  to operate.
               </p>
-              <a href="" >
+              <a href="#course">
                 Read More
               </a>
             </div>
@@ -184,7 +145,7 @@ include 'includes/head.php';
 
   <!-- course section -->
 
-  <section class="course_section layout_padding-bottom">
+  <section class="course_section layout_padding-bottom" id="course">
     <div class="side_img">
       <img src="assets/images/side-image.png" alt="" />
     </div>
@@ -254,7 +215,7 @@ include 'includes/head.php';
         </div>
       </div>
       <div class="btn-box">
-        <a href="">
+        <a href="#policy">
           Read More
         </a>
       </div>
@@ -264,7 +225,7 @@ include 'includes/head.php';
   <!-- end course section -->
 
   <!-- quality policy section -->
-  <section class="quality layout_padding mb-5">
+  <section class="quality layout_padding mb-5" id="policy">
     <div class="container">
         <h1>Quality Policy</h1>
         <p>We Commit to the highest standards of education, value our stakeholders, Strive for continual improvement of our products and services, and Uphold the University’s tenets of Truth, Excellence, and Service to produce globally competitive and morally upright individuals.</p>
@@ -273,7 +234,7 @@ include 'includes/head.php';
   <!-- quality policy section -->
 
   <!-- event section -->
-  <section class="event_section layout_padding mb-5">
+  <section class="event_section layout_padding mb-5" id="events">
     <div class="container">
       <div class="heading_container">
         <h3>
@@ -328,7 +289,7 @@ include 'includes/head.php';
         </div>
       </div>
       <div class="btn-box">
-        <a href="">
+        <a href="#news">
           Read More
         </a>
       </div>
@@ -351,7 +312,7 @@ include 'includes/head.php';
 
   <!-- client section -->
 
-  <section class="client_section layout_padding-bottom mb-5">
+  <section class="client_section layout_padding-bottom mb-5" id="news">
     <div class="container">
       <div class="heading_container">
         <h3>
