@@ -233,6 +233,18 @@ include 'includes/head.php';
   </section>
   <!-- quality policy section -->
 
+
+
+  <?php 
+    //events 
+    $date_today = date('Y-m-d');
+    $sql = "SELECT * FROM events WHERE event_date >= '$date_today' ;";
+    $query = $conn->query($sql);
+    $count = $query->num_rows;
+
+    if ($count > 0) {
+  ?>
+
   <!-- event section -->
   <section class="event_section layout_padding mb-5" id="events">
     <div class="container">
@@ -245,63 +257,65 @@ include 'includes/head.php';
         </p>
       </div>
       <div class="event_container">
+
+       <?php 
+          while ($row = $query->fetch_assoc()) {
+        ?>
+
         <div class="box">
           <div class="img-box">
-            <img src="assets/images/cvsu-bg.jpg" alt="" />
+            <img src="../Portal/admin/uploads/events/<?php echo $row['display_image']; ?>" alt="<?php echo $row['event_name']; ?>" class="img-fluid" />
           </div>
           <div class="detail-box">
             <h4>
-              Education Events 2021
+              <?php echo $row['event_name']; ?>
             </h4>
             <h6>
-              8:00 AM - 5:00 PM CvSu - Imus Covered Court
+              <?php 
+                $date_event=date_create($row['event_date']);
+                $date_from=date_create($row['event_from']);
+                $date_to=date_create($row['event_to']);
+                echo date_format($date_from,"h:i A").' - '.
+                  date_format($date_to,"h:i A"); 
+                echo '<br>'.$row['event_venue'];
+              ?>
             </h6>
           </div>
           <div class="date-box">
             <h3>
               <span>
-                15
+                <?php echo date_format($date_event,'d'); ?>
               </span>
-              March
+              <?php echo date_format($date_event,'F'); ?>
             </h3>
           </div>
         </div>
-        <div class="box">
-          <div class="img-box">
-            <img src="assets/images/cvsu-bg.jpg" alt="" />
-          </div>
-          <div class="detail-box">
-            <h4>
-              Education Events 2021
-            </h4>
-            <h6>
-              8:00 AM - 5:00 PM CvSu - Imus Old Building
-            </h6>
-          </div>
-          <div class="date-box">
-            <h3>
-              <span>
-                15
-              </span>
-              February
-            </h3>
+
+      <?php } ?>
+
+        <div class="collapse" id="moreEvents">
+          <div class="card card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
           </div>
         </div>
+
+
       </div>
+
       <div class="btn-box">
-        <a href="#news">
+        <a href="#news" data-toggle="collapse" href="#moreEvents" role="button">
           Read More
         </a>
       </div>
+
     </div>
   </section>
 
+  <?php } ?>
   <!-- end event section -->
 
 
   <?php 
-    //news 
-    $date_today = date('Y-m-d');
     $sql = "SELECT * FROM news WHERE news_date >= '$date_today' ;";
     $query = $conn->query($sql);
     $count = $query->num_rows;

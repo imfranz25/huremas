@@ -22,12 +22,13 @@ session_start();
 				$check_archive = "SELECT employee_archive FROM employees WHERE employee_id = '$id'";
 				$check_query = $conn->query($check_archive);
 				// CONTINUE TO EMPLOYEE PAGE -> EMPLOYEE IS NOT IN ARCHIVED
-				if ($check_query->num_rows < 1) {
+				if ($check_query->num_rows > 0 ) {
 					$_SESSION['id'] = $row['employee_id'];
 					$_SESSION['type'] = $row['type'];
 				}else{
 					$_SESSION['error'] = 'Sorry your account is not active at the moment, please contact your administrator';
 				}
+
 			}
 			else{
                 $_SESSION['error'] = 'Incorrect password';
