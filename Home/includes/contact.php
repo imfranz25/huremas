@@ -21,29 +21,11 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="contact-form">
-            <h5>
-              Get In Touch
-            </h5>
-            <form action="">
-              <div>
-                <input type="text" placeholder="Full Name " />
-              </div>
-              <div>
-                <input type="text" placeholder="Phone Number" />
-              </div>
-              <div>
-                <input type="email" placeholder="Email Address" />
-              </div>
-              <div>
-                <input type="text" placeholder="Message" class="input_message" />
-              </div>
-              <div class="d-flex justify-content-center ">
-                <button type="submit" class="send" style="background-color: #F7B205;color: black;text-decoration: none;border-radius: 5px;">
-                  Send
-                </button>
-              </div>
-            </form>
+          <div class="contact-form text-light">
+            <h1>Featured Video</h1><br>
+            <iframe width="520" height="315"
+              src="https://www.youtube.com/embed/f7JWd9pyBHM">
+            </iframe>
           </div>
         </div>
       </div>

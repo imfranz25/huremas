@@ -259,7 +259,9 @@ include 'includes/head.php';
       <div class="event_container">
 
        <?php 
+          $e_count = 0;
           while ($row = $query->fetch_assoc()) {
+            if ($e_count==0){
         ?>
 
         <div class="box">
@@ -270,7 +272,7 @@ include 'includes/head.php';
             <h4>
               <?php echo $row['event_name']; ?>
             </h4>
-            <h6>
+            <h6 class="text-center">
               <?php 
                 $date_event=date_create($row['event_date']);
                 $date_from=date_create($row['event_from']);
@@ -291,23 +293,58 @@ include 'includes/head.php';
           </div>
         </div>
 
-      <?php } ?>
 
+        <?php $e_count+=1; }else { $e_count+=1; ?>
+        
         <div class="collapse" id="moreEvents">
-          <div class="card card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          <div class="box">
+            <div class="img-box">
+              <img src="../Portal/admin/uploads/events/<?php echo $row['display_image']; ?>" alt="<?php echo $row['event_name']; ?>" class="img-fluid" />
+            </div>
+            <div class="detail-box">
+              <h4>
+                <?php echo $row['event_name']; ?>
+              </h4>
+              <h6 class="text-center">
+                <?php 
+                  $date_event=date_create($row['event_date']);
+                  $date_from=date_create($row['event_from']);
+                  $date_to=date_create($row['event_to']);
+                  echo date_format($date_from,"h:i A").' - '.
+                    date_format($date_to,"h:i A"); 
+                  echo '<br>'.$row['event_venue'];
+                ?>
+              </h6>
+            </div>
+            <div class="date-box">
+              <h3>
+                <span>
+                  <?php echo date_format($date_event,'d'); ?>
+                </span>
+                <?php echo date_format($date_event,'F'); ?>
+              </h3>
+            </div>
           </div>
         </div>
 
-
+        <?php }  ?>
+        
+        <?php } ?>
       </div>
 
+      <?php if ($e_count > 1) {?>
       <div class="btn-box">
-        <a href="#news" data-toggle="collapse" href="#moreEvents" role="button">
+        <a data-bs-toggle="collapse" href="#moreEvents" role="button" id="viewbtn">
+          View all
+        </a>
+      </div>
+      <?php }else{ ?>
+      <div class="btn-box">
+        <a href="#news" >
           Read More
         </a>
       </div>
-
+      <?php } ?>
     </div>
   </section>
 
@@ -396,5 +433,16 @@ include 'includes/head.php';
 
  
 </body>
+
+<script>
+
+  $(document).ready(function() {
+    $('#viewbtn').click(function(e){
+      let label = $(this).html().trim();
+      if (label=='View all') {$(this).html('Hide details');}
+      else{$(this).html('View all');}
+    });
+  });
+</script>
 
 </html>

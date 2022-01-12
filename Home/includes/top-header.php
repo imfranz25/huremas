@@ -2,17 +2,13 @@
   <div class="top mx-5 pt-2">
     <h1 class="header-left" >
       <div class="header-l" >
-        <a href="#" class="mx-2">
-        <i  class="bi bi-telephone-fill"></i> Contact Us</a>
-        <label class="partition">|</label> 
-        <a href="#" class="mx-2" >
-        <i class="bi bi-envelope-fill"></i> Web Mail</a>
+        <a href="mailto:hrdoimus@cvsu.edu.ph">
+          <i  class="bi bi-telephone-fill mx-2"></i>Contact Us
+        </a>
         <div class="header-right">
-          <a href="/HUREMAS/Portal/index.php" class="mx-2">
-          <i class="bi bi-person-badge-fill"></i> Log in</a>  
-          <label class="partition">|</label>   
-          <a href="#" class="mx-2">
-          <i class="bi bi-person-plus-fill"></i> Register</a>
+          <a href="/HUREMAS/Portal/index.php">
+            <i class="bi bi-person-badge-fill mx-2"></i> Log in
+          </a>  
         </div>
       </div>
     </h1>

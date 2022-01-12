@@ -17,11 +17,10 @@
         <div class="col-md-3">
           <a href="https://www.gov.ph"><img src="/HUREMAS/Home/assets/images/rng.png" alt="Philippine Government Logo"></a>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 mb-2">
           <div class="info_menu">
             <h5>
-              Gov Links
-              <hr style="width: 50%;" />
+              <label class="py-2" style="border-bottom:1px solid gray;">Gov Links</label>
             </h5>
             <ul class="navbar-nav  ">
               <li>
@@ -39,52 +38,32 @@
             </ul>
           </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 mb-2">
           <div class="info_menu">
             <h5>
-              QUICK LINKS
-              <hr style="width: 50%;" />
+              <label class="py-2" style="border-bottom:1px solid gray;">Quick Links</label>
             </h5>
             <ul class="navbar-nav  ">
               <li>
-                <a class="nav-link" href="index.html"> Job Offering <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/HUREMAS/Home/job/jobs.php"> Job Offering <span class="sr-only">(current)</span></a>
               </li>
               <li>
-                <a class="nav-link" href="about.html"> News and Updates </a>
+                <a class="nav-link" href="/HUREMAS/Home/index.php?#news"> News and Updates </a>
               </li>
               <li>
-                <a class="nav-link" href="course.html"> Events </a>
+                <a class="nav-link" href="/HUREMAS/Home/index.php?#events"> Events </a>
               </li>
               <li>
-                <a class="nav-link" href="event.html"> Downloads </a>
-              </li>
-              <li>
-                <a class="nav-link" href="contact.html"> Sitemap </a>
+                <a class="nav-link" href="/HUREMAS/Home/index.php?#about"> About Us </a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="col-md-2">
+        
+        <div class="col-md-3 mb-2">
           <div class="info_menu">
             <h5>
-              Services
-              <hr style="width: 50%;" />
-            </h5>
-            <ul class="navbar-nav  ">
-              <li>
-                <a class="nav-link" href="index.html"> Web Mail <span class="sr-only">(current)</span></a>
-              </li>
-              <li>
-                <a class="nav-link" href="about.html"> Faculty Portal </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info_menu">
-            <h5>
-              Contact Us
-              <hr style="width: 50%;" />
+              <label class="py-2" style="border-bottom:1px solid gray;">Contact Us</label>
             </h5>
             <ul class="navbar-nav  ">
               <li >
