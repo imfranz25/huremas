@@ -1,67 +1,68 @@
 
 
-<!-- Create Event -->
-<div class="modal fade" id="addEvents">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-          	<div class="modal-header">
-            	
-            	<h4 class="modal-title"><b>Create Event</b></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-          	</div>
-          	<div class="modal-body">
+<!-- Request Event -->
+<div class="modal fade" id="eventRequest">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">   	
+        <h4 class="modal-title"><b>Request Event</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" method="POST" action="function/event_add.php" enctype="multipart/form-data" >
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Expected Date</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control border border-secondary" min="<?php echo date('Y-m-d'); ?>" name="event_date" required />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Image</label>
+            <div class="col-sm-10">
+              <input type="file" name="display" class="form-control border border-secondary" accept="image/*" onchange="check_image(this)"  required="" >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Event Name</label>
+            <div class="col-sm-10">
+              <input type="text" name="event_name" class="form-control border border-secondary"  required="" autocomplete="off" >
+            </div>
+          </div>
 
-            <form class="form-horizontal" method="POST" action="function/events_add.php" enctype="multipart/form-data" >
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Time</label>
+            <div class="col-sm-5">
+              <input type="time" name="event_from" class="form-control border border-secondary event_from"  required="" placeholder="From">
+            </div>
+            <div class="col-sm-5">
+              <input type="time" name="event_to" class="form-control border border-secondary event_to"  required="" placeholder="To">
+            </div>
+          </div>
 
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label req">Date</label>
-                  <div class="col-sm-10">
-                    <input type="date" class="form-control border border-secondary" min="<?php echo date('Y-m-d'); ?>" name="event_date" required />
-                  </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Venue</label>
+            <div class="col-sm-10">
+              <input type="text" name="venue" class="form-control border border-secondary"  required="" autocomplete="off"  >
+            </div>
+          </div>
 
-                </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Details</label>
+            <div class="col-sm-10">
+              <textarea name="details" required="" class="form-control border border-secondary" rows="8"></textarea>
+            </div>
+          </div>
 
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label req">Image</label>
-                  <div class="col-sm-10">
-                    <input type="file" name="display" class="form-control border border-secondary" accept="image/*" onchange="check_image(this)"  required="" >
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label req">Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" name="event_name" class="form-control border border-secondary"  required="" autocomplete="off" >
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label req">Time</label>
-                  <div class="col-sm-5">
-                    <input type="time" name="event_from" class="form-control border border-secondary event_from"  required="" placeholder="From">
-                  </div>
-                  <div class="col-sm-5">
-                    <input type="time" name="event_to" class="form-control border border-secondary event_to"  required="" placeholder="To">
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-sm-2 col-form-label req">Venue</label>
-                  <div class="col-sm-10">
-                    <input type="text" name="venue" class="form-control border border-secondary"  required="" autocomplete="off"  >
-                  </div>
-                </div>
-
-
-          	</div>
-          	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-save"></i> Post</button>
-            	</form>
-          	</div>
-        </div>
+      </div>
+    	<div class="modal-footer">
+      	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+      	<button type="submit" class="btn btn-success btn-flat" name="save"><i class="fa fa-save"></i> Save</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 
 

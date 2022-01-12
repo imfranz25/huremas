@@ -117,7 +117,13 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-        
+                            <li>
+                                <a href="events.php" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Event Request</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
                           </ul>
         
                           

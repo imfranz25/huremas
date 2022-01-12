@@ -76,16 +76,16 @@ include 'includes/header.php';
 
                             
                             <div class="card">
-                            <div class="card-header">
-                                                <h5>Event List</h5>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                              <div class="card-header">
+
+                                <h5>
+                                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Event List</a>
+                                </h5>
+                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success m-0 float-right" data-target="#eRequest" data-toggle="modal" >
+                                  <i class="fa fa-exchange"></i>Event Requests
+                                </button>
+
+                              </div>
                             <div class="box-body">
                             <div class="card-block table-border-style" style="min-height: 400px;">
              
@@ -239,8 +239,14 @@ function check_image(file_input) {
 $(document).ready(function() {
 
     // to avoid the re-initialization of datatable
-  if ( ! $.fn.DataTable.isDataTable( '#table1' ) ) {
+  if ( ! $.fn.DataTable.isDataTable( '#table1' ) && 
+        ! $.fn.DataTable.isDataTable( '#table2' ) && 
+        ! $.fn.DataTable.isDataTable( '#table3' )&& 
+        ! $.fn.DataTable.isDataTable( '#table4' ) ) {
     $('#table1').DataTable();
+    $('#table2').DataTable();
+    $('#table3').DataTable();
+    $('#table4').DataTable();
   }//**end**
 
   //DATA HIDE > ALERT
