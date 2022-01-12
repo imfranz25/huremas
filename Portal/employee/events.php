@@ -90,81 +90,92 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
 
     
-    <script>
-$(function(){
-
-  //CA Request Properties
-  $('.edit_req').click(function(e){
-    e.preventDefault();
-    $('#edit_req').modal('show');
-    var id = $(this).data('id');
-    CA_row(id);
-  });
-  $('.desc').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    CA_row(id);
-  });
-  $('.cancel_req').click(function(e){
-    e.preventDefault();
-    $('#cancelCA').modal('show');
-    var id = $(this).data('id');
-    CA_row(id);
-  });
-
-  //view satus
-  $('.stat_desc').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    CA_row(id);
-  });
+<script>
 
 
-});
-
-
-function CA_row(id){
+function event_request_row(id){
   $.ajax({
     type: 'POST',
-    url: 'function/CA_row.php',
+    url: 'function/event_request_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      //cancel
-      $('#cancel_CA').val(response.id);
-      $('#cancel_ref').html(response.reference_id);
+      let status = "Pending";
       //edit
-      $('#CA_id').val(response.id);
-      $('.edit_CA_date').val(new Date(response.req_date).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
-      $('.edit_CA_type').val(response.ca_type);
-      $('.edit_CA_account').val(response.ca_account);
-      $('.edit_CA_amount').val(response.amount);
-      $('.edit_CA_reason').val(response.ca_reason);
-      $('.edit_CA_notes').val(response.notes);
-      $('.edit_CA_status').val(response.status);
-      $('.edit_CA_review').val(response.reviewed_by);
-      
+      $('.event_reference').val(response.reference_id);
+      $('.event_display').html(response.display_image);
+      $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
+      $('.event_date').val(response.event_date);
+      $('.event_name').val(response.event_name);
+      $('.event_from').val(response.event_from);
+      $('.event_to').val(response.event_to);
+      $('.event_venue').val(response.event_venue);
+      $('.event_details').val(response.details);
+      if (response.request_status=='1') {
+        status = 'Approved';
+      }else if (response.request_status=='2') {
+        status = 'Rejected';
+      }
+      $('.event_status').val(status);
     }
   });
 }
+
+//CHECK FILE MAIN FUNCTION
+function check_file(file_input,valid_extension){
+  if (file_input.type == "file") {
+    //get value and extension
+    const file_name = file_input.value;
+    const extension = file_name.substr((file_name.lastIndexOf('.') +1));
+    if (file_name.length > 0) { //check if there is selected file
+      var file_size = file_input.files[0].size/1024/1024; //file size in MB
+      if (file_size <= 5){ // Maximum of 5MB Image Upload
+        if(!valid_extension.includes(extension)){ // check if extension is valid
+          file_input.value = '';
+          $('#fullModal').modal('show');
+          $('#warn_msg').html('Invalid file format !');
+        }
+      }else{
+        file_input.value = '';
+        $('#fullModal').modal('show');
+        $('#warn_msg').html('The attachment size exceeds the allowable limit !');
+      }
+    }
+  }
+}
+
+
+//CHECK IF FILE IS VALID (IMAGE)
+function check_image(file_input) {
+  //valid extension
+  const valid_image = ["jpg", "jpeg", "png"];    
+  check_file(file_input,valid_image);
+  return true;
+} 
 
 
 $(document).ready(function() {
 
   // to avoid the re-initialization of datatable
-  if ( ! $.fn.DataTable.isDataTable( '#table1' ) && ! $.fn.DataTable.isDataTable( '#table2' ) && ! $.fn.DataTable.isDataTable( '#table3' ) ) {
+  if ( ! $.fn.DataTable.isDataTable( '#table1' ) ) {
     $('#table1').DataTable();
-    $('#table2').DataTable();
-    $('#table3').DataTable();
-    $('#table4').DataTable();
   }//**end**
 
-  // ensure that the other tab pane is hidden when the other one is shown :)
-  $('.nav-tabs a').on('shown.bs.tab', function(){
-    var activeTab = $(this).attr('href');
-    $(".tab-pane").hide();
-    $(activeTab).show();
-  });//**end**
+  //Event Request Properties
+  $('.edit').click(function(e){
+    e.preventDefault();
+    $('#editRequest').modal('show');
+    var id = $(this).data('id');
+    event_request_row(id);
+  });
+
+  $('.view').click(function(e){
+    e.preventDefault();
+    $('#viewRequest').modal('show');
+    var id = $(this).data('id');
+    event_request_row(id);
+  });
+  
   
 });
 
