@@ -158,6 +158,7 @@ include 'includes/header.php';
 <script>
 
 $(function(){
+
   $('.edit').click(function(e){
     e.preventDefault();
     $('#editEvents').modal('show');
@@ -172,9 +173,37 @@ $(function(){
     getRow(id);
   });
 
-
+  $('.review_req').click(function(e){
+    e.preventDefault();
+    $('#reviewRequest').modal('show');
+    var id = $(this).data('id');
+    getRequest(id);
+  });
 
 });
+
+
+function getRequest(id){
+  $.ajax({
+    type: 'POST',
+    url: 'function/event_request_row.php',
+    data: {id:id},
+    dataType: 'json',
+    success: function(response){
+      //review
+      $('.ereq_id').val(response.reference_id);
+      $('.event_date_text').val(response.event_date);
+      $('.event_display').html(response.display_image);
+      $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
+      $('.event_name').val(response.event_name);
+      $('.event_from').val(response.event_from);
+      $('.event_to').val(response.event_to);
+      $('.event_venue').val(response.event_venue);
+      $('.event_details').val(response.details);
+    }
+  });
+}
+
 
 
 function getRow(id){

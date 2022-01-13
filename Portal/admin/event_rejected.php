@@ -21,7 +21,7 @@
           <?php
             $sql = "SELECT * FROM event_request LEFT JOIN employees 
                     ON employees.employee_id=event_request.employee_id 
-                    WHERE request_status = 'Rejected' ";
+                    WHERE request_status = 2 ";
             $query = $conn->query($sql);
             while($row = $query->fetch_assoc()){
           ?>

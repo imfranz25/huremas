@@ -10,7 +10,6 @@
       <table id="table2" class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th style="max-width: 25px;">View</th>
             <th>Reference ID</th>
             <th>Request Date</th>
             <th>Request By</th>
@@ -21,16 +20,11 @@
           <?php
             $sql = "SELECT * FROM event_request LEFT JOIN employees 
                     ON employees.employee_id=event_request.employee_id 
-                    WHERE request_status = 'Pending' ";
+                    WHERE request_status = 0 ";
             $query = $conn->query($sql);
             while($row = $query->fetch_assoc()){
           ?>
           <tr>
-            <td class="d-flex justify-content-center">
-              <a href='#view_req' data-toggle='modal' class='view_req' data-id='<?php echo $row['reference_id']; ?>'>
-                <i class='fa fa-eye'></i>
-              </a>
-            </td>
             <td><?php echo $row['reference_id']; ?></td>
             <td><?php echo (new Datetime($row['request_date']))->format('F d, Y'); ?></td>
             <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
