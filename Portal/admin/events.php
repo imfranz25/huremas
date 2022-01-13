@@ -166,32 +166,6 @@ include 'includes/header.php';
 
 <script>
 
-$(function(){
-
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#editEvents').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#eventsDelete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.review_req').click(function(e){
-    e.preventDefault();
-    $('#reviewRequest').modal('show');
-    var id = $(this).data('id');
-    getRequest(id);
-  });
-
-});
-
-
 function getRequest(id){
   $.ajax({
     type: 'POST',
@@ -201,7 +175,7 @@ function getRequest(id){
     success: function(response){
       //review
       $('.ereq_id').val(response.reference_id);
-      $('.event_date_text').val(response.event_date);
+      $('.event_date_text').val((new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
       $('.event_display').html(response.display_image);
       $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
       $('.event_name').val(response.event_name);
@@ -276,6 +250,33 @@ function check_image(file_input) {
 
 $(document).ready(function() {
 
+  $('.edit').click(function(e){
+    e.preventDefault();
+    $('#editEvents').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
+
+  $('.delete').click(function(e){
+    e.preventDefault();
+    $('#eventsDelete').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
+
+  $('.review_req').click(function(e){
+    e.preventDefault();
+    $('#reviewRequest').modal('show');
+    var id = $(this).data('id');
+    getRequest(id);
+  });
+
+  $('.view_req').click(function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    getRequest(id);
+  });
+
     // to avoid the re-initialization of datatable
   if ( ! $.fn.DataTable.isDataTable( '#table1' ) && 
         ! $.fn.DataTable.isDataTable( '#table2' ) && 
@@ -286,6 +287,13 @@ $(document).ready(function() {
     $('#table3').DataTable();
     $('#table4').DataTable();
   }//**end**
+
+  // ensure that the other tab pane is hidden when the other one is shown :)
+  $('.nav-tabs a').on('shown.bs.tab', function(){
+    var activeTab = $(this).attr('href');
+    $(".tab-pane").hide();
+    $(activeTab).show();
+  });//**end**
 
   //DATA HIDE > ALERT
   $("[data-hide]").on("click", function(){

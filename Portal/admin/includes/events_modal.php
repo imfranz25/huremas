@@ -188,28 +188,28 @@
               <!-- Nav tabs -->
               <ul class="nav nav-tabs md-tabs" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#CAreq" role="tab">Pending</a>
+                  <a class="nav-link active" data-toggle="tab" href="#Ereq" role="tab">Pending</a>
                   <div class="slide"></div>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " data-toggle="tab" href="#CAapp" role="tab">Approved</a>
+                  <a class="nav-link " data-toggle="tab" href="#Eapp" role="tab">Approved</a>
                   <div class="slide"></div>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#CArej" role="tab">Rejected</a>
+                  <a class="nav-link" data-toggle="tab" href="#Erej" role="tab">Rejected</a>
                   <div class="slide"></div>
                 </li>
               </ul>
 
               <!-- Tab panes -->
               <div class="tab-content">
-                <div class="tab-pane active" id="CAreq" role="tabpanel">
+                <div class="tab-pane active" id="Ereq" role="tabpanel">
                   <br><?php include 'event_request.php'; ?>  
                 </div>
-                <div class="tab-pane " id="CAapp" role="tabpanel">
+                <div class="tab-pane " id="Eapp" role="tabpanel">
                   <br><?php include 'event_approved.php'; ?>   
                 </div>
-                <div class="tab-pane " id="CArej" role="tabpanel">
+                <div class="tab-pane " id="Erej" role="tabpanel">
                   <br><?php include 'event_rejected.php'; ?>   
                 </div>
               </div>
@@ -233,18 +233,18 @@
 
 
 
-<!-- Request View -->
+<!-- Request reView -->
 <div class="modal fade" id="reviewRequest" style="background:rgba(0,0,0,.7)">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">    
-        <h4 class="modal-title"><b>View Request</b></h4>
+        <h4 class="modal-title"><b>Review Request</b></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <form method="POST" action="function/event_evaluate.php">
-        <input type="text" name="reference_id" class="ereq_id">
+        <input type="hidden" name="reference_id" class="ereq_id">
         <div class="modal-body">
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Date</label>
@@ -294,6 +294,70 @@
           <button type="submit" class="btn btn-success btn-flat pull-left" name="approve" ><i class="fa fa-thumbs-o-up"></i> Approve</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Request View -->
+<div class="modal fade" id="viewRequest" style="background:rgba(0,0,0,.7)">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">    
+        <h4 class="modal-title"><b>View Request</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Date</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control border border-secondary event_date_text" readonly />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Image</label>
+          <div class="col-sm-10">
+            <a target="_blank" class="event_display" href=""></a>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Event Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control border border-secondary event_name"  readonly >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Time</label>
+          <div class="col-sm-5">
+            <input type="time" class="form-control border border-secondary event_from"  readonly>
+          </div>
+          <div class="col-sm-5">
+            <input type="time" class="form-control border border-secondary event_to"  readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Venue</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control border border-secondary event_venue"  readonly >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Details</label>
+          <div class="col-sm-10">
+            <textarea readonly class="form-control border border-secondary event_details" rows="8"></textarea>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+      </div>
     </div>
   </div>
 </div>

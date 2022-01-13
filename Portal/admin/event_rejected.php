@@ -10,10 +10,11 @@
       <table id="table4" class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th style="min-width: 25px;">View</th>
+            <th>View</th>
             <th>Reference ID</th>
-            <th>Request Date</th>
-            <th>Request By</th>
+            <th style="min-width: 200px;">Request Date</th>
+            <th style="min-width: 200px;">Event Name</th>
+            <th style="min-width: 200px;">Request By</th>
           </tr>
         </thead>
         <tbody>
@@ -26,12 +27,13 @@
           ?>
           <tr>
             <td class="d-flex justify-content-center">
-              <a href='#view_req' data-toggle='modal' class='view_req' data-id='<?php echo $row['reference_id']; ?>'>
+              <a href='#viewRequest' data-toggle='modal' class='view_req' data-id='<?php echo $row['reference_id']; ?>'>
                 <i class='fa fa-eye'></i>
               </a>
             </td>
             <td><?php echo $row['reference_id']; ?></td>
             <td><?php echo (new Datetime($row['request_date']))->format('F d, Y'); ?></td>
+            <td><?php echo $row['event_name']; ?></td>
             <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
           </tr>
           <?php } ?>
