@@ -23,7 +23,6 @@
 			//set filename
 			$new_filename = $reference_id.".".$extension;
 			$image_query = ", display_image='$new_filename' ";
-			$test_image = true;
 		}else{
 			$image_query ='';
 		}

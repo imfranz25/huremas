@@ -121,7 +121,7 @@
               <input type="hidden" class="reference_id" name="reference_id" id="reference_id">
 
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">Date</label>
+                  <label class="col-sm-2 col-form-label req">Date</label>
                   <div class="col-sm-10">
                     <input type="date" class="form-control border border-secondary news_date" min="<?php echo date('Y-m-d');  ?>" name="date" required>
                   </div>
@@ -132,6 +132,13 @@
                   <div class="col-sm-10">
                     <label class="col-form-label"><a class="news_image" target="_blank" href=""></a></label>
                     <input type="file" name="display" class="form-control border border-secondary" accept="image/*" onchange="check_image(this)"  >
+                    <!-- INFO FOR FILE -->
+                    <div class="input-group-append">
+                      <span class="input-group-text text-info" >
+                        <i class="fa fa-info-circle"></i>
+                        <strong>Leave upload file to default if you dont wish to change the display image</strong>
+                      </span>
+                    </div>
                   </div>
                 </div>
 
