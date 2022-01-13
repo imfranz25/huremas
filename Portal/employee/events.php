@@ -105,12 +105,11 @@ function event_request_row(id){
       $('.event_reference').val(response.reference_id);
       $('.event_display').html(response.display_image);
       $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
-      $('.event_date').val();
+      $('.event_date').val(response.event_date);
+      $('.event_date_text').val((new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
       $('.event_name').val(response.event_name);
-
       $('.event_from').val(response.event_from);
       $('.event_to').val(response.event_to);
-
       $('.event_venue').val(response.event_venue);
       $('.event_details').val(response.details);
       if (response.request_status=='1') {
@@ -121,7 +120,7 @@ function event_request_row(id){
       $('.event_status').val(status);
       //delete
       $('#del_events').html(response.event_name);
-      $('#del_reference').html('Date Requested : '+(new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
+      $('#del_reference').html('Date Requested : '+(new Date(response.request_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
     }
   });
 }

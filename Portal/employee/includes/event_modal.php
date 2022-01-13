@@ -79,7 +79,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" method="POST" action="function/event_request__edit.php" enctype="multipart/form-data" >
+        <form class="form-horizontal" method="POST" action="function/event_request_edit.php" enctype="multipart/form-data" >
           <input type="hidden" name="reference_id" class="event_reference" />
           <div class="form-group row">
             <label class="col-sm-2 col-form-label req">Expected Date</label>
@@ -155,7 +155,7 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Date</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control border border-secondary event_date" readonly />
+            <input type="text" class="form-control border border-secondary event_date_text" readonly />
           </div>
         </div>
         <div class="form-group row">
@@ -231,7 +231,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-        <button type="submit" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i> Retrieve</button>
+        <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
         </form>
       </div>
     </div>
