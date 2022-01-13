@@ -68,7 +68,7 @@
 
 
 
-<!-- Request Event -->
+<!-- Edit Request Event -->
 <div class="modal fade" id="editRequest">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -173,10 +173,10 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Time</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control border border-secondary event_from"  readonly>
+            <input type="time" class="form-control border border-secondary event_from"  readonly>
           </div>
           <div class="col-sm-5">
-            <input type="text" class="form-control border border-secondary event_to"  readonly>
+            <input type="time" class="form-control border border-secondary event_to"  readonly>
           </div>
         </div>
         <div class="form-group row">
@@ -206,97 +206,33 @@
 
 
 
-
-
-
-
-
-
-<!-- Delete Event -->
-<div class="modal fade" id="retreiveModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title"><b>Delete</b></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center">
-                  <label>Are you sure you want to retrieve this archive?</label>
-                  <h2 id="del_events" class="bold"></h2>
-                  <label id="del_reference"></label>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="button" class="btn btn-danger btn-flat" id="retrieve_archive"><i class="fa fa-archive"></i> Retrieve</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Event Request -->
-<div class="modal fade" id="eRequest">
-  <div class="modal-dialog modal-xl">
+<!-- Cancel Event -->
+<div class="modal fade" id="cancelRequest">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title"><b>Event Request</b></h4>
+        <h4 class="modal-title"><b>Cancel Request</b></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
-        <!-- Card Block -->
-        <div class="card">
-          <div class="card-block mb-0">
-            <div class="col-xl-12">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs md-tabs" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#CAreq" role="tab">Pending</a>
-                  <div class="slide"></div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link " data-toggle="tab" href="#CAapp" role="tab">Approved</a>
-                  <div class="slide"></div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#CArej" role="tab">Rejected</a>
-                  <div class="slide"></div>
-                </li>
-              </ul>
-
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <div class="tab-pane active" id="CAreq" role="tabpanel">
-                  <br><?php include 'event_request.php'; ?>  
-                </div>
-                <div class="tab-pane " id="CAapp" role="tabpanel">
-                  <br><?php include 'event_approved.php'; ?>   
-                </div>
-                <div class="tab-pane " id="CArej" role="tabpanel">
-                  <br><?php include 'event_rejected.php'; ?>   
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <!-- Main-body end -->
+        <form method="POST" action="function/event_request_delete.php">
+        <div class="text-center">
+          <label>Are you sure you want to cancel this event request?</label>
+          <h2 id="del_events" class="bold"></h2>
+          <label id="del_reference"></label>
         </div>
-
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+        <button type="submit" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i> Retrieve</button>
+        </form>
       </div>
-
     </div>
   </div>
 </div>
+
 
 
 

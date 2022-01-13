@@ -107,8 +107,10 @@ function event_request_row(id){
       $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
       $('.event_date').val(response.event_date);
       $('.event_name').val(response.event_name);
+
       $('.event_from').val(response.event_from);
       $('.event_to').val(response.event_to);
+
       $('.event_venue').val(response.event_venue);
       $('.event_details').val(response.details);
       if (response.request_status=='1') {
