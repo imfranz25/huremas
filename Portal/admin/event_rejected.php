@@ -10,11 +10,10 @@
       <table id="table4" class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th style="max-width: 25px;">View</th>
+            <th style="min-width: 25px;">View</th>
             <th>Reference ID</th>
             <th>Request Date</th>
             <th>Request By</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -34,11 +33,6 @@
             <td><?php echo $row['reference_id']; ?></td>
             <td><?php echo (new Datetime($row['request_date']))->format('F d, Y'); ?></td>
             <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
-            <td>
-              <button class='btn btn-success btn-sm review_req btn-round' data-id='<?php echo $row['reference_id']; ?>'>
-                <i class='fa fa-edit'></i> Review
-              </button>
-            </td>
           </tr>
           <?php } ?>
         </tbody>

@@ -16,6 +16,12 @@
             <label class="col-sm-2 col-form-label req">Expected Date</label>
             <div class="col-sm-10">
               <input type="date" class="form-control border border-secondary" min="<?php echo date('Y-m-d'); ?>" name="event_date" required />
+              <div class="input-group-append">
+                <span class="input-group-text text-info" >
+                  <i class="fa fa-info-circle"></i>
+                  <strong>Please give a extra few days before the expected event date for evaluation process</strong>
+                </span>
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -92,6 +98,12 @@
             <div class="col-sm-10">
               <a target="_blank" class="event_display" href=""></a>
               <input type="file" name="display" class="form-control border border-secondary" accept="image/*" onchange="check_image(this)"  >
+              <div class="input-group-append">
+                <span class="input-group-text text-info" >
+                  <i class="fa fa-info-circle"></i>
+                  <strong>Leave the upload file to default if you don't wish to change the display image</strong>
+                </span>
+              </div>
             </div>
           </div>
           <div class="form-group row">
