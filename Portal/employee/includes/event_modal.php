@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" method="POST" action="function/event_add.php" enctype="multipart/form-data" >
+        <form class="form-horizontal" method="POST" action="function/event_request_add.php" enctype="multipart/form-data" >
           <div class="form-group row">
             <label class="col-sm-2 col-form-label req">Expected Date</label>
             <div class="col-sm-10">
@@ -79,7 +79,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" method="POST" action="function/event_edit.php" enctype="multipart/form-data" >
+        <form class="form-horizontal" method="POST" action="function/event_request__edit.php" enctype="multipart/form-data" >
           <input type="hidden" name="reference_id" class="event_reference" />
           <div class="form-group row">
             <label class="col-sm-2 col-form-label req">Expected Date</label>
@@ -218,10 +218,15 @@
       </div>
       <div class="modal-body">
         <form method="POST" action="function/event_request_delete.php">
+          <input type="hidden" name="reference_id" class="event_reference" />
         <div class="text-center">
           <label>Are you sure you want to cancel this event request?</label>
           <h2 id="del_events" class="bold"></h2>
           <label id="del_reference"></label>
+          <div class="text-center text-danger" >
+            <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+            <label> Note: This process cannot be undone</label>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

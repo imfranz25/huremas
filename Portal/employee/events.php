@@ -105,7 +105,7 @@ function event_request_row(id){
       $('.event_reference').val(response.reference_id);
       $('.event_display').html(response.display_image);
       $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
-      $('.event_date').val(response.event_date);
+      $('.event_date').val();
       $('.event_name').val(response.event_name);
 
       $('.event_from').val(response.event_from);
@@ -119,6 +119,9 @@ function event_request_row(id){
         status = 'Rejected';
       }
       $('.event_status').val(status);
+      //delete
+      $('#del_events').html(response.event_name);
+      $('#del_reference').html('Date Requested : '+(new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
     }
   });
 }
@@ -174,6 +177,13 @@ $(document).ready(function() {
   $('.view').click(function(e){
     e.preventDefault();
     $('#viewRequest').modal('show');
+    var id = $(this).data('id');
+    event_request_row(id);
+  });
+  
+  $('.delete').click(function(e){
+    e.preventDefault();
+    $('#cancelRequest').modal('show');
     var id = $(this).data('id');
     event_request_row(id);
   });
