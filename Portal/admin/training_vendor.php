@@ -114,7 +114,7 @@ include 'includes/header.php';
                                         <th>Email</th>
                                         <th>Contact</th>
                                         <th>Experience</th>
-                                        <th style="max-width: 60px;">Tools</th>
+                                        <th style="max-width: 60px;">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tbody_vendor">
@@ -136,8 +136,17 @@ include 'includes/header.php';
                                               <td><?php echo $row['contact']; ?></td>
                                               <td><?php echo $row['experience']; ?></td>
                                               <td>
-                                                  <button class="btn btn-success btn-sm edit btn-round" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-                                                  <button class="btn btn-danger btn-sm delete btn-round" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+
+                                                <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+                                                </button>
+
+                                                <div class="dropdown-menu" style="">
+                                                  <div class="dropdown-divider"></div>
+                                                  <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                                                  <div class="dropdown-divider"></div>
+                                                  <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                </div>
+
                                               </td>
                                             </tr>
                                         <?php

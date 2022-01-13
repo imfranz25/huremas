@@ -122,7 +122,7 @@
                                           <!--No Attendees-->
                                           <div class="row m-auto" id="no_candidate">
                                             <div class="col-lg-12 p-3 text-center">
-                                              <img src="../assets/images/no_attend.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 w-25">
+                                              <img src="../assets/images/no_notif.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 rounded-circle">
                                               <h5>THERE ARE NO TRAINING REQUEST AT THE MOMENT</h5>
                                               <label>You can view pending request here.</label>
                                             </div>
@@ -208,7 +208,7 @@
                                           <!--No Attendees-->
                                           <div class="row m-auto" id="no_candidate">
                                             <div class="col-lg-12 p-3 text-center">
-                                              <img src="../assets/images/no_attend.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 w-25">
+                                              <img src="../assets/images/no_notif.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 rounded-circle">
                                               <h5>THERE ARE NO EMPLOYEES IN THIS TRAINING SESSION</h5>
                                               <label>Add Employees to this training to view their details.</label>
                                             </div>
@@ -282,7 +282,7 @@
                                           <!--No Attendees-->
                                           <div class="row m-auto" id="no_candidate">
                                             <div class="col-lg-12 p-3 text-center">
-                                              <img src="../assets/images/no_attend.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 w-25">
+                                              <img src="../assets/images/no_notif.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 rounded-circle">
                                               <h5>THERE ARE NO REJECTED TRAINING REQUEST SO FAR</h5>
                                               <label>You can view rejected request here.</label>
                                             </div>
