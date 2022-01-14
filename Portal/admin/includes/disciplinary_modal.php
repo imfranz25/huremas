@@ -371,100 +371,157 @@
 </div>
 
 
-<!-- View description -->
-<div class="modal fade" id="view_desc">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          	<div class="modal-header">
-            	
-            	<h4 class="modal-title"><b><span class="viewcode"></span></b></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-          	</div>
-          	<div class="modal-body">
-            		<div class="text-center">
-						<h5 class="bold"><span class="view_title"></h5>
-					</div>
-					<br>
-          
-					<div class="form-group row">
-					 <label class="col-sm-2 col-form-label">Category Type</label>
-            <div class="col-sm-10">
-							<input type="text" class="form-control" readonly id='view_type'>
-            </div>
-          </div>
-
-
-					<div class="form-group form-default">
-                  <label class="float-label">Details</label>
-                  <span class="form-bar"></span>
-                  <textarea class="form-control" readonly id='view_details' style='height:200px;'></textarea>
-              </div>
-	                	
-
-          	</div>
-          	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-
-          	</div>
-        </div>
-    </div>
-</div>
 
 
 <!-- Add CATEGORY-->
 <div class="modal fade" id="addnewCAT">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          	<div class="modal-header">
-            	
-            	<h4 class="modal-title"><b>New Disciplinary Category</b></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-          	</div>
-          	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="function/disciplinaryC_add.php">
-
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Title</label>
-                        <div class="col-sm-10">
-							<input type="text" class="form-control" name="title" >
-                        </div>
-            	</div>
-
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Code</label>
-                        <div class="col-sm-10">
-							<input type="text" class="form-control"  name="code">
-                        </div>
-            	</div>
-
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">Category Type</label>
-                        <div class="col-sm-10">
-							<input type="text" class="form-control"  name="cat_type">
-                        </div>
-            	</div>
-
-
-              <div class="form-group form-default">
-                  <label class="float-label">Details</label>
-                  <span class="form-bar"></span>
-                  <textarea class="form-control" required="" name='details' style='height:200px;'></textarea>
-              </div>
-                
-
-
-
-          	</div>
-          	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
-            	</form>
-          	</div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h4 class="modal-title"><b>New Disciplinary Category</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    	</div>
+      <form class="form-horizontal" method="POST" action="function/disciplinaryC_add.php">
+        <div class="modal-body">
+  				<div class="form-group row">
+  					<label class="col-sm-2 col-form-label req">Title</label>
+            <div class="col-sm-10">
+  						<input type="text" class="form-control border border-secondary" name="title" >
+            </div>
+          </div>
+  				<div class="form-group row">
+  					<label class="col-sm-2 col-form-label req">Category Type</label>
+            <div class="col-sm-10">
+  						<input type="text" class="form-control border border-secondary"  name="cat_type">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Details</label>
+            <div class="col-sm-10">
+              <textarea class="form-control border border-secondary" required="" name='details' rows="8"></textarea>
+            </div>
+          </div>
         </div>
+      	<div class="modal-footer">
+        	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+        	<button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
+      	</div>
+      </form>
     </div>
+  </div>
 </div>
 
 
-     
+<!-- Edit CATEGORY-->
+<div class="modal fade" id="editCAT">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><b>Edit Disciplinary Category</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-horizontal" method="POST" action="function/disciplinaryC_edit.php">
+        <input type="hidden" name="id" class="cat_id">
+        <div class="modal-body">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control border border-secondary cat_title" name="title" >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Category Type</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control border border-secondary cat_type"  name="cat_type">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label req">Details</label>
+            <div class="col-sm-10">
+              <textarea class="form-control border border-secondary cat_details" required="" name='details' rows="8"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+          <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-save"></i> Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- View CATEGORY-->
+<div class="modal fade" id="viewCAT">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><b>View Disciplinary Category</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Title</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control border border-secondary cat_title" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Category Type</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control border border-secondary cat_type" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Details</label>
+          <div class="col-sm-10">
+            <textarea class="form-control border border-secondary cat_details" rows="8" readonly></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Delete Category-->
+<div class="modal fade" id="deleteCAT">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><b>Delete<span class="bene_id"></span></b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-horizontal" method="POST" action="function/disciplinaryC_delete.php">
+        <input type="hidden" class="cat_id" name="id">
+        <div class="modal-body">
+          <div class="text-center">
+            <p>Are you sure you want to delete this disciplinary category?</p>
+            <h2 id="del_cat" class="bold h4"></h2>
+            <div class="text-center text-danger" >
+              <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+              <label> Note: You can't delete a category if its currently applied in disciplinary action</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+          <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

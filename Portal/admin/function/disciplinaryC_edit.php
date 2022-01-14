@@ -1,16 +1,18 @@
 <?php
 	include '../includes/session.php';
 
-	if(isset($_POST['add'])){
-		
+	if(isset($_POST['edit'])){
+
+		$id = addslashes($_POST['id']);
 		$title = addslashes($_POST['title']);
 		$cat_type = addslashes($_POST['cat_type']);
 		$details = addslashes($_POST['details']);
 
 
-		$sql = "INSERT INTO disciplinary_category (title, cat_type,details) VALUES ('$title', '$cat_type', '$details')";
+		$sql = "UPDATE disciplinary_category SET title='$title', cat_type='$cat_type', details='$details' WHERE id = '$id' ";
+
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Disciplinary category added successfully';
+			$_SESSION['success'] = 'Disciplinary category updated successfully';
 		}
 		else{
 			$_SESSION['error'] = 'Connection Timeout';

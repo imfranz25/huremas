@@ -81,7 +81,7 @@ include 'includes/header.php';
                                 <h5>
                                   <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Event List</a>
                                 </h5>
-                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success m-0 float-right" data-target="#eRequest" data-toggle="modal" >
+                                <button type="button" class="btn btn-success m-0 float-right" data-target="#eRequest" data-toggle="modal" >
                                   <i class="fa fa-exchange"></i>Event Requests
                                 </button>
 
@@ -131,7 +131,6 @@ include 'includes/header.php';
                                                 </button>
 
                                                 <div class="dropdown-menu" style="">
-                                                  <div class="dropdown-divider"></div>
                                                   <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                   <div class="dropdown-divider"></div>
                                                   <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>

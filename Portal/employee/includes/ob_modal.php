@@ -20,7 +20,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Date</label>
                   <div class="col-sm-9">
-                    <input type="date" class="form-control" name="date" required="">
+                    <input type="date" class="form-control border border-secondary" name="date" required="">
                 </div>
                  
                 </div>
@@ -28,14 +28,14 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Start Time</label>
                     <div class="col-sm-9 bootstrap-timepicker">
-                        <input type="time" class="form-control timepicker" id="" name="start" required>
+                        <input type="time" class="form-control timepicker border border-secondary" id="" name="start" required>
                     </div>
                 </div>
                 <!--time-->
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">End Time</label>
                     <div class="col-sm-9 bootstrap-timepicker">
-                        <input type="time" class="form-control timepicker" id="" name="end" required>
+                        <input type="time" class="form-control timepicker border border-secondary" id="" name="end" required>
                     </div>
                 </div>
 
@@ -121,7 +121,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Date</label>
                   <div class="col-sm-9">
-                    <input type="date" class="form-control" id="date" name="date" required="">
+                    <input type="date" class="form-control border border-secondary" id="date" name="date" required="">
                 </div>
                  
                 </div>
@@ -129,14 +129,14 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Start Time</label>
                     <div class="col-sm-9 bootstrap-timepicker">
-                        <input type="time" class="form-control timepicker" id="start" name="start" required>
+                        <input type="time" class="form-control timepicker border border-secondary" id="start" name="start" required>
                     </div>
                 </div>
                 <!--time-->
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">End Time</label>
                     <div class="col-sm-9 bootstrap-timepicker">
-                        <input type="time" class="form-control timepicker" id="end" name="end" required>
+                        <input type="time" class="form-control timepicker border border-secondary" id="end" name="end" required>
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Details</label>
                   <div class="col-sm-9">
-                    <textarea class="form-control border border-secondary" rows="8" id="reason" name="reason" required=""></textarea>
+                    <textarea class="form-control border border-secondary border border-secondary" rows="8" id="reason" name="reason" required=""></textarea>
                   </div>
                 </div>
             </div>
@@ -187,7 +187,7 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label ">Date</label>
                   <div class="col-sm-4">
-                    <input type="date" class="form-control" id="date_view" name="" readonly="" >
+                    <input type="date" class="form-control border border-secondary" id="date_view" name="" readonly="" >
                   </div>
 
                   <label class="col-sm-2 col-form-label ">Status</label>
@@ -200,25 +200,25 @@
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label ">Start Time</label>
                     <div class="col-sm-4 bootstrap-timepicker">
-                        <input type="time" class="form-control timepicker" id="start_view" name="" readonly>
+                        <input type="time" class="form-control timepicker border border-secondary" id="start_view" name="" readonly>
                     </div>
 
 
                   <label class="col-sm-2 col-form-label ">Evaluated By</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="eval_by" name="" readonly="" >
+                    <input type="text" class="form-control border border-secondary" id="eval_by" name="" readonly="" >
                   </div>
                 </div>
                 <!--time-->
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label ">End Time</label>
                     <div class="col-sm-4 bootstrap-timepicker">
-                        <input type="time" class="form-control timepicker" id="end_view" name="" readonly>
+                        <input type="time" class="form-control timepicker border border-secondary" id="end_view" name="" readonly>
                     </div>
 
                     <label class="col-sm-2 col-form-label ">Allowance Given</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="ot_type" name="" readonly="" >
+                    <input type="text" class="form-control border border-secondary" id="ot_type" name="" readonly="" >
                   </div>
                 </div>
 

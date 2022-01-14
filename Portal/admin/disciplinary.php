@@ -125,15 +125,17 @@ $(function(){
     var id = $(this).data('id');
     DA_row(id);
     //set to first tab and tabpane
-    $('.first_tab').trigger('click')
+    $('.first_tab').trigger('click');
   });
+
   $('.view_DA').click(function(e){
     e.preventDefault();
     var id = $(this).data('id');
     DA_row(id);
     //set to first tab and tabpane
-    $('.first_tab').trigger('click')
+    $('.first_tab').trigger('click');
   });
+
    $('.delete_DA').click(function(e){
     e.preventDefault();
     $('#delete_action').modal('show');
@@ -141,9 +143,27 @@ $(function(){
     DA_row(id);
   });
 
-  
+   $('.view_DCAT').click(function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    DCAT_row(id);
+  });
 
+  $('.edit_DCAT').click(function(e){
+    e.preventDefault();
+    $('#editCAT').modal('show');
+    var id = $(this).data('id');
+    DCAT_row(id);
+  });
 
+  $('.delete_DCAT').click(function(e){
+    e.preventDefault();
+    $('#deleteCAT').modal('show');
+    var id = $(this).data('id');
+    DCAT_row(id);
+  });
+
+   
 });
 
 $('#selectEmp').change(function(){
@@ -157,6 +177,26 @@ $('#selectEmp2').change(function(){
     $('#posi2').val($('#selectEmp2').find(':selected').data('pos'));
     $('#department2').val($('#selectEmp2').find(':selected').data('dept'));
 })
+
+function DCAT_row(id){
+  $.ajax({
+    type: 'POST',
+    url: 'function/disciplinaryC_row.php',
+    data: {id:id},
+    dataType: 'json',
+    success: function(response){
+      //view
+      $('.cat_id').val(response.id);
+      $('.cat_title').val(response.title);
+      $('.cat_code').val(response.code);
+      $('.cat_type').val(response.cat_type);
+      $('.cat_details').val(response.details);
+      //delete
+      $('#del_cat').html(response.title);  
+    }
+  });
+}
+
 
 function DA_row(id){
 
@@ -219,7 +259,6 @@ function DA_row(id){
 
     }
   });
-
 }
 
 
@@ -236,7 +275,9 @@ $(document).ready(function() {
   // ensure that the other tab pane is hidden when the other one is shown :)
   $('.nav-tabs a').on('shown.bs.tab', function(){
     var activeTab = $(this).attr('href');
-    (activeTab === "#dipC") ? ($("#dipC").show(),$("#dipA").hide()) : ($("#dipC").hide(),$("#dipA").show());
+    (activeTab === "#dipC") ? 
+      ($("#dipC").show(),$("#dipA").hide()) : 
+      ($("#dipC").hide(),$("#dipA").show());
   });//**end**
 
 });
