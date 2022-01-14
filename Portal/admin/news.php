@@ -71,20 +71,16 @@ include 'includes/header.php';
                         ?>
                             <!-- Main-body start -->
 
-                            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addNews"><i class="fa fa-plus"></i>Add News</button>
-                            <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" id="deleteAllNews"><i class="fa fa-trash"></i>Delete</button>
+                            
                             
                             <div class="card">
                             <div class="card-header">
-                                                <h5>News List</h5>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                              <h5>
+                                <a type="button" class="btn btn-mat waves-effect waves-light btn-default">News List</a>
+                              </h5>
+                              <button type="button" class="btn btn-mat waves-effect waves-light btn-danger float-right" id="deleteAllNews"><i class="fa fa-trash"></i>Delete</button>
+                              <button type="button" class="btn btn-mat waves-effect waves-light btn-success mx-2 float-right" data-toggle="modal" data-target="#addNews"><i class="fa fa-plus"></i>Add News</button>   
+                            </div>
                             <div class="box-body">
                             <div class="card-block table-border-style" style="min-height: 400px;">
              

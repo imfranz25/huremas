@@ -144,27 +144,41 @@
 
 
 <!-- Delete Event -->
-<div class="modal fade" id="retreiveModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title"><b>Delete</b></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
+<div class="modal fade" id="eventsDelete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><b>Delete</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="function/events_delete.php" method="POST">
+        <input type="hidden" name="id" class="reference_id">
+        <div class="modal-body">
+          <div class="text-center">
+            <label>Are you sure you want to this event(s)?</label>
+            <h2 id="del_events" class="bold"></h2>
+            <label id="del_reference"></label>
+            <div class="text-center text-danger" >
+              <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+              <label> Note: This process cannot be undone</label>
             </div>
-            <div class="modal-body">
-                <div class="text-center">
-                  <label>Are you sure you want to retrieve this archive?</label>
-                  <h2 id="del_events" class="bold"></h2>
-                  <label id="del_reference"></label>
-                </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label req">Password</label>
+            <div class="col-sm-9">
+              <input type="password" name="pass" class="form-control border border-secondary" required="" placeholder="Please enter your password for verification"  />
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="button" class="btn btn-danger btn-flat" id="retrieve_archive"><i class="fa fa-archive"></i> Retrieve</button>
-            </div>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+          <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
 

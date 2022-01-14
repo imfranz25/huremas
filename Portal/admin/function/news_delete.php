@@ -14,6 +14,7 @@
 	if(isset($_POST['delete'])){
 		// initialization shitty
 		$id  = explode(',', $_POST['id']);
+		
 		$user_id = $user['employee_id'];
 		$pass  = $_POST['pass'];
 		$verify = "SELECT password FROM admin WHERE employee_id = '$user_id' ";
@@ -29,7 +30,6 @@
 		}else{
 			 $_SESSION['error'] = 'Incorrect Password, please try again';
 		}
-
 	}
 	else{
 		$_SESSION['error'] = 'Select item to delete first';

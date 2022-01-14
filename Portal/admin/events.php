@@ -68,6 +68,14 @@ include 'includes/header.php';
                             ";
                             unset($_SESSION['success']);
                             }
+                            $rsql = "SELECT COUNT(*) FROM event_request WHERE request_status = 0";
+                            $rquery=$conn->query($rsql);
+                            $row = $rquery->fetch_assoc();
+                            if ($row['COUNT(*)']==0) {
+                              $count='';
+                            }else{
+                              $count=$row['COUNT(*)'];
+                            }
                         ?>
                             <!-- Main-body start -->
 
@@ -83,6 +91,10 @@ include 'includes/header.php';
                                 </h5>
                                 <button type="button" class="btn btn-success m-0 float-right" data-target="#eRequest" data-toggle="modal" >
                                   <i class="fa fa-exchange"></i>Event Requests
+                                  <?php if ($count!='') { ?>
+                                    <span class="badge text-light bg-danger mx-1">
+                                    <?php echo "$count"; ?></span>
+                                  <?php } ?>
                                 </button>
 
                               </div>
@@ -133,7 +145,7 @@ include 'includes/header.php';
                                                 <div class="dropdown-menu" style="">
                                                   <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                   <div class="dropdown-divider"></div>
-                                                  <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                  <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                 </div>
 
                                               </td>
@@ -199,11 +211,11 @@ function getRow(id){
       //delete
       $("#del_reference").removeClass('d-none');
       $('#del_events').html(response.event_name);
-      $('#del_reference').html('Date Created : '+ new Date(response.event_created).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
+      $('#del_reference').html('Date Created : '+ (new Date(response.event_date)).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
       //edit
       $('.reference_id').val(response.reference_id);
       $('.event_date').val(response.event_date);
-      $('.event_date').attr('min',response.event_created);
+      $('.event_date').attr('min',response.event_date);
       $('.event_image').html(response.display_image);
       $('.event_image').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
       $('.event_name').val(response.event_name);
@@ -335,8 +347,7 @@ $(document).ready(function() {
           $(".reference_id").val(ids);
           $("#del_reference").html('');
           $("#del_reference").addClass('d-none');
-          $("#del_events").html((response.length <= 1) ? response.join(", ") : response.slice(0, -1).join(", ")+", and "+response[response.length-1]);
-          
+          $("#del_events").html((response.length <= 1) ? response.join(", ") : response.slice(0, -1).join(", ")+", and "+response[response.length-1]); 
         }
       });
     }else{
