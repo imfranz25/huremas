@@ -4,7 +4,6 @@
     <h5>
       <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Disciplinary Action List</a>
     </h5>
-    <button type="button" class="btn btn-mat waves-effect waves-light btn-danger float-right" ><i class="fa fa-trash"></i>Remove</button>
     <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right mx-2" data-toggle="modal" data-target="#addnew"><i class="fa fa-plus"></i>New</button>
   </div>
   <div class="box-body">
@@ -54,7 +53,7 @@
                 <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">   Action
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item edit_DA" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                  <a class="dropdown-item edit_DA" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Review</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item delete_DA text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>
                 </div>

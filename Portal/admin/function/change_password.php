@@ -16,7 +16,7 @@
 		$special = preg_match('@[^\w]@', $new);
 
 		//SQL PREPARATION STATEMENT
-		$stmt = $conn->prepare("UPDATE admin SET password = ? WHERE id = ? ");
+		$stmt = $conn->prepare("UPDATE admin SET password = ? WHERE employee_id = ? ");
 		$stmt->bind_param("sd",$confirm,$id);
 		
 		//VALIDATE NEW PASS
@@ -38,7 +38,7 @@
 		else{
 			//INITIALIZE PARAMETERS FOR STATEMENT
 			$confirm = password_hash($confirm, PASSWORD_DEFAULT);
-			$id = $user['id'];
+			$id = $user['employee_id'];
 			$status = $stmt->execute(); //EXECUTE STATEMENT
 			if ($status === false) {
 				$output["error"] = "Account Update Failed";
