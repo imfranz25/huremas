@@ -65,21 +65,17 @@ include 'includes/header.php';
                         ?>
                             <!-- Main-body start -->
 
-                            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addnew"><i class="fa fa-plus"></i>New</button>
                             
 
 
                             <div class="card">
-                            <div class="card-header">
-                                                <h5>Benefits List</h5>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                            <div class="card-header">     
+                                <h5>
+                                  <a type="button" class="btn btn-default">
+                                    Benefits List</a> 
+                                </h5>
+                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addnew"><i class="fa fa-plus"></i>New</button>
+                            </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
              
@@ -98,25 +94,29 @@ include 'includes/header.php';
                                             $sql = "SELECT * FROM benefits";
                                             $query = $conn->query($sql);
                                             while($row = $query->fetch_assoc()){
-                                            echo "
-                                                <tr>
-                                                <td>".$row['benefit_id']."</td>
-                                                <td>".$row['benefit_name']."</td>
-                                                <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 290px;'>
-                                                <a href='#view_desc' data-toggle='modal' class='pull-right desc' data-id='".$row['id']."'><span class='fa fa-eye'></span></a>
-                                                
-                                                ".$row['description']."
-                                                
-                                                
-                                                </td>
-                                                <td>
-                                                    <button class='btn btn-success btn-sm edit btn-round' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                                                    <button class='btn btn-danger btn-sm delete btn-round' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                                                </td>
-                                                </tr>
-                                            ";
-                                            }
                                         ?>
+
+                                            <tr>
+                                            <td><?php echo $row['benefit_id']; ?></td>
+                                            <td><?php echo $row['benefit_name']; ?></td>
+                                            <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 290px;'>
+                                            <a href='#view_desc' data-toggle='modal' class='pull-right desc' data-id='<?php echo $row['id']; ?>'><span class='fa fa-eye mx-2'></span></a>
+                                            <?php echo $row['description']; ?>     
+                                            </td>
+                                            <td>
+
+                                                 <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+                                                </button>
+
+                                                <div class="dropdown-menu" style="">
+                                                  <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                                                  <div class="dropdown-divider"></div>
+                                                  <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                </div>
+
+                                            </td>
+                                            </tr>
+                                         <?php } ?>
                                         </tbody>
                                 </table>
                                     </div>
@@ -170,9 +170,8 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('#beneid').val(response.id);
-      $('.bene_id').html(response.benefit_id);
-      $('#edit_title').val(response.benefit_name);
-      $('#edit_description').val(response.description);
+      $('.edit_title').val(response.benefit_name);
+      $('.edit_description').val(response.description);
       $('#del_beneid').val(response.id);
       $('#del_benefit').html(response.benefit_name);
       $('#view_benefit').html(response.description);

@@ -5,10 +5,10 @@
 		$id = $_POST['id'];
 		$sql = "DELETE FROM benefits WHERE id = '$id'";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Benefit deleted successfully '.$id;
+			$_SESSION['success'] = 'Benefit deleted successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 	}
 	else{
