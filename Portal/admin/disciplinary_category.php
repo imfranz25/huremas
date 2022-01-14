@@ -39,7 +39,7 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item edit_DCAT" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item delete_DCAT" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                <a class="dropdown-item delete_DCAT text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
               </div>
             </td>
           </tr>
