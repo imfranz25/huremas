@@ -5,7 +5,6 @@
 		$emp_id = $user['employee_id'];
 		$date = date("Y-m-d");
 		$type = $_POST['type'];
-		$account = $_POST['account'];
 		$amount = trim($_POST['amount']);
 		$reason = trim($_POST['reason']);
 
@@ -21,7 +20,7 @@
 		$reference_id = "CA".substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
 
 
-		$sql = "INSERT INTO cash_advance (reference_id,employee_id,req_date,ca_type,ca_reason,amount,status,ca_account) VALUES ('$reference_id','$emp_id','$date','$type','$reason','$amount','Pending','$account')";
+		$sql = "INSERT INTO cash_advance (reference_id,employee_id,req_date,ca_type,ca_reason,amount,status) VALUES ('$reference_id','$emp_id','$date','$type','$reason','$amount','Pending')";
 
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Cash Advance Request sent successfully';

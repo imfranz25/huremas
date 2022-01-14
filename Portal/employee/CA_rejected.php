@@ -38,7 +38,8 @@
                                                     <a href='#status_req' data-toggle='modal' class='stat_desc' data-id='<?php echo $row['id']; ?>'><i class='fa fa-eye'></i></a>
                                                 </td>
                                                 <td><?php echo $row['reference_id']; ?></td>
-                                                <td><?php echo $row['req_date']; ?></td>
+                                                <td><?php echo (new Datetime($row['req_date']))->format('F d, Y'); ?>
+                                                </td>
                                                 <td><?php echo $row['ca_type']; ?></td>
                                                 <td><?php echo $row['amount']; ?></td>
                                                 <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>

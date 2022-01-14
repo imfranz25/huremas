@@ -6,11 +6,10 @@
 
 		$id = trim($_POST['id']);
 		$type = $_POST['type'];
-		$account = $_POST['account'];
 		$amount = trim($_POST['amount']);
 		$reason = trim($_POST['reason']);
 	
-		$sql = "UPDATE cash_advance SET ca_type ='$type',ca_account='$account',amount=$amount,ca_reason='$reason' WHERE id=$id ";
+		$sql = "UPDATE cash_advance SET ca_type ='$type',amount=$amount,ca_reason='$reason' WHERE id=$id ";
 
 		if ($conn->query($sql)) {
 			$_SESSION['success'] = 'Cash Advance Request updated succesfully';

@@ -36,26 +36,13 @@
                       <option value="" selected>--Select Type--</option>
                       <option value="Cash">Cash</option>
                       <option value="Cheque">Cheque</option>
-                      <option value="Bank Transfer">Bank Transfer</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!--CA Account-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">CA Account</label>
-                  <div class="col-sm-9">
-                    <select name="account" class="form-control border border-secondary" required>
-                      <option value="" selected>--Select Account--</option>
-                      <option value="Bank">Bank</option>
-                      <option value="...">...</option>
                     </select>
                   </div>
                 </div>
 
                 <!--Amount-->
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Amount</label>
+                  <label class="col-sm-3 col-form-label req">Amount</label>
                   <div class="col-sm-9">
                     <input type="number" class="form-control border border-secondary" step="1" required="" min="1" max="99999" name="amount"  />
                   </div>
@@ -120,25 +107,13 @@
                     <select name="type" class="form-control border border-secondary edit_CA_type" required>
                       <option value="Cash">Cash</option>
                       <option value="Cheque">Cheque</option>
-                      <option value="Bank Transfer">Bank Transfer</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!--CA Account-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">CA Account</label>
-                  <div class="col-sm-9">
-                    <select name="account" class="form-control border border-secondary edit_CA_account"required>
-                      <option value="Bank">Bank</option>
-                      <option value="...">...</option>
                     </select>
                   </div>
                 </div>
 
                 <!--Amount-->
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Amount</label>
+                  <label class="col-sm-3 col-form-label req">Amount</label>
                   <div class="col-sm-9">
                     <input type="number" class="form-control border border-secondary edit_CA_amount" step="1" required="" min="1" max="99999" name="amount"  />
                   </div>
@@ -196,17 +171,9 @@
 
                 <!--CA Type-->
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">CA Type</label>
+                  <label class="col-sm-3 col-form-label">CA Type</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control border border-secondary edit_CA_type" readonly="" />
-                  </div>
-                </div>
-
-                <!--CA Account-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">CA Account</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control border border-secondary edit_CA_account" readonly="" />
                   </div>
                 </div>
 
@@ -220,7 +187,7 @@
 
                 <!--Tax Type-->
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">Reason</label>
+                  <label class="col-sm-3 col-form-label">Reason</label>
                   <div class="col-sm-9">
                     <textarea class="form-control border border-secondary edit_CA_reason" name="reason" rows="5" readonly="" ></textarea>
                   </div>
@@ -305,14 +272,6 @@
                   <label class="col-sm-3 col-form-label">CA Type</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control border border-secondary edit_CA_type" readonly="" />
-                  </div>
-                </div>
-
-                <!--CA Account-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">CA Account</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control border border-secondary edit_CA_account" readonly="" />
                   </div>
                 </div>
 

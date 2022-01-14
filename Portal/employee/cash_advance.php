@@ -171,7 +171,6 @@ function CA_row(id){
       $('#CA_id').val(response.id);
       $('.edit_CA_date').val(new Date(response.req_date).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
       $('.edit_CA_type').val(response.ca_type);
-      $('.edit_CA_account').val(response.ca_account);
       $('.edit_CA_amount').val(response.amount);
       $('.edit_CA_reason').val(response.ca_reason);
       $('.edit_CA_notes').val(response.notes);
