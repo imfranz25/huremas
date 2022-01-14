@@ -26,17 +26,9 @@
 
                 <!--CA Type-->
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">CA Type</label>
+                  <label class="col-sm-3 col-form-label">CA Type</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control border border-secondary edit_CA_type" readonly="" />
-                  </div>
-                </div>
-
-                <!--CA Account-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">CA Account</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control border border-secondary edit_CA_account" readonly="" />
                   </div>
                 </div>
 
@@ -50,7 +42,7 @@
 
                 <!--Tax Type-->
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">Reason</label>
+                  <label class="col-sm-3 col-form-label">Reason</label>
                   <div class="col-sm-9">
                     <textarea class="form-control border border-secondary edit_CA_reason" name="reason" rows="5" readonly="" ></textarea>
                   </div>
@@ -86,6 +78,9 @@
 <!--CA Request Review **End**-->
 
 
+
+
+
 <!-- CA Request View-->
 <div class="modal fade" id="view_req">
     <!--Modal Dialog-->
@@ -109,27 +104,11 @@
                   </div>
                 </div>
 
-                <!--Date Request-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control border border-secondary edit_CA_status" readonly="" />
-                  </div>
-                </div>
-
                 <!--CA Type-->
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">CA Type</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control border border-secondary edit_CA_type" readonly="" />
-                  </div>
-                </div>
-
-                <!--CA Account-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">CA Account</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control border border-secondary edit_CA_account" readonly="" />
                   </div>
                 </div>
 
