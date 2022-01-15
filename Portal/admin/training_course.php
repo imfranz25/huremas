@@ -81,19 +81,18 @@ include 'includes/header.php';
                             
                         ?>
 
-                        <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#courseNew" id="btncourse"><i class="fa fa-plus"></i>Add Course</button>
-
+                        
                              <div class="card">
                             <div class="card-header">
-                                                <h5>Course List</h5>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                            
+                                <h5>
+                                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Course List</a>
+                                </h5>
+                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#courseNew" id="btncourse">
+                                  <i class="fa fa-plus"></i>Add Course
+                                </button>
+
+                            </div>
                             <div class="box-body">
                             <div class="card-block table-border-style" style="min-height: 400px;">
              
