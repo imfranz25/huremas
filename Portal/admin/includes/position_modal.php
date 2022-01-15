@@ -12,18 +12,18 @@
             	<form class="form-horizontal" method="POST" action="function/position_add.php">
 
           		  <div class="form-group row">
-                  	<label for="title" class="col-sm-3 control-label">Designation Title</label>
+                  	<label for="title" class="col-sm-3 control-label req">Title</label>
 
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="title" name="title" required>
+                    	<input type="text" class="form-control border border-secondary" id="title" name="title" required>
                   	</div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="rate" class="col-sm-3 control-label">Rate per Hr</label>
+                    <label for="rate" class="col-sm-3 control-label req">Rate per Hr</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="rate" name="rate" required>
+                      <input type="number" class="form-control border border-secondary" id="rate" name="rate" min='0' step="100" required>
                     </div>
                 </div>
           	</div>
@@ -49,18 +49,16 @@
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="function/position_edit.php">
             		<input type="hidden" id="posid" name="id">
-                <div class="form-group">
-                    <label for="edit_title" class="col-sm-3 control-label">Designation Title</label>
-
+                <div class="form-group row">
+                    <label for="edit_title" class="col-sm-3 control-label req">Title</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_title" name="title">
+                      <input type="text" class="form-control border border-secondary" id="edit_title" name="title" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="edit_rate" class="col-sm-3 control-label">Rate per Hr</label>
-
+                <div class="form-group row">
+                    <label for="edit_rate" class="col-sm-3 control-label req">Rate per Hr</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_rate" name="rate">
+                      <input type="number" class="form-control border border-secondary" id="edit_rate" name="rate" min='0' step="100"  required>
                     </div>
                 </div>
           	</div>
@@ -89,9 +87,14 @@
             		<div class="text-center">
 	                	<p>Are you sure you want to delete this designation record(s)?</p>
 	                	<h2 id="del_position" class="bold"></h2>
+                        <div class="form-group row">
+                        <label for="pass" class="col-sm-3 control-label req">Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control border border-secondary" id="pass" name="pass" placeholder="Please enter your password for verification" required>
+                        </div>
+                    </div>
                     <div class="text-center text-danger" >
-                      <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
+                      <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i> Note: You can't delete a position record if its currently applied in employee record</label>
                     </div>
 	            	</div>
           	</div>
@@ -201,15 +204,14 @@
                 <div class="text-center">
                     <p>Are you sure you want to delete this department record(s)?</p>
                     <h2 id="del_position2" class="bold"></h2>
-                    <div class="text-center text-danger" >
-                      <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
-                    </div>
                     <div class="form-group row">
                         <label for="pass" class="col-sm-3 control-label req">Password</label>
                         <div class="col-sm-9">
                           <input type="password" class="form-control border border-secondary" id="pass" name="pass" placeholder="Please enter your password for verification" required>
                         </div>
+                    </div>
+                    <div class="text-center text-danger" >
+                      <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i> Note: You can't delete a department record if its curretly applied in employee record</label>
                     </div>
                 </div>
             </div>

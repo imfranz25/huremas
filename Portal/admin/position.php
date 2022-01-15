@@ -139,6 +139,14 @@ $(function(){
     var id = $(this).data('id');
     getRow2(id);
   });
+
+  $('.nav-link').click(function(e){
+    let link = $(this).attr('href');
+    $('.tab-pane').removeClass('active');
+    $(link).addClass('active');
+  });
+
+  
 });
 
 function getRow(id){
