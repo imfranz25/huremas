@@ -175,7 +175,7 @@
               <form class="form-horizontal" method="POST" action="function/course_delete.php">
                 <input type="hidden" class="course_id" name="id">
                 <div class="text-center">
-                    <label>Are you sure you want to delete the following course title(s)?</label>
+                    <label>Are you sure you want to delete the following course title?</label>
                     <h2 id="del_course" class="bold"></h2>
                     <label id="del_code"></label>
                     <div class="form-group row">

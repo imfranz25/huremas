@@ -4,40 +4,36 @@
 	//delete
 	$stmt = $conn->prepare("DELETE FROM training_vendor WHERE id = ? ;");
 	$stmt->bind_param("d", $delete);
-	$check_active = $conn->prepare("SELECT COUNT(training_vendor) AS count FROM  training_list WHERE training_vendor = ?");
-	$check_active->bind_param("d",$delete);
-	$notes=""; //Message for user
 
 	function delete($id){
-		global $stmt,$check_active,$delete,$notes;
+		global $stmt,$delete,$notes;
 		$delete = $id;
+		$stmt->execute() ? $_SESSION['success'] = 'Vendor record deleted successfully' : $_SESSION['error'] = "Connection Timeout";
 
-		$check_active->execute();
-		$result = $check_active->get_result(); 
-		$count = $result->fetch_assoc(); 
-		if ($count['count'] < 1) {
-			$stmt->execute() ? $_SESSION['success'] = 'Vendor record(s) deleted successfully' : $_SESSION['error'] = "Connection Timeout";
-		}
-		else{
-			$notes .= "&#8594;<mark> ".$count['vendor_name']."</mark><br>";
-		}
-		
 	}
 
 	if(isset($_POST['delete'])){
 		// initialization shitty
-		$id  = explode(',', $_POST['id']);
+		$id  = $_POST['id'];
+		$employee_id = $user['employee_id'];
+		$check = "SELECT * FROM training_list WHERE training_vendor = $id ";
+		$query = $conn->query($check);
+		$count = mysqli_num_rows($query);
+		echo $count;
+		if ($count==0) {
+			//challenge
+			$pass  = $_POST['pass'];
+			if (password_verify($pass,get_password($employee_id,$conn))) {
+				delete($id);
+			}else{
+				 $_SESSION['error'] = 'Incorrect Password, please try again';
+			}
+		}else{
+			$_SESSION['error'] = 'Training vendor currently in used';
+		}
 
-		if (count($id) > 1) {
-			array_map('delete', $id);
-		}
-		else{
-			delete($id[0]);
-		}
-		//notify user for
-		if ($notes) {
-			$_SESSION['warning'] = 'Unable to delete the following vendor record(s) :<br>'.$notes;
-		}
+
+
 	}
 	else{
 		$_SESSION['error'] = 'Select item to delete first';

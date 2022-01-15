@@ -159,12 +159,18 @@
               <form class="form-horizontal" method="POST" action="function/training_vendor_delete.php">
                 <input type="hidden" class="vendor_id" name="id">
                 <div class="text-center">
-                    <label>Are you sure you want to delete the following training vendor(s)?</label>
+                    <label>Are you sure you want to delete the following training vendor?</label>
                     <h2 id="del_vendor" class="bold"></h2>
                     <label id="del_code"></label>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Password</label>
+                      <div class="col-sm-9">
+                        <input type="password" class="form-control border border-secondary" name="pass" required placeholder="Please enter your password for verification" />
+                      </div>
+                    </div>
                     <div class="text-center text-danger" >
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
+                      <label> Note: You can't delete a training vendor if its currently applied in training list</label>
                     </div>
                 </div>
             </div>

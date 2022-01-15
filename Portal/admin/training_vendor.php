@@ -81,21 +81,18 @@ include 'includes/header.php';
                             
                         ?>
 
-                        <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#vendorNew" id="btnvendor"><i class="fa fa-plus"></i>Add Vendor</button>
-                        <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" data-toggle="modal" id="deleteAllVendor"> <i class="fa fa-trash"></i>Delete</button>
+                        
 
                         
                              <div class="card">
                             <div class="card-header">
-                                                <h5>Training Vendor List</h5>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                               
+                                <h5>
+                                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Training Vendor List</a>
+                                </h5>
+                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#vendorNew" id="btnvendor"><i class="fa fa-plus"></i>Add Vendor</button>
+
+                            </div>
                             <div class="box-body">
                             <div class="card-block table-border-style" style="min-height: 400px;">
              
@@ -103,12 +100,6 @@ include 'includes/header.php';
                                 <table id="table1" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th style="max-width: 15px;">
-                                          <div class="custom-control custom-checkbox m-0 p-0">
-                                            <input type="checkbox" class="custom-control-input" id="globalcheck" />
-                                            <label class="custom-control-label d-flex align-items-center text-center" for="globalcheck"></label>
-                                          </div>
-                                        </th>
                                         <th>Vendor Code</th>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -124,12 +115,6 @@ include 'includes/header.php';
                                         while($row = $query->fetch_assoc()){
                                         ?>
                                             <tr>
-                                              <td>
-                                                  <div class="custom-control custom-checkbox m-0 p-0">
-                                                    <input type="checkbox" class="custom-control-input" id="n<?php echo $row['id']; ?>" />
-                                                    <label class="custom-control-label d-flex align-items-center text-center" for="n<?php echo $row['id']; ?>"></label>
-                                                  </div>  
-                                              </td>
                                               <td><?php echo $row['vendor_code']; ?></td>
                                               <td><?php echo $row['vendor_name']; ?></td>
                                               <td><?php echo $row['email']; ?></td>
@@ -144,7 +129,7 @@ include 'includes/header.php';
                                                   <div class="dropdown-divider"></div>
                                                   <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                   <div class="dropdown-divider"></div>
-                                                  <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                  <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                 </div>
 
                                               </td>
@@ -250,33 +235,6 @@ $(document).ready(function() {
     }
   });
 
-   //delete all checked checkbox :)
-  $('#deleteAllVendor').click(function(e){
-    //select all checked checkbox
-    var ids = $("#tbody_vendor input:checkbox:checked").map(function(){
-      return $(this).attr("id").replace("n","");
-    }).get();
-
-    if (ids.length){
-      $.ajax({
-        type: 'POST',
-        url: 'function/training_vendor_row.php',
-        data: {ids:ids},
-        dataType: 'json',
-        success: function(response){
-          $("#vendorDelete").modal('show');
-          $(".vendor_id").val(ids);
-          $("#del_code").html('');
-          $("#del_code").addClass('d-none');
-          $("#del_vendor").html((response.length <= 1) ? response.join(", ") : response.slice(0, -1).join(", ")+", and "+response[response.length-1]);
-          
-        }
-      });
-    }else{
-      $("#showdanger").removeAttr("hidden");
-      $("#warning").html("Please select vendor first !");
-    }
-  });
 
 });
 
