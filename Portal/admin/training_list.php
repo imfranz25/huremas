@@ -75,39 +75,28 @@ include 'includes/header.php';
                             
                         ?>
 
-                        <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#trainingNew" id="btnTRA"><i class="fa fa-plus"></i>Add Training</button>
-
                         
-
-                        <div class="btn-group float-right">
-                          <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
-                          <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
-                            <a class="dropdown-item filter_tra active" data-id='all' href="javascript:void(0)" id="training_all">All</a>
-                            <a class="dropdown-item filter_tra" data-id='starred' href="javascript:void(0)">Starred</a>
-                            <a class="dropdown-item filter_tra" data-id='active' href="javascript:void(0)">Active</a>
-                            <a class="dropdown-item filter_tra" data-id='inactive' href="javascript:void(0)">Inactive</a>
-                          </div>
-                        </div>
                         
                             <!-- Main-body start -->
                             <div class="card mb-0 ">    
                               <div class="card-header">
-                                <ul class="breadcrumb-title">
-                                  <li class="breadcrumb-item">
-                                    <a class="reload_card" href="javascript:void(0)"><h5>Trainings</h5></a>
-                                  </li>
-                                  <li class="breadcrumb-item">
-                                    <a class="reload_card" href="javascript:void(0)"><label id="tra_breadcrumb">All</label></a>
-                                  </li>
-                                  <!--Filter here-->
-                                </ul>
-                                <div class="card-header-right">
-                                  <ul class="list-unstyled card-option">
-                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                    <li><i class="fa fa-window-maximize full-card"></i></li>
-                                    <li><i class="fa fa-refresh reload_card"></i></li>
-                                  </ul>
-                                </div>
+                                <h5>
+                                  <a class="btn btn-default reload_card" href="javascript:void(0)">Trainings / &nbsp;<label id="tra_breadcrumb">All</label></a>                                  
+                                </h5>
+                                  
+                                  <div class="btn-group float-right">
+                                    <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
+                                    <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
+                                      <a class="dropdown-item filter_tra active" data-id='all' href="javascript:void(0)" id="training_all">All</a>
+                                      <a class="dropdown-item filter_tra" data-id='starred' href="javascript:void(0)">Starred</a>
+                                      <a class="dropdown-item filter_tra" data-id='active' href="javascript:void(0)">Active</a>
+                                      <a class="dropdown-item filter_tra" data-id='inactive' href="javascript:void(0)">Inactive</a>
+                                    </div>
+                                  </div>
+
+                                  <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right mx-2" data-toggle="modal" data-target="#trainingNew" id="btnTRA"><i class="fa fa-plus"></i>Add Training</button>
+
+
                               </div>         
                               <div class="box-body" id="training_data" style="height: 500px;">
                                 <div class="card-block table-border-style row text-justify mh-100" style="overflow-y: scroll !important;">
@@ -431,6 +420,9 @@ include 'includes/header.php';
           }else if (response=='2') {
             $('#fullModal').modal('show');
             $('#warn_msg').html('Looks like the batch size for this training reach its limit !');
+          }else if (response=='3') {
+            $('#fullModal').modal('show');
+            $('#warn_msg').html('Looks like this training is already finished !');
           }else{
             $('#errorModal').modal('show');
             $('#error_msg').html('Add attendee failed');
@@ -671,6 +663,9 @@ include 'includes/header.php';
           }else if (response=='2') {
             $('#fullModal').modal('show');
             $('#warn_msg').html('Looks like the batch size for this training reach its limit !');
+          }else if (response=='3') {
+            $('#fullModal').modal('show');
+            $('#warn_msg').html('Looks like this training is already finished !');
           }else{
             $('#errorModal').modal('show');
             $('#error_msg').html('Add attendee failed');

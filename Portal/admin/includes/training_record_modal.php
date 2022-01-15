@@ -103,7 +103,6 @@
                                                             <td><?php echo (new Datetime($row['request_date']))->format('F d, Y'); ?></td>
                                                             <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                                                             <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>
-                                                              <a href='#view_action'class='pull-right view_att' data-id='<?php echo $row['reference_no']; ?>'><span class='fa fa-eye ml-5'></span></a>
                                                               <?php echo $row['internal_note']; ?>
                                                           </td>
                                                             <td>
@@ -182,17 +181,22 @@
                                                             <td><?php echo $row['reference_no']; ?></td>
                                                             <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                                                             <td>
-                                                              <?php echo $row['status']; ?>
+                                                              <span class="badge <?php echo ($row['status']=='On-going')? 'badge-warning' : 'badge-success'; ?>"><?php echo $row['status']; ?></span>
                                                             </td>
                                                             <td>
-                                                              <button class="btn btn-success btn-sm btn-round view_att" data-id="<?php echo $row['reference_no']; ?>"><i class="fa fa-edit"></i> View</button>
-                                                              <?php 
+
+                                                              <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+                                                              </button>
+
+                                                              <div class="dropdown-menu" style="">
+                                                                <a class="dropdown-item view_att" href="javascript:void(0)" data-id="<?php echo $row['reference_no'] ?>"><i class="fa fa-eye"></i>View</a>
+                                                                <?php 
                                                                 if ((strcmp($row['status'], 'Reviewed')+strcmp($row['status'], 'Finished'))==0) {
-                                                              ?>
-
-                                                              <button class="btn btn-danger btn-sm btn-round remove" data-id="<?php echo $row['reference_no']; ?>"><i class="fa fa-trash"></i> Remove</button>
-
-                                                              <?php } ?>
+                                                                ?>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item remove text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_no'] ?>"><i class="fa fa-trash"></i>Remove</a>
+                                                                <?php } ?>
+                                                              </div>
                                                               
                                                             </td>
 
@@ -263,8 +267,7 @@
                                                             <td><?php echo (new Datetime($row['request_date']))->format('F d, Y'); ?></td>
                                                             <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                                                             <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>
-                                                              <a href='#view_rejnote' class='pull-right view_att' data-id='<?php echo $row['reference_no']; ?>'><span class='fa fa-eye ml-5'></span></a>
-                                                              <?php echo $row['internal_note']; ?>
+                                                              <?php echo ($row['internal_note']=='')?'N/A':$row['internal_note']; ?>
                                                           </td>
                                                             <td>
                                                               <button class="btn btn-success btn-sm review_rej btn-round" data-id="<?php echo $row['reference_no']; ?>"><i class="fa fa-edit"></i> Review</button>

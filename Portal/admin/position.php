@@ -81,7 +81,7 @@ include 'includes/header.php';
                                     </ul>
 
                                     <!-- Tab panes -->
-                                    <div class="tab-content card-block">
+                                    <div class="tab-content">
                                         <div class="tab-pane active" id="CAreq" role="tabpanel">
                                             <br>
                                             <?php include 'positions.php'; ?>  

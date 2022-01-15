@@ -443,6 +443,12 @@
                     <label>Are you sure you want to delete this training record?</label>
                     <h2 id="del_training" class="bold"></h2>
                     <label id="del_tcode"></label>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label req">Password</label>
+                      <div class="col-sm-9">
+                        <input type="password" class="form-control border border-secondary" required placeholder="Please enter your password for verification" name="pass" />
+                      </div>
+                    </div>
                     <div class="text-center text-danger" >
                       <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
                        Note: Deleting this Training Record will also result in the deletion of employee training records connected to this training, and once deleted, this action can't be undone. </label>

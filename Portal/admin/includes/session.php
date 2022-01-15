@@ -11,7 +11,7 @@
 	$user = $query->fetch_assoc();
 
 	//UPDATE TRAINING RECORD
-	$update_record = $conn->prepare("UPDATE training_record SET status=? WHERE training_code = ? ");
+	$update_record = $conn->prepare("UPDATE training_record SET status=? WHERE training_code = ? AND (status ='On-going' OR status='Finished') ");
 	$update_record->bind_param('ss',$status,$code);
 
 	//UPDATE TRAINING 

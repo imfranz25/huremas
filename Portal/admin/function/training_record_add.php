@@ -22,7 +22,13 @@
 		$sql = "INSERT INTO training_record (reference_no,employee_id,training_code,status) VALUES ('$reference_no','$id','$code','On-going')";	
 
 		if ($row['batch_size']>$row['basecount']) {
-			echo ($conn->query($sql))? 1:0;
+			$today = new Datetime('now');
+			$end = new Datetime($row['schedule_to']);
+			if ($end<=$today) {
+				echo 3;
+			}else{
+				echo ($conn->query($sql))? 1:0;
+			}
 		}else{
 			echo 2;
 		}
