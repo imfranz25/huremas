@@ -25,11 +25,12 @@
                                           <a href="profile.php" onclick="store('#personal')"><i class="ti-user"></i>View Profile</a>
                                           <a href="profile.php" onclick="store('#setting')"><i class="ti-settings"></i>Settings</a>
                                           <a href="logout.php"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                          <hr />
                                       </li>
                                   </ul>
                               </div>
                           </div>
-                          <div class="p-15 p-b-0">
+                          <!-- <div class="p-15 p-b-0">
                               <form class="form-material">
                                   <div class="form-group form-primary">
                                       <input type="text" name="footer-email" class="form-control" required="">
@@ -37,7 +38,7 @@
                                       <label class="float-label"><i class="fa fa-search m-r-10"></i>Search</label>
                                   </div>
                               </form>
-                          </div>
+                          </div> -->
                           <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Reports</div>
                           <ul class="pcoded-item pcoded-left-item nav">
                               <li class="nav-item">
@@ -129,6 +130,30 @@
                                 </ul>
                             </li>
 
+                            <li class="pcoded-hasmenu" id="dtr">
+                                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-timer"></i></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Daily Time Records</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li class=" ">
+                                        <a href="dtr.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Attendance</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class=" ">
+                                        <a href="record_correction.php" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Time Record Correction</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>  
+                                </ul>
+                            </li>
+
                             <li class="pcoded-hasmenu" id="evaluation">
                                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-bar-chart-alt"></i></span>
@@ -199,31 +224,7 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
-                            <li class="pcoded-hasmenu" id="training">
-                                <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                    <span class="pcoded-micon"><i class="ti-timer"></i></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Daily Time Records</span>
-                                    <span class="pcoded-mcaret"></span>
-                                </a>
-                                <ul class="pcoded-submenu">
-                                    <li class=" ">
-                                        <a href="dtr.php" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Attendance</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="record_correction.php" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Time Record Correction</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>  
-                                </ul>
-                            </li>
                             
-
         
                           </ul>
         
@@ -272,46 +273,7 @@
                                   </a>
                               </li>
 
-                              <li class="pcoded-hasmenu ">
-                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>M</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.menu-levels.main">Etc</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                                  <ul class="pcoded-submenu">
-                                      <li class="">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-21">Etc 1</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                                      <li class="pcoded-hasmenu ">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-direction-alt"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.main">Etc 2</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                          <ul class="pcoded-submenu">
-                                              <li class="">
-                                                  <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                      <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-22.menu-level-31">Etc 3</span>
-                                                      <span class="pcoded-mcaret"></span>
-                                                  </a>
-                                              </li>
-                                          </ul>
-                                      </li>
-                                      <li class="">
-                                          <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                              <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.menu-levels.menu-level-23">Etc 4</span>
-                                              <span class="pcoded-mcaret"></span>
-                                          </a>
-                                      </li>
-                
-                                  </ul>
-                              </li>
+                              
                           </ul>
                       </div>
                   </nav>
@@ -339,12 +301,15 @@
             var tra = (url).href.indexOf("training_course") != -1 || (url).href.indexOf("training_vendor") != -1 || (url).href.indexOf("training_list") != -1;
             //performance
             var per = (url).href.indexOf("tasks") != -1 || (url).href.indexOf("performance_eval") != -1;
+            var dtr = (url).href.indexOf("dtr") != -1 || (url).href.indexOf("record_correction") != -1;
             if (emp){
               $("#employee").addClass('active'); // ACTIVATE ACTIVE
             }else if (tra){
               $("#training").addClass('active'); // ACTIVATE ACTIVE
             }else if (per){
               $("#evaluation").addClass('active'); // ACTIVATE ACTIVE
+            }else if (dtr){
+              $("#dtr").addClass('active'); // ACTIVATE ACTIVE
             }
           }
 

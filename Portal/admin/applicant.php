@@ -73,39 +73,31 @@ include 'includes/header.php';
                             
                         ?>
 
-                        <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#newJob" id="btnJob"><i class="fa fa-plus"></i>Add New Job</button>
+                        
 
                         
 
-                        <div class="btn-group float-right">
-                          <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
-                          <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
-                            <a class="dropdown-item filter_job active" data-id='all' href="javascript:void(0)" id="job_all">All</a>
-                            <a class="dropdown-item filter_job" data-id='starred' href="javascript:void(0)">Starred</a>
-                            <a class="dropdown-item filter_job" data-id='active' href="javascript:void(0)">Active</a>
-                            <a class="dropdown-item filter_job" data-id='inactive' href="javascript:void(0)">Inactive</a>
-                          </div>
-                        </div>
                         
                             <!-- Main-body start -->
                             <div class="card mb-0 ">    
                               <div class="card-header">
-                                <ul class="breadcrumb-title">
-                                  <li class="breadcrumb-item">
-                                    <a class="reload_card" href="javascript:void(0)"><h5>Recruitment</h5></a>
-                                  </li>
-                                  <li class="breadcrumb-item">
-                                    <a class="reload_card" href="javascript:void(0)"><label id="job_breadcrumb">All</label></a>
-                                  </li>
-                                  <!--Filter here-->
-                                </ul>
-                                <div class="card-header-right">
-                                  <ul class="list-unstyled card-option">
-                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                    <li><i class="fa fa-window-maximize full-card"></i></li>
-                                    <li><i class="fa fa-refresh reload_card"></i></li>
-                                  </ul>
+
+                                <h5>
+                                  <a class="btn btn-default reload_card" href="javascript:void(0)">Recruitment / &nbsp;<label id="job_breadcrumb">All</label></a>                             
+                                </h5>
+
+                                <div class="btn-group float-right">
+                                  <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
+                                  <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
+                                    <a class="dropdown-item filter_job active" data-id='all' href="javascript:void(0)" id="job_all">All</a>
+                                    <a class="dropdown-item filter_job" data-id='starred' href="javascript:void(0)">Starred</a>
+                                    <a class="dropdown-item filter_job" data-id='active' href="javascript:void(0)">Active</a>
+                                    <a class="dropdown-item filter_job" data-id='inactive' href="javascript:void(0)">Inactive</a>
+                                  </div>
                                 </div>
+
+                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right mx-2" data-toggle="modal" data-target="#newJob" id="btnJob"><i class="fa fa-plus"></i>Add New Job</button>
+
                               </div>         
                               <div class="box-body" id="job_data" style="height: 500px;">
                                 <div class="card-block table-border-style row text-justify mh-100" style="overflow-y: scroll !important;">

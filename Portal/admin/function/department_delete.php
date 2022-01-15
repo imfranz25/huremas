@@ -4,11 +4,16 @@
 	if(isset($_POST['delete'])){
 		$id = $_POST['id'];
 
+		$check_job = "SELECT * FROM job WHERE job_dept = $id ";
+		$query_job = $conn->query($check_job);
+		$count_job = mysqli_num_rows($query_job);
+
 		$check = "SELECT * FROM employees WHERE department_id = $id ";
 		$query = $conn->query($check);
 		$count = mysqli_num_rows($query);
 
-		if ($count==0) {
+		if ($count==0 && $count_job==0) {
+			
 			$sql = "DELETE FROM department_category WHERE id = '$id'";
 			$pass = $_POST['pass'];
 			$employee_id = $user['employee_id'];

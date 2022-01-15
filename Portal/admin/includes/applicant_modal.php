@@ -419,6 +419,12 @@
                     <label>Are you sure you want to delete this job record?</label>
                     <h2 id="del_jobtitle" class="bold"></h2>
                     <label id="del_jcode"></label>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label req">Password</label>
+                      <div class="col-sm-9">
+                        <input type="password" class="form-control border border-secondary " required name="pass" placeholder="Please enter your password for verification" />
+                      </div>
+                    </div>
                     <div class="text-center text-danger" >
                       <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
                        Note: Deleting this Job Record will also result in the deletion of application records connected to this job, and once deleted, this action can't be undone. </label>
