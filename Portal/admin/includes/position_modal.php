@@ -165,14 +165,14 @@
                     <label for="edit_title" class="col-sm-3 control-label req">Title</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary" id="edit_title2" name="title">
+                      <input type="text" class="form-control border border-secondary" id="edit_title2" required name="title">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="edit_rate" class="col-sm-3 control-label req">Code</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary" id="edit_code2" name="code">
+                      <input type="text" class="form-control border border-secondary" id="edit_code2" required name="code">
                     </div>
                 </div>
             </div>
@@ -204,6 +204,12 @@
                     <div class="text-center text-danger" >
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
                       <label> Note: This process cannot be undone</label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="pass" class="col-sm-3 control-label req">Password</label>
+                        <div class="col-sm-9">
+                          <input type="password" class="form-control border border-secondary" id="pass" name="pass" placeholder="Please enter your password for verification" required>
+                        </div>
                     </div>
                 </div>
             </div>
