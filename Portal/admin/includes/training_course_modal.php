@@ -178,9 +178,15 @@
                     <label>Are you sure you want to delete the following course title(s)?</label>
                     <h2 id="del_course" class="bold"></h2>
                     <label id="del_code"></label>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Password</label>
+                      <div class="col-sm-9">
+                        <input type="password" class="form-control border border-secondary" name="pass" required placeholder="Please enter your password for verification" />
+                      </div>
+                    </div>
                     <div class="text-center text-danger" >
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
+                      <label> Note: You can't delete a course record if its currently applied in training list</label>
                     </div>
                 </div>
             </div>

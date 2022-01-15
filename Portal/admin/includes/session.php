@@ -52,4 +52,11 @@
 
 	}
 
+	function get_password($employee_id,$conn){
+		$verify = "SELECT password FROM admin WHERE employee_id = '$employee_id' ";
+		$query = $conn->query($verify);
+		$row = $query->fetch_assoc();
+		return $row['password'];
+	}
+
 ?>

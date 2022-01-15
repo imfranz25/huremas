@@ -209,21 +209,20 @@
 			},
 			success:function(resp){
 				if(resp && typeof JSON.parse(resp) === 'object'){
-					resp = JSON.parse(resp)
+					resp = JSON.parse(resp);
 					if(Object.keys(resp).length > 0){
 						$('#post-field').html('')
 						Object.keys(resp).map(k=>{
-							var _progress = $('#clone_progress .post').clone()
-							_progress.find('.pdesc').append(resp[k].progress)
-							_progress.find('.avatar').attr('src','../assets/profile/'+resp[k].photo)
-							_progress.find('.nf').text(resp[k].uname)
-							_progress.find('.date').text(resp[k].date_created)
-
-							$('#post-field').append(_progress)
+							var _progress = $('#clone_progress .post').clone();
+							_progress.find('.pdesc').append(resp[k].progress);
+							_progress.find('.avatar').attr('src','images/'+resp[k].photo);
+							_progress.find('.nf').text(resp[k].uname);
+							_progress.find('.date').text(resp[k].date_created);
+							$('#post-field').append(_progress);
 						})
-					 	$('#ratings-field').show()
+					 	$('#ratings-field').show();
 					}else{
-					 	$('#ratings-field').hide()
+					 	$('#ratings-field').hide();
 					}
 				}
 			},

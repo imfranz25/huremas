@@ -82,9 +82,7 @@ include 'includes/header.php';
                         ?>
 
                         <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#courseNew" id="btncourse"><i class="fa fa-plus"></i>Add Course</button>
-                        <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" data-toggle="modal" id="deleteAllCourse"> <i class="fa fa-trash"></i>Delete</button>
 
-                        
                              <div class="card">
                             <div class="card-header">
                                                 <h5>Course List</h5>
@@ -103,12 +101,6 @@ include 'includes/header.php';
                                 <table id="table1" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th style="max-width: 15px;">
-                                          <div class="custom-control custom-checkbox m-0 p-0">
-                                            <input type="checkbox" class="custom-control-input" id="globalcheck" />
-                                            <label class="custom-control-label d-flex align-items-center text-center" for="globalcheck"></label>
-                                          </div>
-                                        </th>
                                         <th>Course Code</th>
                                         <th>Course Title</th>
                                         <th>Details</th>
@@ -122,12 +114,6 @@ include 'includes/header.php';
                                         while($row = $query->fetch_assoc()){
                                         ?>
                                             <tr>
-                                              <td>
-                                                  <div class="custom-control custom-checkbox m-0 p-0">
-                                                    <input type="checkbox" class="custom-control-input" id="n<?php echo $row['id']; ?>" />
-                                                    <label class="custom-control-label d-flex align-items-center text-center" for="n<?php echo $row['id']; ?>"></label>
-                                                  </div>  
-                                              </td>
                                               <td><?php echo $row['course_code']; ?></td>
                                               <td><?php echo $row['course_title']; ?></td>
                                               <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>
@@ -144,7 +130,7 @@ include 'includes/header.php';
                                                   <div class="dropdown-divider"></div>
                                                   <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                   <div class="dropdown-divider"></div>
-                                                  <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                  <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                 </div>
 
                                               </td>
@@ -248,33 +234,6 @@ $(document).ready(function() {
     }
   });
 
-   //delete all checked checkbox :)
-  $('#deleteAllCourse').click(function(e){
-    //select all checked checkbox
-    var ids = $("#tbody_course input:checkbox:checked").map(function(){
-      return $(this).attr("id").replace("n","");
-    }).get();
-
-    if (ids.length){
-      $.ajax({
-        type: 'POST',
-        url: 'function/course_row.php',
-        data: {ids:ids},
-        dataType: 'json',
-        success: function(response){
-          $("#courseDelete").modal('show');
-          $(".course_id").val(ids);
-          $("#del_code").html('');
-          $("#del_code").addClass('d-none');
-          $("#del_course").html((response.length <= 1) ? response.join(", ") : response.slice(0, -1).join(", ")+", and "+response[response.length-1]);
-          
-        }
-      });
-    }else{
-      $("#showdanger").removeAttr("hidden");
-      $("#warning").html("Please select course first !");
-    }
-  });
 
 });
 
