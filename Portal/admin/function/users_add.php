@@ -17,7 +17,6 @@
 		}
 		$default = substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
 		$default = substr(str_shuffle($default), 0, 15);
-
 		$hashed_password = password_hash($default, PASSWORD_DEFAULT);
 
 

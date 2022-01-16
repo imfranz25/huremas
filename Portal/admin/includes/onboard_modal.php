@@ -225,7 +225,7 @@
                               <!--Age-->
                               <label class="col-12 mt-3">Age</label> 
                               <div class="col-12">
-                                <input type="text" id="age_on" name="age" class="form-control border border-secondary" readonly /> 
+                                <input type="text" id="age_on" class="form-control border border-secondary" readonly /> 
                               </div>
 
 
@@ -240,6 +240,12 @@
                               <div class="col-12">
                                 <input type="text" id="mobile_on" name="mobile" class="form-control border border-secondary" required /> 
                               </div>
+
+                              <!--Email-->
+                                <label class="req col-12 mt-3">Email</label> 
+                                <div class="col-12">
+                                  <input type="email" id="email_on" name="email" class="form-control border border-secondary" required /> 
+                                </div>
 
                               <!--Religion-->
                               <!-- <label class="req col-12 mt-3">Religion</label> 
@@ -300,13 +306,13 @@
                               <!--Basic Salary-->
                               <label class="col-12 mt-3">Basic Salary</label> 
                               <div class="col-12">
-                                <input type="text" id="salary_on" name="salary_on" class="form-control" readonly>
+                                <input type="text" id="salary_on" name="salary" class="form-control" readonly>
                               </div>
 
                               <!--Daily Wage-->
                               <label class="col-12 mt-3">Daily Wage</label> 
                               <div class="col-12">
-                                <input type="text" id="wage_on" name="wage_on" class="form-control" readonly>
+                                <input type="text" id="wage_on" name="wage" class="form-control" readonly>
                               </div>
 
                                <!--Photo-->
@@ -355,43 +361,43 @@
                               <!--SSS-->
                               <label class="col-12 mt-3 req">SSS</label> 
                               <div class="col-12">
-                                <input type="text" id="sss_on" name="sss_on" class="form-control border border-secondary" >
+                                <input type="text" id="sss_on" name="sss" class="form-control border border-secondary" >
                               </div>
 
                               <!--Pag-ibig-->
                               <label class="col-12 mt-3 req">Pag-ibig</label> 
                               <div class="col-12">
-                                <input type="text" id="pagibig_on" name="pagibig_on" class="form-control border border-secondary" >
+                                <input type="text" id="pagibig_on" name="pagibig" class="form-control border border-secondary" >
                               </div>
 
                               <!--Philhealth-->
                               <label class="col-12 mt-3 req">Philhealth</label> 
                               <div class="col-12">
-                                <input type="text" id="philhealth_on" name="philhealth_on" class="form-control border border-secondary" >
+                                <input type="text" id="philhealth_on" name="philhealth" class="form-control border border-secondary" >
                               </div>
 
                               <!--TIN Number-->
                               <label class="col-12 mt-3 req">TIN Number</label> 
                               <div class="col-12">
-                                <input type="text" id="tin_on" name="tin_on" class="form-control border border-secondary" >
+                                <input type="text" id="tin_on" name="tin" class="form-control border border-secondary" >
                               </div>
 
                               <!--SSS-->
                               <label class="col-12 mt-3 req">SSS Premium</label> 
                               <div class="col-12">
-                                <input type="text" id="sssprem_on" name="sssprem_on" class="form-control border border-secondary" >
+                                <input type="text" id="sssprem_on" name="sssprem" class="form-control border border-secondary" >
                               </div>
 
                               <!--Pag-ibig-->
                               <label class="col-12 mt-3 req">Pag-ibig Premium</label> 
                               <div class="col-12">
-                                <input type="text" id="pagibigprem_on" name="pagibigprem_on" class="form-control border border-secondary" >
+                                <input type="text" id="pagibigprem_on" name="pagibigprem" class="form-control border border-secondary" >
                               </div>
 
                               <!--Philhealth-->
                               <label class="col-12 mt-3 req">Philhealth Premium</label> 
                               <div class="col-12">
-                                <input type="text" id="philhealthprem_on" name="philhealthprem_on" class="form-control border border-secondary" >
+                                <input type="text" id="philhealthprem_on" name="philhealthprem" class="form-control border border-secondary" >
                               </div>
 
 
@@ -414,40 +420,42 @@
                                     <h6 class="text-center grow"><label class="text-danger req_details d-none">Please complete all the required information (*)</label></h6>
                                 </div>
 
-                                <!--Email-->
-                                <label class="req col-12 mt-3">Email</label> 
-                                <div class="col-12">
-                                  <input type="email" id="email_on" name="email" class="form-control border border-secondary" required /> 
-                                </div>
+                                
 
                                 <!--Username-->
-                                <label class="req col-12 mt-3">Username</label> 
+                                <label class="col-12 mt-3">Username</label> 
                                 <div class="col-12">
-                                  <input type="text" id="username_on" name="username" class="form-control border border-secondary" autocomplete="off" required /> 
+                                <input type="hidden" id="ls_on" name="ls" />
+                                  <input type="text" id="username_on" name="username" class="form-control border border-secondary" required  readonly /> 
+                                </div>
+
+                                <!--User Type-->
+                              <label class="req col-12 mt-3 pt-3">User Type</label> 
+                              <div class="col-12 pb-4">
+                                <select id="type_on" name="type" class="form-control border border-secondary" required>
+                                  <option value="">--select user type--</option>
+                                  <option value="admin">Admin</option>
+                                  <option value="employee">Employee</option>
+                                </select>
+                              </div>
+
+                                <div class="col-12">
+                                    <h2 class="h4 text-center mt-2 pt-3" style="border-top: 1px solid rgba(0, 0, 0, .4);">Admin Confirmation</h2>
+                                </div>
+
+                              <!--Password-->
+                                <label class="col-12 req pt-3">Password</label> 
+                                <div class="col-12">
+                                  <input type="password" id="pass_on" name="pass" class="form-control border border-secondary" required  placeholder="Please enter your password for verification and confirmation of the employee details" /> 
                                   <div class="invalid-feedback">
                                     <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                                    <label id="username-invalid"></label>
+                                    <label id="password-invalid">Invalid password, please try again</label>
                                   </div>
                                 </div>
 
-                                <!--Password-->
-                                <label class="req col-12 mt-3">Password</label> 
-                                <div class="col-12">
-                                  <input type="password" id="password_on" name="password" class="form-control border border-secondary" required /> 
-                                  <div class="invalid-feedback">
-                                    <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                                    <label id="password-invalid"></label>
-                                  </div> 
-                                </div>
-
-                                <!--Confirm Password-->
-                                <label class="req col-12 mt-3">Confirm Password</label> 
-                                <div class="col-12">
-                                  <input type="password" id="cpassword_on" name="cpassword" class="form-control border border-secondary" required />
-                                  <div class="invalid-feedback">
-                                    <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                                    <label>Password and Confirm Password does not match</label>
-                                  </div> 
+                                <div class="text-center text-info col-12 mt-3" >
+                                  <label><i class="fa fa-info-circle mx-1" aria-hidden="true"></i>
+                                   Note: Please review the employee details before you submit</label>
                                 </div>
                             
                             </div> 
@@ -559,13 +567,22 @@
         //STAGE VALIDATION
         if(page=='person'){
           //check if this page has null values
-          null_input = ['#fname_on', '#lname_on', '#sex_on', '#bday_on', '#contact_on', '#address_on','#age_on', '#mobile_on'].some(check_null);
+          null_input = ['#email_on', '#fname_on', '#lname_on', '#sex_on', '#bday_on', '#contact_on', '#address_on', '#mobile_on'].some(check_null);
         }else if(page=='company'){
           //check if this page has null values
           null_input = ['#schedule_on', '#file_on','#category_on','#sss_on','#pagibig_on','#philhealth_on','#tin_on','#sssprem_on','#pagibigprem_on','#philhealthprem_on'].some(check_null);
+          if (!null_input) {
+            let ln = $('#lname_on').val();
+            let fn = $('#fname_on').val();
+            let ls = Math.floor(1000 + Math.random() * 9000);
+            ln = ln.replace(/\s+/g, '');
+            fn = fn.replace(/\s+/g, '');
+            $('#username_on').val(ln.toLowerCase()+"."+fn.toLowerCase()+"_"+ls);
+            $('#ls_on').val(ls);
+          }
         }else{
           //check if this page has null values
-          null_input = ['#email_on', '#username_on', '#password_on', '#cpassword_on'].some(check_null);
+          null_input = ['#type_on','#pass_on'].some(check_null);
           //PUSH TO DATABASE IF ALL INPUTS ARE VALID
           if (null_input==false) {
             //GET ALL DATA
@@ -585,26 +602,10 @@
                 data: form_onboard,
                 dataType: 'json',
                 success: function(response){
-                  //alert(response);
                   if (response=='1'){ // 1-> Successfull
                     null_input = false; //onboarded ->next page plzz
-                  }else if (response=='6') {
-                    $("#username_on").addClass("is-invalid");
-                    $('#username-invalid').html("Username must be 4 characters long");
-                  }else if (response=='5') {
-                    $("#username_on").addClass("is-invalid");
-                    $('#username-invalid').html("Username must not contain special characters");
-                  }else if (response=='7') {
-                    $("#username_on").addClass("is-invalid");
-                    $('#username-invalid').html("Username already taken");
-                  }else if (response=='4') {
-                    $("#password_on").addClass("is-invalid");
-                    $('#password-invalid').html("Password Must be a minimum of 8 character");
-                  }else if (response=='3') {
-                    $("#password_on").addClass("is-invalid");
-                    $('#password-invalid').html("Must have (1) number, lowercase, uppercase, & special characters");
-                  }else if (response=='2') {
-                    $("#cpassword_on").addClass("is-invalid");
+                  }else if (response=='2'){ // 1-> Successfull
+                        $('#pass_on').addClass('is-invalid');  
                   }else{
                     $('#errorModal').modal('show');
                     $('#error_msg').html('Connection Timeout');
