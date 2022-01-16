@@ -19,7 +19,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Folder Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control border border-secondary" name="name" autocomplete="off" minlength="5" maxlength="15" required />
+                    <input type="text" class="form-control border border-secondary" name="name" autocomplete="off" minlength="5" maxlength="25" required />
                   </div>
                 </div>
 
@@ -71,7 +71,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Folder Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control border border-secondary edit_folder_name" name="name" minlength="5" maxlength="15" autocomplete="off" required />
+                    <input type="text" class="form-control border border-secondary edit_folder_name" name="name" minlength="5" maxlength="25" autocomplete="off" required />
                   </div>
                 </div>
 

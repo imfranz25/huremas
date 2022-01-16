@@ -683,12 +683,22 @@ function get_request_info(request_by,table){
           let id =(response)[i].reference_id;
           let status=set_req_status((response)[i].request_status);
           let delete_btn='';
-          let edit_btn = '<button class="btn btn-success btn-sm edit_areq btn-round mx-1" data-id="'+id+'"><i class="fa fa-edit"></i> Edit</button>';
+          let badge = 'badge-warning';
+          //let edit_btn = '<button class="btn btn-success btn-sm edit_areq btn-round mx-1" data-id="'+id+'"><i class="fa fa-edit"></i> Edit</button>';
+
+          let edit_btn = '<div class="dropdown-divider"></div><a class="dropdown-item edit_areq" href="javascript:void(0)" data-id="'+id+'"><i class="fa fa-edit"></i>Edit</a>';
+
           if (status=='Pending') {
-            delete_btn = '<button class="btn btn-danger btn-sm delete_areq btn-round" data-id="'+id+'"><i class="fa fa-trash"></i> Delete</button>';
+            //delete_btn = '<button class="btn btn-danger btn-sm delete_areq btn-round" data-id="'+id+'"><i class="fa fa-trash"></i> Delete</button>';
+            delete_btn = '<div class="dropdown-divider"></div><a class="dropdown-item delete_areq text-danger" href="javascript:void(0)" data-id="'+id+'"><i class="fa fa-trash"></i>Delete</a>';
           }
           if (status=='Validated') {
             edit_btn ='';
+            badge = 'badge-success';
+          }else if(status=='Document sent'){
+            badge = 'badge-info';
+          }else if(status=='Rejected'){
+            badge = 'badge-danger';
           }
           if (request_by=='employee') {
             delete_btn='';
@@ -699,7 +709,13 @@ function get_request_info(request_by,table){
             (response)[i].reference_id,
             (response)[i].request_name,
             emp_name,
-            status,'<button class="btn btn-warning btn-sm '+view_req+' text-dark btn-round" data-id="'+id+'"><i class="fa fa-eye"></i> Review</button>'+edit_btn+delete_btn
+            '<span class="badge '+badge+'">'+status+'</span>',
+            ` <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+            </button>
+            <div class="dropdown-menu" style="">
+              <a class="dropdown-item ${view_req}" href="javascript:void(0)" data-id="${id}"><i class="fa fa-eye"></i>Review</a>`+edit_btn+delete_btn+
+            `</div>`
+             //'<button class="btn btn-warning btn-sm '+view_req+' text-dark btn-round" data-id="'+id+'"><i class="fa fa-eye"></i> Review</button>'+edit_btn+delete_btn
           ] ).draw();
         }
       }
@@ -804,6 +820,7 @@ function set_request_reject(reference_id){
         $('#successModal').modal('show');
         $('#success_msg').html('Document rejected successfully');
       }
+      $('#admin_request_review').modal('hide'); 
     }
   });
 }
@@ -1017,7 +1034,7 @@ $(document).ready(function() {
     get_document(document_id);
   });
 
-  // CANCEL EDIT
+  // VIEW FOLDER
   $(document).on('click', '#folder_view_btn', function(e) {
     e.preventDefault();
     let folder_id = $(this).data('folder_id');
@@ -1176,10 +1193,10 @@ $(document).ready(function() {
       success : function (response){
         if (response=='1') {
           $('#successModal').modal('show');
-          $('#success_msg').html('Document request updated successfully');
+          $('#success_msg').html('Document request cancelled successfully');
         }else{
           $('#errorModal').modal('show');
-          $('#error_msg').html('Document request updated failed');
+          $('#error_msg').html('Document request cancellation failed');
         }
         $('#cancelreq').modal('hide');
         get_request_info('admin',table_hr);
@@ -1199,6 +1216,7 @@ $(document).ready(function() {
     }
     get_request(reference_id);
     get_request_info('admin',table_hr);
+
   });
 
   //EDIT BTN -> SHOW SAVE AND CANCEL

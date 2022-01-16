@@ -17,7 +17,7 @@
             <div class="modal-body">
               <div class="pcoded-inner-content" >
 
-                        
+                      
                           <div class="col-xl-12 col-xl-6">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs md-tabs border border-success rounded-top" id="training_tab">
@@ -55,7 +55,7 @@
                                                     <th>Request Title</th>
                                                     <th>Employee Name</th>
                                                     <th>Status</th>
-                                                    <th>Tools</th>
+                                                    <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -113,7 +113,7 @@
                                                     <th>Request Title</th>
                                                     <th>Employee Name</th>
                                                     <th>Status</th>
-                                                    <th>Tools</th>
+                                                    <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -203,14 +203,11 @@
                         <option value="">--select employee--</option>
                         <?php 
                           $id = $user['employee_id'];
-                          $sql="SELECT * FROM employees LEFT JOIN admin ON admin.employee_id=employees.employee_id WHERE employees.employee_id!='$id' ";
+                          $sql="SELECT *,admin.employee_id AS empid FROM admin RIGHT JOIN employees ON admin.employee_id=employees.employee_id WHERE admin.employee_id!='$id' ";
                           $query=$conn->query($sql);
                           while ($row=$query->fetch_assoc()) {
-                            if ($row['type']=='admin') {
-                              continue;
-                            }
                         ?>
-                          <option value="<?php echo $row['employee_id']; ?>"><?php echo $row['firstname'].' '.$row['lastname']; ?></option>
+                          <option value="<?php echo $row['empid']; ?>"><?php echo $row['firstname'].' '.$row['lastname']; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -280,14 +277,11 @@
                         <option value="">--select employee--</option>
                         <?php 
                           $id = $user['employee_id'];
-                          $sql="SELECT * FROM employees LEFT JOIN admin ON admin.employee_id=employees.employee_id WHERE employees.employee_id!='$id' ";
+                          $sql="SELECT *,admin.employee_id AS empid FROM admin RIGHT JOIN employees ON admin.employee_id=employees.employee_id WHERE admin.employee_id!='$id' ";
                           $query=$conn->query($sql);
                           while ($row=$query->fetch_assoc()) {
-                            if ($row['type']=='admin') {
-                              continue;
-                            }
                         ?>
-                          <option value="<?php echo $row['employee_id']; ?>"><?php echo $row['firstname'].' '.$row['lastname']; ?></option>
+                          <option value="<?php echo $row['empid']; ?>"><?php echo $row['firstname'].' '.$row['lastname']; ?></option>
                         <?php } ?>
                       </select>
                     </div>
@@ -390,7 +384,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Employee</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary view_request_employee" readonly   />
+                      <input type="text" class="form-control border border-secondary view_request_employee_name" readonly   />
                     </div>
                 </div>
 
@@ -557,6 +551,13 @@
                     <div class="col-sm-9">
                       <input type="text" class="form-control border border-secondary view_request_date" readonly   />
                      </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Employee</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control border border-secondary view_request_employee_name" readonly   />
+                    </div>
                 </div>
 
                 <!--Status-->
