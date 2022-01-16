@@ -747,20 +747,25 @@ function get_request(reference_id){
       //default
       $('.request_file').html('No Uplaoded File');
       $('.request_file').attr('href','#');
+      //employee request (default)
+      $('.view_request_file').html('No uploaded file');
+      $('.view_request_file').attr('href','#');
+      $('.view_request_file').attr('target','');
 
       // PROPERTIES
       if (response.request_status==0) {
         $('.replied').addClass('d-none');
-        $('.view_request_file').html('No uploaded file');
-        $('.view_request_file').attr('href','#');
-        $('.view_request_file').attr('target','');
         $('.request_file_upload').attr('required',true);
       }else{
         $('.request_file_upload').attr('required',false);
         $('.replied').removeClass('d-none');
-        $('.view_request_file').attr('target','_blank');
-        $('.view_request_file').html(response.request_file);
-        $('.view_request_file').attr('href','/HUREMAS/Documents/request/?reference_id='+response.file_hash);
+        if(response.request_file!=null){
+          $('.view_request_file').attr('target','_blank');
+          $('.view_request_file').html(response.request_file);
+          $('.view_request_file').attr('href','/HUREMAS/Documents/request/?reference_id='+response.file_hash);
+        }
+        
+
         if (response.request_status==2 || response.request_status==3) {
           $('.rej_btn').addClass('d-none');
         }
@@ -1223,7 +1228,7 @@ $(document).ready(function() {
   $(document).on('click','.edit_btn', function(e){
     e.preventDefault();
     let status = $(this).data('status');
-    if (status==0) {
+    if (status==0 || status==2) {
         $('#file_request_change').addClass('d-none');
     }else{
         $('#file_request_change').removeClass('d-none');
@@ -1245,27 +1250,39 @@ $(document).ready(function() {
   //SUBMIT REPLY (EMPLYOEE REQUEST)
   $(document).on('submit','#review_emp_req_form', function(e){
     e.preventDefault();
-    let form_data = new FormData($(this)[0]); 
-    $.ajax({
-      type:'POST',
-      url:'function/document_request_edit.php',
-      cache: false,
-      contentType: false,
-      processData: false,
-      data:form_data,
-      dataType:'json',
-      success : function(response){
-        if (response=='1') {
-          $('#successModal').modal('show');
-          $('#success_msg').html('Document sent successfully');
-        }else{
-          $('#errorModal').modal('show');
-          $('#error_msg').html('Document send failed');
+    let status = $('#req_stat').val(); 
+    let valid = true;
+    if (status=='Rejected') {
+      if ($('#emp_file').val()=='') { valid = false;}
+    }
+
+
+    if(valid){
+      let form_data = new FormData($(this)[0]); 
+      $.ajax({
+        type:'POST',
+        url:'function/document_request_edit.php',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data:form_data,
+        dataType:'json',
+        success : function(response){
+          if (response=='1') {
+            $('#successModal').modal('show');
+            $('#success_msg').html('Document sent successfully');
+          }else{
+            $('#errorModal').modal('show');
+            $('#error_msg').html('Document send failed');
+          }
+          get_request_info('employee',table_emp);
+          $('#employee_request_review').modal('hide');
         }
-        get_request_info('employee',table_emp);
-        $('#employee_request_review').modal('hide');
-      }
-    });
+      });
+    }else{
+      $('#errorModal').modal('show');
+      $('#error_msg').html('Upload a file first');
+    }
   });//**end**
 
   //SUBMIT REPLY (EMPLYOEE REQUEST)

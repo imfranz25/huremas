@@ -13,7 +13,9 @@
 
 	}else if(isset($_POST['reject_id'])){
 		$reference_id = trim($_POST['reject_id']);
-		$sql = "UPDATE document_request SET request_status=2 WHERE reference_id='$reference_id' ";
+		$comment = $_POST['reject_comment'];
+		
+		$sql = "UPDATE document_request SET request_status=2, request_comment='$comment' WHERE reference_id='$reference_id' ";
 
 		echo ($conn->query($sql))?1:0;
 

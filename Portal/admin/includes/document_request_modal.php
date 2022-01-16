@@ -527,7 +527,7 @@
 
 
 
-<!-- ADMIN Document Request REVIEW-->
+<!-- Employee Document Request REVIEW-->
 <div class="modal fade" id="employee_request_review" style="background:rgba(0, 0, 0, .7);">
     <!--Modal Dialog-->
     <div class="modal-dialog modal-lg">
@@ -535,7 +535,7 @@
         <div class="modal-content">
             <!--Modal Header-->
             <div class="modal-header">
-              <h4 class="modal-title"><b>Review HR's Document Request</b></h4>
+              <h4 class="modal-title"><b>Review Document Request</b></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
             </div>
@@ -564,7 +564,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Request Status</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary view_request_status" readonly   />
+                      <input type="text" class="form-control border border-secondary view_request_status" id="req_stat" readonly   />
                      </div>
                 </div>
 
@@ -590,7 +590,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">File</label>
                     <div class="col-sm-9">
-                      <input type="file" class="form-control border border-secondary request_file_upload d-none" name="file" />
+                      <input type="file" class="form-control border border-secondary request_file_upload d-none" name="file" id="emp_file" />
                       <!-- INFO FOR FILE -->
                       <div class="input-group-append d-none" id="file_request_change">
                         <span class="input-group-text text-info" >
@@ -598,7 +598,7 @@
                           <strong>Leave upload file to default if you dont wish to change the document file</strong>
                         </span>
                       </div>
-                      <a href="#" target="_blank" class="view_request_file form-control"></a>
+                      <a href="#" class="view_request_file form-control"></a>
                      </div>
                 </div>
 
