@@ -201,7 +201,7 @@
                               </div>
 
                               <!--Suffix-->
-                              <label class="col-12 mt-3">Suffix</label> 
+                              <label class="col-12 mt-3">Suffix (Optional)</label> 
                               <div class="col-12">
                                 <input type="text" id="suffix_on" name="suffix" class="form-control border border-secondary" autocomplete="off" /> 
                               </div>
@@ -229,16 +229,16 @@
                               </div>
 
                               <!--Religion-->
-                              <label class="req col-12 mt-3">Religion</label> 
+                              <!-- <label class="req col-12 mt-3">Religion</label> 
                               <div class="col-12">
                                 <input type="text" id="religion_on" name="religion" class="form-control border border-secondary"  /> 
-                              </div>
+                              </div> -->
 
                               <!--Civil Status-->
-                              <label class="req col-12 mt-3">Civil Status</label> 
+                              <!-- <label class="req col-12 mt-3">Civil Status</label> 
                               <div class="col-12">
                                 <input type="text" id="civil_status_on" name="civil_status" class="form-control border border-secondary"  /> 
-                              </div>
+                              </div> -->
 
                               <!--Address-->
                               <label class="req col-12 mt-3">Address</label> 

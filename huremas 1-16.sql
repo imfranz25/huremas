@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2022 at 03:48 PM
+-- Generation Time: Jan 15, 2022 at 07:33 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.0
 
@@ -596,8 +596,7 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`id`, `reference_id`, `event_name`, `display_image`, `event_date`, `event_from`, `event_to`, `event_venue`) VALUES
 (1, 'CVSUEVJAF7638', 'CVSU Event 2022', 'CVSUEVJAF7638.jpg', '2022-01-18', '07:01:00', '19:02:00', 'Imus'),
-(2, 'CVSUEVBDZ4876', 'CVSU Intramurals', 'CVSUEVBDZ4876.jpg', '2022-01-21', '10:11:00', '22:11:00', 'CVSU Court'),
-(5, 'CVSUEVMQX4273', 'event sample', 'CVSUEVMQX4273.jpg', '2022-01-21', '10:44:00', '22:44:00', 'hahaha');
+(2, 'CVSUEVBDZ4876', 'CVSU Intramurals', 'CVSUEVBDZ4876.jpg', '2022-01-21', '10:11:00', '22:11:00', 'CVSU Court');
 
 -- --------------------------------------------------------
 
@@ -661,7 +660,6 @@ INSERT INTO `job` (`id`, `job_code`, `job_title`, `job_position`, `job_recruit`,
 (39, 'CVSUJOBKLS30765', 'Super Janitor', 3, 3, 3, 'Permanent', 'Full Time', 'No Experience Needed', 19, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.', 'active', '2021-11-17 01:55:22'),
 (41, 'CVSUJOBFYE01537', 'chair', 5, 2, 2, 'Permanent', 'Full Time', '10 Years + of Experience', 19, 'haha', 'active', '2021-11-24 15:50:12'),
 (44, 'CVSUJOBJGL83720', 'Program Head with 50k signing Bonus ! OMG', 7, 1, 1, 'Permanent', 'Full Time', '10 Years + of Experience', 33, 'Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.\r\n\r\nLorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.', 'active', '2021-11-25 15:48:51'),
-(45, 'CVSUJOBUQY81254', 'Super Technical Staff', 6, 2, 1, 'Contract', 'Full Time', 'Atleast One (1) Year of Experience', 18, 'Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.', 'active', '2021-11-25 15:49:23'),
 (46, 'CVSUJOBYID78135', 'Mabait na Instructor', 1, 4, 1, 'Permanent', 'Full Time', '5 Years + of Experience', 18, 'Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.', 'inactive', '2021-11-25 15:50:12');
 
 -- --------------------------------------------------------
@@ -924,7 +922,7 @@ CREATE TABLE `training_course` (
 --
 
 INSERT INTO `training_course` (`id`, `course_code`, `course_title`, `course_details`) VALUES
-(2, 'xd11111', 'xd', 'xdxdxd');
+(7, 'ITEC-111', 'Sample Course', 'Sample Details');
 
 -- --------------------------------------------------------
 
@@ -955,8 +953,7 @@ CREATE TABLE `training_list` (
 --
 
 INSERT INTO `training_list` (`id`, `training_code`, `training_title`, `training_objective`, `training_course`, `batch_size`, `schedule_from`, `schedule_to`, `training_mode`, `training_details`, `training_duration`, `training_vendor`, `training_trainer`, `training_experience`, `training_status`) VALUES
-(1, 'CVSUTRAPIT7029658', 'The Ultimate Training', 'Upskill', 2, 22, '2021-11-27 15:35:00', '2021-11-30 07:35:00', 'Online', 'Details lorem lorem haha', '168', 3, 'Trainer A', 'Experience B', 'inactive'),
-(2, 'CVSUTRAOLT1870549', '1', '1', 2, 322, '2021-12-11 20:00:00', '2021-12-13 19:44:00', 'Online', '1', '47.733333333333', 3, '1', '1', 'inactive');
+(10, 'CVSUTRAJGO7230641', 'asdasd', 'asdas', 7, 21, '2022-01-01 22:09:00', '2022-01-02 22:10:00', 'Online', 'asdasd', '24.016666666667', 3, 'asdasd', 'asd', 'inactive');
 
 -- --------------------------------------------------------
 
@@ -981,16 +978,7 @@ CREATE TABLE `training_record` (
 --
 
 INSERT INTO `training_record` (`id`, `reference_no`, `employee_id`, `training_code`, `internal_note`, `status`, `review`, `request_date`, `comment`) VALUES
-(14, 'CVSUATTJPV26071', 'CVSUZRO036571482', 'CVSUTRAOLT1870549', '', 'Finished', 0, '2021-12-11', ''),
-(15, 'CVSUATTXIE93487', 'CVSUZRO036571482', 'CVSUTRAPIT7029658', '', 'Finished', 0, '2021-12-11', ''),
-(16, 'CVSUATTEXM41986', 'CVSUFIZ562147308', 'CVSUTRAPIT7029658', '', 'Reviewed', 5, '2021-12-11', 'Very Good'),
-(17, 'CVSUATTRVE81569', 'CVSUJPS103467598', 'CVSUTRAOLT1870549', '', 'Finished', 0, '2021-12-11', ''),
-(19, 'CVSUATTJMF07132', 'CVSURIB015736298', 'CVSUTRAOLT1870549', '', 'Finished', 0, '2021-12-11', ''),
-(20, 'CVSUATTIHA56139', 'CVSUFIZ562147308', 'CVSUTRAOLT1870549', '', 'Finished', 0, '2021-12-11', ''),
-(21, 'CVSUATTNHV50842', 'CVSUJPS103467598', 'CVSUTRAPIT7029658', '', 'Finished', 0, '2021-12-11', ''),
-(22, 'CVSUATTCQS47128', 'CVSURIB015736298', 'CVSUTRAPIT7029658', '', 'Finished', 0, '2021-12-11', ''),
-(23, 'CVSUATTYTN43659', 'CVSUCAK697231805', 'CVSUTRAPIT7029658', '', 'Finished', 0, '2021-12-11', ''),
-(24, 'CVSUATTYPN62318', 'CVSUCAK697231805', 'CVSUTRAOLT1870549', '', 'Finished', 0, '2021-12-11', '');
+(39, 'CVSUATTCBH19670', 'CVSUFIZ562147308', 'CVSUTRAJGO7230641', 'gsVhnsamGDsd', 'Reviewed', 5, '2022-01-15', 'great experience');
 
 -- --------------------------------------------------------
 
@@ -1284,7 +1272,7 @@ ALTER TABLE `deduction_vendor`
 -- AUTO_INCREMENT for table `department_category`
 --
 ALTER TABLE `department_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `disciplinary_action`
@@ -1362,7 +1350,7 @@ ALTER TABLE `overtime_request`
 -- AUTO_INCREMENT for table `position`
 --
 ALTER TABLE `position`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -1398,25 +1386,25 @@ ALTER TABLE `tax`
 -- AUTO_INCREMENT for table `training_course`
 --
 ALTER TABLE `training_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `training_list`
 --
 ALTER TABLE `training_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `training_record`
 --
 ALTER TABLE `training_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `training_vendor`
 --
 ALTER TABLE `training_vendor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

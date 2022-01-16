@@ -419,6 +419,7 @@
                     <label>Are you sure you want to delete this job record?</label>
                     <h2 id="del_jobtitle" class="bold"></h2>
                     <label id="del_jcode"></label>
+                    <hr>
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label req">Password</label>
                       <div class="col-sm-9">
@@ -441,38 +442,6 @@
 </div>
 
 
-
-<!-- Delete Job -->
-<div class="modal fade" id="jobDelete">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title"><b>Delete</b></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="function/job_delete.php">
-                <input type="hidden" id="del_job" name="id">
-                <input type="hidden" name="code" id="edit_code" />
-                <div class="text-center">
-                    <label>Are you sure you want to delete this job record?</label>
-                    <h2 id="del_jobtitle" class="bold"></h2>
-                    <label id="del_jcode"></label>
-                    <div class="text-center text-danger" >
-                      <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                       Note: Deleting this Job Record will also result in the deletion of application records connected to this job, and once deleted, this action can't be undone. </label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
-              </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

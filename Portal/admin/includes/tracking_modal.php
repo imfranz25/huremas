@@ -303,12 +303,18 @@
                     <h2 id="del_app_name" class="bold"></h2>
                     <div class="text-center text-danger">
                        <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i> Note: This process cannot be undone</label>
+                    </div><hr>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label req">Password</label>
+                      <div class="col-sm-9">
+                        <input type="password" class="form-control border border-secondary " required name="pass" id="pass" placeholder="Please enter your password for verification" />
+                      </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-              <button type="submit" class="btn btn-success btn-flat" name="move"><i class="fa fa-trash-o"></i> Delete</button>
+              <button type="submit" class="btn btn-danger btn-flat" name="move"><i class="fa fa-trash-o"></i> Delete</button>
               </form>
             </div>
         </div>

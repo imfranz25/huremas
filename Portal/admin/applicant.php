@@ -723,15 +723,20 @@ $(document).ready(function() {
     $('#deleteApp').modal('hide');
     var id = $('#del_app_id').val();
     var code = $('#move_app_code').val();
+    var pass = $('#pass').val();
+    $('#pass').val('');
     $.ajax({
       type: 'POST',
       url: 'function/applicant_delete.php',
-      data: {id:id},
+      data: {id:id,pass:pass},
       dataType: 'json',
       success: function(response){
         if (response=='1') {
           $('#successModal').modal('show');
           $('#success_msg').html('Applicant deleted successfuly');
+        }else if(response=='2'){
+          $('#errorModal').modal('show');
+          $('#error_msg').html('Incorrect Password, please try again');
         }else{
           $('#errorModal').modal('show');
           $('#error_msg').html('Applicant delete failed');
