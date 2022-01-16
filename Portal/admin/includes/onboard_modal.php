@@ -189,7 +189,7 @@
                               </div>
 
                               <!--Middle Name-->
-                              <label class="col-12 mt-3">Middle Name</label> 
+                              <label class="col-12 mt-3">Middle Name (Optional)</label> 
                               <div class="col-12">
                                 <input type="text" id="mname_on" name="mname" class="form-control border border-secondary" autocomplete="off" /> 
                               </div>
@@ -219,13 +219,26 @@
                               <!--Birthday-->
                               <label class="req col-12 mt-3">Birthday</label> 
                               <div class="col-12">
-                                <input type="date" id="bday_on" name="bday" class="form-control border border-secondary" required /> 
+                                <input type="date" id="bday_on" onchange="getAge(this.value)" name="bday" class="form-control border border-secondary" required /> 
                               </div>
+
+                              <!--Age-->
+                              <label class="col-12 mt-3">Age</label> 
+                              <div class="col-12">
+                                <input type="text" id="age_on" name="age" class="form-control border border-secondary" readonly /> 
+                              </div>
+
 
                               <!--Contact-->
                               <label class="req col-12 mt-3">Contact</label> 
                               <div class="col-12">
                                 <input type="text" id="contact_on" name="contact" class="form-control border border-secondary" required /> 
+                              </div>
+
+                              <!--Contact-->
+                              <label class="req col-12 mt-3">Mobile Number</label> 
+                              <div class="col-12">
+                                <input type="text" id="mobile_on" name="mobile" class="form-control border border-secondary" required /> 
                               </div>
 
                               <!--Religion-->
@@ -284,8 +297,46 @@
                                 <input type="text" id="department_on" class="form-control" readonly>
                               </div>
 
+                              <!--Basic Salary-->
+                              <label class="col-12 mt-3">Basic Salary</label> 
+                              <div class="col-12">
+                                <input type="text" id="salary_on" name="salary_on" class="form-control" readonly>
+                              </div>
+
+                              <!--Daily Wage-->
+                              <label class="col-12 mt-3">Daily Wage</label> 
+                              <div class="col-12">
+                                <input type="text" id="wage_on" name="wage_on" class="form-control" readonly>
+                              </div>
+
+                               <!--Photo-->
+                              <label class="req col-12 mt-3 req">Upload Photo  (Please attach profile picture in a JPG or PNG Format)</label> 
+                              <div class="col-12">
+                                <input type="file" id="file_on" class="form-control form-control-file" name="pic" accept="image/*" onchange="check_image(this)" required >
+                                <div class="input-group-append text-danger">
+                                  <label><i class="fa fa-info-circle mr-1 mt-1"></i>Maximum Size 5 MB</label>
+                                </div>
+                              </div>
+
+                              <!--Category-->
+                                <label for="" class="req col-12 mt-3">Category</label>
+                                <div class="col-12">
+                                    <select class="form-control border border-secondary" name="category" id="category_on" required>
+                                        <option value="" selected>--Select category--</option>
+                                        <?php
+                                          $sql = "SELECT * FROM employment_category";
+                                          $query = $conn->query($sql);
+                                          while($prow = $query->fetch_assoc()){
+                                            echo "
+                                              <option value='".$prow['id']."'>".$prow['cat']." (".$prow['code'].")</option>
+                                            ";
+                                          }
+                                        ?>
+                                    </select>
+                                </div>
+
                               <!--Schedule-->
-                              <label class="req col-12 mt-3 req">Schedule</label> 
+                              <label class="req col-12 mt-3">Schedule</label> 
                               <div class="col-12">
                                 <select id="schedule_on" name="schedule" class="form-control border border-secondary" required>
                                   <option value="">--select schedule--</option>
@@ -301,13 +352,46 @@
                                 </select>
                               </div>
 
-                              <!--Photo-->
-                              <label class="req col-12 mt-3 req">Upload Photo  (Please attach profile picture in a JPG or PNG Format)</label> 
+                              <!--SSS-->
+                              <label class="col-12 mt-3 req">SSS</label> 
                               <div class="col-12">
-                                <input type="file" id="file_on" class="form-control form-control-file" name="pic" accept="image/*" onchange="check_image(this)" required >
-                                <div class="input-group-append text-danger">
-                                  <label><i class="fa fa-info-circle mr-1 mt-1"></i>Maximum Size 5 MB</label>
-                                </div>
+                                <input type="text" id="sss_on" name="sss_on" class="form-control border border-secondary" >
+                              </div>
+
+                              <!--Pag-ibig-->
+                              <label class="col-12 mt-3 req">Pag-ibig</label> 
+                              <div class="col-12">
+                                <input type="text" id="pagibig_on" name="pagibig_on" class="form-control border border-secondary" >
+                              </div>
+
+                              <!--Philhealth-->
+                              <label class="col-12 mt-3 req">Philhealth</label> 
+                              <div class="col-12">
+                                <input type="text" id="philhealth_on" name="philhealth_on" class="form-control border border-secondary" >
+                              </div>
+
+                              <!--TIN Number-->
+                              <label class="col-12 mt-3 req">TIN Number</label> 
+                              <div class="col-12">
+                                <input type="text" id="tin_on" name="tin_on" class="form-control border border-secondary" >
+                              </div>
+
+                              <!--SSS-->
+                              <label class="col-12 mt-3 req">SSS Premium</label> 
+                              <div class="col-12">
+                                <input type="text" id="sssprem_on" name="sssprem_on" class="form-control border border-secondary" >
+                              </div>
+
+                              <!--Pag-ibig-->
+                              <label class="col-12 mt-3 req">Pag-ibig Premium</label> 
+                              <div class="col-12">
+                                <input type="text" id="pagibigprem_on" name="pagibigprem_on" class="form-control border border-secondary" >
+                              </div>
+
+                              <!--Philhealth-->
+                              <label class="col-12 mt-3 req">Philhealth Premium</label> 
+                              <div class="col-12">
+                                <input type="text" id="philhealthprem_on" name="philhealthprem_on" class="form-control border border-secondary" >
                               </div>
 
 
@@ -421,7 +505,15 @@
 
   //CHECK IF INPUT IS NULL
   function check_null(id){
-    return ($(id).val()=='');
+    if (id=='#age_on') {
+        if($(id).val()=='') {
+            return true;
+        }else{
+            return ($(id).val()<18);
+        }
+    }else{
+        return ($(id).val()=='');
+    }
   }
 
   //REMOVE ERROR MESSAGES
@@ -438,6 +530,21 @@
     $(".progress-bar").css("width",percent+"%")
   }
 
+   function getAge(vale){
+        $('#age_on').val(getAge1(vale));
+    }
+
+    function getAge1(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
   $(document).ready(function(){
     //SET PROGRESS TO 1 (DEFAULT)
     update_progress(current);
@@ -452,10 +559,10 @@
         //STAGE VALIDATION
         if(page=='person'){
           //check if this page has null values
-          null_input = ['#fname_on', '#lname_on', '#sex_on', '#bday_on', '#contact_on', '#address_on'].some(check_null);
+          null_input = ['#fname_on', '#lname_on', '#sex_on', '#bday_on', '#contact_on', '#address_on','#age_on', '#mobile_on'].some(check_null);
         }else if(page=='company'){
           //check if this page has null values
-          null_input = ['#schedule_on', '#file_on'].some(check_null);
+          null_input = ['#schedule_on', '#file_on','#category_on','#sss_on','#pagibig_on','#philhealth_on','#tin_on','#sssprem_on','#pagibigprem_on','#philhealthprem_on'].some(check_null);
         }else{
           //check if this page has null values
           null_input = ['#email_on', '#username_on', '#password_on', '#cpassword_on'].some(check_null);
@@ -566,7 +673,6 @@
         //DECREMENT PAGE
         update_progress(--current);
     });
-
 
   });
 </script>

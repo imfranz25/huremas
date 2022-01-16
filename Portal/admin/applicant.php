@@ -242,6 +242,7 @@ var lname_on='';
 var contact_on='';
 var email_on='';
 var position_on='';
+var salary_on='';
 var position_desc_on='';
 var department_on='';
 var department_desc_on='';
@@ -431,6 +432,7 @@ function getapplicant(code,stage){
     success: function(response){
       //on-board
       position_on=(response)[0].job_position;
+      salary_on=(response)[0].rate;
       position_desc_on=(response)[0].description;
       department_on=(response)[0].job_dept;
       department_desc_on=(response)[0].title;
@@ -773,7 +775,8 @@ $(document).ready(function() {
     $('#positionid_on').val(position_on);
     $('#departmentid_on').val(department_on);
     $('#department_on').val(department_desc_on);
-    
+    $('#wage_on').val(salary_on);
+    $('#salary_on').val(salary_on*26);
   }); 
 
   //RELOAD APPLICANT INFOS -> CLOSE ONBOARD
