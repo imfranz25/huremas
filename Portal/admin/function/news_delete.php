@@ -14,14 +14,11 @@
 	if(isset($_POST['delete'])){
 		// initialization shitty
 		$id  = explode(',', $_POST['id']);
-		
-		$user_id = $user['employee_id'];
 		$pass  = $_POST['pass'];
-		$verify = "SELECT password FROM admin WHERE employee_id = '$user_id' ";
-		$query = $conn->query($verify);
-		$row = $query->fetch_assoc();
+		$employee_id = $user['employee_id'];
 
-		if (password_verify($pass,$row['password'])) {
+		//challenge
+		if (password_verify($pass,get_password($employee_id,$conn))) {
 			if (count($id) > 1) {
 				array_map('delete', $id);
 			}else{
