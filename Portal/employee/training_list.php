@@ -29,6 +29,20 @@
                                             $sql = "SELECT * FROM training_record LEFT JOIN training_list ON training_list.training_code=training_record.training_code WHERE (status='On-going' OR status='Finished' OR status='Reviewed') AND training_record.employee_id='$emp_id' ORDER BY CASE WHEN status='On-going' THEN 1 WHEN status='Finished' THEN 2 ELSE 3 END ";
                                             $query = $conn->query($sql); 
                                             while($row = $query->fetch_assoc()){
+                                                $today = date('Y-m-d');
+                                                if ($row['schedule_from']>$today) {
+                                                    $status = 'Registered';
+                                                    $badge = 'badge-info';
+                                                }else{
+                                                    $status = $row['status'];
+                                                    if ($row['status']=='Reviewed') {
+                                                        $badge = 'badge-success';
+                                                    }else if ($row['status']=='Ongoing') {
+                                                        $badge = 'badge-warning';
+                                                    }else{
+                                                        $badge = 'badge-danger';
+                                                    }
+                                                }
                                         ?>
                                             <tr>
                                                 <td><?php echo $row['reference_no']; ?></td>
@@ -37,7 +51,8 @@
                                                 <td>
                                                     <?php echo (new Datetime($row['schedule_from']))->format('M d, Y h:i a').' - '.(new Datetime($row['schedule_to']))->format('M d, Y h:i a'); ?>
                                                 </td>
-                                                <td><?php echo $row['status']; ?></td>
+                                                <td><span class="badge <?php echo $badge; ?>"><?php echo $status; ?></span>
+                                                </td>
                                                 <td>
                                                     <?php
                                                         if ($row['status']=='Finished') {
