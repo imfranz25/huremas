@@ -37,8 +37,18 @@
                                                      <?php echo $row['internal_note']; ?>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-success btn-sm edit_req btn-round" data-id="<?php echo $row['reference_no']; ?>"><i class="fa fa-edit"></i> Edit</button>
-                                                    <button class="btn btn-danger btn-sm cancel_req btn-round" data-id="<?php echo $row['reference_no']; ?>"><i class="fa fa-ban"></i> Cancel Request</button>
+
+
+                                                    <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                                                  Action
+                                                        </button>
+                                                        
+                                                    <div class="dropdown-menu" style="">
+                                                      <a class="dropdown-item edit_req" href="javascript:void(0)" data-id="<?php echo $row['reference_no'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                                                      <div class="dropdown-divider"></div>
+                                                      <a class="dropdown-item cancel_req text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_no'] ?>"><i class="fa fa-ban"></i>Cancel Request</a>
+                                                    </div>
+
                                                 </td>
                                             </tr>
 

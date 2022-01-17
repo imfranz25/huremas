@@ -76,7 +76,10 @@
                                                             
                                                           </td>
                                                             <td>
+
                                                               <button class="btn btn-success btn-sm request_tra btn-round" data-id="<?php echo $row['training_code']; ?>"><i class="fa fa-edit"></i> Request</button>
+
+                                                              
                                                             </td>
 
                                                         </tr>
@@ -91,7 +94,7 @@
                                           <!--No Attendees-->
                                           <div class="row m-auto" id="no_candidate">
                                             <div class="col-lg-12 p-3 text-center">
-                                              <img src="../assets/images/no_attend.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 w-25">
+                                              <img src="../assets/images/no_training.png" alt="No Notification" class="img-fluid mx-auto d-block p-4 w-25">
                                               <h5>THERE ARE NO AVAILABLE TRAININGS AT THE MOMENT</h5>
                                               <label>You can view active trainings here.</label>
                                             </div>
