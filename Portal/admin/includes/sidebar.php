@@ -296,7 +296,7 @@
             $('.nav li.active').removeClass('active'); // REMOVE EXISTING
             element.addClass('active'); // ACTIVATE ACTIVE
             //for nested li (e.g Employee)
-            var emp = (url).href.indexOf("employee") != -1 || (url).href.indexOf("overtime") != -1 || (url).href.indexOf("cash") != -1 || (url).href.indexOf("deduction") != -1 || (url).href.indexOf("schedule") != -1 || (url).href.indexOf("benefits") != -1 || (url).href.indexOf("disciplinary") != -1;
+            var emp = (url).href.indexOf("employee") != -1 || (url).href.indexOf("overtime") != -1 || (url).href.indexOf("cash") != -1 || (url).href.indexOf("deduction") != -1 || (url).href.indexOf("schedule") != -1 || (url).href.indexOf("benefits") != -1 || (url).href.indexOf("disciplinary") != -1 || (url).href.indexOf("official_business") != -1; 
             //training
             var tra = (url).href.indexOf("training_course") != -1 || (url).href.indexOf("training_vendor") != -1 || (url).href.indexOf("training_list") != -1;
             //performance
