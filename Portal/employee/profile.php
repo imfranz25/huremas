@@ -10,7 +10,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
   .pcoded .pcoded-container {
   -webkit-box-shadow: none;
           box-shadow: none }
-
+  .link{
+    cursor: pointer;
+  }
 
 </style>
 
@@ -50,7 +52,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                 </li>
                 <li class="nav-item text-left container">
                   <a class="nav-link f-14" data-toggle="tab" href="#inbox" role="tab" onclick="change_title('Inbox')" >
-                    <i class="ti-email mr-2" aria-hidden="true"></i>Inbox
+                    <i class="ti-bell mr-2" aria-hidden="true"></i> Notifications
                   </a><hr class="m-0 divider" />
                 </li>
                 <li class="nav-item text-left container">
@@ -259,110 +261,36 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
             <div class="card tab-pane fade" id="inbox">
             <!--Inbox Page-->
               <div class="card-header">
-                <h5>Inbox</h5>
+                <h5>Notification</h5>
               </div> 
               <div class="card-block">
 
-                <!--No Notification Message > Visible By Default-->
-                <div id="no_notif" class="row m-auto">
-                  <div class="col-lg-12 p-3 text-center">
-                    <img src="../assets/images/no_notif.png" alt="No Notification" class="img-radius img-fluid mx-auto d-block p-4">
-                    <h5>YOU HAVE NO MESSAGES AT A MOMENT</h5>
-                    <label>When you have messages they show up here. Stay Tune for updates !</label>
-                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3" id="refresh_inbox" name='refresh'>Refresh</button>
-                  </div>
-                </div>
-                <!--No Notification Message End-->
-
                 <!-- Inbox Sample *-->
-                <div id="inbox-content" class="d-none">
-                  <div class="row p-2">
-                    <div class="col-9 col-md-6 d-flex align-items-center">
-                      <h5 class="font-light">
-                      <i class="ti-email"></i> 2 Unread Message(s)</h5>
-                    </div>
-                    <div class="col-3 col-md-6">
-                      <ul class="float-right">
-                        <li class="text-danger overflow-auto">
-                          <a href="#">
-                            <button class="btn btn-circle btn-danger text-white" href="#">
-                            <i class="fa fa-trash"></i>
-                            </button>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <!--=========================SAMPLE MESSAGE==============================-->
-
+                <div id="inbox-content">
                   <!-- Inbox Table-->
                   <div class="table-responsive">
                     <table class="table table-hover">
-                      <tbody>
-
-                        <tr>
-                           <!-- CHECK BOX WITH PROFILE IMAGE AND NAME -->
-                          <td class="align-middle">
-                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="inbox1" />
-                              <label class="custom-control-label" for="inbox1">&nbsp;</label>
-                            </div>
-                            <a class="link" href="#">
-                              <img src="../assets/images/avatar-4.jpg" alt="user image" class="img-radius img-30 m-r-15">
-                              <span class="mb-0 text-muted">Francis Ong</span>
-                            </a>
-                          </td>
-                          <!-- INBOX MESSAGE CONTENT -->
-                          <td class="align-middle">
-                            <a class="link" href="#">
-                              <span class="text-dark">Hello Its my Brithday :)</span>
-                            </a>
-                          </td>
-                          <!-- DATE / TIME -->
-                          <td class="text-muted align-middle">May 13</td>
-                          <!-- ACTIONS / MISC -->
-                          <td class="align-middle">
-                            <a href="#"><i class="fa fa-trash m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-star m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-bookmark m-1 float-right"></i></a>
-                          </td>
-                        </tr>    
-
-                        <tr>
-                           <!-- CHECK BOX WITH PROFILE IMAGE AND NAME -->
-                          <td class="align-middle">
-                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="inbox2" />
-                              <label class="custom-control-label" for="inbox2">&nbsp;</label>
-                            </div>
-                            <a class="link" href="#">
-                              <img src="../assets/images/avatar-4.jpg" alt="user image" class="img-radius img-30 m-r-15">
-                              <span class="mb-0 text-muted">Francis Ong</span>
-                            </a>
-                          </td>
-                          <!-- INBOX MESSAGE CONTENT -->
-                          <td class="align-middle">
-                            <a class="link" href="#">
-                              <span class="text-dark">Hello Its my Brithday :)</span>
-                            </a>
-                          </td>
-                          <!-- DATE / TIME -->
-                          <td class="text-muted align-middle">May 13</td>
-                          <!-- ACTIONS / MISC -->
-                          <td class="align-middle">
-                            <a href="#"><i class="fa fa-trash m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-star m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-bookmark m-1 float-right"></i></a>
-                          </td>
-                        </tr> 
-
+                      <tbody id="notif-body">
+                        <!-- Notif Infos Here    -->
                       </tbody>            
                     </table>            
                   </div>
                   <!-- Inbox Table **End**-->
                 </div>
                 <!-- Inbox Sample **End**-->
+
+                <!--No Notification Message > Visible By Default-->
+                <div id="no_notif" class="row m-auto d-none">
+                  <div class="col-lg-12 p-3 text-center">
+                    <img src="../assets/images/no_notif.png" alt="No Notification" class="img-radius img-fluid mx-auto d-block p-4">
+                    <h5>YOU HAVE NO NOTIFICATION AT A MOMENT</h5>
+                    <label>When you have notification they show up here. Stay Tune for updates !</label>
+                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3" id="refresh_inbox" name='refresh'>Refresh</button>
+                  </div>
+                </div>
+                <!--No Notification Message End-->
+
+
 
                 <!--=========================SAMPLE MESSAGE==============================-->
 
@@ -499,6 +427,52 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
         });
       }//GET PROFILE DETAILS ****END*****
 
+      //GET NOTIF
+      function get_notification(){
+        $("#notif-body").html("");
+        $.ajax({
+          type: 'POST',
+          url: 'function/get_emp_notification.php',
+          dataType: 'json',
+          success: function(response){
+           if (response.length > 0 ) {
+            $("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
+            $("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
+             
+            for (var i = 0; i < response.length; i++) {
+              $("#notif-body").append(`
+                <tr>
+                  <td class="align-middle link" 
+                    data-link="${(response)[i].link}" 
+                    data-open="${(response)[i].open}"
+                    data-id="${(response)[i].nid}">
+                    <i class="fa fa-bell mx-2 ${(response)[i].bell}"></i>
+                    <span class="text-dark" style="font-weight:bold;">
+                      ${(response)[i].title}
+                    </span>
+                  </td>
+                  <td class="text-muted align-middle link" 
+                    data-link="${(response)[i].link}" 
+                    data-open="${(response)[i].open}"
+                    data-id="${(response)[i].nid}">
+                    ${(response)[i].date}
+                  </td>
+                  <td class="align-middle">
+                    <a href="javascript:void(0)" data-id="${(response)[i].nid}" class="delete_notif text-danger"><i class="fa fa-trash m-1 float-right"></i></a>
+                  </td>
+                </tr> 
+              `);
+            }
+
+
+           }else{
+            $("#inbox-content").addClass("d-none"); // HIDE TABLE
+            $("#no_notif").removeClass("d-none"); // NO NOTIF
+           }
+          }  
+        });
+      }//GET NOTIF ****END*****
+
       //REMOVE ERROR/SUCCESS MESSAGES
       function remove_message(){
         $("#currentpass").removeClass("is-invalid");
@@ -508,18 +482,51 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
         $("#alert-error").addClass("d-none");
       }//REMOVE ERROR/SUCCESS MESSAGES **END**
 
+      //CHANGE TITLE 
       function change_title(title){
         document.title=(title+' | HUREMAS - CvSU Imus');
+      }
+
+      function update_openlink(id,link){
+        let url = window.location.href;
+        $.ajax({
+          type: 'POST',
+          url: 'function/update_emp_notification.php',
+          data: {id:id},
+          dataType: 'json',
+          success: function(response){
+            if(response=='1'){
+              location.replace(link);
+            }else{
+              location.replace(url);
+            }
+          }  
+        });
       }
 
       //JQUERY
       $(document).ready(function() {
 
+        
+        // CLICKED LINK
+        $(document).on('click','.link',function(e){
+          e.preventDefault();
+          let link = $(this).data('link');
+          let open = $(this).data('open');
+          let id = $(this).data('id');
+          if (open==0) {
+            update_openlink(id,link);
+          }else{
+            location.replace(link);
+          }
+        });
+
         //REFRESH INBOX
         $('#refresh_inbox').click(function(e){
           e.preventDefault();
-          $("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
-          $("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
+          //$("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
+          //$("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
+          get_notification();
         });
         //REFRESH INBOX **END**
 
@@ -586,9 +593,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
       });//JQUERY **END**
 
-      //EXECEUTE GET PROFILE FUNCTION
+      //EXECEUTE GET PROFILE & NOTIF FUNCTION
       get_profile();
-
+      get_notification();
 
 
 
