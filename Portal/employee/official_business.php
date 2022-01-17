@@ -130,10 +130,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                         
                                                         <div class="dropdown-menu" style="">
                                                         	<?php if($row['status']=='0'): ?>
-                                                          <div class="dropdown-divider"></div>
                                                           <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['oids'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                           <div class="dropdown-divider"></div>
-                                                          <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['oids'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                          <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['oids'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                           <?php endif; ?>
 
                                                           <div class="dropdown-divider"></div>

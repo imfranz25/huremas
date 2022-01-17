@@ -75,13 +75,13 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
                             <div class="card-header">
                                                 <h5>Disciplinary Action List</h5>
-                                                <div class="card-header-right">
+                                                <!-- <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                         <li><i class="fa fa-window-maximize full-card"></i></li>
                                                         <li><i class="fa fa-refresh reload-card"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                             </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
@@ -104,6 +104,13 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                             $sql = "SELECT * FROM disciplinary_action LEFT JOIN disciplinary_category ON disciplinary_category.id=disciplinary_action.reason WHERE disciplinary_action.employee_id = '$id' ORDER BY disciplinary_action.reason DESC ";
                                             $query = $conn->query($sql);
                                             while($row = $query->fetch_assoc()){
+                                              if ($row['state']=='Draft') {
+                                                $badge = 'badge-danger';
+                                              }else if ($row['state']=='Responded') {
+                                                $badge = 'badge-info';
+                                              }else{
+                                                $badge = 'badge-success';
+                                              }
                                             ?>
                                                 <tr>
 
@@ -114,7 +121,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                         <a href='#view_action' data-toggle='modal' class='pull-right view_DA' data-id='<?php echo $row['reference_id']; ?>'><span class='fa fa-eye ml-5'></span></a>
                                                         <?php echo $row['internal_note']; ?>
                                                     </td>
-                                                    <td><?php echo $row['state']; ?></td>
+                                                    <td>
+                                                      <span class="badge <?php echo $badge ?>"><?php echo $row['state']; ?></span>
+                                                      </td>
                                                     <td class="d-flex justify-content-center">
                                                         <button class='btn btn-success btn-sm mr-1 edit_DA btn-round' data-id='<?php echo  $row['reference_id']; ?>'><i class='fa fa-edit'></i> Review</button>
                                                     </td>
