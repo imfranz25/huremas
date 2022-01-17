@@ -312,6 +312,9 @@
               $("#dtr").addClass('active'); // ACTIVATE ACTIVE
             }
           }
+          if ((url).href.indexOf("overtime_category") != -1) {
+            $("#employee").addClass('active'); // ACTIVATE ACTIVE
+          }
 
 
 
