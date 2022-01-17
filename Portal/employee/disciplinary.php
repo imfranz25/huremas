@@ -113,7 +113,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                               }
                                             ?>
                                                 <tr>
-
+                                                  
                                                     <td><?php echo $row['reference_id']; ?></td>
                                                     <td><?php echo (new DateTime($row['issued_date']))->format('F d, Y'); ?></td>
                                                     <td><?php echo $row['title']; ?></td>

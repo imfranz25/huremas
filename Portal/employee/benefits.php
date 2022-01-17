@@ -84,31 +84,55 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                   </li>
                                   <!--Filter here-->
                                 </ul>
-                                <div class="card-header-right">
+                                <!-- <div class="card-header-right">
                                   <ul class="list-unstyled card-option">
                                     <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                     <li><i class="fa fa-window-maximize full-card"></i></li>
                                     <li><i class="fa fa-refresh reload_card"></i></li>
                                   </ul>
-                                </div>
+                                </div> -->
                               </div>         
-                              <div class="box-body" id="job_data" style="height: 500px;">
-                                <div class="card-block table-border-style row text-justify mh-100" style="overflow-y: scroll !important;overflow-x: hidden !important;">
-                                  <!--PHP Start-->
-                             
-                                  <!--No Job Post-->
-                                  <div class="row m-auto">
-                                    <div class="col-lg-12 p-3 text-center">
-                                      <img src="../assets/images/under_development.png" alt="No Notification" class="img-radius img-fluid mx-auto d-block" style="width: 30%;">
-                                      <h5>BENEFITS - UNDER DEVELOPMENT</h5>
-                                      <label>Sorry for inconvenience</label>
-                                      <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3 reload_card">Refresh</button>
-                                    </div>
-                                  </div>
-                                  <!--No Job Post End-->
+                              <div class="box-body">
 
-                                 
-                                </div>
+
+                                <div class="card-block table-border-style">
+             
+                                <div class="table-responsive">
+                                <table id="table1" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Benefit ID</th>
+                                        <th>Name</th>
+                                        <th>Decription</th>
+                                        <th>Date Applied</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $id = $user['employee_id'];
+                                            $sql = "SELECT *, benefit_record.benefit_id AS bid FROM benefit_record LEFT JOIN benefits ON benefits.benefit_id=benefit_record.benefit_id WHERE employee_id='$id' ";
+                                            $query = $conn->query($sql);
+                                            while($row = $query->fetch_assoc()){
+                                            ?>
+                                                <tr>
+                                                    
+                                                    <td><?php echo $row['bid']; ?></td>
+                                                    <td><?php echo $row['benefit_name']; ?></td>
+                                                    <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>
+                                                        <a href='#view_action' data-toggle='modal' class='pull-right view_DA' data-id='<?php echo $row['reference_id']; ?>'><span class='fa fa-eye ml-5'></span></a>
+                                                        <?php echo $row['description']; ?>
+                                                    </td>
+                                                    <td><?php echo (new DateTime($row['date_applied']))->format('F d, Y'); ?></td>
+                                                </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                </table>
+                                    </div>
+                                    </div>
+                           
+
+                                
+
                               </div>
                             </div>
                             <!-- Main-body end -->
@@ -136,13 +160,10 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
   $(document).ready(function() {
 
-
-    // CHECK IF THERE IS STILL MODAL OPEN => TO SUPPORT SCROLLING EVEN IF WE CLOSE THE MODAL
-    $('body').on('hidden.bs.modal', function () {
-      if($('.modal.show').length > 0){
-        $('body').addClass('modal-open');
-      }
-    });
+    // to avoid the re-initialization of datatable
+    if ( ! $.fn.DataTable.isDataTable( '#table1' )) {
+      $('#table1').dataTable();
+    }//**end**
 
   });
 
