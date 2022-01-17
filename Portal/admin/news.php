@@ -128,7 +128,6 @@ include 'includes/header.php';
                                                 </button>
 
                                                 <div class="dropdown-menu" style="">
-                                                  <div class="dropdown-divider"></div>
                                                   <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                   <div class="dropdown-divider"></div>
                                                   <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>

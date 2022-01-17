@@ -187,6 +187,7 @@
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
                       <label> Note: This process cannot be undone</label>
                     </div>
+                    <hr>
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label req">Password</label>
                       <div class="col-sm-9">
