@@ -73,8 +73,8 @@ include 'includes/header.php';
                             <!-- Main-body start -->
 
                             <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addOT"><i class="fa fa-plus"></i>New</button>
-                            <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" data-toggle="modal" id="deleteAll"><i class="fa fa-trash"></i>Delete</button>
-
+                           <!--  <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" data-toggle="modal" id="deleteAll"><i class="fa fa-trash"></i>Delete</button>
+ -->
                             <a href="overtime.php" style="float:right;">
                             <button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-chevron-left"></i>Back</button></a>
 
@@ -98,12 +98,12 @@ include 'includes/header.php';
                                 <table id="table1" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th  width="5%">
+                                        <!-- <th  width="5%">
                                           <div class="custom-control custom-checkbox m-0 p-0">
                                             <input type="checkbox" class="custom-control-input" id="globalcheck" />
                                             <label class="custom-control-label d-flex align-items-center text-center" for="globalcheck">&nbsp;</label>
                                           </div>
-                                        </th>
+                                        </th> -->
                                         <th>Overtime Name</th>
                                         <th>Rate</th>
                                         <th>Status</th>
@@ -117,13 +117,13 @@ include 'includes/header.php';
                                         while($row = $query->fetch_assoc()){
                                         ?>
                                             <tr>
-                                              <td>
+                                              <!-- <td>
                                                 <div class="custom-control custom-checkbox m-0 p-0">
-                                                  <input type="checkbox" class="custom-control-input toggle-check" data-id="<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" />
-                                                  <label class="custom-control-label d-flex align-items-center" for="<?php echo $row['id']; ?>">&nbsp;</label>
+                                                  <input type="checkbox" class="custom-control-input toggle-check" data-id="<?php //echo $row['id']; ?>" id="<?php //echo $row['id']; ?>" />
+                                                  <label class="custom-control-label d-flex align-items-center" for="<?php //echo $row['id']; ?>">&nbsp;</label>
 
                                                 </div>
-                                              </td>
+                                              </td> -->
                                               <td><?php echo ucfirst($row['overtime_name']); ?></td>
                                               <td><?php echo $row['overtime_rate']; ?>%</td>
                                               <td><?php echo ucfirst($row['status']); ?></td>

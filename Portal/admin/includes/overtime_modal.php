@@ -80,6 +80,13 @@
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
                       <label> Note: This process cannot be undone</label>
                     </div>
+                    <hr>
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label req">Password</label>
+                      <div class="col-sm-9">
+                        <input type="password" class="form-control border border-secondary" name="pass" placeholder="Please enter your password for verification" required />
+                      </div>
+                    </div>
 	            	</div>
           	</div>
           	<div class="modal-footer">
@@ -139,7 +146,6 @@
             <!--Modal Footer-->
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="reset" class="btn btn-default btn-flat pull-left"><i class="fa fa-window-restore"></i>Clear</button>
               <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-save"></i> Save</button>
               </form>
             </div>
