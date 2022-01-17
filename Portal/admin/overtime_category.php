@@ -32,7 +32,7 @@ include 'includes/header.php';
                                           </li>
                                           <li class="breadcrumb-item"><a href="overtime.php">Overtime</a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="#!">Overtime Category</a>
+                                          <li class="breadcrumb-item"><a href="overtime_category.php">Overtime Category</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -83,13 +83,13 @@ include 'includes/header.php';
                             <div class="card">
                             <div class="card-header">
                                                 <h5>Overtime List</h5>
-                                                <div class="card-header-right">
+                                                <!-- <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                         <li><i class="fa fa-window-maximize full-card"></i></li>
                                                         <li><i class="fa fa-refresh reload-card"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                             </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
@@ -107,7 +107,7 @@ include 'includes/header.php';
                                         <th>Overtime Name</th>
                                         <th>Rate</th>
                                         <th>Status</th>
-                                        <th>Tools</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tbody">
@@ -128,8 +128,18 @@ include 'includes/header.php';
                                               <td><?php echo $row['overtime_rate']; ?>%</td>
                                               <td><?php echo ucfirst($row['status']); ?></td>
                                               <td>
-                                                  <button class="btn btn-success btn-sm edit btn-round" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Edit</button>
-                                                  <button class="btn btn-danger btn-sm delete btn-round" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Delete</button>
+
+                                                  <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+                                                  </button>
+
+                                                  <div class="dropdown-menu" style="">
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                  </div>
+
+
                                               </td>
                                             </tr>
                                       <?php }?>
