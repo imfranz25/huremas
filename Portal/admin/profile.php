@@ -50,7 +50,7 @@ include 'includes/header.php';
                 </li>
                 <li class="nav-item text-left container">
                   <a class="nav-link f-14" data-toggle="tab" href="#inbox" role="tab" onclick="change_title('Inbox')" >
-                    <i class="ti-email mr-2" aria-hidden="true"></i>Inbox
+                    <i class="ti-bell mr-2" aria-hidden="true"></i>Notifications
                   </a><hr class="m-0 divider" />
                 </li>
                 <li class="nav-item text-left container">
@@ -81,76 +81,172 @@ include 'includes/header.php';
                 <h5>Personal Information</h5>
               </div> 
               <div class="card-block">
+              
+                <!--Personal Details -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5>Personal Details</h5>
+                  </div> 
+                </div>
                 <!--Employee ID -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Employee ID</label>
                   <div class="col-lg-6">
-                    <input type="text" name="employeeid" id="employeeid" class="form-control" readonly> 
+                    <input type="text" id="employeeid" class="form-control" readonly> 
                   </div> 
-                </div>
-                <!--Position -->
-                <div class="row d-flex m-3">
-                  <label class="col-lg-2 col-form-label">Position</label>
-                  <div class="col-lg-6">
-                    <input type="text" name="position" id="position" class="form-control" readonly> 
-                   </div> 
                 </div>
                 <!--Full Name -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Full Name</label>
                   <div class="col-lg-6">
-                    <input type="text" name="fullname" id="fullname" class="form-control"readonly> 
+                    <input type="text" id="fullname" class="form-control"readonly> 
                   </div> 
                 </div>
                 <!--Birthdate -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Birthdate</label>
                   <div class="col-lg-6">
-                    <input type="text" name="birthdate" id="birthdate" class="form-control" readonly> 
+                    <input type="text" id="birthdate" class="form-control" readonly> 
                    </div> 
+                </div>
+                <!--Age -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Age</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="age" class="form-control" readonly> 
+                  </div> 
                 </div>
                 <!--Sex -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Sex</label>
                   <div class="col-lg-6">
-                    <input type="text" name="sex" id="sex" class="form-control" readonly> 
+                    <input type="text" id="sex" class="form-control" readonly> 
                   </div> 
                 </div>
                 <!--Religion -->
-                <div class="row d-flex m-3">
+                <!-- <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Religion</label>
                   <div class="col-lg-6">
                     <input type="text" name="religion" id="religion" class="form-control" readonly> 
                   </div> 
-                </div>
+                </div> -->
                 <!--Civil Status -->
-                <div class="row d-flex m-3">
+                <!-- <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Civil Status</label>
                   <div class="col-lg-6">
                     <input type="text" name="civilstatus" id="civilstatus" class="form-control" readonly> 
+                  </div> 
+                </div> -->
+                <!--Contact Details -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Contact Details</h5>
                   </div> 
                 </div>
                 <!--Address -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Address</label>
                   <div class="col-lg-6">
-                    <input type="text" name="address" id="address" class="form-control" readonly> 
+                    <input type="text" id="address" class="form-control" readonly> 
                   </div> 
                 </div>
                 <!--Contact Number -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Contact Number</label>
                   <div class="col-lg-6">
-                    <input type="text" name="contact" id="contact" class="form-control" readonly> 
+                    <input type="text" id="contact" class="form-control" readonly> 
+                  </div> 
+                </div>
+                <!--Mobile Number -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Mobile Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="mobile" class="form-control" readonly> 
                   </div> 
                 </div>
                 <!--Email Address -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Email Address</label>
                   <div class="col-lg-6">
-                    <input type="email" name="email" id="email" class="form-control" readonly> 
+                    <input type="email"  id="email" class="form-control" readonly> 
                   </div> 
                 </div>
+
+                <!--Employee Details -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Employee Details</h5>
+                  </div> 
+                </div>
+                <!--Position -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Position</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="position" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Department -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Department</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="department" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Schedule -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Schedule</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="schedule" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Category -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Category</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="category" class="form-control" readonly> 
+                   </div> 
+                </div>
+
+                <!--Goverment -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Government Issued ID</h5>
+                   </div> 
+                </div>
+                <!--SSS -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">SSS Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="sss" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Pag-ibig -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Pagi-ibig Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="pagibig" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Philhealth -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Philhealth Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="philhealth" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--TIN -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">TIN Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="tin" class="form-control" readonly> 
+                   </div> 
+                </div>
+
+
               </div>
               <!-- Card Block End-->
             </div>
@@ -162,110 +258,47 @@ include 'includes/header.php';
             <div class="card tab-pane fade" id="inbox">
             <!--Inbox Page-->
               <div class="card-header">
-                <h5>Inbox</h5>
+                <h5>
+                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Notification</a>
+                </h5>
+                <button type="button" class="btn btn-mat waves-effect waves-light btn-danger m-0 float-right" id="clear" data-target="#clearNotif" data-toggle="modal" >Clear All
+                </button>
               </div> 
               <div class="card-block">
 
-                <!--No Notification Message > Visible By Default-->
-                <div id="no_notif" class="row m-auto">
-                  <div class="col-lg-12 p-3 text-center">
-                    <img src="../assets/images/no_notif.png" alt="No Notification" class="img-radius img-fluid mx-auto d-block p-4">
-                    <h5>YOU HAVE NO MESSAGES AT A MOMENT</h5>
-                    <label>When you have messages they show up here. Stay Tune for updates !</label>
-                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3" id="refresh_inbox" name='refresh'>Refresh</button>
-                  </div>
-                </div>
-                <!--No Notification Message End-->
-
                 <!-- Inbox Sample *-->
-                <div id="inbox-content" class="d-none">
-                  <div class="row p-2">
-                    <div class="col-9 col-md-6 d-flex align-items-center">
-                      <h5 class="font-light">
-                      <i class="ti-email"></i> 2 Unread Message(s)</h5>
-                    </div>
-                    <div class="col-3 col-md-6">
-                      <ul class="float-right">
-                        <li class="text-danger overflow-auto">
-                          <a href="#">
-                            <button class="btn btn-circle btn-danger text-white" href="#">
-                            <i class="fa fa-trash"></i>
-                            </button>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <!--=========================SAMPLE MESSAGE==============================-->
-
+                <div id="inbox-content">
                   <!-- Inbox Table-->
                   <div class="table-responsive">
                     <table class="table table-hover">
-                      <tbody>
-
-                        <tr>
-                           <!-- CHECK BOX WITH PROFILE IMAGE AND NAME -->
-                          <td class="align-middle">
-                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="inbox1" />
-                              <label class="custom-control-label" for="inbox1">&nbsp;</label>
-                            </div>
-                            <a class="link" href="#">
-                              <img src="../assets/images/avatar-4.jpg" alt="user image" class="img-radius img-30 m-r-15">
-                              <span class="mb-0 text-muted">Francis Ong</span>
-                            </a>
-                          </td>
-                          <!-- INBOX MESSAGE CONTENT -->
-                          <td class="align-middle">
-                            <a class="link" href="#">
-                              <span class="text-dark">Hello Its my Brithday :)</span>
-                            </a>
-                          </td>
-                          <!-- DATE / TIME -->
-                          <td class="text-muted align-middle">May 13</td>
-                          <!-- ACTIONS / MISC -->
-                          <td class="align-middle">
-                            <a href="#"><i class="fa fa-trash m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-star m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-bookmark m-1 float-right"></i></a>
-                          </td>
-                        </tr>    
-
-                        <tr>
-                           <!-- CHECK BOX WITH PROFILE IMAGE AND NAME -->
-                          <td class="align-middle">
-                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="inbox2" />
-                              <label class="custom-control-label" for="inbox2">&nbsp;</label>
-                            </div>
-                            <a class="link" href="#">
-                              <img src="../assets/images/avatar-4.jpg" alt="user image" class="img-radius img-30 m-r-15">
-                              <span class="mb-0 text-muted">Francis Ong</span>
-                            </a>
-                          </td>
-                          <!-- INBOX MESSAGE CONTENT -->
-                          <td class="align-middle">
-                            <a class="link" href="#">
-                              <span class="text-dark">Hello Its my Brithday :)</span>
-                            </a>
-                          </td>
-                          <!-- DATE / TIME -->
-                          <td class="text-muted align-middle">May 13</td>
-                          <!-- ACTIONS / MISC -->
-                          <td class="align-middle">
-                            <a href="#"><i class="fa fa-trash m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-star m-1 float-right"></i></a>
-                            <a href="#"><i class="fa fa-bookmark m-1 float-right"></i></a>
-                          </td>
-                        </tr> 
-
+                      <tbody id="notif-body">
+                        <!-- Notif Infos Here    -->
                       </tbody>            
                     </table>            
                   </div>
                   <!-- Inbox Table **End**-->
                 </div>
                 <!-- Inbox Sample **End**-->
+
+                <!--No Notification Message > Visible By Default-->
+                <div id="no_notif" class="row m-auto d-none">
+                  <div class="col-lg-12 p-3 text-center">
+                    <img src="../assets/images/no_notif.png" alt="No Notification" class="img-radius img-fluid mx-auto d-block p-4">
+                    <h5>YOU HAVE NO NOTIFICATION AT A MOMENT</h5>
+                    <label>When you have notification they show up here. Stay Tune for updates !</label>
+                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3" id="refresh_inbox" name='refresh'>Refresh</button>
+                  </div>
+                </div>
+                <!--No Notification Message End-->
+
+
+
+                <!--=========================SAMPLE MESSAGE==============================-->
+
+
+              </div>
+            </div>
+            <!--Inbox End-->
 
                 <!--=========================SAMPLE MESSAGE==============================-->
 
@@ -358,6 +391,18 @@ include 'includes/header.php';
  
     <script>
 
+      //GET AGE
+      function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
       //GET PROFILE DETAILS
       function get_profile(){
         $.ajax({
@@ -373,11 +418,70 @@ include 'includes/header.php';
             $('#email').val(response.email);
             $('#sex').val(response.sex).html(response.sex);
             $('#position').val(response.description);
+            $('#age').val(getAge(response.birthdate));
+            $('#mobile').val(response.mobile_no);
+            $('#department').val(response.title);
+            $('#schedule').val(response.time_in+' - '+response.time_out);
+            $('#category').val(response.cat);
+            //gov id
+            $('#sss').val(response.sss_id);
+            $('#pagibig').val(response.pagibig_id);
+            $('#philhealth').val(response.philhealth_id);
+            $('#tin').val(response.tin_num);
             //religion
             //civil status
           }  
         });
       }//GET PROFILE DETAILS ****END*****
+
+
+      //GET NOTIF
+      function get_notification(){
+        $("#notif-body").html("");
+        $.ajax({
+          type: 'POST',
+          url: 'function/notification_row.php',
+          dataType: 'json',
+          success: function(response){
+           if (response.length > 0 ) {
+            $("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
+            $("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
+            $("#clear").removeClass("d-none");
+            
+            for (var i = 0; i < response.length; i++) {
+              $("#notif-body").append(`
+                <tr>
+                  <td class="align-middle link" 
+                    data-link="${(response)[i].link}" 
+                    data-open="${(response)[i].open}"
+                    data-id="${(response)[i].nid}">
+                    <i class="fa fa-bell mx-2 ${(response)[i].bell}"></i>
+                    <span class="text-dark" style="font-weight:bold;">
+                      ${(response)[i].title}
+                    </span>
+                  </td>
+                  <td class="text-muted align-middle link" 
+                    data-link="${(response)[i].link}" 
+                    data-open="${(response)[i].open}"
+                    data-id="${(response)[i].nid}">
+                    ${(response)[i].date}
+                  </td>
+                  <td class="align-middle">
+                    <a href="javascript:void(0)" data-id="${(response)[i].nid}" class="delete_notif text-danger"><i class="fa fa-trash m-1 float-right"></i></a>
+                  </td>
+                </tr> 
+              `);
+            }
+
+
+           }else{
+            $("#inbox-content").addClass("d-none"); // HIDE TABLE
+            $("#no_notif").removeClass("d-none"); // NO NOTIF
+            $("#clear").addClass("d-none");
+           }
+          }  
+        });
+      }//GET NOTIF ****END*****
 
       //REMOVE ERROR/SUCCESS MESSAGES
       function remove_message(){
@@ -398,8 +502,9 @@ include 'includes/header.php';
         //REFRESH INBOX
         $('#refresh_inbox').click(function(e){
           e.preventDefault();
-          $("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
-          $("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
+          //$("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
+          //$("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
+          get_notification();
         });
         //REFRESH INBOX **END**
 
@@ -468,8 +573,8 @@ include 'includes/header.php';
 
       //EXECEUTE GET PROFILE FUNCTION
       get_profile();
-
-
+      get_notification();
+      
 
 
 

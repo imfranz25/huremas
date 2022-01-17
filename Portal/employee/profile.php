@@ -261,7 +261,11 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
             <div class="card tab-pane fade" id="inbox">
             <!--Inbox Page-->
               <div class="card-header">
-                <h5>Notification</h5>
+                <h5>
+                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Notification</a>
+                </h5>
+                <button type="button" class="btn btn-mat waves-effect waves-light btn-danger m-0 float-right" id="clear" data-target="#clearNotif" data-toggle="modal" >Clear All
+                </button>
               </div> 
               <div class="card-block">
 
@@ -422,7 +426,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                       <span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                  <form class="form-horizontal" method="POST" action="delete_emp_notification.php">
+                  <form class="form-horizontal" method="POST" action="function/notification_delete.php">
                     <div class="text-center">
                         <label>Are you sure you want to clear your notification ? </label>
                         <div class="text-center text-danger" >
@@ -514,7 +518,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
            if (response.length > 0 ) {
             $("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
             $("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
-             
+            $("#clear").removeClass("d-none");
+            
             for (var i = 0; i < response.length; i++) {
               $("#notif-body").append(`
                 <tr>
@@ -544,6 +549,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
            }else{
             $("#inbox-content").addClass("d-none"); // HIDE TABLE
             $("#no_notif").removeClass("d-none"); // NO NOTIF
+            $("#clear").addClass("d-none");
            }
           }  
         });
