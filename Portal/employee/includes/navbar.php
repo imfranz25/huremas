@@ -77,7 +77,7 @@
                                   </li>
                                   <li class="waves-effect waves-light">
                                       <a href="profile.php" onclick="store('#inbox')">
-                                          <i class="ti-email"></i> Inbox
+                                          <i class="ti-bell"></i> Notifications
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">

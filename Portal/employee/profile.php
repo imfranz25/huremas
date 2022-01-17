@@ -379,6 +379,82 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
     </div>
     <!-- Pcoded **End**-->  
 
+
+
+
+     <!-- Delete -->
+    <div class="modal fade" id="deleteNotif">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title"><b><span>Delete Notification</span></b></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form class="form-horizontal" method="POST" id="notif_form">
+                    <input type="hidden" id="notif_id" name="id">
+                    <div class="text-center">
+                        <label>Are you sure you want to delete this notification ? </label>
+                        <div class="text-center text-danger" >
+                          <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+                          <label> Note: This process cannot be undone</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                  <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Clear -->
+    <div class="modal fade" id="clearNotif">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title"><b><span>Clear Notification</span></b></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form class="form-horizontal" method="POST" action="delete_emp_notification.php">
+                    <div class="text-center">
+                        <label>Are you sure you want to clear your notification ? </label>
+                        <div class="text-center text-danger" >
+                          <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+                          <label> Note: This process cannot be undone</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                  <button type="submit" class="btn btn-danger btn-flat" name="deleteAll"><i class="fa fa-trash"></i> Delete</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php"); ?>
  
     <script>
@@ -432,7 +508,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
         $("#notif-body").html("");
         $.ajax({
           type: 'POST',
-          url: 'function/get_emp_notification.php',
+          url: 'function/notification_row.php',
           dataType: 'json',
           success: function(response){
            if (response.length > 0 ) {
@@ -491,7 +567,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
         let url = window.location.href;
         $.ajax({
           type: 'POST',
-          url: 'function/update_emp_notification.php',
+          url: 'function/notification_edit.php',
           data: {id:id},
           dataType: 'json',
           success: function(response){
@@ -520,6 +596,31 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
             location.replace(link);
           }
         });
+
+        
+        $(document).on('click','.delete_notif',function(e){
+          e.preventDefault();
+          $('#notif_id').val($(this).data('id'));
+          $('#deleteNotif').modal('show');
+        });
+
+
+        $(document).on('submit','#notif_form',function(e){
+          e.preventDefault();
+          let url = window.location.href;
+          let id = $('#notif_id').val();
+          $.ajax({
+            type: 'POST',
+            url: 'function/notification_delete.php',
+            data: {id:id},
+            dataType: 'json',
+            success: function(response){
+              location.replace(url);
+            }  
+          });
+        });
+
+        
 
         //REFRESH INBOX
         $('#refresh_inbox').click(function(e){
