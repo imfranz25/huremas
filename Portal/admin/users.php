@@ -125,10 +125,9 @@ include 'includes/header.php';
                                                                   Action
                                                         </button>
                                                         <div class="dropdown-menu" style="">
+                                                          <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                           <div class="dropdown-divider"></div>
-                                                          <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>">Edit</a>
-                                                          <div class="dropdown-divider"></div>
-                                                          <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>">Delete</a>
+                                                          <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                         </div>
                                             </td>
                                             </tr>
