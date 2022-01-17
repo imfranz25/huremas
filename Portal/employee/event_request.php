@@ -55,15 +55,13 @@
               </button>
               
               <div class="dropdown-menu" style="">
+                <a class="dropdown-item view" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-eye"></i>View</a>
                 <?php if($row['request_status']=='0'): ?>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Edit</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>
-                <?php endif; ?>
-
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item view" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-eye"></i>View</a>
+                  <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                <?php endif; ?> 
               </div>
 
             </td>
