@@ -45,7 +45,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
               <ul class="nav nav-tabs md-tabs flex-column" id="profile_tab" role="tablist">
                 <li class="nav-item text-left container">
                   <a class="nav-link f-14" data-toggle="tab" href="#personal" role="tab" onclick="change_title('Profile')" >
-                    <i class="ti-user mr-2" aria-hidden="true"></i>Personal Information
+                    <i class="ti-user mr-2" aria-hidden="true"></i>Employee Profile
                   </a><hr class="m-0 divider" />
                 </li>
                 <li class="nav-item text-left container">
@@ -78,79 +78,176 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
             <!-- Personal Information Container-->
             <div class="card tab-pane fade show active" id="personal">
               <div class="card-header">
-                <h5>Personal Information</h5>
+                <h5>Employee Profile</h5>
               </div> 
               <div class="card-block">
+                <!--Personal Details -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5>Personal Details</h5>
+                  </div> 
+                </div>
                 <!--Employee ID -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Employee ID</label>
                   <div class="col-lg-6">
-                    <input type="text" name="employeeid" id="employeeid" class="form-control" readonly> 
+                    <input type="text" id="employeeid" class="form-control" readonly> 
                   </div> 
-                </div>
-                <!--Position -->
-                <div class="row d-flex m-3">
-                  <label class="col-lg-2 col-form-label">Position</label>
-                  <div class="col-lg-6">
-                    <input type="text" name="position" id="position" class="form-control" readonly> 
-                   </div> 
                 </div>
                 <!--Full Name -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Full Name</label>
                   <div class="col-lg-6">
-                    <input type="text" name="fullname" id="fullname" class="form-control"readonly> 
+                    <input type="text" id="fullname" class="form-control"readonly> 
                   </div> 
                 </div>
                 <!--Birthdate -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Birthdate</label>
                   <div class="col-lg-6">
-                    <input type="text" name="birthdate" id="birthdate" class="form-control" readonly> 
+                    <input type="text" id="birthdate" class="form-control" readonly> 
                    </div> 
+                </div>
+                <!--Age -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Age</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="age" class="form-control" readonly> 
+                  </div> 
                 </div>
                 <!--Sex -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Sex</label>
                   <div class="col-lg-6">
-                    <input type="text" name="sex" id="sex" class="form-control" readonly> 
+                    <input type="text" id="sex" class="form-control" readonly> 
                   </div> 
                 </div>
                 <!--Religion -->
-                <div class="row d-flex m-3">
+                <!-- <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Religion</label>
                   <div class="col-lg-6">
                     <input type="text" name="religion" id="religion" class="form-control" readonly> 
                   </div> 
-                </div>
+                </div> -->
                 <!--Civil Status -->
-                <div class="row d-flex m-3">
+                <!-- <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Civil Status</label>
                   <div class="col-lg-6">
                     <input type="text" name="civilstatus" id="civilstatus" class="form-control" readonly> 
+                  </div> 
+                </div> -->
+                <!--Contact Details -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Contact Details</h5>
                   </div> 
                 </div>
                 <!--Address -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Address</label>
                   <div class="col-lg-6">
-                    <input type="text" name="address" id="address" class="form-control" readonly> 
+                    <input type="text" id="address" class="form-control" readonly> 
                   </div> 
                 </div>
                 <!--Contact Number -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Contact Number</label>
                   <div class="col-lg-6">
-                    <input type="text" name="contact" id="contact" class="form-control" readonly> 
+                    <input type="text" id="contact" class="form-control" readonly> 
+                  </div> 
+                </div>
+                <!--Mobile Number -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Mobile Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="mobile" class="form-control" readonly> 
                   </div> 
                 </div>
                 <!--Email Address -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Email Address</label>
                   <div class="col-lg-6">
-                    <input type="email" name="email" id="email" class="form-control" readonly> 
+                    <input type="email"  id="email" class="form-control" readonly> 
                   </div> 
                 </div>
+
+                <!--Employee Details -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Employee Details</h5>
+                  </div> 
+                </div>
+                <!--Position -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Position</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="position" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Department -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Department</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="department" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Schedule -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Schedule</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="schedule" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Category -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Category</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="category" class="form-control" readonly> 
+                   </div> 
+                </div>
+
+                <!--Goverment -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Government Issued ID</h5>
+                   </div> 
+                </div>
+                <!--SSS -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">SSS Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="sss" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Pag-ibig -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Pagi-ibig Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="pagibig" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Philhealth -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Philhealth Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="philhealth" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--TIN -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">TIN Number</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="tin" class="form-control" readonly> 
+                   </div> 
+                </div>
+
+
+
+
               </div>
               <!-- Card Block End-->
             </div>
@@ -358,6 +455,18 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
  
     <script>
 
+      //GET AGE
+      function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
       //GET PROFILE DETAILS
       function get_profile(){
         $.ajax({
@@ -373,6 +482,17 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
             $('#email').val(response.email);
             $('#sex').val(response.sex).html(response.sex);
             $('#position').val(response.description);
+            $('#age').val(getAge(response.birthdate));
+            $('#mobile').val(response.mobile_no);
+            $('#department').val(response.title);
+            $('#schedule').val(response.time_in+' - '+response.time_out);
+            $('#category').val(response.cat);
+            //gov id
+            $('#sss').val(response.sss_id);
+            $('#pagibig').val(response.pagibig_id);
+            $('#philhealth').val(response.philhealth_id);
+            $('#tin').val(response.tin_num);
+
             //religion
             //civil status
           }  
