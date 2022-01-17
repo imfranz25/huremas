@@ -5,6 +5,7 @@
                                     <h5>
                                         <a type="button" class="btn btn-mat waves-effect waves-light btn-default training_title">My Training List</a>
                                     </h5>
+                                    <button type="button" class="btn btn-mat waves-effect waves-light btn-success m-0 float-right" data-target="#training_list_modal" data-toggle="modal"  id="addAtt"><i class="fa fa-plus"></i>Request Training</button>
                                   <!--data-toggle="modal" data-target="#addAtt"-->
                                 </div>  
                             <div class="box-body">
@@ -36,9 +37,11 @@
                                                 }else{
                                                     $status = $row['status'];
                                                     if ($row['status']=='Reviewed') {
-                                                        $badge = 'badge-success';
+                                                        $badge = 'badge-primary';
                                                     }else if ($row['status']=='Ongoing') {
                                                         $badge = 'badge-warning';
+                                                    }else if ($row['status']=='Finished') {
+                                                        $badge = 'badge-success';
                                                     }else{
                                                         $badge = 'badge-danger';
                                                     }

@@ -73,8 +73,7 @@ include 'includes/header.php';
                             
                         ?>
 
-                        
-
+                     
                         
 
                         
@@ -88,7 +87,7 @@ include 'includes/header.php';
 
                                 <div class="btn-group float-right">
                                   <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
-                                  <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
+                                  <div class="dropdown-menu " style="cursor: pointer;">
                                     <a class="dropdown-item filter_job active" data-id='all' href="javascript:void(0)" id="job_all">All</a>
                                     <a class="dropdown-item filter_job" data-id='starred' href="javascript:void(0)">Starred</a>
                                     <a class="dropdown-item filter_job" data-id='active' href="javascript:void(0)">Active</a>
@@ -100,7 +99,7 @@ include 'includes/header.php';
 
                               </div>         
                               <div class="box-body" id="job_data" style="height: 500px;">
-                                <div class="card-block table-border-style row text-justify mh-100" style="overflow-y: scroll !important;">
+                                <div class="card-block table-border-style row text-justify mh-100">
                                   <!--PHP Start-->
                                   <?php 
 
@@ -147,13 +146,15 @@ include 'includes/header.php';
                                           
                                   ?>
 
+
                                   <!--Sample Recuit Box-->
                                   <div class="col-md-6 col-lg-4">
                                     <div class="card rounded border border-secondary">
                                       <div class="card-header p-0 m-0">
                                         <div class="bg-success text-white px-3 pt-3 pb-1 rounded-top">
-                                          <h4>
-                                            <a href="javascript:void(0)"><i data-id="<?php echo $row['job_code']; ?>" class="fa <?php echo $star; ?> starred text-warning f-20 mr-2" style="color: white;" id="<?php echo $row['job_code']; ?>"></i></a><?php echo $row['description'];  ?>
+                                          <h4 class="h5">
+                                            <a href="javascript:void(0)"><i data-id="<?php echo $row['job_code']; ?>" class="fa <?php echo $star; ?> starred text-warning f-20 mr-2" style="color: white;"></i></a>
+                                            <?php echo $row['description'];  ?>
                                             <!-- Settings Dropdown -->
                                             <div class="btn-group float-right">
                                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -784,7 +785,7 @@ $(document).ready(function() {
     var code = $('#move_app_code').val();
     getapplicant(code,'Hired'); // reload page (stay on page)
   }); 
-  
+
 
   
 

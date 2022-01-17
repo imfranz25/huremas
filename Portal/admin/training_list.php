@@ -147,7 +147,7 @@ include 'includes/header.php';
                                       }
                                   ?>
 
-                                  <div class="col-md-6 col-lg-4">
+                                  <div class="col-md-6 col-lg-4 mb-4">
                                     <div class="card rounded border border-secondary h-100 mb-1">
                                       <div class="card-header p-0 m-0 h-100">
                                         <!--Header-->

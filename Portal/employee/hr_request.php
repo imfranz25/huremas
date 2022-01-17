@@ -27,19 +27,23 @@
                                                 $req_status=$row['request_status'];
                                                 if ($req_status==0) {
                                                     $status ='Pending';
+                                                    $badge = 'badge-info';
                                                 }else if ($req_status==1) {
                                                     $status ='Document sent';
+                                                    $badge = 'badge-warning';
                                                 }else if ($req_status==2) {
                                                     $status ='Rejected';
+                                                    $badge = 'badge-danger';
                                                 }else{
                                                     $status ='Validated';
+                                                    $badge = 'badge-success';
                                                 }
                                         ?>
                                             <tr>
                                                 <td><?php echo $row['reference_id']; ?></td>
                                                 <td><?php echo (new Datetime($row['request_date']))->format('F d, Y'); ?></td>
                                                 <td><?php echo $row['request_name']; ?></td>
-                                                <td><?php echo $status; ?></td>
+                                                <td><span class="badge <?php echo $badge; ?>"><?php echo $status; ?></span></td>
                                                 <td>
                                                     <button class='btn btn-warning text-dark btn-sm review_req_admin btn-round' data-id='<?php echo $row['reference_id']; ?>'><i class='fa fa-eye'></i> Review</button>
                                                 </td>
