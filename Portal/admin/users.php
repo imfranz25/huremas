@@ -26,9 +26,9 @@ include 'includes/header.php';
                                   <div class="col-md-4">
                                       <ul class="breadcrumb-title">
                                           <li class="breadcrumb-item">
-                                              <a href="index.php"> <i class="fa fa-home"></i> </a>
+                                              <a href="index.php"> <i class="fa fa-home"></i></a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="#!">Others</a>
+                                          <li class="breadcrumb-item"><a href="users.php">Others</a>
                                           </li>
                                           <li class="breadcrumb-item"><a href="users.php">Users</a>
                                           </li>
@@ -70,18 +70,24 @@ include 'includes/header.php';
                         ?>
                             <!-- Main-body start -->
 
-                            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addUsers"><i class="fa fa-plus"></i>New</button>                          
+                            
 
                             <div class="card">
                             <div class="card-header">
-                                                <h5>Users List</h5>
-                                                <div class="card-header-right">
+
+                                  <h5>
+                                    <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Users List</a>
+                                  </h5>
+                                  <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addUsers"><i class="fa fa-plus"></i>New</button>                          
+
+                                                <!-- <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                         <li><i class="fa fa-window-maximize full-card"></i></li>
                                                         <li><i class="fa fa-refresh reload-card"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
+
                                             </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">

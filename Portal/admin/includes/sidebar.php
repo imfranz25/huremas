@@ -229,7 +229,7 @@
                           </ul>
         
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Printables</div>
-                          <ul class="pcoded-item pcoded-left-item">
+                          <ul class="pcoded-item pcoded-left-item nav">
                               <li>
                                   <a href="chart.html" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
@@ -264,7 +264,7 @@
         
                           <div class="pcoded-navigation-label" data-i18n="nav.category.other">Other</div>
 
-                          <ul class="pcoded-item pcoded-left-item">
+                          <ul class="pcoded-item pcoded-left-item nav">
                             <li>
                                   <a href="users.php" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>

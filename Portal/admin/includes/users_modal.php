@@ -19,8 +19,8 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">Employee</label>
                   <div class="col-sm-8">
-                    <select name="employee_id" id="employee_id" class="form-control form-control-sm select2">
-                      <option value=""></option>
+                    <select name="employee_id" id="employee_id" class="form-control form-control-sm select2" required>
+                      <option value="">--select employee--</option>
                       <?php 
                       $employees = $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM employees WHERE employee_id not in (SELECT employee_id FROM admin) order by concat(lastname,', ',firstname,' ',middlename) asc");
                       while($row=$employees->fetch_assoc()):

@@ -433,9 +433,8 @@
                               <label class="req col-12 mt-3 pt-3">User Type</label> 
                               <div class="col-12 pb-4">
                                 <select id="type_on" name="type" class="form-control border border-secondary" required>
-                                  <option value="">--select user type--</option>
+                                  <option value="employee" selected>Employee</option>
                                   <option value="admin">Admin</option>
-                                  <option value="employee">Employee</option>
                                 </select>
                               </div>
 
