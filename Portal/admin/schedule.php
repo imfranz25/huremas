@@ -66,20 +66,24 @@ include 'includes/header.php';
                         ?>
                             <!-- Main-body start -->
 
-                            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addnew"><i class="fa fa-plus"></i>New</button>
-
                             
 
                             <div class="card">
                             <div class="card-header">
-                                                <h5>Schedule List</h5>
+                              <h5>
+                                <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Schedule List</a>
+                              </h5>
+                              <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addnew"><i class="fa fa-plus"></i>New</button>
+
+                            
+                                                <<!-- h5>Schedule List</h5>
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                         <li><i class="fa fa-window-maximize full-card"></i></li>
                                                         <li><i class="fa fa-refresh reload-card"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                             </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
@@ -99,19 +103,26 @@ include 'includes/header.php';
                                             $sql = "SELECT * FROM schedules";
                                             $query = $conn->query($sql);
                                             while($row = $query->fetch_assoc()){
-                                            echo "
+                                            ?>
                                                 <tr>
-                                                <td>".$row['schedcode']."</td>
-                                                <td>".date('h:i A', strtotime($row['time_in']))."</td>
-                                                <td>".date('h:i A', strtotime($row['time_out']))."</td>
+                                                <td><?php echo $row['schedcode']; ?></td>
+                                                <td><?php echo date('h:i A', strtotime($row['time_in'])); ?></td>
+                                                <td><?php echo date('h:i A', strtotime($row['time_out'])); ?></td>
                                                 <td>
-                                                    <button class='btn btn-success btn-sm edit btn-round' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                                                    <button class='btn btn-danger btn-sm delete btn-round' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                                                
+                                                    <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+                                                    </button>
+
+                                                    <div class="dropdown-menu" style="">
+                                                      <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                                                      <div class="dropdown-divider"></div>
+                                                      <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                    </div>
+
+
                                                 </td>
                                                 </tr>
-                                            ";
-                                            }
-                                        ?>
+                                           <?php } ?>
                                         </tbody>
                                 </table>
                                     </div>
