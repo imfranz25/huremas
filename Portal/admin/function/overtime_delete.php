@@ -12,19 +12,30 @@
 
 	if(isset($_POST['delete'])){
 		// initialization shitty
-		$id  = explode(',', $_POST['id']);
-		$pass  = $_POST['pass'];
-		$employee_id = $user['employee_id'];
+		$id  = $_POST['id'];
 
-		//challenge
-		if (password_verify($pass,get_password($employee_id,$conn))) {
-			if (count($id) > 1) {
-				array_map('delete', $id);
+
+		$check = "SELECT * FROM overtime_request WHERE overtime_code = '$id' ";
+		$query = $conn->query($check);
+		$count = mysqli_num_rows($query);
+
+		if ($count==0) {
+
+			$pass  = $_POST['pass'];
+			$employee_id = $user['employee_id'];
+
+			//challenge
+			if (password_verify($pass,get_password($employee_id,$conn))) {
+				// if (count($id) > 1) {
+				// 	array_map('delete', $id);
+				// }else{
+					delete($id[0]);
+				//}
 			}else{
-				delete($id[0]);
+				 $_SESSION['error'] = 'Incorrect Password, please try again';
 			}
 		}else{
-			 $_SESSION['error'] = 'Incorrect Password, please try again';
+			$_SESSION['error'] = 'Overtime category is currently in used';
 		}
 
 

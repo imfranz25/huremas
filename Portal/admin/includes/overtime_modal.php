@@ -31,7 +31,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">(+ %Rate)</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control border border-secondary" id="rate" name="rate" step="any" min="0" value="0" required />
+                    <input type="number" class="form-control border border-secondary" id="rate" name="rate" step="any" min=".1" value="0" required />
                     <div class="input-group-append">
                       <span class="input-group-text"><strong class="text-danger">Addtional Rate :</strong> Rate per Hour &times; 
                       <output id="percent">0</output>%</span>
@@ -76,16 +76,15 @@
             		<div class="text-center">
 	                	<label>Are you sure you want to delete this overtime record(s) ? </label>
 	                	<h2 class="bold" id="overtime_name"></h2>
-                    <div class="text-center text-danger" >
-                      <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
-                    </div>
                     <hr>
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label req">Password</label>
                       <div class="col-sm-9">
                         <input type="password" class="form-control border border-secondary" name="pass" placeholder="Please enter your password for verification" required />
                       </div>
+                    </div>
+                    <div class="text-center text-danger" >
+                      <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i> Note: You can't delete a overtime category if its currently applied in overtime records</label>
                     </div>
 	            	</div>
           	</div>
@@ -134,7 +133,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label req">(+ %Rate)</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control border border-secondary" id="edit_rate" name="edit_rate" step="any" min="0" value="0" required />
+                    <input type="number" class="form-control border border-secondary" id="edit_rate" name="edit_rate" step="any" min=".1" value="0" required />
                     <div class="input-group-append">
                       <span class="input-group-text"><strong class="text-danger">Addtional Rate :</strong> Rate per Hour &times; 
                       <output id="edit_percent"></output>%</span>

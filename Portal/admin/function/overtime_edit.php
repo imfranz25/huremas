@@ -22,5 +22,5 @@
 		$_SESSION['error'] = 'Select overtime record to edit first';
 	}
 
-	header('location: ../overtime.php');
+	header('location: ../overtime_category.php');
 ?>
