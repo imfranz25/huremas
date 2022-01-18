@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2022 at 07:33 PM
+-- Generation Time: Jan 18, 2022 at 12:43 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.0
 
@@ -45,7 +45,12 @@ INSERT INTO `admin` (`id`, `employee_id`, `username`, `password`, `default_passw
 (1, 'CVSUEJT052613497', 'admin', '$2y$10$jopL5bSinvWaDY2nFjufIeb.u9ZFPgmWB0zoL7P60BPPbP2Ix9XMC', 'admin123', 'admin', '2021-12-12 16:15:30'),
 (45, 'CVSUJPS103467598', 'howard.richmond_7598', '$2y$10$jopL5bSinvWaDY2nFjufIeb.u9ZFPgmWB0zoL7P60BPPbP2Ix9XMC', 'Z086P197243F', 'employee', '2021-12-12 16:46:40'),
 (46, 'CVSUFIZ562147308', 'ong.francis_7308', '$2y$10$jopL5bSinvWaDY2nFjufIeb.u9ZFPgmWB0zoL7P60BPPbP2Ix9XMC', 'A2Z910538I46', 'employee', '2021-12-12 17:06:48'),
-(47, 'CVSUZRO036571482', 'cooper.foreman_1482', '$2y$10$jopL5bSinvWaDY2nFjufIeb.u9ZFPgmWB0zoL7P60BPPbP2Ix9XMC', '8L317254P0A9', 'employee', '2021-12-12 17:07:50');
+(47, 'CVSUZRO036571482', 'cooper.foreman_1482', '$2y$10$jopL5bSinvWaDY2nFjufIeb.u9ZFPgmWB0zoL7P60BPPbP2Ix9XMC', '8L317254P0A9', 'employee', '2021-12-12 17:07:50'),
+(49, 'CVSUKFY695286353', 'asdasd.sadas_6353', '$2y$10$mq8ucoZ2dSAL/yX6isEXae1aF.h5eHNNVRoJIyQkQhilLleF6mbQa', '31890Y257A4S', 'employee', '2022-01-16 21:44:32'),
+(50, 'CVSUPGC530287196', 'estacion.keeper_7196', '$2y$10$vmW.Nsunmjs2dyrqA8N7g.yedSR3UhuLLvvtOGjxxtOvV0mmCkFHq', '972DJ813R540', 'employee', '2022-01-17 11:11:53'),
+(51, 'CVSUYLP047156239', 'reinherz.klaus_6239', '$2y$10$wxsuEdgepkDj0y7xZHkKe.CiaVA7PRgWXgoqjacqerHYa7Crnrnqi', '67A5908M2D13', 'employee', '2022-01-17 11:12:10'),
+(52, 'CVSUCAK697231805', 'smith.sebastian_1805', '$2y$10$mRGuvj5gWWZbDSaDdVV3v.zog8Ynqb2GZ.2W8.RTY12zcdbkaFsci', 'D83A92106X74', 'employee', '2022-01-17 11:12:24'),
+(53, 'CVSURIB015736298', 'white.woodwardstuart_6298', '$2y$10$7ufrCQeFQ6TDeJC7BTbAxOOu/tKBm2xzAwNxU8IdmmUUOGwlSYD/.', '20AW1X963754', 'employee', '2022-01-17 11:15:51');
 
 -- --------------------------------------------------------
 
@@ -90,8 +95,9 @@ CREATE TABLE `allowance` (
 
 INSERT INTO `allowance` (`id`, `employee_id`, `date`, `start`, `end`, `details`, `status`, `evaluated_by`, `cash`, `notes`) VALUES
 (1, 'CVSUZRO036571482', '2022-01-07', '06:39:00', '17:39:00', 'Trys', '2', 'Ran Taken', '0.00', 'Test'),
-(2, 'CVSUFIZ562147308', '2022-01-20', '10:01:00', '22:01:00', 'details', '0', NULL, NULL, NULL),
-(3, 'CVSUFIZ562147308', '2022-01-21', '00:34:00', '23:34:00', 'details', '0', NULL, NULL, NULL);
+(2, 'CVSUFIZ562147308', '2022-01-20', '10:01:00', '22:01:00', 'details', '2', 'Ran Taken', '0.00', '123'),
+(3, 'CVSUFIZ562147308', '2022-01-21', '00:34:00', '23:34:00', 'details', '1', 'Ran Taken', '333.00', '123123'),
+(4, 'CVSUFIZ562147308', '2022-01-04', '10:15:00', '22:15:00', '123123111', '0', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -123,7 +129,8 @@ INSERT INTO `applicant` (`id`, `applicant_no`, `job_code`, `application_date`, `
 (67, 2021970316584, 'CVSUJOBYID78135', '2021-11-25 16:37:11', 'sample', 'sample', 'sample', 'sample@gmail.com', '1231231', '2021970316584.pdf', 'On-Board', ''),
 (68, 2021478906231, 'CVSUJOBYID78135', '2021-11-25 16:41:39', 'mabait', 'mabait', 'mabait', 'mabait@gmail.com', '123123', '2021478906231.pdf', 'On-Board', ''),
 (69, 2021690251483, 'CVSUJOBYID78135', '2021-11-25 16:44:32', 'asdas', 'dasd', 'asd', 'asd@gmail.com', '123213', '2021690251483.pdf', 'On-Board', ''),
-(70, 2021512486907, 'CVSUJOBYID78135', '2021-11-25 16:47:45', 'adasd', 'asd', 'asd', 'asda@gmail.com', '123123', '2021512486907.pdf', 'On-Board', '');
+(70, 2021512486907, 'CVSUJOBYID78135', '2021-11-25 16:47:45', 'adasd', 'asd', 'asd', 'asda@gmail.com', '123123', '2021512486907.pdf', 'On-Board', ''),
+(72, 2022621753098, 'CVSUJOBFYE01537', '2022-01-16 03:43:38', 'sadas', 'dasd', 'asdasd', 'asd@gmail.com', '123123123', '2022621753098.pdf', 'On-Board', '');
 
 -- --------------------------------------------------------
 
@@ -150,8 +157,9 @@ INSERT INTO `attendance` (`id`, `employee_id`, `date_created`, `time_in`, `time_
 (13, 'CVSUZRO036571482', '2021-12-19 13:57:29', '2021-12-19 13:57:00', '2021-12-19 19:57:00'),
 (14, 'CVSUFIZ562147308', '2021-12-19 14:05:56', '2021-12-18 14:05:56', NULL),
 (15, 'CVSUFIZ562147308', '2021-12-19 14:11:07', '2021-12-19 14:11:07', '2021-12-19 14:11:16'),
-(16, 'CVSUZRO036571482', '2021-12-21 12:51:39', '2021-12-21 12:51:39', '2021-12-21 16:10:29'),
-(17, 'CVSUFIZ562147308', '2022-01-13 18:55:44', '2022-01-13 06:55:00', '2022-01-13 18:55:00');
+(16, 'CVSUZRO036571482', '2021-12-21 12:51:39', '2021-12-21 07:00:00', '2021-12-21 16:10:00'),
+(17, 'CVSUFIZ562147308', '2022-01-13 18:55:44', '2022-01-13 06:55:00', '2022-01-13 18:55:00'),
+(18, 'CVSUFIZ562147308', '2022-01-18 10:10:58', '2022-01-18 10:10:00', '2022-01-18 22:12:00');
 
 -- --------------------------------------------------------
 
@@ -176,7 +184,8 @@ CREATE TABLE `attendance_correction` (
 
 INSERT INTO `attendance_correction` (`id`, `attendance_id`, `req_in`, `req_out`, `status`, `reason`, `date_created`, `reviewed_by`) VALUES
 (5, 13, '2021-12-19 13:57:00', '2021-12-19 19:57:00', '1', 'Test1', '2021-12-21 16:22:18', 'Ran Taken'),
-(6, 16, '2021-12-21 07:00:00', '2021-12-21 16:10:00', '0', 'Test', '2021-12-22 21:47:59', NULL);
+(6, 16, '2021-12-21 07:00:00', '2021-12-21 16:10:00', '1', 'Test', '2021-12-22 21:47:59', 'Ran Taken'),
+(7, 18, '2022-01-18 10:10:00', '2022-01-18 10:12:00', '1', 'asdasd', '2022-01-18 10:14:04', 'Ran Taken');
 
 -- --------------------------------------------------------
 
@@ -200,6 +209,19 @@ INSERT INTO `benefits` (`id`, `benefit_id`, `benefit_name`, `description`) VALUE
 (3, 'CVSUBENEOV791084562', 'Midyear Pay Workload', 'PHP 3000, cash incentives'),
 (4, 'CVSUBENEOV791084566', '13th Month Pay', 'An additional amount of compensation, calculated from a single month\'s salary'),
 (8, 'CVSUBENHOJ169345287', 'Sample Benefit', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint velit magni cumque vitae distinctio sapiente quae dolores, ipsa iste quos quas voluptates reprehenderit incidunt ut enim animi, unde qui porro!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint velit magni cumque vitae distinctio sapiente quae dolores, ipsa iste quos quas voluptates reprehenderit incidunt ut enim animi, unde qui porro!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint velit magni cumque vitae distinctio sapiente quae dolores, ipsa iste quos quas voluptates reprehenderit incidunt ut enim animi, unde qui porro!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint velit magni cumque vitae distinctio sapiente quae dolores, ipsa iste quos quas voluptates reprehenderit incidunt ut enim animi, unde qui porro!Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint velit magni cumque vitae distinctio sapiente quae dolores, ipsa iste quos quas voluptates reprehenderit incidunt ut enim animi, unde qui porro!');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `benefit_record`
+--
+
+CREATE TABLE `benefit_record` (
+  `id` int(11) NOT NULL,
+  `benefit_id` varchar(100) NOT NULL,
+  `employee_id` varchar(100) NOT NULL,
+  `date_applied` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -229,7 +251,8 @@ INSERT INTO `cash_advance` (`id`, `reference_id`, `employee_id`, `req_date`, `ca
 (11, 'CAYJP138752096', 'CVSUZRO036571482', '2021-12-21', 'Cash', 'TEst2', '999', 'Rejected', 'Ran Taken', 'Test'),
 (12, 'CAPYF805136427', 'CVSUFIZ562147308', '2022-01-14', 'Cash', 'Need for Medical Emergency', '1000', 'Approved', 'Ran Taken', 'Approved'),
 (13, 'CAUPK468097125', 'CVSUFIZ562147308', '2022-01-14', 'Cheque', 'Emergency Fund', '5000', 'Rejected', 'Ran Taken', 'Rejected'),
-(14, 'CAYRX187902346', 'CVSUFIZ562147308', '2022-01-14', 'Cash', 'Emergency Fund', '300', 'Pending', NULL, '');
+(14, 'CAYRX187902346', 'CVSUFIZ562147308', '2022-01-14', 'Cash', 'Emergency Fund', '300', 'Rejected', 'Ran Taken', '123123'),
+(15, 'CABXK513869720', 'CVSUFIZ562147308', '2022-01-18', 'Cash', '12312', '200', 'Approved', 'Ran Taken', '123123');
 
 -- --------------------------------------------------------
 
@@ -255,12 +278,10 @@ CREATE TABLE `deduction` (
 
 INSERT INTO `deduction` (`id`, `deduction_code`, `deduction_name`, `deduction_type`, `deduction_desc`, `deduction_vendor`, `amount_rate`, `deduction_limit`, `deduction_period`) VALUES
 (7, 'CVSUDTXBYH3142', 'SSS Loan Payment', 'Gross Percent', 'Payment for All types of Loan', 4, 30, 1000, 'Period'),
-(8, 'CVSUDTCSGX3765', 'Deduction', 'Gross Percent', 'description', 13, 3, 0, 'None'),
+(8, 'CVSUDTCSGX3765', 'Deduction', 'Gross Percent', 'description', 13, 5, 0, 'None'),
 (9, 'CVSUDTTYVA1978', 'Dental Fee', 'Fixed Amount', 'Dental Fee Deduction', 6, 1000, 0, 'None'),
 (16, 'CVSUDTRTIW8360', 'Life Insurance', 'Fixed Amount', 'Insulife Deduction', 19, 2000, 0, 'None'),
-(19, 'CVSUDTRVJF0615', 'Sample Deduction 1', 'Fixed Amount', '1', 5, 1, 0, 'None'),
-(20, 'CVSUDTKJXE2513', 'Sample Deduction 2', 'Fixed Amount', '1', 19, 1, 0, 'None'),
-(21, 'CVSUDTTYBS2083', 'Sample Deduction 3', 'Fixed Amount', '1', 12, 1, 0, 'None');
+(23, 'CVSUDTEAZP0694', '12312', 'Fixed Amount', 'hahaha', 4, 599, 0, 'None');
 
 -- --------------------------------------------------------
 
@@ -342,7 +363,10 @@ CREATE TABLE `disciplinary_action` (
 --
 
 INSERT INTO `disciplinary_action` (`id`, `reference_id`, `employee_id`, `issued_date`, `reason`, `internal_note`, `attachment`, `explanation`, `action`, `action_details`, `issued_by`, `state`) VALUES
-(8, 'CVSUDADOA35164', 'CVSUFIZ562147308', '2022-01-14', 1, 'Kindly report to the HR', 'CVSUDADOA35164.pdf', 'Please accept my apology.........', '3 day Suspesion', 'we cant tolerate your action this time, so were giving a 3 day suspension for this one.....', 'Ran Taken', 'Reviewed');
+(8, 'CVSUDADOA35164', 'CVSUFIZ562147308', '2022-01-14', 1, 'Kindly report to the HR', 'CVSUDADOA35164.pdf', 'Please accept my apology.........', '3 day Suspesion', 'we cant tolerate your action this time, so were giving a 3 day suspension for this one.....', 'Ran Taken', 'Reviewed'),
+(9, 'CVSUDAQPE54720', 'CVSUFIZ562147308', '2022-01-17', 2, 'hahahaha', 'CVSUDAQPE54720.pdf', 'plz', '3 day Suspesion', 'details', 'Ran Taken', 'Reviewed'),
+(10, 'CVSUDAUAB35082', 'CVSUFIZ562147308', '2022-01-18', 1, '213123', 'CVSUDAUAB35082.pdf', 'jkghjhgj', '123', '123', 'Ran Taken', 'Reviewed'),
+(11, 'CVSUDAJHZ93560', 'CVSUFIZ562147308', '2022-01-18', 1, '123123', 'CVSUDAJHZ93560.pdf', '123123', '', '', 'Ran Taken', 'Responded');
 
 -- --------------------------------------------------------
 
@@ -414,7 +438,12 @@ INSERT INTO `documents` (`id`, `document_id`, `document_name`, `document_type`, 
 (18, 'CVSULINKHZF615028', 'link for lorem', 'url', 'asdsad', 'CVSUFOLDHTR701459', '2021-12-14', 'asdsa', 'CVSUEJT052613497', 0, 'https://www.youtube.com', 0, 0),
 (19, 'CVSUDOXCQDU649125', 'xdxdsese', 'document', 'seses', 'CVSUFOLDQRM164983', '2021-12-14', 'sese', 'CVSUEJT052613497', 0, 'txt.jpg', 0, 0),
 (20, 'CVSUDOXCRTF367145', 'rarararara', 'document', 'rarara', 'CVSUFOLDRCW703614', '2021-12-26', 'rararara', 'CVSUEJT052613497', 1, 'Exercise 7 (5).pdf', 0, 1),
-(21, 'CVSULINKXIP503741', 'epbe dot com', 'url', 'mark zubergesxyxyx123', 'Institutional Records', '2021-12-26', 'epbi ez access123', 'CVSUEJT052613497', 0, 'https://www.facebook.com', 0, 0);
+(21, 'CVSULINKXIP503741', 'epbe dot com', 'url', 'mark zubergesxyxyx123', 'Institutional Records', '2021-12-26', 'epbi ez access123', 'CVSUEJT052613497', 0, 'https://www.facebook.com', 0, 0),
+(22, 'CVSUDOXCHGX240357', 'Sample Diploma (Francis)', 'document', 'Francis Ong', 'CVSUFOLDKSU143560', '2022-01-16', 'Sample Details', 'CVSUEJT052613497', 0, 'ITEC 116 - Web Services.pdf', 0, 1),
+(23, 'CVSULINKKAC307921', 'hahah', 'url', 'hahahah', 'Human Resource', '2022-01-16', 'ahaha', 'CVSUEJT052613497', 0, 'https://www.facebook.com', 1, 1),
+(24, 'CVSUDOXCZHG762345', 'Name of Docu', 'document', 'Francis Ong', 'CVSUFOLDKSU143560', '2022-01-16', 'Details', 'CVSUEJT052613497', 0, 'Exercise 7 (1).pdf', 0, 0),
+(25, 'CVSUDOXCOIV452170', 'dsads', 'document', 'Francis Ong', 'CVSUFOLDKSU143560', '2022-01-16', 'sample', 'CVSUEJT052613497', 0, 'ITEC 116 - Web Services (1).pdf', 0, 0),
+(26, 'CVSUDOXCURC415937', 'Diploma', 'document', 'Francis Ong', 'CVSUFOLDKSU143560', '2022-01-18', '123123', 'CVSUEJT052613497', 0, 'Principles-of-Security.pdf', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -437,15 +466,7 @@ CREATE TABLE `document_folder` (
 --
 
 INSERT INTO `document_folder` (`id`, `folder_id`, `folder_name`, `folder_date`, `folder_details`, `folder_created_by`, `folder_archive`) VALUES
-(1, 'CVSUFOLDQRM164983', 'sample', '2021-12-13', 'sample details', 'CVSUEJT052613497', 0),
-(2, 'CVSUFOLDRVA914207', 'edited', '2021-12-13', 'edited details\r\n', 'CVSUEJT052613497', 0),
-(3, 'CVSUFOLDUGH894672', 'hahah123', '2021-12-13', 'ahahaha123', 'CVSUEJT052613497', 0),
-(7, 'CVSUFOLDWGR654029', 'sample archive 2', '2021-12-13', 'xd111', 'CVSUEJT052613497', 0),
-(8, 'CVSUFOLDMFZ079283', 'archive sample', '2021-12-13', '1111', 'CVSUEJT052613497', 0),
-(9, 'CVSUFOLDWRK269834', 'aaaaaaaa', '2021-12-13', 'aaaaaaaa', 'CVSUEJT052613497', 0),
-(10, 'CVSUFOLDHTR701459', 'otherss', '2021-12-14', 'sdad', 'CVSUEJT052613497', 0),
-(11, 'CVSUFOLDIKN368025', 'wtatata', '2021-12-14', 'wtatata', 'CVSUEJT052613497', 0),
-(12, 'CVSUFOLDRCW703614', 'rererere', '2021-12-26', 'rerere', 'CVSUEJT052613497', 1);
+(14, 'CVSUFOLDKSU143560', 'Employee Diplomas', '2022-01-16', 'Folder for Diploma', 'CVSUEJT052613497', 0);
 
 -- --------------------------------------------------------
 
@@ -472,8 +493,16 @@ CREATE TABLE `document_request` (
 --
 
 INSERT INTO `document_request` (`id`, `reference_id`, `employee_id`, `request_date`, `request_name`, `request_note`, `request_file`, `request_status`, `request_comment`, `request_by`, `folder_id`) VALUES
-(0, 'CVSUREQAGYJ246180', 'CVSUFIZ562147308', '2021-12-26', 'rararara', 'rararara', 'Exercise 7 (1).pdf', 1, 'tratasdasdsa', 'admin', NULL),
-(0, 'CVSUREQANZX506218', 'CVSUFIZ562147308', '2022-01-09', 'Request for Certificate of Employment', 'Good evening Maam,\r\n\r\nI would like to request a certificate of employment to be use in.....', 'laya-diwa.jpg', 1, '123123', 'employee', NULL);
+(0, 'CVSUREQAGYJ246180', 'CVSUFIZ562147308', '2021-12-26', 'rararara', 'rararara', 'Exercise 7 (1).pdf', 3, 'tratasdasdsa', 'admin', 'CVSUFOLDKSU143560'),
+(0, 'CVSUREQANZX506218', 'CVSUFIZ562147308', '2022-01-09', 'Request for Certificate of Employment', 'Good evening Maam,\r\n\r\nI would like to request a certificate of employment to be use in.....', 'laya-diwa.jpg', 1, '123123', 'employee', NULL),
+(0, 'CVSUREQAGWM540983', 'CVSUFIZ562147308', '2022-01-16', 'dsads', 'sadasd', 'ITEC 116 - Web Services (1).pdf', 3, 'replied', 'admin', 'CVSUFOLDKSU143560'),
+(0, 'CVSUREQAADC035824', 'CVSUFIZ562147308', '2022-01-17', 'sadasd', 'asdasdsad', 'laya-diwa.jpg', 2, '', 'admin', NULL),
+(0, 'CVSUREQADPG245978', 'CVSUKFY695286353', '2022-01-17', 'sada', 'sdasd', 'ITEC 116 - Web Services (1).pdf', 1, 'hahahahah', 'employee', NULL),
+(0, 'CVSUREQAKQB786534', 'CVSUFIZ562147308', '2022-01-17', '2222', '222', 'Principles-of-Security.pdf', 1, '123123', 'employee', NULL),
+(0, 'CVSUREQAHFJ410928', 'CVSUFIZ562147308', '2022-01-17', 'sample', 'sample', 'Principles-of-Security.pdf', 3, '123123', 'admin', 'CVSUFOLDKSU143560'),
+(0, 'CVSUREQADJX601297', 'CVSUFIZ562147308', '2022-01-17', 'dasdasdasd', 'asdasdsad', 'laya-diwa.jpg', 1, 'asdasdas', 'admin', NULL),
+(0, 'CVSUREQACZW467309', 'CVSUFIZ562147308', '2022-01-18', 'request 123', '123', NULL, 2, '123123', 'employee', NULL),
+(0, 'CVSUREQAGOU014253', 'CVSUFIZ562147308', '2022-01-18', '12312312111', '123111', 'Principles-of-Security.pdf', 2, '', 'admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -526,7 +555,8 @@ INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `middlename`, `lastna
 (48, 'CVSUCAK697231805', 'Sebastian', 'Lewis', 'Smith', '', 'Molino', '2000-06-12', '09262198123', '4765484', 'asda@gmail.com', 'Male', 'ICON1.png', 1, 1, 3, 1, '2021-08-10', '2021-12-07', '34-6581234-0', '121253674429', '082504593324', '439-126-266-0000', '10400.00', '400.00', '337.50', '112.50', '50.00', '2021-11-26', 0),
 (49, 'CVSUFIZ562147308', 'Francis', 'Condino', 'Ong', '', 'Camella', '2000-05-13', '09262487123', '4731548', 'francis@gmail.com', 'Male', '1X1PIC.png', 7, 2, 3, 1, '2015-06-10', '2015-07-23', '34-6847234-0', '129683674429', '082504598534', '439-126-266-0487', '130000.00', '5000.00', '337.50', '112.50', '50.00', '2021-11-16', 0),
 (50, 'CVSUYLP047156239', 'Klaus', 'Von', 'Reinherz', '', 'Bacoor', '1999-11-15', '09262198154', '4754869', 'klaus@gmail.com', 'Male', 'Klaus.V..Reinherz.full.1876280.jpg', 1, 1, 1, 1, '2022-01-02', '0000-00-00', '34-6451234-0', '121256374429', '082507493324', '339-684-148-0000', '10400.00', '400.00', '338.00', '122.50', '50.45', '2022-01-02', 0),
-(51, 'CVSUPGC530287196', 'Keeper', 'Miranda', 'Estacion', 'Jr.', 'Queen\'s Row, Apple St., Cavite', '2005-12-23', '09991234567', '4751485', 'keeper@gmail.com', 'Female', '', 6, 4, 2, 1, '2022-01-07', '0000-00-00', '34-684234-0', '121253478424', '082504268536', '439-126-456-0475', '13000.00', '500.00', '337.50', '0.00', '100.00', '2022-01-07', 0);
+(51, 'CVSUPGC530287196', 'Keeper', 'Miranda', 'Estacion', 'Jr.', 'Queen\'s Row, Apple St., Cavite', '2005-12-23', '09991234567', '4751485', 'keeper@gmail.com', 'Female', '', 6, 4, 2, 1, '2022-01-07', '0000-00-00', '34-684234-0', '121253478424', '082504268536', '439-126-456-0475', '13000.00', '500.00', '337.50', '0.00', '100.00', '2022-01-07', 0),
+(53, 'CVSUKFY695286353', 'sadas', 'dasd', 'asdasd', '123', 'sadasd', '1998-02-11', 'asdas', '123123123', 'asd@gmail.com', 'Male', 'CVSUCVSUKFY695286353.jpg', 5, 2, 1, 1, '2022-01-16', '2022-01-16', '123', '123', '123', '123', '52000.00', '2000.00', '0.00', '0.00', '0.00', '2022-01-16', 0);
 
 -- --------------------------------------------------------
 
@@ -596,7 +626,9 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`id`, `reference_id`, `event_name`, `display_image`, `event_date`, `event_from`, `event_to`, `event_venue`) VALUES
 (1, 'CVSUEVJAF7638', 'CVSU Event 2022', 'CVSUEVJAF7638.jpg', '2022-01-18', '07:01:00', '19:02:00', 'Imus'),
-(2, 'CVSUEVBDZ4876', 'CVSU Intramurals', 'CVSUEVBDZ4876.jpg', '2022-01-21', '10:11:00', '22:11:00', 'CVSU Court');
+(2, 'CVSUEVBDZ4876', 'CVSU Intramurals', 'CVSUEVBDZ4876.jpg', '2022-01-21', '10:11:00', '22:11:00', 'CVSU Court'),
+(10, 'CVSUEVCAF6870', '123', 'CVSUEVCAF6870.jpg', '2022-01-27', '00:08:00', '12:08:00', '123'),
+(11, 'CVSUEVVTW7143', '123123', 'CVSUEVVTW7143.jpg', '2022-01-25', '04:31:00', '16:32:00', '12312');
 
 -- --------------------------------------------------------
 
@@ -628,7 +660,12 @@ INSERT INTO `event_request` (`id`, `reference_id`, `event_name`, `display_image`
 (3, 'CVSUEVIUF9802', 'sadasdasd', 'CVSUEVIUF9802.jpg', '2022-01-28', '11:24:00', '23:24:00', 'asdasasdasd', 2, 'CVSUFIZ562147308', '2022-01-13', 'asdasdasd'),
 (4, 'CVSUEVAEK5467', '13.21312312312', 'CVSUEVAEK5467.jpg', '2022-01-19', '04:21:00', '16:21:00', '455463123', 1, 'CVSUFIZ562147308', '2022-01-13', '1312345'),
 (5, 'CVSUEVMQX4273', 'event sample', 'CVSUEVMQX4273.jpg', '2022-01-21', '10:44:00', '22:44:00', 'hahaha', 1, 'CVSUFIZ562147308', '2022-01-14', 'hahahahaha'),
-(6, 'CVSUEVIJX9058', 'sample', 'CVSUEVIJX9058.jpg', '2022-01-22', '08:37:00', '20:37:00', 'venue', 0, 'CVSUFIZ562147308', '2022-01-14', 'details');
+(6, 'CVSUEVIJX9058', 'sample', 'CVSUEVIJX9058.jpg', '2022-01-22', '08:37:00', '20:37:00', 'venue', 2, 'CVSUFIZ562147308', '2022-01-14', 'details'),
+(7, 'CVSUEVBRV4918', '123', 'CVSUEVBRV4918.jpg', '2022-01-19', '10:30:00', '22:30:00', '111', 2, 'CVSUFIZ562147308', '2022-01-18', '111'),
+(8, 'CVSUEVDHL2087', '123', 'CVSUEVDHL2087.jpg', '2022-01-19', '11:21:00', '23:21:00', '123', 2, 'CVSUFIZ562147308', '2022-01-18', '123'),
+(9, 'CVSUEVCAF6870', '123', 'CVSUEVCAF6870.jpg', '2022-01-27', '00:08:00', '12:08:00', '123', 1, 'CVSUFIZ562147308', '2022-01-18', '123'),
+(10, 'CVSUEVYAQ6873', '123123', 'CVSUEVYAQ6873.jpg', '2022-01-19', '04:10:00', '16:10:00', '123', 0, 'CVSUFIZ562147308', '2022-01-18', '123123'),
+(11, 'CVSUEVVTW7143', '123123', 'CVSUEVVTW7143.jpg', '2022-01-25', '04:31:00', '16:32:00', '12312', 1, 'CVSUFIZ562147308', '2022-01-18', '3123123');
 
 -- --------------------------------------------------------
 
@@ -659,8 +696,8 @@ CREATE TABLE `job` (
 INSERT INTO `job` (`id`, `job_code`, `job_title`, `job_position`, `job_recruit`, `job_dept`, `job_term`, `job_type`, `job_exp`, `job_grade`, `job_desc`, `job_status`, `job_date`) VALUES
 (39, 'CVSUJOBKLS30765', 'Super Janitor', 3, 3, 3, 'Permanent', 'Full Time', 'No Experience Needed', 19, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Hic tempora ut inventore recusandae mollitia maxime, exercitationem! Rerum, laboriosam eligendi dolores, dolorem iure pariatur voluptatibus autem cumque, perspiciatis laudantium soluta, eum.', 'active', '2021-11-17 01:55:22'),
 (41, 'CVSUJOBFYE01537', 'chair', 5, 2, 2, 'Permanent', 'Full Time', '10 Years + of Experience', 19, 'haha', 'active', '2021-11-24 15:50:12'),
-(44, 'CVSUJOBJGL83720', 'Program Head with 50k signing Bonus ! OMG', 7, 1, 1, 'Permanent', 'Full Time', '10 Years + of Experience', 33, 'Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.\r\n\r\nLorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.', 'active', '2021-11-25 15:48:51'),
-(46, 'CVSUJOBYID78135', 'Mabait na Instructor', 1, 4, 1, 'Permanent', 'Full Time', '5 Years + of Experience', 18, 'Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.', 'inactive', '2021-11-25 15:50:12');
+(46, 'CVSUJOBYID78135', 'Mabait na Instructor', 1, 4, 1, 'Permanent', 'Full Time', '5 Years + of Experience', 18, 'Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Vel eius praesentium natus, magni inventore aliquam magnam adipisci maxime sit nemo dolor minima commodi sint quasi, rerum blanditiis. Magni, quidem, dignissimos.', 'inactive', '2021-11-25 15:50:12'),
+(47, 'CVSUJOBGYI15463', 'sadasdas', 1, 213123, 1, 'Contract', 'Part Time', 'No Experience Needed', 17, '12312', 'active', '2022-01-17 07:30:25');
 
 -- --------------------------------------------------------
 
@@ -688,6 +725,29 @@ INSERT INTO `news` (`id`, `reference_id`, `news_date`, `news_headline`, `display
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(11) NOT NULL,
+  `employee_id` varchar(100) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `link` varchar(50) NOT NULL,
+  `open` int(11) NOT NULL DEFAULT 0 COMMENT '0 ->not yet open\r\n1 opened',
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`id`, `employee_id`, `title`, `date`, `link`, `open`, `type`) VALUES
+(65, 'CVSUFIZ562147308', 'Francis Ong send a event request', '2022-01-18', 'events.php', 0, 'admin');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `overtime`
 --
 
@@ -705,10 +765,10 @@ CREATE TABLE `overtime` (
 INSERT INTO `overtime` (`id`, `overtime_name`, `overtime_rate`, `status`) VALUES
 (38, 'Ordinary', 15, 'active'),
 (39, 'Rest Day', 30, 'active'),
-(41, 'Special Holiday', 50, 'active'),
 (42, 'Legal Holiday', 50, 'inactive'),
 (43, 'Special Holiday Rest Day', 100, 'inactive'),
-(44, 'Double Holiday', 200, 'inactive');
+(44, 'Double Holiday', 200, 'inactive'),
+(57, 'jhgk', 0.1, 'active');
 
 -- --------------------------------------------------------
 
@@ -735,8 +795,8 @@ CREATE TABLE `overtime_request` (
 
 INSERT INTO `overtime_request` (`id`, `employee_id`, `date`, `start`, `end`, `reason`, `status`, `evaluated_by`, `overtime_code`, `notes`) VALUES
 (2, 'CVSUZRO036571482', '2021-12-22', '10:21:00', '22:21:00', 'Test', '1', 'Ran Taken', '38', 'Testing'),
-(3, 'CVSUZRO036571482', '2021-12-20', '10:00:00', '23:00:00', 'Traffic eh', '0', NULL, NULL, NULL),
-(5, 'CVSUFIZ562147308', '2022-01-20', '11:25:00', '23:25:00', 'Its overtime', '0', NULL, NULL, NULL);
+(6, 'CVSUFIZ562147308', '2022-01-18', '10:18:00', '13:18:00', 'hahahaha', '1', 'Ran Taken', '39', '123123123'),
+(7, 'CVSUFIZ562147308', '2022-01-03', '10:13:00', '22:13:00', '12312311', '2', 'Ran Taken', '', '213123');
 
 -- --------------------------------------------------------
 
@@ -785,7 +845,8 @@ CREATE TABLE `ratings` (
 
 INSERT INTO `ratings` (`id`, `employee_id`, `task_id`, `efficiency`, `timeliness`, `quality`, `accuracy`, `remarks`, `date_created`) VALUES
 (5, 'CVSUZRO036571482', 1, 5, 5, 5, 4, 'Test edit ok', '2021-12-08 22:44:26'),
-(6, 'CVSUFIZ562147308', 5, 5, 5, 5, 5, 'very good', '2022-01-14 22:36:20');
+(6, 'CVSUFIZ562147308', 5, 5, 5, 5, 5, 'very goody', '2022-01-14 22:36:20'),
+(7, 'CVSUFIZ562147308', 7, 5, 5, 5, 5, 'very goody again11', '2022-01-18 12:24:02');
 
 -- --------------------------------------------------------
 
@@ -835,7 +896,9 @@ INSERT INTO `task` (`id`, `task`, `description`, `employee_id`, `due_date`, `com
 (1, 'test13', 'sample3', 'CVSUZRO036571482', '2021-11-16', '2021-12-05', 2, '2021-11-29 23:30:36'),
 (3, 'Sample2', 'asdasdasggg', 'CVSURIB015736298', '2021-12-10', '0000-00-00', 0, '2021-12-01 19:09:41'),
 (4, 'Test2', 'Test2', 'CVSUZRO036571482', '2022-02-25', '0000-00-00', 1, '2021-12-01 22:43:53'),
-(5, 'Sample Task', 'This task will make you strong', 'CVSUFIZ562147308', '2022-01-28', '2022-01-14', 2, '2022-01-14 22:26:50');
+(5, 'Sample Task', 'This task will make you strong', 'CVSUFIZ562147308', '2022-01-28', '2022-01-14', 2, '2022-01-14 22:26:50'),
+(6, '213123', '213123123', 'CVSUFIZ562147308', '2022-01-04', '0000-00-00', 1, '2022-01-18 10:22:43'),
+(7, 'Sample Task', '123123111', 'CVSUFIZ562147308', '2022-01-19', '2022-01-18', 2, '2022-01-18 12:20:49');
 
 -- --------------------------------------------------------
 
@@ -872,7 +935,9 @@ INSERT INTO `task_progress` (`id`, `task_id`, `progress`, `document`, `is_comple
 (13, 1, 'ABCD1', NULL, 1, '2021-12-05 11:07:24'),
 (16, 5, '10 % Complete', NULL, 0, '2022-01-14 22:29:45'),
 (17, 5, '20%', NULL, 0, '2022-01-14 22:30:33'),
-(18, 5, '100%', NULL, 1, '2022-01-14 22:31:05');
+(18, 5, '100%', NULL, 1, '2022-01-14 22:31:05'),
+(19, 6, '123123123213123123', NULL, 0, '2022-01-18 10:23:08'),
+(20, 7, 'very easy goody', NULL, 1, '2022-01-18 12:22:39');
 
 -- --------------------------------------------------------
 
@@ -953,7 +1018,11 @@ CREATE TABLE `training_list` (
 --
 
 INSERT INTO `training_list` (`id`, `training_code`, `training_title`, `training_objective`, `training_course`, `batch_size`, `schedule_from`, `schedule_to`, `training_mode`, `training_details`, `training_duration`, `training_vendor`, `training_trainer`, `training_experience`, `training_status`) VALUES
-(10, 'CVSUTRAJGO7230641', 'asdasd', 'asdas', 7, 21, '2022-01-01 22:09:00', '2022-01-02 22:10:00', 'Online', 'asdasd', '24.016666666667', 3, 'asdasd', 'asd', 'inactive');
+(10, 'CVSUTRAJGO7230641', 'asdasd', 'asdas', 7, 21, '2022-01-01 22:09:00', '2022-01-02 22:10:00', 'Online', 'asdasd', '24.016666666667', 3, 'asdasd', 'asd', 'inactive'),
+(11, 'CVSUTRADYZ0742586', 'sample training', 'sadasd', 7, 21, '2022-01-19 14:12:00', '2022-01-29 14:12:00', 'Online', 'asdasd', '240', 3, 'trasd', 'asdasd', 'active'),
+(13, 'CVSUTRAXZF5906723', '123', '123', 7, 12, '2022-01-01 15:00:00', '2022-01-18 15:00:00', 'Online', '123', '408', 3, '123', '123', 'active'),
+(14, 'CVSUTRAHZL6510798', '123', '123', 7, 123, '2022-01-19 07:43:00', '2022-01-21 07:43:00', 'Online', 'sdaasd', '48', 3, '123', '123', 'active'),
+(15, 'CVSUTRATCN3612578', 'sad', 'asdas', 7, 12, '2022-01-19 10:27:00', '2022-01-20 10:27:00', 'Offline', '123', '24', 3, '123', '123', 'active');
 
 -- --------------------------------------------------------
 
@@ -978,7 +1047,11 @@ CREATE TABLE `training_record` (
 --
 
 INSERT INTO `training_record` (`id`, `reference_no`, `employee_id`, `training_code`, `internal_note`, `status`, `review`, `request_date`, `comment`) VALUES
-(39, 'CVSUATTCBH19670', 'CVSUFIZ562147308', 'CVSUTRAJGO7230641', 'gsVhnsamGDsd', 'Reviewed', 5, '2022-01-15', 'great experience');
+(39, 'CVSUATTCBH19670', 'CVSUFIZ562147308', 'CVSUTRAJGO7230641', 'gsVhnsamGDsd', 'Reviewed', 4, '2022-01-15', 'great experience'),
+(41, 'CVSUATTFYN37965', 'CVSUFIZ562147308', 'CVSUTRADYZ0742586', 'hahahahaha', 'On-going', 0, '2022-01-17', ''),
+(43, 'CVSUATTDNZ86410', 'CVSUFIZ562147308', 'CVSUTRAXZF5906723', '123123', 'Rejected', 0, '2022-01-17', ''),
+(52, 'CVSUATTHNA75230', 'CVSUFIZ562147308', 'CVSUTRAHZL6510798', 'asdasd', 'Pending', 0, '2022-01-18', ''),
+(53, 'CVSUATTBDG28064', 'CVSUFIZ562147308', 'CVSUTRATCN3612578', '123111', 'Pending', 0, '2022-01-18', '');
 
 -- --------------------------------------------------------
 
@@ -1042,6 +1115,12 @@ ALTER TABLE `attendance_correction`
 -- Indexes for table `benefits`
 --
 ALTER TABLE `benefits`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `benefit_record`
+--
+ALTER TABLE `benefit_record`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1138,6 +1217,12 @@ ALTER TABLE `news`
   ADD UNIQUE KEY `reference_id` (`reference_id`);
 
 --
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `overtime`
 --
 ALTER TABLE `overtime`
@@ -1218,31 +1303,31 @@ ALTER TABLE `training_vendor`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `allowance`
 --
 ALTER TABLE `allowance`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `applicant`
 --
 ALTER TABLE `applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `attendance_correction`
 --
 ALTER TABLE `attendance_correction`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `benefits`
@@ -1251,22 +1336,28 @@ ALTER TABLE `benefits`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `benefit_record`
+--
+ALTER TABLE `benefit_record`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cash_advance`
 --
 ALTER TABLE `cash_advance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `deduction`
 --
 ALTER TABLE `deduction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `deduction_vendor`
 --
 ALTER TABLE `deduction_vendor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `department_category`
@@ -1278,7 +1369,7 @@ ALTER TABLE `department_category`
 -- AUTO_INCREMENT for table `disciplinary_action`
 --
 ALTER TABLE `disciplinary_action`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `disciplinary_category`
@@ -1290,19 +1381,19 @@ ALTER TABLE `disciplinary_category`
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `document_folder`
 --
 ALTER TABLE `document_folder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `employment_category`
@@ -1314,37 +1405,43 @@ ALTER TABLE `employment_category`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `event_request`
 --
 ALTER TABLE `event_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `overtime`
 --
 ALTER TABLE `overtime`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `overtime_request`
 --
 ALTER TABLE `overtime_request`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `position`
@@ -1356,31 +1453,31 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `task_progress`
 --
 ALTER TABLE `task_progress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tax`
 --
 ALTER TABLE `tax`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `training_course`
@@ -1392,13 +1489,13 @@ ALTER TABLE `training_course`
 -- AUTO_INCREMENT for table `training_list`
 --
 ALTER TABLE `training_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `training_record`
 --
 ALTER TABLE `training_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `training_vendor`
