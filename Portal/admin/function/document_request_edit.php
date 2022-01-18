@@ -9,6 +9,14 @@
 
 		$sql = "UPDATE document_request SET employee_id='$employee_id' ,request_name='$request_name' ,request_note='$details' WHERE reference_id='$reference_id' ";
 
+
+		// $get_id = "SELECT employee_id FROM cash_advance WHERE id = $id ";
+			// $query = $conn->query($get_id);
+			// $row = $query->fetch_assoc();
+			// $emp_id = $row['employee_id'];
+		$title = "Document Request from HR has been updated";
+		send_notif($conn, $employee_id, $title, 'documents.php', 'employee');
+
 		echo ($conn->query($sql))?1:0;
 
 	}else if(isset($_POST['reject_id'])){
@@ -16,6 +24,14 @@
 		$comment = $_POST['reject_comment'];
 		
 		$sql = "UPDATE document_request SET request_status=2, request_comment='$comment' WHERE reference_id='$reference_id' ";
+
+
+		$get_id = "SELECT employee_id FROM document_request WHERE reference_id = '$reference_id' ";
+		$query = $conn->query($get_id);
+		$row = $query->fetch_assoc();
+		$employee_id = $row['employee_id']; 
+		$title = "Document Request reply rejected";
+		send_notif($conn, $employee_id, $title, 'documents.php', 'employee');
 
 		echo ($conn->query($sql))?1:0;
 
@@ -42,6 +58,16 @@
 			echo ($conn->query($sql))?1:0;
 		}else{
 			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/request/".$new_filename)) {
+
+
+				$get_id = "SELECT employee_id FROM document_request WHERE reference_id = '$reply_id' ";
+				$query = $conn->query($get_id);
+				$row = $query->fetch_assoc();
+				$employee_id = $row['employee_id']; 
+				$title = "Document Request has been evaluated";
+				send_notif($conn, $employee_id, $title, 'documents.php', 'employee');
+
+
 				echo ($conn->query($sql))?1:0;
 			}else{echo 0;}
 		}

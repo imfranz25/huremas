@@ -21,6 +21,15 @@
 		$sql = "UPDATE disciplinary_action SET employee_id='$employee_id', reason=$reason, internal_note='$description' $action_query WHERE reference_id ='$reference' ";
 
 		if($conn->query($sql)){
+
+			// $get_id = "SELECT employee_id FROM cash_advance WHERE id = $id ";
+			// $query = $conn->query($get_id);
+			// $row = $query->fetch_assoc();
+			// $emp_id = $row['employee_id'];
+			$title = "Disciplinary record update";
+			send_notif($conn, $employee_id, $title, 'disciplinary.php', 'employee');
+
+
 			$_SESSION['success'] = 'Disciplinary action updated successfully';
 		}
 		else{

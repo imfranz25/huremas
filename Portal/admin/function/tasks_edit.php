@@ -10,6 +10,17 @@
 		$sql = "UPDATE task SET task = '$task', description = '$description', due_date = '$due' WHERE id = $id ";
 		
 		if($conn->query($sql)){
+
+
+			$get_id = "SELECT employee_id FROM task WHERE id=$id ";
+			$query = $conn->query($get_id);
+			$row = $query->fetch_assoc();
+			$employee_id = $row['employee_id']; 
+			$title = "Your task has been updated";
+			send_notif($conn, $employee_id, $title, 'tasks.php', 'employee');
+
+
+
 			$_SESSION['success'] = 'Task updated successfully';
 		}
 		else{

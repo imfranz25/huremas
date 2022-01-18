@@ -14,6 +14,15 @@
 		$sql = "UPDATE ratings SET `efficiency`='$a3',`timeliness`='$a4',`quality`='$a5',`accuracy`='$a6',`remarks`='$a7' WHERE id='$a1'";
 
 		if($conn->query($sql)){
+
+
+				// $get_id = "SELECT employee_id FROM document_request WHERE reference_id = '$reply_id' ";
+			// 	$query = $conn->query($get_id);
+			// 	$row = $query->fetch_assoc();
+			// 	$employee_id = $row['employee_id']; 
+			$title = "Your task evaluation has been updated";
+			send_notif($conn, $a1, $title, 'tasks.php', 'employee');
+
 			$_SESSION['success'] = 'Evaluation updated successfully ' ;
 		}
 		else{

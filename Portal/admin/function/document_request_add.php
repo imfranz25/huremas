@@ -20,6 +20,14 @@
 
 		$sql = "INSERT INTO document_request (reference_id,employee_id,request_name,request_note,request_by) VALUES ('$reference_id','$employee_id','$request_name','$details','$request_by')";
 
+
+		// $get_id = "SELECT employee_id FROM cash_advance WHERE id = $id ";
+			// $query = $conn->query($get_id);
+			// $row = $query->fetch_assoc();
+			// $emp_id = $row['employee_id'];
+		$title = "You have new document request from HR";
+		send_notif($conn, $employee_id, $title, 'documents.php', 'employee');
+
 		echo ($conn->query($sql))?1:0;
 
 

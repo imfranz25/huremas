@@ -12,12 +12,13 @@
 		$sql = "UPDATE cash_advance SET ca_type ='$type',amount=$amount,ca_reason='$reason' WHERE id=$id ";
 
 		if ($conn->query($sql)) {
+			$emp_id = $user['employee_id'];
 			$full = $user['firstname'].' '.$user['lastname'];
 			$title = $full." updated a cash advance request";
 			send_notif($conn, $emp_id, $title, 'cash_advance.php', 'admin');
 			$_SESSION['success'] = 'Cash Advance Request updated succesfully';
 		}else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 
 		

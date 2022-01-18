@@ -13,9 +13,17 @@
 
 	
 		if($conn->query($sql)){
+
+			$get_id = "SELECT employee_id FROM cash_advance WHERE id = $id ";
+			$query = $conn->query($get_id);
+			$row = $query->fetch_assoc();
+			$emp_id = $row['employee_id'];
+			$title = "Your cash advance request has been ".lcfirst($status);
+			send_notif($conn, $emp_id, $title, 'cash_advance.php', 'employee');
+
 			$_SESSION['success'] = 'Cash Advance proccessed successfully';
 		}else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 
 

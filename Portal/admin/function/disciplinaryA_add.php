@@ -24,6 +24,15 @@
 
 
 		if($conn->query($sql)){
+
+			// $get_id = "SELECT employee_id FROM cash_advance WHERE id = $id ";
+			// $query = $conn->query($get_id);
+			// $row = $query->fetch_assoc();
+			// $emp_id = $row['employee_id'];
+			$title = "You have new disciplinary record ";
+			send_notif($conn, $employee_id, $title, 'disciplinary.php', 'employee');
+
+
 			$_SESSION['success'] = 'Disciplinary action recorded successfully';
 		}
 		else{

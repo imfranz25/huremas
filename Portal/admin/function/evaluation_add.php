@@ -15,6 +15,15 @@
 
 		$sql = "INSERT INTO ratings (`employee_id`, `task_id`, `efficiency`, `timeliness`, `quality`, `accuracy`, `remarks`) VALUES ('$a1','$a2','$a3','$a4','$a5','$a6','$a7')";
 		if($conn->query($sql)){
+
+			// $get_id = "SELECT employee_id FROM document_request WHERE reference_id = '$reply_id' ";
+			// 	$query = $conn->query($get_id);
+			// 	$row = $query->fetch_assoc();
+			// 	$employee_id = $row['employee_id']; 
+			$title = "Your task evaluation has been evaluated";
+			send_notif($conn, $a1, $title, 'tasks.php', 'employee');
+
+
 			$_SESSION['success'] = 'Evaluation added successfully ' ;
 		}
 		else{

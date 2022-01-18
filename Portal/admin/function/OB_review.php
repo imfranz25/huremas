@@ -15,6 +15,14 @@
 		if($conn->query($sql)){
 
 
+			$get_id = "SELECT employee_id FROM allowance WHERE id=$id ";
+			$query = $conn->query($get_id);
+			$row = $query->fetch_assoc();
+			$employee_id = $row['employee_id']; 
+			$title = "Your official business request has been evaluated";
+			send_notif($conn, $employee_id, $title, 'official_business.php', 'employee');
+
+
 			$_SESSION['success'] = 'Official Business request proccessed successfully';
 		}else{
 			$_SESSION['error'] = $conn->error;

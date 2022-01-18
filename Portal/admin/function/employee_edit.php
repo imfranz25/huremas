@@ -46,6 +46,7 @@
 		
 		$sql = "UPDATE employees SET firstname = '$firstname', middlename = '$middlename', lastname = '$lastname', suffix = '$suffix', address = '$address', birthdate = '$birthdate',mobile_no='$mobile', contact_info = '$contact', email = '$email', sex = '$sex',photo='$filename' ,position_id = '$position', department_id='$department',schedule_id = '$schedule',category_id = '$category', date_hired = '$date_hired', date_regularization = '$date_regular',sss_id = '$sss',pagibig_id = '$pagibig',philhealth_id = '$phealth',tin_num = '$tin',basic_salary = '$basic_salary',daily_wage = '$daily_wage',sss_prem = '$sss_prem',philhealth_prem = '$phealth_prem',pagibig_prem = '$pagibig_prem',basic_salary = '$basic_salary',daily_wage = '$daily_wage' WHERE id = '$empid'";
 		if($conn->query($sql)){
+
 			$_SESSION['success'] = 'Employee updated successfully';
 		}
 		else{

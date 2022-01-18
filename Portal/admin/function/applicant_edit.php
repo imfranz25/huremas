@@ -18,6 +18,7 @@
         // IF STAGE == HIRED CHECK IF IT REACH ITS MAXIMUM APPLCIANTS 
         if ($stage == "Hired") {
         	if ($row['hired'] < $row['job_recruit']) {
+
 				echo ($conn->query($sql)) ? 1 : 0;
 			}
 			else{

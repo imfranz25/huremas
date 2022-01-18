@@ -14,6 +14,13 @@
 	
 		if($conn->query($sql)){
 
+			$get_id = "SELECT employee_id FROM overtime_request WHERE id=$id ";
+			$query = $conn->query($get_id);
+			$row = $query->fetch_assoc();
+			$employee_id = $row['employee_id']; 
+			$title = "Your overtime request has been evaluated";
+			send_notif($conn, $employee_id, $title, 'overtime.php', 'employee');
+
 
 			$_SESSION['success'] = 'Overtime request proccessed successfully';
 		}else{

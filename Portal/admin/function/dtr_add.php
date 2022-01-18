@@ -9,6 +9,7 @@
 		$sql = "INSERT INTO attendance (employee_id, time_in, time_out) VALUES ('$id','$in','$out')";	
 		
 		if($conn->query($sql)){
+
 			$_SESSION['success'] = 'Attendance added successfully';
 		}
 	}else{
