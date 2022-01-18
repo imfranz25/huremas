@@ -587,7 +587,7 @@ include 'includes/header.php';
 
         $(document).on('submit','#notif_form',function(e){
           e.preventDefault();
-          let url = window.location.href;
+          //let url = window.location.href;
           let id = $('#notif_id').val();
           $.ajax({
             type: 'POST',
@@ -595,7 +595,7 @@ include 'includes/header.php';
             data: {id:id},
             dataType: 'json',
             success: function(response){
-              location.replace(url);
+              window.location.reload();
             }  
           });
         });
