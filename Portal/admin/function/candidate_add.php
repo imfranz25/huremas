@@ -34,6 +34,9 @@
 		}else{
 			//move file
 			move_uploaded_file($_FILES["resume"]["tmp_name"], '../uploads/applicant/'.$applicant_no.".".$extension);
+
+
+
 			echo ($conn->query($sql)) ? 1 : 0;
 		}
 	}
