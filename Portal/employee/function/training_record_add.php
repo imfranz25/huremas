@@ -19,7 +19,15 @@
 
 		$sql = "INSERT INTO training_record (reference_no,employee_id,training_code,status,internal_note) VALUES ('$reference_no','$emp_id','$code','Pending','$note')";	
 
-		echo ($conn->query($sql))? 1:0;
+
+		if ($conn->query($sql)) {
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." sent a training request";
+			send_notif($conn, $emp_id, $title, 'training_list.php', 'admin');
+			echo 1;
+		}else{
+			echo 0;
+		}
 
 	}	
 	

@@ -10,6 +10,10 @@
 		$sql = "UPDATE document_request SET request_name= '$request_name', request_note = '$details' WHERE reference_id='$reference_id' ";
 
 		if ($conn->query($sql)) {
+			$emp_id = $user['employee_id'];
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." updated a document request";
+			send_notif($conn, $emp_id, $title, 'documents.php', 'admin');
 			$_SESSION['success']='Document Request updated successfully';
 		}else{
 			$_SESSION['error']='Document Request update failed';
@@ -45,6 +49,10 @@
 			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/request/".$new_filename)) {
 				//PUSH TO DB IF SUCCESS MOVED
 				if ($conn->query($sql)) {
+					$emp_id = $user['employee_id'];
+					$full = $user['firstname'].' '.$user['lastname'];
+					$title = $full." sent a reply for the document request";
+					send_notif($conn, $emp_id, $title, 'documents.php', 'admin');
 					$_SESSION['success']='Document updated successfully';
 				}else{
 					$_SESSION['error']='Document update failed';
@@ -54,6 +62,10 @@
 			}
 		}else{
 			if ($conn->query($sql)) {
+				$emp_id = $user['employee_id'];
+				$full = $user['firstname'].' '.$user['lastname'];
+				$title = $full." sent a reply for the document request";
+				send_notif($conn, $emp_id, $title, 'documents.php', 'admin');
 				$_SESSION['success']='Document updated successfully';
 			}else{
 				$_SESSION['error']='Document update failed';

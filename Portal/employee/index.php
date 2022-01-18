@@ -193,7 +193,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                                     <th>Issued By</th>
                                                                     <th>Subject</th>
                                                                     <th>Action</th>
-                                                                    <th class="d-flex justify-content-center">Details</th>
+                                                                    <!-- <th class="d-flex justify-content-center">Details</th> -->
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -217,9 +217,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                                     </td>
                                                                     <td><?php echo $row['title'];  ?></td>
                                                                     <td><?php echo $row['action'];  ?></td>
-                                                                    <td class="d-flex justify-content-center">
-                                                                        <a href='#view_action' data-toggle='modal' data-id='<?php echo $row['reference_id']; ?>'><i class='fa fa-eye'></i></a>
-                                                                    </td>
+                                                                    <!-- <td class="d-flex justify-content-center">
+                                                                        <a href='#view_action' data-toggle='modal' data-id='<?php //echo $row['reference_id']; ?>'><i class='fa fa-eye'></i></a>
+                                                                    </td> -->
                                                                 </tr>
                                                                 <?php } ?>
                                                                 </tbody>

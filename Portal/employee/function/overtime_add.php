@@ -11,6 +11,13 @@
 		$sql = "INSERT INTO overtime_request (`employee_id`, `date`, `start`, `end`,`reason`,`status`) VALUES ('$eid','$date','$start','$end','$reason','0')";	
 		
 		if($conn->query($sql)){
+
+			$emp_id = $user['employee_id'];
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." sent a overtime request";
+			send_notif($conn, $emp_id, $title, 'overtime.php', 'admin');
+
+
 			$_SESSION['success'] = 'Overtime request added successfully';
 		}
 		else{

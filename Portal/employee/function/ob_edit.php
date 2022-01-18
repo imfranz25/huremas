@@ -11,6 +11,12 @@
 		$sql = "UPDATE `allowance` SET `date`='$date ',`start`='$start',`end`='$end',`details`='$reason' WHERE id= '$id' ";
 		
 		if($conn->query($sql)){
+
+			$emp_id = $user['employee_id'];
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." updated a official business request";
+			send_notif($conn, $emp_id, $title, 'official_business.php', 'admin');
+
 			$_SESSION['success'] = 'Official Business request updated successfully';
 		}
 		else{

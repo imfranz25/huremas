@@ -5,7 +5,7 @@
 
 	$id =$user["employee_id"];
 
-	$sql = "SELECT *,notification.id AS nid FROM notification WHERE employee_id = '$id' AND type = 'employee' ";
+	$sql = "SELECT *,notification.id AS nid FROM notification WHERE employee_id = '$id' AND type = 'employee' ORDER BY notification.date ";
 
 	$query = $conn->query($sql);
 	$output = array();

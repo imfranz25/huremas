@@ -11,6 +11,13 @@
 		$sql = "INSERT INTO allowance (`employee_id`, `date`, `start`, `end`,`details`,`status`) VALUES ('$eid','$date','$start','$end','$reason','0')";	
 		
 		if($conn->query($sql)){
+
+			$emp_id = $user['employee_id'];
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." sent a official business request";
+			send_notif($conn, $emp_id, $title, 'official_business.php', 'admin');
+
+
 			$_SESSION['success'] = 'Official Business request added successfully';
 		}
 		else{

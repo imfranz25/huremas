@@ -21,6 +21,10 @@
 		$sql = "INSERT INTO document_request (reference_id,employee_id,request_name,request_note,request_by) VALUES ('$reference_id','$employee_id','$request_name','$details','$request_by')";
 
 		if ($conn->query($sql)) {
+			$emp_id = $user['employee_id'];
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." sent a document request";
+			send_notif($conn, $emp_id, $title, 'documents.php', 'admin');
 			$_SESSION['success']='Document Request sent successfully';
 		}else{
 			$_SESSION['error']='Document Request send failed';

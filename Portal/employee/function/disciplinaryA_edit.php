@@ -51,6 +51,10 @@
 			//move file
 			move_uploaded_file($_FILES["attachment"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/HUREMAS/Portal/admin/uploads/disciplinary/'.$new_filename);
 			if($conn->query($sql)){
+				$emp_id = $user['employee_id'];
+				$full = $user['firstname'].' '.$user['lastname'];
+				$title = $full." sent a reply regarding with disciplinary action";
+				send_notif($conn, $emp_id, $title, 'disciplinary.php', 'admin');
 				$_SESSION['success'] = 'Response sent successfully';
 			}
 			else{

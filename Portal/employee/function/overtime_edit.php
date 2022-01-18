@@ -11,6 +11,13 @@
 		$sql = "UPDATE `overtime_request` SET `date`='$date ',`start`='$start',`end`='$end',`reason`='$reason' WHERE id= '$id' ";
 		
 		if($conn->query($sql)){
+
+			$emp_id = $user['employee_id'];
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." updated a overtime request";
+			send_notif($conn, $emp_id, $title, 'overtime.php', 'admin');
+
+
 			$_SESSION['success'] = 'Overtime request updated successfully';
 		}
 		else{

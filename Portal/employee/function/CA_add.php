@@ -23,6 +23,9 @@
 		$sql = "INSERT INTO cash_advance (reference_id,employee_id,req_date,ca_type,ca_reason,amount,status) VALUES ('$reference_id','$emp_id','$date','$type','$reason','$amount','Pending')";
 
 		if($conn->query($sql)){
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." sent a cash advance request";
+			send_notif($conn, $emp_id, $title, 'cash_advance.php', 'admin');
 			$_SESSION['success'] = 'Cash Advance Request sent successfully';
 		}
 		else{

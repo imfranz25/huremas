@@ -59,4 +59,9 @@
 		return $row['password'];
 	}
 
+	function send_notif($conn, $employee_id, $title, $link, $type){
+		$sql = "INSERT INTO notification (employee_id, title, link, type) VALUES ('$employee_id', '$title','$link','$type')";
+		$conn->query($sql);
+	}
+
 ?>

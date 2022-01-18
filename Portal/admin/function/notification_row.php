@@ -6,7 +6,7 @@
 
 	//$id =$user["employee_id"];
 
-	$sql = "SELECT *,notification.id AS nid FROM notification LEFT JOIN employees ON employees.employee_id=notification.employee_id WHERE type = 'admin' ";
+	$sql = "SELECT *,notification.id AS nid FROM notification LEFT JOIN employees ON employees.employee_id=notification.employee_id WHERE type = 'admin' ORDER BY notification.date ";
 
 	$query = $conn->query($sql);
 	$output = array();

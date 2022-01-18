@@ -56,6 +56,12 @@
 
 		if($valid){
 			if($conn->query($sql)){
+
+				$emp_id = $user['employee_id'];
+				$full = $user['firstname'].' '.$user['lastname'];
+				$title = $full." updated a event request";
+				send_notif($conn, $emp_id, $title, 'events.php', 'admin');
+
 				$_SESSION['success'] = 'Event request updated successfully';
 			}
 			else{

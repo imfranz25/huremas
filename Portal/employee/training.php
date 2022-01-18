@@ -359,6 +359,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
     });//**end**
 
 
+    $("#attab").show();
+
   });
 
 </script>

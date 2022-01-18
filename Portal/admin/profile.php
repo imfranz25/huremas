@@ -10,7 +10,9 @@ include 'includes/header.php';
   .pcoded .pcoded-container {
   -webkit-box-shadow: none;
           box-shadow: none }
-
+  .link{
+    cursor: pointer;
+  }
 
 </style>
 
@@ -258,19 +260,15 @@ include 'includes/header.php';
             <div class="card tab-pane fade" id="inbox">
             <!--Inbox Page-->
               <div class="card-header">
-                <h5>
-                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Notification</a>
-                </h5>
-                <button type="button" class="btn btn-mat waves-effect waves-light btn-danger m-0 float-right" id="clear" data-target="#clearNotif" data-toggle="modal" >Clear All
-                </button>
+                <h5>Notification</h5>
               </div> 
               <div class="card-block">
 
                 <!-- Inbox Sample *-->
                 <div id="inbox-content">
                   <!-- Inbox Table-->
-                  <div class="table-responsive">
-                    <table class="table table-hover">
+                  <div class="table-responsive" style="max-height : 500px;">
+                    <table class="table table-hover" style="overflow: auto;">
                       <tbody id="notif-body">
                         <!-- Notif Infos Here    -->
                       </tbody>            
@@ -387,6 +385,41 @@ include 'includes/header.php';
     </div>
     <!-- Pcoded **End**-->  
 
+
+    <!-- Delete -->
+    <div class="modal fade" id="deleteNotif">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title"><b><span>Delete Notification</span></b></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                  <form class="form-horizontal" method="POST" id="notif_form">
+                    <input type="hidden" id="notif_id" name="id">
+                    <div class="text-center">
+                        <label>Are you sure you want to delete this notification ? </label>
+                        <div class="text-center text-danger" >
+                          <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+                          <label> Note: This process cannot be undone</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                  <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <?php include 'includes/scripts.php'; ?>
  
     <script>
@@ -449,6 +482,8 @@ include 'includes/header.php';
             $("#clear").removeClass("d-none");
             
             for (var i = 0; i < response.length; i++) {
+              let bold = '';
+              if ((response)[i].bell) {}
               $("#notif-body").append(`
                 <tr>
                   <td class="align-middle link" 
@@ -496,6 +531,23 @@ include 'includes/header.php';
         document.title=(title+' | HUREMAS - CvSU Imus');
       }
 
+      function update_openlink(id,link){
+        let url = window.location.href;
+        $.ajax({
+          type: 'POST',
+          url: '/HUREMAS/Portal/employee/function/notification_edit.php',
+          data: {id:id},
+          dataType: 'json',
+          success: function(response){
+            if(response=='1'){
+              location.replace(link);
+            }else{
+              location.replace(url);
+            }
+          }  
+        });
+      }
+
       //JQUERY
       $(document).ready(function() {
 
@@ -513,6 +565,40 @@ include 'includes/header.php';
           //REMOVE CLASSES
           remove_message();
         });//CLEAR **END**
+
+        // CLICKED LINK
+        $(document).on('click','.link',function(e){
+          e.preventDefault();
+          let link = $(this).data('link');
+          let open = $(this).data('open');
+          let id = $(this).data('id');
+          if (open==0) {
+            update_openlink(id,link);
+          }else{
+            location.replace(link);
+          }
+        });
+
+        $(document).on('click','.delete_notif',function(e){
+          e.preventDefault();
+          $('#notif_id').val($(this).data('id'));
+          $('#deleteNotif').modal('show');
+        });
+
+        $(document).on('submit','#notif_form',function(e){
+          e.preventDefault();
+          let url = window.location.href;
+          let id = $('#notif_id').val();
+          $.ajax({
+            type: 'POST',
+            url: '/HUREMAS/Portal/employee/function/notification_delete.php',
+            data: {id:id},
+            dataType: 'json',
+            success: function(response){
+              location.replace(url);
+            }  
+          });
+        });
 
         //CHANGE PASSWORD
         $('#change').submit(function(e){

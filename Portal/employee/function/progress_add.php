@@ -25,6 +25,11 @@
 
 			$conn->query($update);
 
+			$emp_id = $user['employee_id'];
+			$full = $user['firstname'].' '.$user['lastname'];
+			$title = $full." sent a task progress";
+			send_notif($conn, $emp_id, $title, 'tasks.php', 'admin');
+
 			$_SESSION['success'] = 'New Task Progress added successfully';
 		}
 
