@@ -11,10 +11,12 @@
 		
 		if($conn->query($sql)){
 
-		
-		
-			$title = "Your attendance record has benn updated";
-			send_notif($conn, $id, $title, 'dtr.php', 'employee');
+			$get_id = "SELECT employee_id FROM attendance WHERE id = $id ";
+			$query = $conn->query($get_id);
+			$row = $query->fetch_assoc();
+			$employee_id = $row['employee_id']; 
+			$title = "Your attendance record has been updated";
+			send_notif($conn, $employee_id, $title, 'dtr.php', 'employee');
 
 			$_SESSION['success'] = 'Attendance updated successfully';
 		}

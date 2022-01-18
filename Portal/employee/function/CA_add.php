@@ -24,7 +24,7 @@
 
 		if($conn->query($sql)){
 			$full = $user['firstname'].' '.$user['lastname'];
-			$title = $full." sent a cash advance request";
+			$title = $full." send a cash advance request";
 			send_notif($conn, $emp_id, $title, 'cash_advance.php', 'admin');
 			$_SESSION['success'] = 'Cash Advance Request sent successfully';
 		}

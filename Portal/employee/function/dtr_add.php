@@ -10,7 +10,7 @@
 
 			$emp_id = $user['employee_id'];
 			$full = $user['firstname'].' '.$user['lastname'];
-			$title = $full." timed-in";
+			$title = $full."has timed-in";
 			send_notif($conn, $emp_id, $title, 'dtr.php', 'admin');
 
 			$_SESSION['success'] = 'Time-in added successfully';
@@ -28,7 +28,7 @@
 
 			$emp_id = $user['employee_id'];
 			$full = $user['firstname'].' '.$user['lastname'];
-			$title = $full." timed-out";
+			$title = $full."has timed-out";
 			send_notif($conn, $emp_id, $title, 'dtr.php', 'admin');
 
 			$_SESSION['success'] = 'Time-out added successfully';

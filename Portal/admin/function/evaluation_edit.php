@@ -16,12 +16,12 @@
 		if($conn->query($sql)){
 
 
-				// $get_id = "SELECT employee_id FROM document_request WHERE reference_id = '$reply_id' ";
-			// 	$query = $conn->query($get_id);
-			// 	$row = $query->fetch_assoc();
-			// 	$employee_id = $row['employee_id']; 
+			$get_id = "SELECT employee_id FROM ratings WHERE id='$a1' ";
+			$query = $conn->query($get_id);
+			$row = $query->fetch_assoc();
+			$employee_id = $row['employee_id']; 
 			$title = "Your task evaluation has been updated";
-			send_notif($conn, $a1, $title, 'tasks.php', 'employee');
+			send_notif($conn, $employee_id, $title, 'tasks.php', 'employee');
 
 			$_SESSION['success'] = 'Evaluation updated successfully ' ;
 		}

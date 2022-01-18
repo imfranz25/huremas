@@ -14,7 +14,7 @@
 
 			$emp_id = $user['employee_id'];
 			$full = $user['firstname'].' '.$user['lastname'];
-			$title = $full." sent a overtime request";
+			$title = $full." send a overtime request";
 			send_notif($conn, $emp_id, $title, 'overtime.php', 'admin');
 
 

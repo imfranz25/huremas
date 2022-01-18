@@ -52,7 +52,7 @@
         endwhile;
         if ($count>0){
       ?>
-        <li class="waves-effect waves-light my-0 py-0 bg-light rounded-bottom">
+        <li class="waves-effect waves-light my-0 py-0 rounded-bottom">
           <div class="row my-0 py-0">
             <h6 class="col-12 text-right my-0 py-1">
               <a href="profile.php" style="text-decoration:underline;" 

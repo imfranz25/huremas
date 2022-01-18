@@ -48,7 +48,7 @@
 
 				$emp_id = $user['employee_id'];
 				$full = $user['firstname'].' '.$user['lastname'];
-				$title = $full." sent a event request";
+				$title = $full." send a event request";
 				send_notif($conn, $emp_id, $title, 'events.php', 'admin');
 
 				$_SESSION['success'] = 'Event request sent successfully';
