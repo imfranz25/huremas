@@ -91,7 +91,7 @@
   <!-- footer section -->
   <footer class="container-fluid footer_section">
     <p>
-      &copy; 2021 HUREMAS - CVSU Imus Campus All Rights Reserved.
+      &copy; <?php echo date('Y'); ?> HUREMAS - CVSU Imus Campus All Rights Reserved.
     </p>
   
   </footer>
