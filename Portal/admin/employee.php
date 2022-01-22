@@ -93,6 +93,7 @@ include 'includes/header.php';
 
     <?php include 'includes/employee_modal.php'; ?>
     <?php include 'includes/benefit_record_modal.php'; ?>
+    <?php include 'includes/alert_modal.php'; ?>
     <?php include 'includes/scripts.php'; ?>
 
     
@@ -130,7 +131,8 @@ $(function(){
   $('.viewBenefits').click(function(e){
     e.preventDefault();
     var id = $(this).data('id');
-    getBenefit(id);
+    //populateBenefit(id);
+    //getBenefit(id);
     getRow(id);
     $('#benModal').modal('show');
   });
@@ -151,6 +153,7 @@ function getRow(id){
     success: function(response){
       //benefit record
       $('#emp_name').html(response.firstname+' '+response.middlename+' '+response.lastname);
+      $('#emp_id_ben').val(response.employee_id);
       //emp details
       $('.empid').val(response.empid);
       $('.employee_id').html(response.employee_id);
@@ -199,6 +202,29 @@ function getRow(id){
   });
 }
 
+function populateBenefit(id){
+  $.ajax({
+    type: 'POST',
+    url: 'function/benefit_record_row.php',
+    data: {pid:id},
+    dataType: 'json',
+    success: function(response){
+      if (response.length>0) {
+        let len = response.length;
+        $("#select_benefit").html(`<option selected value=''>
+          --select benefits---</option>`); 
+        for (var i = 0; i < len; i++) {
+          $("#select_benefit").append(`<option data-desc='${(response)[i].description}' value='${(response)[i].bid}'>
+            ${(response)[i].benefit_name}</option>`); 
+        }
+      }else{
+        $("#select_benefit").html(`<option selected value=''>
+          --There are benefits avaialable---</option>`); 
+      }
+    }
+  });
+}
+
 
 function getBenefit(id){
   $.ajax({
@@ -236,6 +262,36 @@ $(document).ready(function() {
       $('#select_form1').submit();
 
    });
+
+    $('#select_benefit').on('change',function(e){
+      e.preventDefault();
+      let desc = $(this).find(':selected').data('desc');
+      $(benefit_desc).val(desc);
+    });
+
+    $('#addbene_submit').on('submit',function(e){
+      e.preventDefault();
+      let form = $(this).serialize();
+      let id = $('#emp_id_ben').val();
+      $.ajax({
+        type: 'POST',
+        url: 'function/benefit_record_add.php',
+        data: form,
+        dataType: 'json',
+        success: function(response){
+          $('#addBene').modal('hide');
+          if(response=='1'){
+            getBenefit(id);
+            populateBenefit(id);
+            $('#successModal').modal('show');
+            $('#success_msg').html('Benefit applied successfully');
+          }else{
+            $('#errorModal').modal('show');
+            $('#error_msg').html('Something went wrong, please try again!');
+          }
+        }
+      });
+    });
 
 
 
