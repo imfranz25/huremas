@@ -228,7 +228,7 @@ $(document).ready(function() {
     	'<?php } ?>'+
         '</select>' +
         '</form>' +  
-        '</div>').appendTo("#table1.dataTables_filter"); //example is our table id
+        '</div>').appendTo("#table1_wrapper .dataTables_filter"); //example is our table id
 
      $(".dataTables_filter label").addClass("pull-right");
 
