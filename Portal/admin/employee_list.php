@@ -60,8 +60,9 @@
                                   Action
                         </button>
                         <div class="dropdown-menu" style="">
-                        <div class="dropdown-divider"></div>
                           <a class="dropdown-item view" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-eye"></i>View Profile</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item viewBenefits" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="ti-briefcase"></i>View Benefits</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-edit"></i>Edit</a>
                           <?php 

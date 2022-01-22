@@ -92,7 +92,7 @@ include 'includes/header.php';
     </div>
 
     <?php include 'includes/employee_modal.php'; ?>
-
+    <?php include 'includes/benefit_record_modal.php'; ?>
     <?php include 'includes/scripts.php'; ?>
 
     
@@ -127,6 +127,13 @@ $(function(){
     getRow(id);
   });
 
+  $('.viewBenefits').click(function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    getBenefit(id);
+    getRow(id);
+    $('#benModal').modal('show');
+  });
 
 
   
@@ -142,6 +149,9 @@ function getRow(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
+      //benefit record
+      $('#emp_name').html(response.firstname+' '+response.middlename+' '+response.lastname);
+      //emp details
       $('.empid').val(response.empid);
       $('.employee_id').html(response.employee_id);
       $('.del_employee_name').html(response.firstname+' '+response.middlename+' '+response.lastname+' '+response.suffix);
@@ -184,17 +194,27 @@ function getRow(id){
       var paths = "images/"+response.photo;
 
       $("#cimg").attr("src",paths);
-
-     
-
       
     }
   });
 }
 
 
+function getBenefit(id){
+  $.ajax({
+    type: 'POST',
+    url: 'function/benefit_record_row.php',
+    data: {id:id},
+    dataType: 'json',
+    success: function(response){
+      alert(response);
+    }
+  });
+}
+
 $(document).ready(function() {
     $('#table1').DataTable();
+    $('#benefit_record_table').DataTable();
 
      $('<form method="POST" id="select_form1" action="<?php $_PHP_SELF ?>">'+
      	'<div class="pull-right" >Department: ' +
@@ -208,7 +228,7 @@ $(document).ready(function() {
     	'<?php } ?>'+
         '</select>' +
         '</form>' +  
-        '</div>').appendTo(".dataTables_filter"); //example is our table id
+        '</div>').appendTo("#table1.dataTables_filter"); //example is our table id
 
      $(".dataTables_filter label").addClass("pull-right");
 
