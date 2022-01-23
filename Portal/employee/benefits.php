@@ -119,7 +119,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                     <td><?php echo $row['bid']; ?></td>
                                                     <td><?php echo $row['benefit_name']; ?></td>
                                                     <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>
-                                                        <a href='#view_action' data-toggle='modal' class='pull-right view_DA' data-id='<?php echo $row['reference_id']; ?>'><span class='fa fa-eye ml-5'></span></a>
+                                                        <a href='#view_desc' data-toggle='modal' class='pull-right desc' data-id='<?php echo $row['id']; ?>'><span class='fa fa-eye ml-5'></span></a>
                                                         <?php echo $row['description']; ?>
                                                     </td>
                                                     <td><?php echo (new DateTime($row['date_applied']))->format('F d, Y'); ?></td>
@@ -148,14 +148,34 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
     <?php 
 
-
-      require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/alert_modal.php");
+      require_once('includes/benefit_modal.php');
+      //require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/alert_modal.php");
       require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php");
 
     ?>   
 
 
 <script>
+   
+
+
+function getRow(id){
+  $.ajax({
+    type: 'POST',
+    url: '/HUREMAS/Portal/admin/function/benefits_row.php',
+    data: {id:id},
+    dataType: 'json',
+    success: function(response){
+      $('#beneid').val(response.id);
+      $('.edit_title').val(response.benefit_name);
+      $('.edit_description').val(response.description);
+      $('#del_beneid').val(response.id);
+      $('#del_benefit').html(response.benefit_name);
+      $('#view_benefit').html(response.description);
+      $('.view_title').html(response.benefit_name);
+    }
+  });
+}
 
 
   $(document).ready(function() {
@@ -164,6 +184,12 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
     if ( ! $.fn.DataTable.isDataTable( '#table1' )) {
       $('#table1').dataTable();
     }//**end**
+
+    $('.desc').click(function(e){
+      e.preventDefault();
+      var id = $(this).data('id');
+      getRow(id);
+    });
 
   });
 
