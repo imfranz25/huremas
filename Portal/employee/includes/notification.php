@@ -76,7 +76,7 @@
             <img class="d-flex align-self-center img-radius" src="../assets/images/no_notif.png" alt="No Notification">
               <div class="media-body">
                 <h5 class="notification-user">No Notification</h5>
-                  <p class="notification-msg">Check back later for updates.</p>
+                  <p class="notification-msg">Check later for updates.</p>
               </div>
           </div>
         </li>

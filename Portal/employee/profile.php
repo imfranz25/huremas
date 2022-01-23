@@ -365,7 +365,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                       <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center mb-3 mt-3 mx-auto" id="changepass" name='changepass'>Change Password</button>                     
                     </div>
                     <div class="col-lg-4">
-                      <input type="reset" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center mb-3 mt-3 mx-auto" id="clear" name="clear" value="Clear" />
+                      <input type="reset" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center mb-3 mt-3 mx-auto" id="clear_setting" name="clear" value="Clear" />
                     </div>
                 </form>
                 </div>
@@ -638,7 +638,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
         //REFRESH INBOX **END**
 
         //CLEAR
-        $('#clear').click(function(e){
+        $('#clear_setting').click(function(e){
           //REMOVE CLASSES
           remove_message();
         });//CLEAR **END**
