@@ -138,9 +138,16 @@
             		<div class="text-center">
 	                	<p>Are you sure you want to delete this benefit record(s)?</p>
 	                	<h2 id="del_benefit" class="bold"></h2>
+                    <hr>
+                    <div class="form-group row">
+                      <label class="col-3 float-label req">Password</label>
+                      <div class="col-9">
+                        <input type="password" name="pass" class="form-control border border-secondary" placeholder="Please enter your password for verification" required>
+                      </div>
+                    </div>
                     <div class="text-center text-danger" >
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
-                      <label> Note: This process cannot be undone</label>
+                      <label> Note: You can't delete a benefit that is currently applied in employee records.</label>
                     </div>
 	            	</div>
           	</div>
