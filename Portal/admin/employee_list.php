@@ -1,18 +1,13 @@
   <!-- Main-body start -->
 
-<a href="employee.php?page=new_employee"><button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-plus"></i>New</button></a>
-<button type="button" class="btn btn-mat waves-effect waves-light btn-inverse" data-toggle="modal" data-target="#"><i class="fa fa-plus"></i>Import</button>                         
-
+                
 <div class="card">
 <div class="card-header">
-                    <h5>Employee Table</h5>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                            <li><i class="fa fa-window-maximize full-card"></i></li>
-                            <li><i class="fa fa-refresh reload-card"></i></li>
-                        </ul>
-                    </div>
+                    <h5>
+                        <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Employee Table</a>
+                    </h5>
+                    <a href="employee.php?page=new_employee"><button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" ><i class="fa fa-plus"></i>New</button></a>
+                    <!-- <button type="button" class="btn btn-mat waves-effect waves-light btn-inverse" data-toggle="modal" data-target="#"><i class="fa fa-plus"></i>Import</button>    -->
                 </div>
 <div class="box-body">
 <div class="card-block table-border-style">
@@ -62,7 +57,7 @@
                         <div class="dropdown-menu" style="">
                           <a class="dropdown-item view" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-eye"></i>View Profile</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item viewBenefits" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="ti-briefcase"></i>View Benefits</a>
+                          <a class="dropdown-item viewBenefits" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>" data-eid="<?php echo $row['employee_id'] ?>"><i class="ti-briefcase"></i>View Benefits</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['empid'] ?>"><i class="fa fa-edit"></i>Edit</a>
                           <?php 

@@ -3,13 +3,13 @@
                             <div class="card" style="min-height: 400px;">
                             <div class="card-header">
                                                 <h5>Time Record Correction Request List</h5>
-                                                <div class="card-header-right">
+                                                <!-- <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                         <li><i class="fa fa-window-maximize full-card"></i></li>
                                                         <li><i class="fa fa-refresh reload-card"></i></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                             </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">

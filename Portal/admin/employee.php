@@ -100,6 +100,11 @@ include 'includes/header.php';
 
 <script>
 
+// INITIALIZATION 
+$('#table1').DataTable();
+$('#benefit_record_table').DataTable();
+
+
 $(function(){
   $('.edit').click(function(e){
     e.preventDefault();
@@ -131,13 +136,17 @@ $(function(){
   $('.viewBenefits').click(function(e){
     e.preventDefault();
     var id = $(this).data('id');
-    //populateBenefit(id);
-    //getBenefit(id);
+    var eid = $(this).data('eid');
+    populateBenefit(eid);
+    getBenefit(eid);
     getRow(id);
     $('#benModal').modal('show');
   });
 
-
+  $('#addBeneFormat').click(function(e){
+    e.preventDefault();
+    $('#benefit_desc').val('');
+  });
   
 
 });
@@ -153,7 +162,7 @@ function getRow(id){
     success: function(response){
       //benefit record
       $('#emp_name').html(response.firstname+' '+response.middlename+' '+response.lastname);
-      $('#emp_id_ben').val(response.employee_id);
+      $('.emp_id_ben').val(response.employee_id);
       //emp details
       $('.empid').val(response.empid);
       $('.employee_id').html(response.employee_id);
@@ -202,6 +211,7 @@ function getRow(id){
   });
 }
 
+
 function populateBenefit(id){
   $.ajax({
     type: 'POST',
@@ -233,65 +243,152 @@ function getBenefit(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      alert(response);
+      $('#benefit_record_table').DataTable().clear().destroy();
+      $('#benefit_body').html('');
+      let len = response.length;
+      for (var i = 0; i < len; i++) {
+        $('#benefit_body').append(`
+          <tr>
+            <td>${(response)[i].benefit_id}</td>
+            <td>${(response)[i].benefit_name}</td>
+            <td style='overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width: 250px;'>
+              <a href='#viewBeninfo' data-toggle='modal' class='pull-right viewBene' data-id='${(response)[i].bid}'>
+                <span class='fa fa-eye ml-3'></span>
+              </a>
+              ${(response)[i].description}
+            </td>
+            <td>${(new Date((response)[i].date_applied)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'})}</td>
+            <td>
+              <button data-target="#removeBene" data-toggle="modal" class="btn btn-sm btn-danger btn-round removeBene" data-id="${(response)[i].brid}">
+                <i class="fa fa-trash"></i> Remove
+              </button>
+            </td>
+          </tr
+        `);
+      }
+      $('#benefit_record_table').DataTable();
     }
   });
 }
 
 $(document).ready(function() {
-    $('#table1').DataTable();
-    $('#benefit_record_table').DataTable();
 
-     $('<form method="POST" id="select_form1" action="<?php $_PHP_SELF ?>">'+
-     	'<div class="pull-right" >Department: ' +
-        '<select class="form-control-sm" id="department" name="depts">'+
-        '<option value="">All</option>'+
-        '<?php $sql = "SELECT * FROM department_category order by title asc";
-		 $query = $conn->query($sql);
-		 while($row = $query->fetch_assoc()){?> ?>'+
-        '<option value="<?php echo $row['id']?>"<?=$row['id'] == $sel ? ' selected="selected"' : '';?>><?php echo $row['title']?></option>'+
+  // CHECK IF THERE IS STILL MODAL OPEN => TO SUPPORT SCROLLING EVEN IF WE CLOSE THE MODAL
+  $('body').on('hidden.bs.modal', function () {
+    if($('.modal.show').length > 0){
+      $('body').addClass('modal-open');
+    }
+  });
+    
+   $('<form method="POST" id="select_form1" action="<?php $_PHP_SELF ?>">'+
+   	'<div class="pull-right" >Department: ' +
+      '<select class="form-control-sm" id="department" name="depts">'+
+      '<option value="">All</option>'+
+      '<?php $sql = "SELECT * FROM department_category order by title asc";
+   $query = $conn->query($sql);
+   while($row = $query->fetch_assoc()){?> ?>'+
+      '<option value="<?php echo $row['id']?>"<?=$row['id'] == $sel ? ' selected="selected"' : '';?>><?php echo $row['title']?></option>'+
 
-    	'<?php } ?>'+
-        '</select>' +
-        '</form>' +  
-        '</div>').appendTo("#table1_wrapper .dataTables_filter"); //example is our table id
+  	'<?php } ?>'+
+      '</select>' +
+      '</form>' +  
+      '</div>').appendTo("#table1_wrapper .dataTables_filter"); //example is our table id
 
-     $(".dataTables_filter label").addClass("pull-right");
+   $(".dataTables_filter label").addClass("pull-right");
 
-     $('#department').change(function(){
-      $('#select_form1').submit();
+   $('#department').change(function(){
+    $('#select_form1').submit();
 
-   });
+  });
 
-    $('#select_benefit').on('change',function(e){
-      e.preventDefault();
-      let desc = $(this).find(':selected').data('desc');
-      $(benefit_desc).val(desc);
+
+   $(document).on('click','.viewBene',function(e){
+    e.preventDefault();
+    let id = $(this).data('id');
+    $('#view_desc').modal('show');
+    $.ajax({
+      type: 'POST',
+      url: 'function/benefits_row.php',
+      data: {id:id},
+      dataType: 'json',
+      success: function(response){
+        $('.edit_title').val(response.benefit_name);
+        $('.edit_description').val(response.description);
+        $('#view_benefit').html(response.description);
+      }
+    });
+  });
+
+  $(document).on('click','.removeBene',function(e){
+    e.preventDefault();
+    let id = $(this).data('id');
+    $.ajax({
+      type: 'POST',
+      url: 'function/benefit_record_row.php',
+      data: {bid:id},
+      dataType: 'json',
+      success: function(response){
+        $('#del_beneid').val(id);
+        $('#del_benefit').html(response.benefit_name);
+        $('#del_applied').html('Date Applied : '+(new Date(response.date_applied)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
+      }
     });
 
-    $('#addbene_submit').on('submit',function(e){
-      e.preventDefault();
-      let form = $(this).serialize();
-      let id = $('#emp_id_ben').val();
-      $.ajax({
-        type: 'POST',
-        url: 'function/benefit_record_add.php',
-        data: form,
-        dataType: 'json',
-        success: function(response){
-          $('#addBene').modal('hide');
-          if(response=='1'){
-            getBenefit(id);
-            populateBenefit(id);
-            $('#successModal').modal('show');
-            $('#success_msg').html('Benefit applied successfully');
-          }else{
-            $('#errorModal').modal('show');
-            $('#error_msg').html('Something went wrong, please try again!');
-          }
+  });
+
+  $('#select_benefit').on('change',function(e){
+    e.preventDefault();
+    let desc = $(this).find(':selected').data('desc');
+    $(benefit_desc).val(desc);
+  });
+
+  $('#deleteBeneForm').on('submit',function(e){
+    e.preventDefault();
+    let form = $(this).serialize();
+    let id = $('.emp_id_ben').val();
+    $.ajax({
+      type: 'POST',
+      url: 'function/benefit_record_delete.php',
+      data: form,
+      dataType: 'json',
+      success: function(response){
+        $('#removeBene').modal('hide');
+        if(response=='1'){
+          getBenefit(id);
+          populateBenefit(id);
+          $('#successModal').modal('show');
+          $('#success_msg').html('Benefit removed successfully');
+        }else{
+          $('#errorModal').modal('show');
+          $('#error_msg').html('Something went wrong, please try again!');
         }
-      });
+      }
     });
+  });
+
+  $('#addbene_submit').on('submit',function(e){
+    e.preventDefault();
+    let form = $(this).serialize();
+    let id = $('.emp_id_ben').val();
+    $.ajax({
+      type: 'POST',
+      url: 'function/benefit_record_add.php',
+      data: form,
+      dataType: 'json',
+      success: function(response){
+        $('#addBene').modal('hide');
+        if(response=='1'){
+          getBenefit(id);
+          populateBenefit(id);
+          $('#successModal').modal('show');
+          $('#success_msg').html('Benefit applied successfully');
+        }else{
+          $('#errorModal').modal('show');
+          $('#error_msg').html('Something went wrong, please try again!');
+        }
+      }
+    });
+  });
 
 
 
