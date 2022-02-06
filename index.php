@@ -1,6 +1,3 @@
 <?php 
-
-    header('location:Home/index.php');
-
-
+	header('location:Home/index.php');
 ?>

@@ -8,7 +8,6 @@
 
 <body>
 
-  
   <!--Top Header-->
   <?php 
     require_once("includes/top-header.php");
@@ -438,7 +437,6 @@
 </body>
 
 <script>
-
   $(document).ready(function() {
     $('#viewbtn').click(function(e){
       let label = $(this).html().trim();
