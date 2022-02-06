@@ -73,33 +73,42 @@ include 'includes/header.php';
                             
                         ?>
 
-                     
+                        <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#newJob" id="btnJob"><i class="fa fa-plus"></i>Add New Job</button>
+
                         
 
+                        <div class="btn-group float-right">
+                          <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
+                          <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
+                            <a class="dropdown-item filter_job active" data-id='all' href="javascript:void(0)" id="job_all">All</a>
+                            <a class="dropdown-item filter_job" data-id='starred' href="javascript:void(0)">Starred</a>
+                            <a class="dropdown-item filter_job" data-id='active' href="javascript:void(0)">Active</a>
+                            <a class="dropdown-item filter_job" data-id='inactive' href="javascript:void(0)">Inactive</a>
+                          </div>
+                        </div>
                         
                             <!-- Main-body start -->
                             <div class="card mb-0 ">    
                               <div class="card-header">
-
-                                <h5>
-                                  <a class="btn btn-default reload_card" href="javascript:void(0)">Recruitment / &nbsp;<label id="job_breadcrumb">All</label></a>                             
-                                </h5>
-
-                                <div class="btn-group float-right">
-                                  <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
-                                  <div class="dropdown-menu " style="cursor: pointer;">
-                                    <a class="dropdown-item filter_job active" data-id='all' href="javascript:void(0)" id="job_all">All</a>
-                                    <a class="dropdown-item filter_job" data-id='starred' href="javascript:void(0)">Starred</a>
-                                    <a class="dropdown-item filter_job" data-id='active' href="javascript:void(0)">Active</a>
-                                    <a class="dropdown-item filter_job" data-id='inactive' href="javascript:void(0)">Inactive</a>
-                                  </div>
+                                <ul class="breadcrumb-title">
+                                  <li class="breadcrumb-item">
+                                    <a class="reload_card" href="javascript:void(0)"><h5>Recruitment</h5></a>
+                                  </li>
+                                  <li class="breadcrumb-item">
+                                    <a class="reload_card" href="javascript:void(0)"><label id="job_breadcrumb">All</label></a>
+                                  </li>
+                                  <!--Filter here-->
+                                </ul>
+                                <div class="card-header-right">
+                                  <ul class="list-unstyled card-option">
+                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                    <li><i class="fa fa-refresh reload_card"></i></li>
+                                  </ul>
                                 </div>
-
-                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right mx-2" data-toggle="modal" data-target="#newJob" id="btnJob"><i class="fa fa-plus"></i>Add New Job</button>
-
                               </div>         
                               <div class="box-body" id="job_data" style="height: 500px;">
-                                <div class="card-block table-border-style row text-justify mh-100">
+                                <div class="card-block table-border-style row text-justify mh-100" style="overflow-y: scroll !important;">
                                   <!--PHP Start-->
                                   <?php 
 
@@ -146,15 +155,13 @@ include 'includes/header.php';
                                           
                                   ?>
 
-
                                   <!--Sample Recuit Box-->
                                   <div class="col-md-6 col-lg-4">
                                     <div class="card rounded border border-secondary">
                                       <div class="card-header p-0 m-0">
                                         <div class="bg-success text-white px-3 pt-3 pb-1 rounded-top">
-                                          <h4 class="h5">
-                                            <a href="javascript:void(0)"><i data-id="<?php echo $row['job_code']; ?>" class="fa <?php echo $star; ?> starred text-warning f-20 mr-2" style="color: white;"></i></a>
-                                            <?php echo $row['description'];  ?>
+                                          <h4>
+                                            <a href="javascript:void(0)"><i data-id="<?php echo $row['job_code']; ?>" class="fa <?php echo $star; ?> starred text-warning f-20 mr-2" style="color: white;" id="<?php echo $row['job_code']; ?>"></i></a><?php echo $row['description'];  ?>
                                             <!-- Settings Dropdown -->
                                             <div class="btn-group float-right">
                                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -185,7 +192,7 @@ include 'includes/header.php';
                                       <div class="card-footer border border-top-1 p-0 m-0">
                                         <div class="text-white rounded-bottom p-1">
                                           <h4 class="text-right pr-2">
-                                          <a href="<?php echo "localhost/HUREMAS/Home/job/job-posted.php?job_code=".password_hash($row['job_code'],PASSWORD_DEFAULT); ?>" class="copy_link">
+                                          <a href="<?php echo "http://huremas-cvsuic.online/Home/job/job-posted.php?job_code=".password_hash($row['job_code'],PASSWORD_DEFAULT); ?>" class="copy_link">
                                             <i class="fa fa-paperclip mr-2"></i>Share Tracker</a>
                                           </h4>
                                         </div>
@@ -243,10 +250,11 @@ var lname_on='';
 var contact_on='';
 var email_on='';
 var position_on='';
-var salary_on='';
 var position_desc_on='';
 var department_on='';
 var department_desc_on='';
+var category_name='';
+var category_id='';
 
 // JOB PROPERTIES
 function showEdit(id){
@@ -317,7 +325,7 @@ function check_resume(file_input) {
 
 
 //SET APPLICANT INFORMATION
-function set_Appinfo(code,fname,lname,id,email,contact,attachment,notes,mname,stage,appno){
+function set_Appinfo(code,fname,lname,id,email,contact,attachment,notes,mname,stage,appno,type,catname){
   //tracking infos
   $('#move_app_code').val(code);
   $('#move_name').html(fname+" "+lname);
@@ -352,6 +360,8 @@ function set_Appinfo(code,fname,lname,id,email,contact,attachment,notes,mname,st
     lname_on=lname;
     contact_on=contact;
     email_on=email;
+    category_id=type;
+    category_name=catname;
   }
 
 
@@ -390,7 +400,7 @@ function getjob(id){
      $('.edit_department').val(response.job_dept);
      $('.edit_department_title').val(response.title);
      $('.edit_term').val(response.job_term);
-     $('.edit_type').val(response.job_type);
+     //$('.edit_type').val(response.job_type);
      $('.edit_exp').val(response.job_exp);
      $('.edit_grade').val(response.job_grade);
      $('.edit_desc').val(response.job_desc);
@@ -406,7 +416,7 @@ function applicant_info(aid){
     data: {aid:aid},
     dataType: 'json',
     success: function(response){
-      set_Appinfo(response.job_code,response.first_name, response.last_name, response.id, response.email, response.contact, response.attachment, response.notes,response.middle_name,response.stage,response.applicant_no);
+      set_Appinfo(response.job_code,response.first_name, response.last_name, response.id, response.email, response.contact, response.attachment, response.notes,response.middle_name,response.stage,response.applicant_no,response.ptype,response.cat);
     }
   });
 }
@@ -433,7 +443,6 @@ function getapplicant(code,stage){
     success: function(response){
       //on-board
       position_on=(response)[0].job_position;
-      salary_on=(response)[0].rate;
       position_desc_on=(response)[0].description;
       department_on=(response)[0].job_dept;
       department_desc_on=(response)[0].title;
@@ -457,7 +466,7 @@ function getapplicant(code,stage){
           if ((response)[i].stage == stage || (response)[i].stage == onboard) {
             //SET INFO FOR THE FIRST APPLICANT IN THE LIST (DEFAULT)
             if (once==true){
-              set_Appinfo((response)[i].job_code,(response)[i].first_name, (response)[i].last_name, (response)[i].aid, (response)[i].email, (response)[i].contact,(response)[i].attachment,(response)[i].notes,(response)[i].middle_name,(response)[i].stage,(response)[i].applicant_no);
+              set_Appinfo((response)[i].job_code,(response)[i].first_name, (response)[i].last_name, (response)[i].aid, (response)[i].email, (response)[i].contact,(response)[i].attachment,(response)[i].notes,(response)[i].middle_name,(response)[i].stage,(response)[i].applicant_no,(response)[i].ptype,(response)[i].cat);
               once=false;
             }
             //APPEND LIST IN LIST GROUP
@@ -726,8 +735,7 @@ $(document).ready(function() {
     $('#deleteApp').modal('hide');
     var id = $('#del_app_id').val();
     var code = $('#move_app_code').val();
-    var pass = $('#pass').val();
-    $('#pass').val('');
+    var pass = $('#pass_del').val();
     $.ajax({
       type: 'POST',
       url: 'function/applicant_delete.php',
@@ -739,7 +747,7 @@ $(document).ready(function() {
           $('#success_msg').html('Applicant deleted successfuly');
         }else if(response=='2'){
           $('#errorModal').modal('show');
-          $('#error_msg').html('Incorrect Password, please try again');
+          $('#error_msg').html('Invalid Password, please try again');
         }else{
           $('#errorModal').modal('show');
           $('#error_msg').html('Applicant delete failed');
@@ -776,8 +784,8 @@ $(document).ready(function() {
     $('#positionid_on').val(position_on);
     $('#departmentid_on').val(department_on);
     $('#department_on').val(department_desc_on);
-    $('#wage_on').val(salary_on);
-    $('#salary_on').val(salary_on*26);
+    $('#category_id').val(category_id);
+    $('#category_name').val(category_name);
   }); 
 
   //RELOAD APPLICANT INFOS -> CLOSE ONBOARD
@@ -785,7 +793,7 @@ $(document).ready(function() {
     var code = $('#move_app_code').val();
     getapplicant(code,'Hired'); // reload page (stay on page)
   }); 
-
+  
 
   
 

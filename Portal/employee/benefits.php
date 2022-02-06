@@ -1,10 +1,10 @@
 <?php 
 $title ="Benefits";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 ?>
   <body>
-   <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+   <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
   <div id="pcoded" class="pcoded">
         <div class="pcoded-container navbar-wrapper">         
@@ -149,8 +149,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
     <?php 
 
       require_once('includes/benefit_modal.php');
-      //require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/alert_modal.php");
-      require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php");
+      //require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/alert_modal.php");
+      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php");
 
     ?>   
 
@@ -162,7 +162,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: '/HUREMAS/Portal/admin/function/benefits_row.php',
+    url: '/Portal/admin/function/benefits_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){

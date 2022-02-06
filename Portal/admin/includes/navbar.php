@@ -31,7 +31,7 @@
                           <!-- <li class="header-search">
                               <div class="main-search morphsearch-search">
                                   <div class="input-group">
-                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                      <span class="input-groupd-addon search-close"><i class="ti-close"></i></span>
                                       <input type="text" class="form-control">
                                       <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
                                   </div>
@@ -46,9 +46,9 @@
                       <ul class="nav-right">
                           <?php include 'notification.php'; ?>
                           <li class="user-profile header-notification">
-                              <a href="#!" class="waves-effect waves-light">
-                                  <img src="../assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                  <span>Dream</span>
+                              <a href="#" class="waves-effect waves-light">
+                                  <img src="<?php echo $global_link; ?>/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="40" height="40" class="img-radius" alt="User-Profile-Image">
+                                  <span><?php echo $user['firstname']; ?></span>
                                   <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification" id="profile_tab">

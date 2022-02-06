@@ -13,9 +13,9 @@
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
                               <div class="main-menu-header">
-                                  <img class="img-80 img-radius" src="../assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                                  <img class="img-80 img-radius" src="<?php echo $global_link; ?>/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="60" alt="User-Profile-Image">
                                   <div class="user-details">
-                                      <span id="more-details">Dream<i class="fa fa-caret-down"></i></span>
+                                      <span id="more-details"><?php echo $user['firstname']; ?><i class="fa fa-caret-down"></i></span>
                                   </div>
                               </div>
         
@@ -153,6 +153,13 @@
                                     </li>  
                                 </ul>
                             </li>
+                            <li>
+                                <a href="payroll_list.php" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Payroll</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
 
                             <li class="pcoded-hasmenu" id="evaluation">
                                 <a href="javascript:void(0)" class="waves-effect waves-dark">
@@ -230,20 +237,6 @@
         
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Printables</div>
                           <ul class="pcoded-item pcoded-left-item nav">
-                              <li>
-                                  <a href="chart.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-agenda"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Payroll</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="map-google.html" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="fa fa-calendar"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Schedule</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
                               <li class="nav-item">
                                   <a href="documents.php" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-zip"></i><b>FC</b></span>
@@ -312,8 +305,11 @@
               $("#dtr").addClass('active'); // ACTIVATE ACTIVE
             }
           }
-          if ((url).href.indexOf("overtime_category") != -1) {
+          if ((url).href.indexOf("overtime_category") != -1 || (url).href.indexOf("new_employee_cnt") != -1 || (url).href.indexOf("new_employee_jo") != -1) {
             $("#employee").addClass('active'); // ACTIVATE ACTIVE
+          }
+          else if ((url).href.indexOf("new_evaluation") != -1 || (url).href.indexOf("edit_evaluation") != -1) {
+            $("#evaluation").addClass('active'); // ACTIVATE ACTIVE
           }
 
 

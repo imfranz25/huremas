@@ -1,7 +1,7 @@
 <?php 
 $title="Profile";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 ?>
 <!-- Remove Green Theme Temporarily including shadows -->  
 <style type="text/css">
@@ -17,7 +17,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 </style>
 
 <body>
-  <?php //require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
     <!-- Pcoded -->  
     <div id="pcoded" class="pcoded">
@@ -39,9 +39,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
               <!-- Profile Sidebar Header -->
               <div class="p-3 rounded-top" style="background: #379C43">
                 <div class="d-flex justify-content-center">
-                  <img class="img-80 img-radius m-2" src="../assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                  <img class="img-radius m-2" src="/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="150" alt="User-Profile-Image">
                 </div>    
-                <h5 class="text-center text-white">Dream</h5>    
+                <h5 class="text-center text-white"><?php echo $user['firstname']; ?></h5>    
               </div>
               <!-- Profile Sidebar Header **End**-->
               <ul class="nav nav-tabs md-tabs flex-column" id="profile_tab" role="tablist">
@@ -197,12 +197,12 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                    </div> 
                 </div>
                 <!--Schedule -->
-                <div class="row d-flex m-3">
-                  <label class="col-lg-2 col-form-label">Schedule</label>
-                  <div class="col-lg-6">
-                    <input type="text"  id="schedule" class="form-control" readonly> 
-                   </div> 
-                </div>
+                <!--<div class="row d-flex m-3">-->
+                <!--  <label class="col-lg-2 col-form-label">Schedule</label>-->
+                <!--  <div class="col-lg-6">-->
+                <!--    <input type="text"  id="schedule" class="form-control" readonly> -->
+                <!--   </div> -->
+                <!--</div>-->
                 <!--Category -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Category</label>
@@ -244,6 +244,33 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                   <label class="col-lg-2 col-form-label">TIN Number</label>
                   <div class="col-lg-6">
                     <input type="text"  id="tin" class="form-control" readonly> 
+                   </div> 
+                </div>
+                
+                <!--Account -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Account Details</h5>
+                   </div> 
+                </div>
+                <!--Username -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Username</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="username" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Password -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Default Password</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="password" class="form-control" readonly> 
+                    <div class="input-group-append">
+                      <span class="input-group-text text-info">
+                        <label><i class="fa fa-info-circle"></i> Note : Please change your password for the first time login.</label> 
+                      </span>
+                    </div>
                    </div> 
                 </div>
 
@@ -459,7 +486,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
 
 
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php"); ?>
  
     <script>
 
@@ -479,7 +506,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
       function get_profile(){
         $.ajax({
           type: 'POST',
-          url: '/HUREMAS/Portal/admin/function/get_profile.php',
+          url: 'function/get_profile.php',
           dataType: 'json',
           success: function(response){
             $('#employeeid').val(response.employee_id);
@@ -493,14 +520,16 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
             $('#age').val(getAge(response.birthdate));
             $('#mobile').val(response.mobile_no);
             $('#department').val(response.title);
-            $('#schedule').val(response.time_in+' - '+response.time_out);
+            //$('#schedule').val(response.time_in+' - '+response.time_out);
             $('#category').val(response.cat);
             //gov id
             $('#sss').val(response.sss_id);
             $('#pagibig').val(response.pagibig_id);
             $('#philhealth').val(response.philhealth_id);
             $('#tin').val(response.tin_num);
-
+            //account
+            $('#username').val(response.username);
+            $('#password').val(response.default_password);
             //religion
             //civil status
           }  
@@ -654,7 +683,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
             $.ajax({
             type: 'POST',
-            url: '/HUREMAS/Portal/admin/function/change_password.php',
+            url: 'function/change_password.php',
             data:{currentpass:currentpass,newpass:newpass,confirmpass:confirmpass},
             dataType: 'json',
             success: function(response){

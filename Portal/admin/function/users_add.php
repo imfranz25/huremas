@@ -1,5 +1,7 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
+	require_once 'sendEmail.php';
 
 	if(isset($_POST['add'])){
 		$employee_id = $_POST['employee_id'];
@@ -23,7 +25,22 @@
 		$sql = "INSERT INTO admin (`employee_id`, `username`, `password`, `default_password`, `type`) VALUES ('$employee_id','$username','$hashed_password','$default','$type')";	
 		
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'User created successfully';
+		    
+		    $sql1 = "SELECT * FROM employees WHERE employee_id='$employee_id'";
+		    $query = $conn->query($sql1);
+		    $row = $query->fetch_assoc();
+		    
+		    $gmail = $row['email'];
+		    $subject="Account Created";
+		    $message = "Hello!,<br><br>You may now login at : http://huremas-cvsuic.online/Portal  <br>Username: ".$username."<br>Default Password: ".$default." <br><br>Please change your password immediately!";
+		    
+		    $res= sendEmail($gmail,$subject,$message);
+		    
+		    
+		    
+		    
+		    
+			$_SESSION['success'] = $res.' User created successfully';
 		}
 		else{
 			$_SESSION['error'] = "User created unsuccessfully";

@@ -1,19 +1,20 @@
 <?php 
-$title = 'Home';
-session_start();
-include 'includes/conn.php';
-include 'includes/head.php'; 
+  $title = 'Home';
+  session_start();
+  require_once("includes/path.php");
+  require_once($_SERVER['DOCUMENT_ROOT'].$global_link."/Database/conn.php");
+  require_once("includes/head.php");
 ?>
 
 <body>
 
   
-    <!--Top Header-->
-    <?php include 'includes/top-header.php'; ?>
-    <!--Header-->
-    <?php include 'includes/header.php'; ?>
-
-
+  <!--Top Header-->
+  <?php 
+    require_once("includes/top-header.php");
+    require_once("includes/header.php");
+  ?>
+  <!--Header-->
 
     <!-- slider section -->
     <section class=" slider_section position-relative">
@@ -242,7 +243,7 @@ include 'includes/head.php';
     $query = $conn->query($sql);
     $count = $query->num_rows;
 
-    if ($count > 0) {
+    if ($count > 0):
   ?>
 
   <!-- event section -->
@@ -266,7 +267,7 @@ include 'includes/head.php';
 
         <div class="box">
           <div class="img-box">
-            <img src="../Portal/admin/uploads/events/<?php echo $row['display_image']; ?>" alt="<?php echo $row['event_name']; ?>" class="img-fluid" />
+            <img src="<?php echo $global_link; ?>/Portal/admin/uploads/events/<?php echo $row['display_image']; ?>" alt="<?php echo $row['event_name']; ?>" class="img-fluid" />
           </div>
           <div class="detail-box">
             <h4>
@@ -299,7 +300,7 @@ include 'includes/head.php';
         <div class="collapse" id="moreEvents">
           <div class="box">
             <div class="img-box">
-              <img src="../Portal/admin/uploads/events/<?php echo $row['display_image']; ?>" alt="<?php echo $row['event_name']; ?>" class="img-fluid" />
+              <img src="<?php echo $global_link; ?>/Portal/admin/uploads/events/<?php echo $row['display_image']; ?>" alt="<?php echo $row['event_name']; ?>" class="img-fluid" />
             </div>
             <div class="detail-box">
               <h4>
@@ -348,16 +349,16 @@ include 'includes/head.php';
     </div>
   </section>
 
-  <?php } ?>
-  <!-- end event section -->
-
-
   <?php 
+  
+    endif; 
+    // <!-- end event section -->
+
     $sql = "SELECT * FROM news WHERE news_date >= '$date_today' ;";
     $query = $conn->query($sql);
     $count = $query->num_rows;
 
-    if ($count > 0) {
+    if ($count > 0):
   ?>
 
 
@@ -392,7 +393,7 @@ include 'includes/head.php';
           <div class="carousel-item <?php echo $active;  ?>">
             <div class="box">
               <div class="img-box">
-                <img src="/HUREMAS/Portal/admin/uploads/news/<?php echo $row['display_image']; ?>" alt="<?php echo $row['news_headline']; ?>" width="100" height="100"  />
+                <img src="<?php echo $global_link; ?>/Portal/admin/uploads/news/<?php echo $row['display_image']; ?>" alt="<?php echo $row['news_headline']; ?>" width="100" height="100"  />
               </div>
               <div class="detail-box">
                 <h5>
@@ -423,13 +424,15 @@ include 'includes/head.php';
 
   <!-- end client section -->
 
-  <?php } ?>
+  <?php 
 
-  <!--Contact-->
-  <?php include_once 'includes/contact.php'; ?>
+    endif;
+    // <!--Contact-->
+    require_once("includes/contact.php");
+    // <!--footer-->
+    require_once("includes/footer.php");
 
-  <!--footer-->
-  <?php include_once 'includes/footer.php'; ?>
+  ?>
 
  
 </body>

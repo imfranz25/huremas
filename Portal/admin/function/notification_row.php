@@ -1,7 +1,8 @@
 <?php 
 
 	//require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 
 	//$id =$user["employee_id"];

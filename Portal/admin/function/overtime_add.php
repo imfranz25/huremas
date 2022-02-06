@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
 		$status = isset($_POST['status']) ? $_POST['status'] : "inactive";

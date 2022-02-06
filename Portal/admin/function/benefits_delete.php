@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['delete'])){
 		$id = $_POST['id'];
@@ -24,7 +25,7 @@
 				$_SESSION['error'] = 'Incorrect Password, please try again';
 			}
 		}else{
-		 	$_SESSION['error'] = 'Benefit deletion failed, record is currently in used';
+		 	$_SESSION['error'] = 'Delete benefit record failed, record is currently in used';
 		}
 
 		

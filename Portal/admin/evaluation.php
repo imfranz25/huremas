@@ -3,9 +3,10 @@
 	<div class="card card-outline card-success">
 		<div class="card-header">
 			<div class="card-tools">
-				
-
-				<a href="performance_eval.php?page=new_evaluation"><button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-plus"></i>New</button></a>
+				<h5>
+                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Employee Task Evaluation </a>
+                </h5>
+				<a href="performance_eval.php?page=new_evaluation" class="float-right"><button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-plus"></i>New</button></a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -35,11 +36,11 @@
 		                      Action
 		                    </button>
 		                    <div class="dropdown-menu" style="">
-		                      <a class="dropdown-item view_evaluation" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">View</a>
+		                      <a class="dropdown-item view_evaluation" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-eye"></i>View</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item" href="performance_eval.php?page=edit_evaluation&id=<?php echo $row['id'] ?>">Edit</a>
+		                      <a class="dropdown-item" href="performance_eval.php?page=edit_evaluation&id=<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
 		                      <div class="dropdown-divider"></div>
-		                      <a class="dropdown-item delete_evaluation" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Delete</a>
+		                      <a class="dropdown-item delete_evaluation text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
 		                    </div>
 						</td>
 					</tr>	

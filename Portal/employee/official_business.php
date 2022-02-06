@@ -1,11 +1,11 @@
 <?php 
 $title ="Official Business";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 
 ?>
   <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
   <div id="pcoded" class="pcoded">
       
@@ -67,6 +67,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
                         ?>
                             <!-- Main-body start -->
+                            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addOT"><i class="fa fa-plus"></i>New</button>
 
                         <div class="card">
                           <div class="card-block">
@@ -75,16 +76,15 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
 
 
                             <div class="card-header">
-
-                              <h5>
-                                <a type="button" class="btn btn-default">
-                                  Official Business List
-                                </a>
-                              </h5>
-                              <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addOT"><i class="fa fa-plus"></i>New</button>
-
-
-                            </div>
+                                                <h5>Official Business List</h5>
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
              
@@ -130,9 +130,10 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                         
                                                         <div class="dropdown-menu" style="">
                                                         	<?php if($row['status']=='0'): ?>
+                                                          <div class="dropdown-divider"></div>
                                                           <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['oids'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                           <div class="dropdown-divider"></div>
-                                                          <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['oids'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                          <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['oids'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                           <?php endif; ?>
 
                                                           <div class="dropdown-divider"></div>
@@ -165,8 +166,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
    
 
     <?php require_once 'includes/ob_modal.php'; ?>
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/alert_modal.php"); ?>
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/alert_modal.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php"); ?>
 
     
     <script>

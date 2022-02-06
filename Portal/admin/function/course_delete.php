@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 
 	$stmt = $conn->prepare("DELETE FROM training_course WHERE id = ? ");

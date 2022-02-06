@@ -302,18 +302,27 @@
                                 <input type="hidden" id="departmentid_on" name="department">
                                 <input type="text" id="department_on" class="form-control" readonly>
                               </div>
+                              
+                              
+                               <!--Category-->
+                                <label for="" class="col-12 mt-3">Category</label>
+                                <div class="col-12">
+                                    <input type="hidden" id="category_id" name="category" readonly>
+                                    <input type="text" id="category_name" class="form-control" readonly>
+                                </div>
+
 
                               <!--Basic Salary-->
-                              <label class="col-12 mt-3">Basic Salary</label> 
-                              <div class="col-12">
-                                <input type="text" id="salary_on" name="salary" class="form-control" readonly>
-                              </div>
+                              <!--<label class="col-12 mt-3">Basic Salary</label> -->
+                              <!--<div class="col-12">-->
+                              <!--  <input type="text" id="salary_on" name="salary" class="form-control" readonly>-->
+                              <!--</div>-->
 
                               <!--Daily Wage-->
-                              <label class="col-12 mt-3">Daily Wage</label> 
-                              <div class="col-12">
-                                <input type="text" id="wage_on" name="wage" class="form-control" readonly>
-                              </div>
+                              <!--<label class="col-12 mt-3">Daily Wage</label> -->
+                              <!--<div class="col-12">-->
+                              <!--  <input type="text" id="wage_on" name="wage" class="form-control" readonly>-->
+                              <!--</div>-->
 
                                <!--Photo-->
                               <label class="req col-12 mt-3 req">Upload Photo  (Please attach profile picture in a JPG or PNG Format)</label> 
@@ -324,39 +333,6 @@
                                 </div>
                               </div>
 
-                              <!--Category-->
-                                <label for="" class="req col-12 mt-3">Category</label>
-                                <div class="col-12">
-                                    <select class="form-control border border-secondary" name="category" id="category_on" required>
-                                        <option value="" selected>--Select category--</option>
-                                        <?php
-                                          $sql = "SELECT * FROM employment_category";
-                                          $query = $conn->query($sql);
-                                          while($prow = $query->fetch_assoc()){
-                                            echo "
-                                              <option value='".$prow['id']."'>".$prow['cat']." (".$prow['code'].")</option>
-                                            ";
-                                          }
-                                        ?>
-                                    </select>
-                                </div>
-
-                              <!--Schedule-->
-                              <label class="req col-12 mt-3">Schedule</label> 
-                              <div class="col-12">
-                                <select id="schedule_on" name="schedule" class="form-control border border-secondary" required>
-                                  <option value="">--select schedule--</option>
-                                  <?php
-                                    $sql = "SELECT * FROM schedules";
-                                    $query = $conn->query($sql);
-                                    while($srow = $query->fetch_assoc()){
-                                      echo "
-                                        <option value='".$srow['id']."'>".$srow['time_in'].' - '.$srow['time_out']."</option>
-                                      ";
-                                    }
-                                  ?>
-                                </select>
-                              </div>
 
                               <!--SSS-->
                               <label class="col-12 mt-3 req">SSS</label> 
@@ -380,24 +356,6 @@
                               <label class="col-12 mt-3 req">TIN Number</label> 
                               <div class="col-12">
                                 <input type="text" id="tin_on" name="tin" class="form-control border border-secondary" >
-                              </div>
-
-                              <!--SSS-->
-                              <label class="col-12 mt-3 req">SSS Premium</label> 
-                              <div class="col-12">
-                                <input type="text" id="sssprem_on" name="sssprem" class="form-control border border-secondary" >
-                              </div>
-
-                              <!--Pag-ibig-->
-                              <label class="col-12 mt-3 req">Pag-ibig Premium</label> 
-                              <div class="col-12">
-                                <input type="text" id="pagibigprem_on" name="pagibigprem" class="form-control border border-secondary" >
-                              </div>
-
-                              <!--Philhealth-->
-                              <label class="col-12 mt-3 req">Philhealth Premium</label> 
-                              <div class="col-12">
-                                <input type="text" id="philhealthprem_on" name="philhealthprem" class="form-control border border-secondary" >
                               </div>
 
 
@@ -472,7 +430,7 @@
                             <h2 class="text-success text-center"><strong>SUCCESS !</strong></h2> <br>
                             <div class="row justify-content-center">
                                 <div class="col-3 mx-auto"> 
-                                  <img id="success-onboard" src="/HUREMAS/Portal/admin/images/success-onboard.png" class="img-fluid mx-auto"> 
+                                  <img id="success-onboard" src="/Portal/admin/images/success-onboard.png" class="img-fluid mx-auto"> 
                                 </div>
                             </div> <br><br>
                             <div class="row justify-content-center mb-4">
@@ -566,10 +524,10 @@
         //STAGE VALIDATION
         if(page=='person'){
           //check if this page has null values
-          null_input = ['#email_on', '#fname_on', '#lname_on', '#sex_on', '#bday_on', '#contact_on', '#address_on', '#mobile_on'].some(check_null);
+          null_input = ['#email_on', '#fname_on', '#lname_on', '#sex_on', '#bday_on', '#contact_on', '#address_on', '#mobile_on','#age_on'].some(check_null);
         }else if(page=='company'){
           //check if this page has null values
-          null_input = ['#schedule_on', '#file_on','#category_on','#sss_on','#pagibig_on','#philhealth_on','#tin_on','#sssprem_on','#pagibigprem_on','#philhealthprem_on'].some(check_null);
+          null_input = ['#file_on','#sss_on','#pagibig_on','#philhealth_on','#tin_on'].some(check_null);
           if (!null_input) {
             let ln = $('#lname_on').val();
             let fn = $('#fname_on').val();

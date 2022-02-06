@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['status_code'])){
 		$code = $_POST['status_code'];

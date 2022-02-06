@@ -1,6 +1,6 @@
 <?php 
-
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if (isset($_POST['add'])) {
 
@@ -40,7 +40,7 @@
 			$_SESSION['error'] = 'File size exceeds the maximum limit';
 		}else{
 			//move file
-			move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/HUREMAS/Portal/admin/uploads/events/'.$new_filename);
+			move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename);
 			if($conn->query($sql)){
 				$_SESSION['success'] = 'Event posted successfully';
 			}

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include 'conn.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].$global_link.'/Database/conn.php';
 
 	if(!isset($_SESSION['id']) || trim($_SESSION['id']) == ''){
 		header('location: ../index.php');

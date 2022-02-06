@@ -3,7 +3,7 @@
     <div class="container" >
       <div>
       <a href="index.php">
-          <img src="/HUREMAS/Home/assets/images/cvsu-logo.png" alt="Cavite State University" style="width: 100%;height: auto;max-width: 180px;" class="cvsu-logo" />
+          <img src="<?php echo $global_link; ?>/Home/assets/images/cvsu-logo.png" alt="Cavite State University" style="width: 100%;height: auto;max-width: 180px;" class="cvsu-logo" />
       </a>
       <a href="https://www.youtube.com/channel/UCMraY_VdxLvKTktj1el5FwQ" class="social mx-2"><i class="fab fa-youtube fa-2x"></i></a>
       <a href="https://www.facebook.com/cvsuimusofficialpage" class="social mx-2"><i class="fab fa-facebook fa-2x"></i></a>
@@ -15,7 +15,7 @@
     <div class="container" >
       <div class="row mar-3">
         <div class="col-md-3">
-          <a href="https://www.gov.ph"><img src="/HUREMAS/Home/assets/images/rng.png" alt="Philippine Government Logo"></a>
+          <a href="https://www.gov.ph"><img src="<?php echo $global_link; ?>/Home/assets/images/rng.png" alt="Philippine Government Logo"></a>
         </div>
         <div class="col-md-2 mb-2">
           <div class="info_menu">
@@ -45,16 +45,16 @@
             </h5>
             <ul class="navbar-nav  ">
               <li>
-                <a class="nav-link" href="/HUREMAS/Home/job/jobs.php"> Job Offering <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?php echo $global_link; ?>/Home/job/jobs.php"> Job Offering <span class="sr-only">(current)</span></a>
               </li>
               <li>
-                <a class="nav-link" href="/HUREMAS/Home/index.php?#news"> News and Updates </a>
+                <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#news"> News and Updates </a>
               </li>
               <li>
-                <a class="nav-link" href="/HUREMAS/Home/index.php?#events"> Events </a>
+                <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#events"> Events </a>
               </li>
               <li>
-                <a class="nav-link" href="/HUREMAS/Home/index.php?#about"> About Us </a>
+                <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#about"> About Us </a>
               </li>
             </ul>
           </div>
@@ -91,7 +91,8 @@
   <!-- footer section -->
   <footer class="container-fluid footer_section">
     <p>
-      &copy; <?php echo date('Y'); ?> HUREMAS - CVSU Imus Campus All Rights Reserved.
+      &copy; <?php echo date('Y'); ?> 
+      HUREMAS - CVSU Imus Campus All Rights Reserved.
     </p>
   
   </footer>
@@ -99,5 +100,5 @@
  
   <!-- footer section -->
 
-  <script type="text/javascript" src="/HUREMAS/Home/assets/js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="/HUREMAS/Home/assets/js/bootstrap.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.js"></script>

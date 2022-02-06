@@ -10,23 +10,67 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="function/position_add.php">
-
-          		  <div class="form-group row">
-                  	<label for="title" class="col-sm-3 control-label req">Title</label>
-
-                  	<div class="col-sm-9">
-                    	<input type="text" class="form-control border border-secondary" id="title" name="title" required>
-                  	</div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="rate" class="col-sm-3 control-label req">Rate per Hr</label>
+                <div class="form-group">
+                    <label for="rate" class="col-sm-3 control-label">Type</label>
 
                     <div class="col-sm-9">
-                      <input type="number" class="form-control border border-secondary" id="rate" name="rate" min='0' step="100" required>
+                      <select id="typeS" name="type" class="form-control border border-secondary" onchange="changelabel()" required>
+                        <option value="1">Contractual (CNT)</option>
+                        <option value="2">Job Order (JO)</option>
+                      </select>
                     </div>
                 </div>
-          	</div>
+
+          		  <div class="form-group">
+                  	<label for="title" class="col-sm-3 control-label">Designation Title</label>
+
+                  	<div class="col-sm-9">
+                    	<input type="text" class="form-control" id="title" name="title" required>
+                  	</div>
+                </div>
+                <div class="form-group">
+                    <div id="bs" class="col-sm-12">
+                         <div class="form-group">
+                        <label  for="rate" class="control-label">Basic Salary: </label>
+
+                          <select class="border border-secondary" name="sslx" id="sslx" onchange="ssl_table()">
+                            <?php
+                              $sql = "SELECT * FROM ssl_table ";
+                                    $query = $conn->query($sql);
+                                    while($prow = $query->fetch_assoc()){
+                                      echo "
+                                        <option value='".$prow['id']."'>Salary Grade - ".$prow['salary_grade']."</option>
+                                      ";
+                                    }
+
+                            ?>
+
+                          </select>
+                          <label  for="" class="control-label"> - </label>
+
+                          <select class="border border-secondary" onchange="ssl_table()" name="step" id="step">
+                            <?php
+                              for ($i=1; $i < 9; $i++) { 
+                               echo "
+                                        <option value='S".$i."'>Step - ".$i."</option>
+                                      ";
+                              }
+                            ?>
+
+                          </select>
+                        </div>
+   
+                    </div>
+                </div>
+
+                    <div id="rph" style="display: none;">
+                    <label  for="rate" class="col-sm-3 control-label">Rate per Hr</label>
+                    </div>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="rate" name="rate" readonly="" required="">
+                    </div>
+              </div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
             	<button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
@@ -49,16 +93,59 @@
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="function/position_edit.php">
             		<input type="hidden" id="posid" name="id">
-                <div class="form-group row">
-                    <label for="edit_title" class="col-sm-3 control-label req">Title</label>
+                <div class="form-group">
+                    <label for="rate" class="col-sm-3 control-label">Type</label>
+
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary" id="edit_title" name="title" required>
+                      <input type="text" class="form-control" id="typeS2" name="type" readonly="">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="edit_rate" class="col-sm-3 control-label req">Rate per Hr</label>
+                <div class="form-group">
+                    <label for="edit_title" class="col-sm-3 control-label">Designation Title</label>
+
                     <div class="col-sm-9">
-                      <input type="number" class="form-control border border-secondary" id="edit_rate" name="rate" min='0' step="100"  required>
+                      <input type="text" class="form-control" id="edit_title" name="title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div id="bs2" class="col-sm-12">
+                         <div class="form-group">
+                        <label  for="rate" class="control-label">Basic Salary: </label>
+
+                          <select class="border border-secondary" name="sslx2" id="sslx2" onchange="ssl_table2()">
+                            <?php
+                              $sql = "SELECT * FROM ssl_table ";
+                                    $query = $conn->query($sql);
+                                    while($prow = $query->fetch_assoc()){
+                                      echo "
+                                        <option value='".$prow['id']."'>Salary Grade - ".$prow['salary_grade']."</option>
+                                      ";
+                                    }
+
+                            ?>
+
+                          </select>
+                          <label  for="" class="control-label"> - </label>
+
+                          <select class="border border-secondary" name="step2" onchange="ssl_table2()" id="step2">
+                            <?php
+                              for ($i=1; $i < 9; $i++) { 
+                               echo "
+                                        <option value='S".$i."'>Step - ".$i."</option>
+                                      ";
+                              }
+                            ?>
+
+                          </select>
+                        </div>
+   
+                    </div>
+                    <div id="rph2" style="display: none;">
+                    <label  for="rate" class="col-sm-3 control-label">Rate per Hr</label>
+                    </div>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="edit_rate" name="rate" required readonly="">
                     </div>
                 </div>
           	</div>
@@ -87,14 +174,9 @@
             		<div class="text-center">
 	                	<p>Are you sure you want to delete this designation record(s)?</p>
 	                	<h2 id="del_position" class="bold"></h2>
-                        <div class="form-group row">
-                        <label for="pass" class="col-sm-3 control-label req">Password</label>
-                        <div class="col-sm-9">
-                          <input type="password" class="form-control border border-secondary" id="pass" name="pass" placeholder="Please enter your password for verification" required>
-                        </div>
-                    </div>
                     <div class="text-center text-danger" >
-                      <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i> Note: You can't delete a position record if its currently applied in employee record</label>
+                      <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+                      <label> Note: This process cannot be undone</label>
                     </div>
 	            	</div>
           	</div>
@@ -114,7 +196,7 @@
 
 <!-- Add -->
 <div class="modal fade" id="addnew2">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
               
@@ -124,26 +206,23 @@
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="function/department_add.php">
-
-                <div class="form-group row">
-                    <label for="title" class="col-sm-3 control-label req">Title</label>
+                <div class="form-group">
+                    <label for="title" class="col-sm-4 control-label">Department Title</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary" id="" name="title" required>
+                      <input type="text" class="form-control" id="" name="title" required>
                     </div>
-
                 </div>
-                <div class="form-group row">
-                    <label for="rate" class="col-sm-3 control-label req">Code</label>
+                <div class="form-group">
+                    <label for="rate" class="col-sm-4 control-label">Department Code</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary" id="" name="code" required>
+                      <input type="text" class="form-control" id="" name="code" required>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-              <button type="reset" class="btn btn-default btn-flat"><i class="fa fa-refresh"></i> Set to Default</button>
               <button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
               </form>
             </div>
@@ -164,18 +243,18 @@
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="function/department_edit.php">
                 <input type="hidden" id="posid2" name="id">
-                <div class="form-group row">
-                    <label for="edit_title" class="col-sm-3 control-label req">Title</label>
+                <div class="form-group">
+                    <label for="edit_title" class="col-sm-4 control-label">Department Title</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary" id="edit_title2" required name="title">
+                      <input type="text" class="form-control" id="edit_title2" name="title">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="edit_rate" class="col-sm-3 control-label req">Code</label>
+                <div class="form-group">
+                    <label for="edit_rate" class="col-sm-4 control-label">Department Code</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control border border-secondary" id="edit_code2" required name="code">
+                      <input type="text" class="form-control" id="edit_code2" name="code">
                     </div>
                 </div>
             </div>
@@ -204,14 +283,9 @@
                 <div class="text-center">
                     <p>Are you sure you want to delete this department record(s)?</p>
                     <h2 id="del_position2" class="bold"></h2>
-                    <div class="form-group row">
-                        <label for="pass" class="col-sm-3 control-label req">Password</label>
-                        <div class="col-sm-9">
-                          <input type="password" class="form-control border border-secondary" id="pass" name="pass" placeholder="Please enter your password for verification" required>
-                        </div>
-                    </div>
                     <div class="text-center text-danger" >
-                      <label><i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i> Note: You can't delete a department record if its curretly applied in employee record</label>
+                      <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
+                      <label> Note: This process cannot be undone</label>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,7 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
+	require_once 'sendEmail.php';
 
 	if (isset($_POST['code'])) {
 
@@ -34,10 +36,15 @@
 		}else{
 			//move file
 			move_uploaded_file($_FILES["resume"]["tmp_name"], '../uploads/applicant/'.$applicant_no.".".$extension);
-
-
-
 			echo ($conn->query($sql)) ? 1 : 0;
+			
+
+		    $subject="Application Received";
+		    $message = "Hello!,<br><br>Your job application has been received, we will notify you if your application has been evaluated. <br>For more  email us at hrdoimus@cvsu.edu.ph";
+		    
+		    $res= sendEmail($email,$subject,$message);
+
+			
 		}
 	}
 

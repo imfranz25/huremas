@@ -1,6 +1,6 @@
 
 <?php
-	require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
 
 	if(isset($_POST['save'])){
 		$reference=trim($_POST['ref_review']);

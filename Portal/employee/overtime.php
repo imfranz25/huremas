@@ -1,11 +1,11 @@
 <?php 
 $title ="Overtime";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 
 ?>
   <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
   <div id="pcoded" class="pcoded">
       
@@ -174,8 +174,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
    
 
     <?php require_once 'includes/overtime_modal.php'; ?>
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/alert_modal.php"); ?>
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/alert_modal.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php"); ?>
 
     
     <script>

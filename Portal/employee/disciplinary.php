@@ -1,11 +1,11 @@
 <?php 
 $title ="Disciplinary";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 
 ?>
   <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
   <div id="pcoded" class="pcoded">
       
@@ -152,8 +152,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
    
 
     <?php require_once 'includes/disciplinary_modal.php'; ?>
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/alert_modal.php"); ?>
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/alert_modal.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php"); ?>
 
     
     <script>
@@ -183,7 +183,7 @@ function DA_row(id){
 
   $.ajax({
     type: 'POST',
-    url: '/HUREMAS/Portal/admin/function/disciplinaryA_row.php',
+    url: '/Portal/admin/function/disciplinaryA_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
@@ -199,7 +199,7 @@ function DA_row(id){
       //attachment link
       $('.attachment_link_DA').html('');
       if (response.attachment!='') {
-        $('.attachment_link_DA').html('<i class="fa fa-paperclip mr-2"></i><label style="cursor: pointer;"><a target="_blank" href="/HUREMAS/Portal/admin/uploads/disciplinary/'+response.attachment+'" class="attachment_DA">'+response.attachment+'</a></label>');
+        $('.attachment_link_DA').html('<i class="fa fa-paperclip mr-2"></i><label style="cursor: pointer;"><a target="_blank" href="/Portal/admin/uploads/disciplinary/'+response.attachment+'" class="attachment_DA">'+response.attachment+'</a></label>');
       }else{
         $('.attachment_link_DA').html('<label><a href="javascript:void(0)">No Attachment</a></label>');
       }

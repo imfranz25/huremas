@@ -1,6 +1,6 @@
 <?php
 session_start();
-	include 'includes/conn.php';
+	include '../Database/conn.php';
 
 	if(isset($_POST['login'])){
         
@@ -21,8 +21,9 @@ session_start();
 				$id = $row['employee_id'];
 				$check_archive = "SELECT employee_archive FROM employees WHERE employee_id = '$id'";
 				$check_query = $conn->query($check_archive);
+				$archive_row = $check_query->fetch_assoc();
 				// CONTINUE TO EMPLOYEE PAGE -> EMPLOYEE IS NOT IN ARCHIVED
-				if ($check_query->num_rows > 0 ) {
+				if ($archive_row['employee_archive'] == 0 ) {
 					$_SESSION['id'] = $row['employee_id'];
 					$_SESSION['type'] = $row['type'];
 				}else{

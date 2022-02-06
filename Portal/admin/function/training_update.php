@@ -1,6 +1,6 @@
 <?php 
-
-	require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
+	require_once '../../includes/path.php';
+	require_once($_SERVER['DOCUMENT_ROOT'].$global_link."/HUREMAS/Portal/admin/includes/session.php");
 
 	$update_record = $conn->prepare("UPDATE training_record SET status='Finished' WHERE training_code = ? AND (status ='On-going' OR status='Finished') ");
 	$update_record->bind_param('s',$code);

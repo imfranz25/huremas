@@ -1,10 +1,10 @@
 <?php 
 $title ="Attendance";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 ?>
   <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
   <div id="pcoded" class="pcoded">
         <div class="pcoded-container navbar-wrapper">         
@@ -97,21 +97,27 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                             
                             ?>
 
+
+                            <br>
+                            <?php if($logs){ ?>
+                              <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addIn" ><i class="fa fa-timer"></i>Time - In</button>
+                            <?php } if($logs2){ ?>
+                              <button class='btn btn-mat waves-effect waves-light btn-warning time_out' data-id='<?php echo $aids; ?>'><i class='fa fa-timer'></i> Time - Out</button>
+                           <?php }?>
+
+
                             <div class="card">
                             <div class="card-header">
+                                                <h5>Attendance History List </h5>
+                                                <div class="card-header-right">
+                                                    <ul class="list-unstyled card-option">
+                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                        <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    </ul>
+                                                </div>
 
-                                    <h5>
-                                      <a type="button" class="btn btn-default">Attendance History List
-                                      </a>
-                                    </h5>
-                                         
-                                    <?php if($logs){ ?>
-                                      <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addIn" ><i class="fa fa-timer"></i>Time - In</button>
-                                    <?php } if($logs2){ ?>
-                                      <button class='btn btn-mat waves-effect waves-light btn-warning time_out float-right' data-id='<?php echo $aids; ?>'><i class='fa fa-timer'></i> Time - Out</button>
-                                   <?php }?>    
-
-                            </div>
+                                            </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
 
@@ -175,8 +181,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
     <?php include 'includes/dtr_modal.php'; ?>
 
     <?php 
-      require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/alert_modal.php");
-      require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php");
+      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/alert_modal.php");
+      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php");
     ?> 
 
     

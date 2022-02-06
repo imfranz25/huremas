@@ -1,18 +1,19 @@
 <?php 
 $title ="News";
-include 'includes/session.php';
-include 'includes/header.php';
+require_once '../includes/path.php';
+require_once 'includes/session.php';
+require_once 'includes/header.php';
 
 ?>
 <body>
-  <?php include 'includes/preloader.php'; ?>
+  <?php include_once 'includes/preloader.php'; ?>
   
   <div id="pcoded" class="pcoded">
       
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">         
-        <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
+        <?php require_once 'includes/navbar.php'?>
+        <?php require_once 'includes/sidebar.php'?>
         
         
                   <div class="pcoded-content">
@@ -154,34 +155,13 @@ include 'includes/header.php';
         </div>
     </div>
 
-    <?php include 'includes/news_modal.php'; ?>
-    <?php include 'includes/alert_modal.php'; ?>
-    <?php include 'includes/scripts.php'; ?>
+    <?php require_once 'includes/news_modal.php'; ?>
+    <?php require_once 'includes/alert_modal.php'; ?>
+    <?php require_once 'includes/scripts.php'; ?>
 
     
 
 <script>
-
-$(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#editNews').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#newsDelete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-  $('.desc').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
-});
 
 
 function getRow(id){
@@ -200,7 +180,7 @@ function getRow(id){
       $('.reference_id').val(response.reference_id);
       $('.news_date').val(response.news_date);
       $('.news_datetext').val((new Date(response.news_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
-      $('.news_image').attr('href','/HUREMAS/Portal/admin/uploads/news/'+response.display_image);
+      $('.news_image').attr('href','<?php echo $global_link; ?>/Portal/admin/uploads/news/'+response.display_image);
       $('.news_image').html(response.display_image);
       $('.news_headline').val(response.news_headline);
       $('.news_detail').val(response.news_details);
@@ -241,6 +221,28 @@ function check_image(file_input) {
 
 
 $(document).ready(function() {
+    
+    //news properties
+    
+     $(document).on('click','.edit',function(e){
+        e.preventDefault();
+        $('#editNews').modal('show');
+        var id = $(this).data('id');
+        getRow(id);
+      });
+    
+      $(document).on('click','.delete',function(e){
+        e.preventDefault();
+        $('#newsDelete').modal('show');
+        var id = $(this).data('id');
+        getRow(id);
+      });
+
+      $(document).on('click','.desc',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        getRow(id);
+      });
 
     // to avoid the re-initialization of datatable
   if ( ! $.fn.DataTable.isDataTable( '#table1' ) ) {

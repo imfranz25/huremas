@@ -76,24 +76,27 @@ if(isset($_SESSION['id'])){
                                     <div class="form-group form-primary">
                                         <input type="text" name="username" class="form-control" required autofocus>
                                         <span class="form-bar"></span>
-                                        <label class="float-label">Your Email Address / Username</label>
+                                        <label class="float-label">Username</label>
                                     </div>
+                                    
+
                                     <div class="form-group form-primary">
-                                        <input type="password" name="password" class="form-control" required>
-                                        <span class="form-bar"></span>
-                                        <label class="float-label">Password</label>
+                                        <div class="input-group" id="show_hide_password">
+                                            <input type="password" name="password" class="form-control" required>
+                                            <div class="input-group-addon">
+                                                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                               <span class="form-bar"></span>
+                                            </div>
+                                             
+                                             <label class="float-label">Password</label>
+                                        </div>
+                                        
                                     </div>
                                     <div class="row m-t-25 text-left">
                                         <div class="col-12">
-                                            <div class="checkbox-fade fade-in-primary d-">
-                                                <label>
-                                                    <input type="checkbox" value="">
-                                                    <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                    <span class="text-inverse">Remember me</span>
-                                                </label>
-                                            </div>
+
                                             <div class="forgot-phone text-right f-right">
-                                                <a href="#" class="text-right f-w-600"> Forgot Password?</a>
+                                                <a href="forgot.php" class="text-right f-w-600"> Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>
@@ -141,6 +144,23 @@ if(isset($_SESSION['id'])){
 <!-- Warning Section Ends -->
 <!-- Required Jquery -->
 <?php include 'includes/scripts.php' ?>
+
+<script>
+    $(document).ready(function() {
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if($('#show_hide_password input').attr("type") == "text"){
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass( "fa-eye-slash" );
+            $('#show_hide_password i').removeClass( "fa-eye" );
+        }else if($('#show_hide_password input').attr("type") == "password"){
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass( "fa-eye-slash" );
+            $('#show_hide_password i').addClass( "fa-eye" );
+        }
+    });
+});
+</script>
 
 </body>
 

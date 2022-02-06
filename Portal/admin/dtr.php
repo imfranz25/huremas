@@ -3,6 +3,7 @@ $title ="Daily Time Records";
 include 'includes/session.php';
 include 'includes/header.php';
 ?>
+ 
   <body>
   <?php include 'includes/preloader.php'; ?>
   
@@ -70,50 +71,52 @@ include 'includes/header.php';
                             <!-- Main-body start -->
                             <div class="row">
                                <div class="col-lg-2">
-                                <label for="">Date Filter</label>
+                                <label for="">Date Filter - Start</label>
                                 <form method="POST" id="date_form" action="<?php $_PHP_SELF ?>">
                                 <input type="date" class="form-control form-control-lg" name="shown_date" id="shown_date" value="<?php if(isset($_POST['shown_date'])){echo $_POST['shown_date'];}else{echo date('Y-m-d');}?>">
-                                </form>
+                                
                               </div>
                               <?php 
                               $today= isset($_POST['shown_date']) ?  $_POST['shown_date'] : date('Y-m-d');
-                              $tom= isset($_POST['shown_date']) ? date('Y-m-d',(strtotime ( '+1 day' , strtotime ( $_POST['shown_date']) ) )) : date('Y-m-d', strtotime('+1 day'));
+      
+                              ?>
+                              
+                              <div class="col-lg-2">
+                                <label for="">Date Filter - End</label>
+    
+                                <input type="date" class="form-control form-control-lg" name="shown_date2" id="shown_date2" value="<?php if(isset($_POST['shown_date2'])){echo $_POST['shown_date2'];}else{echo date('Y-m-d');}?>">
+                                </form>
+                              </div>
+                              
+                              <?php 
+ 
+                              $tom2= isset($_POST['shown_date2']) ? date('Y-m-d',(strtotime ( '+1 day' , strtotime ( $_POST['shown_date2']) ) )) : date('Y-m-d', strtotime('+1 day'));
+                              
+
+                              
+                              
                               ?>
 
-                              <div class="col-lg-2">
-                                <label for="">On Time</label>
-                                <input type="text" class="form-control form-control-lg" id="" readonly="">
-                              </div>
-
-                              <div class="col-lg-2">
-                                <label for="">Late</label>
-                                <input type="text" class="form-control form-control-lg" id="" readonly="">
-                              </div>
-
-                              <div class="col-lg-2">
-                                <label for="">Absent</label>
-                                <input type="text" class="form-control form-control-lg" id="" readonly="">
-                              </div>
-
-                              <div class="col-lg-2">
-                                <label for="">Total Employee</label>
-                                <input type="text" class="form-control form-control-lg" id="" readonly="">
-                              </div>                
-
                            </div>
+                           
+
                             <br>
 
-                              <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addDTR" ><i class="fa fa-plus"></i>New</button>
+                              
                             <div class="card">
                             <div class="card-header">
-                                                <h5>Attendance List </h5>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                    </ul>
-                                                </div>
+                                <h5>
+                                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Attendance List</a>
+                                </h5>
+                                <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addDTR" ><i class="fa fa-plus"></i>New</button>
+                                                <!--<h5>Attendance List </h5>-->
+                                                <!--<div class="card-header-right">-->
+                                                <!--    <ul class="list-unstyled card-option">-->
+                                                <!--        <li><i class="fa fa fa-wrench open-card-option"></i></li>-->
+                                                <!--        <li><i class="fa fa-window-maximize full-card"></i></li>-->
+                                                <!--        <li><i class="fa fa-refresh reload-card"></i></li>-->
+                                                <!--    </ul>-->
+                                                <!--</div>-->
 
                                             </div>
                             <div class="box-body">
@@ -136,7 +139,7 @@ include 'includes/header.php';
                                     <tbody id="tbody">
                                     <?php
                                         $sql = "SELECT a.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name,a.id as aid,e.id as eid FROM attendance a left join employees e on a.employee_id=e.employee_id 
-                                        inner JOIN department_category dc ON dc.id = e.department_id WHERE time_in > '$today' AND time_in < '$tom' order by date_created asc";
+                                        inner JOIN department_category dc ON dc.id = e.department_id WHERE time_in > '$today' AND time_in < '$tom2' order by date_created asc";
                                         $query = $conn->query($sql);
                                         while($row = $query->fetch_assoc()){
                                           $eid= $row['eid'];
@@ -157,7 +160,8 @@ include 'includes/header.php';
                                                   $diff = $t2 - $t1;
                                                   $hours = $diff / 3600 ;
                                                   if($row['time_out']==null){$hours=0;}
-                                               echo round($hours,2) ?></td>
+                                               echo round($hours,2) 
+                                               ?></td>
 
                                               <td class="text-center">
                                                       <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -167,7 +171,7 @@ include 'includes/header.php';
                                                           <div class="dropdown-divider"></div>
                                                           <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                           <div class="dropdown-divider"></div>
-                                                          <a class="dropdown-item delete" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                          <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                         </div>
                                             </td>
                                             </tr>
@@ -213,6 +217,10 @@ $(function(){
    $('#shown_date').change(function(){
       $('#date_form').submit();
    });
+   $('#shown_date2').change(function(){
+      $('#date_form').submit();
+   });
+
 
 });
 

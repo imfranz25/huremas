@@ -1,6 +1,6 @@
 <?php 
-
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['confirmpass'])){	
 
@@ -17,7 +17,7 @@
 
 		//SQL PREPARATION STATEMENT
 		$stmt = $conn->prepare("UPDATE admin SET password = ? WHERE employee_id = ? ");
-		$stmt->bind_param("sd",$confirm,$id);
+		$stmt->bind_param("ss",$confirm,$id);
 		
 		//VALIDATE NEW PASS
 		if(strlen($new) < 8 ){

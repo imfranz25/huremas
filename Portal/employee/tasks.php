@@ -1,10 +1,10 @@
 <?php 
 $title ="Tasks";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 ?>
   <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
   <div id="pcoded" class="pcoded">
         <div class="pcoded-container navbar-wrapper">         
@@ -164,9 +164,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
         </div>
     </div>
 
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/employee/includes/tasks_modal.php");  ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/employee/includes/tasks_modal.php");  ?>
 
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php"); ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php"); ?>
 
     
 
@@ -236,7 +236,7 @@ function getRow2(id){
 	       	var d = dayy.toDateString();
 	        block = block+	"<div class='accordion-desc'><div class='user-block'><span class='btn-group dropleft float-right'>"+
 	        "<span class='btndropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='cursor: pointer;'><i class='fa fa-ellipsis-v'></i></span><div class='dropdown-menu'><a class='dropdown-item manage_progress' href='javascript:void(0)' data-id='"+response[i].id+"'  >Edit</a><div class='dropdown-divider'></div>"+"<a class='dropdown-item delete_progress' href='javascript:void(0)' data-id='"+response[i].id+"'>Delete</a></div>"
-	        +"</span><div><img class='img-radius img-thumbnail' style='border:solid gray 2px ;padding:1px;max-width: 40px;height: auto;' src='../assets/profile/"+response[i].photo+"' alt='user image'><span class='username'><a href='#'>"+response[i].uname+"</a></span><br><span class='fa fa-calendar'></span><span><b>"+d+"</b></span></div></div><div><br><span class='description'>"+response[i].progress+"</span></div></div><p></p>";
+	        +"</span><div><img class='img-radius img-thumbnail' style='border:solid gray 2px ;padding:1px;max-width: 40px;height: auto;' src='/Portal/admin/images/"+response[i].photo+"' alt='user image'><span class='username'><a href='#'>"+response[i].uname+"</a></span><br><span class='fa fa-calendar'></span><span><b>"+d+"</b></span></div></div><div><br><span class='description'>"+response[i].progress+"</span></div></div><p></p>";
 	       }
        }else{
        	block = block = "<div class='mb-2'><center><i>No Progress Yet</i></center></div>";

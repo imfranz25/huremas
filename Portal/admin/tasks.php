@@ -70,19 +70,24 @@ include 'includes/header.php';
                         ?>
                             <!-- Main-body start -->
 
-                            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addTask"><i class="fa fa-plus"></i>New</button>
-       
+                           
 
                             <div class="card">
                             <div class="card-header">
-                                                <h5>Task List</h5>
-                                                <div class="card-header-right">
-                                                    <ul class="list-unstyled card-option">
-                                                        <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                                        <li><i class="fa fa-window-maximize full-card"></i></li>
-                                                        <li><i class="fa fa-refresh reload-card"></i></li>
-                                                    </ul>
-                                                </div>
+    
+                                <h5>
+                                  <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Task List</a>
+                                </h5>
+                                
+                                 <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addTask"><i class="fa fa-plus"></i>New</button>
+       
+                                                <!--<div class="card-header-right">-->
+                                                <!--    <ul class="list-unstyled card-option">-->
+                                                <!--        <li><i class="fa fa fa-wrench open-card-option"></i></li>-->
+                                                <!--        <li><i class="fa fa-window-maximize full-card"></i></li>-->
+                                                <!--        <li><i class="fa fa-refresh reload-card"></i></li>-->
+                                                <!--    </ul>-->
+                                                <!--</div>-->
                                             </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
@@ -152,13 +157,13 @@ include 'includes/header.php';
                                                             Action
                                                           </button>
                                                             <div class="dropdown-menu" style="">
-                                                            <a class="dropdown-item view_task" href="javascript:void(0)" data-id="<?php echo $row['tid'] ?>">View Task</a>
+                                                            <a class="dropdown-item view_task" href="javascript:void(0)" data-id="<?php echo $row['tid'] ?>"><i class="fa fa-eye"></i>View Task</a>
                                                              <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item edit_task" href="javascript:void(0)" data-id="<?php echo $row['tid'] ?>">Edit</a>
+                                                            <a class="dropdown-item edit_task" href="javascript:void(0)" data-id="<?php echo $row['tid'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                              <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item delete_task" href="javascript:void(0)" data-id="<?php echo $row['tid'] ?>">Delete</a>
-                                                             <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item view_progress"  data-id = '<?php echo $row['tid'] ?>' data-task = '<?php echo ucwords($row['task']) ?>'   href="javascript:void(0)" onclick='getids()' >View Progress</a>
+                                                            <a class="dropdown-item view_progress"  data-id = '<?php echo $row['tid'] ?>' data-task = '<?php echo ucwords($row['task']) ?>'   href="javascript:void(0)" onclick='getids()' ><i class="fa fa-eye"></i>View Progress</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item delete_task text-danger" href="javascript:void(0)" data-id="<?php echo $row['tid'] ?>"><i class="fa fa-trash"></i>Delete</a>
                                                   </div>
                                               </td>
                                             </tr>
@@ -240,7 +245,7 @@ function getRow2(id){
           let dayy = new Date(response[i].data_created);
           var d = dayy.toDateString();
           block = block+  "<div class='accordion-desc'>"
-          +"</span><div><img class='img-radius img-thumbnail' style='border:solid gray 2px ;padding:1px;max-width: 40px;height: auto;' src='../assets/profile/"+response[i].photo+"' alt='user image'><span class='username'><a href='#'>"+response[i].uname+"</a></span><br><span class='fa fa-calendar'></span><span><b>"+d+"</b></span></div></div><div><br><span class='description'>"+response[i].progress+"</span></div></div><p></p>";
+          +"</span><div><img class='img-radius img-thumbnail' style='border:solid gray 2px ;padding:1px;max-width: 40px;height: auto;' src='images/"+response[i].photo+"' alt='user image'><span class='username'><a href='#'>"+response[i].uname+"</a></span><br><span class='fa fa-calendar'></span><span><b>"+d+"</b></span></div></div><div><br><span class='description'>"+response[i].progress+"</span></div></div><p></p>";
          }
        }else{
         block = block = "<div class='mb-2'><center><i>No Progress Yet</i></center></div>";

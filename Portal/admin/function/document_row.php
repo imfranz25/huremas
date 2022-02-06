@@ -1,5 +1,6 @@
 <?php 
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['folder_id'])){
 		$_SESSION['folder_name']=$_POST['folder_id'];

@@ -1,15 +1,80 @@
 <?php 
 $title ="Dashboard";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
+
+
+
+
+
 ?>
   <body>
-  <?php //require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php");  ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php");  ?>
   <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">         
         <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
+        <?php include 'includes/sidebar.php';
+
+
+//get reports
+
+
+$trainings=0;
+
+
+
+
+$month=date('M');
+$month2=date('F');
+
+$id = $user['employee_id'];
+
+$sql = "SELECT * FROM employees WHERE employee_id='$id' ";
+$query = $conn->query($sql);
+
+$havesched=0;
+$ontimes=0;
+$laters=0;
+$ot=0;
+$F_month = date('Y-m-01'); 
+$L_month  = date('Y-m-t');
+
+$tt1 = strtotime($F_month );
+$tt2 = strtotime($L_month);
+while($row = $query->fetch_assoc()){
+    $eeid=$row['employee_id'];
+    
+
+
+    
+    $yesterday=date($F_month, strtotime('-1 day'));
+    $tom = date($L_month, strtotime('+1 day'));
+    
+
+    $sql2 = "SELECT * FROM attendance WHERE employee_id='$eeid' AND time_in > '$yesterday' AND time_in < '$tom' ";
+    $query2 = $conn->query($sql2);
+    while($row2 = $query2->fetch_assoc()){
+        $ot++;
+
+    }
+
+    
+     $tt1 +=86400;
+
+
+
+}//while
+
+
+$sql = "SELECT COUNT(*) as counts FROM training_record WHERE status = 'Finished' AND employee_id = '$id' ";
+$query = $conn->query($sql);
+$row = $query->fetch_assoc();
+$trainings = $row['counts'];
+
+
+
+        ?>
                   <div class="pcoded-content">
                       <!-- Page-header start -->
                       <div class="page-header">
@@ -47,8 +112,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">64 %</h4>
-                                                                <h6 class="text-muted m-b-0">On-time Rate</h6>
+                                                                <h4 class="text-c-purple"><?php echo $ot; ?></h4>
+                                                                <h6 class="text-muted m-b-0">Present Count (Jan)</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-bar-chart f-28"></i>
@@ -57,11 +122,11 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                     </div>
                                                     <div class="card-footer bg-c-purple">
                                                         <div class="row align-items-center">
-                                                            <div class="col-9">
+                                                            <div class="col-9"><a href="dtr.php">
                                                                 <p class="text-white m-b-0">More Info</p>
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                                <i class="fa fa-angle-double-right text-white f-16"></i></a>
                                                             </div>
                                                         </div>
             
@@ -73,8 +138,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">14</h4>
-                                                                <h6 class="text-muted m-b-0">Goals Completed</h6>
+                                                                <h4 class="text-c-green"><?php echo $trainings; ?></h4>
+                                                                <h6 class="text-muted m-b-0">Trainings Completed</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-file-text-o f-28"></i>
@@ -83,11 +148,11 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                     </div>
                                                     <div class="card-footer bg-c-green">
                                                         <div class="row align-items-center">
-                                                            <div class="col-9">
+                                                            <div class="col-9"><a href="training.php">
                                                                 <p class="text-white m-b-0">More info</p>
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                                <i class="fa fa-angle-double-right text-white f-16"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -98,13 +163,13 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                             <!--Disciplinary Count-->
                                             <?php
                                                 $id = $user['employee_id'];
-                                                $sql = "SELECT COUNT(disciplinary_action.id) as dis_count FROM disciplinary_action WHERE employee_id='$id' ";
+                                                $sql = "SELECT COUNT(*) as dis_count FROM task WHERE employee_id='$id' AND status='2' ";
                                                 $query=$conn->query($sql);
                                                 $row =$query->fetch_assoc();
+
+
                                             ?>
                                             <!--Disciplinary Count END-->
-
-
 
                                             <div class="col-xl-3 col-md-6">
                                                 <div class="card">
@@ -112,7 +177,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
                                                                 <h4 class="text-c-red"><?php echo $row['dis_count']; ?></h4>
-                                                                <h6 class="text-muted m-b-0">Diciplinary Action</h6>
+                                                                <h6 class="text-muted m-b-0">Pending Task</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-calendar-check-o f-28"></i>
@@ -121,11 +186,11 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                     </div>
                                                     <div class="card-footer bg-c-red">
                                                         <div class="row align-items-center">
-                                                            <div class="col-9">
+                                                            <div class="col-9"><a href="tasks.php">
                                                                 <p class="text-white m-b-0">More Info</p>
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                                <i class="fa fa-angle-double-right text-white f-16"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -157,11 +222,11 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                     </div>
                                                     <div class="card-footer bg-c-blue">
                                                         <div class="row align-items-center">
-                                                            <div class="col-9">
+                                                            <div class="col-9"><a href="cash_advance.php">
                                                                 <p class="text-white m-b-0">More info</p>
                                                             </div>
                                                             <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                                <i class="fa fa-angle-double-right text-white f-16"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -173,14 +238,14 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                             <div class="col-xl-8 col-md-12">
                                                 <div class="card table-card h-100">
                                                     <div class="card-header">
-                                                        <h5>Disciplinary Actions Report</h5>
+                                                        <h5>My Disciplinary Actions Report</h5>
                                                         <div class="card-header-right">
                                                             <ul class="list-unstyled card-option">
                                                                 <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                                 <li><i class="fa fa-window-maximize full-card"></i></li>
                                                                 <li><i class="fa fa-minus minimize-card"></i></li>
                                                                 <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
+                                                                
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -193,7 +258,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                                     <th>Issued By</th>
                                                                     <th>Subject</th>
                                                                     <th>Action</th>
-                                                                    <!-- <th class="d-flex justify-content-center">Details</th> -->
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -250,7 +314,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                 </div>
                                             </div>
 
-                                             <div class="col-xl-8 col-md-12 mt-4">
+                                             <div class="col-xl-12 col-md-12 mt-4">
                                                 <div class="card h-100">
                                                     <div class="card-header">
                                                         <h5>Upcoming Events</h5>
@@ -260,52 +324,71 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
                                                                 <li><i class="fa fa-window-maximize full-card"></i></li>
                                                                 <li><i class="fa fa-minus minimize-card"></i></li>
                                                                 <li><i class="fa fa-refresh reload-card"></i></li>
-                                                                <li><i class="fa fa-trash close-card"></i></li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                     <div class="card-block">
-                                                        <div class="align-middle m-b-30">
-                                                            <img src="../assets/images/avatar-2.jpg" alt="user image" class="img-radius img-40 align-top m-r-15">
-                                                            <div class="d-inline-block">
-                                                                <h6>Halloween Party</h6>
-                                                                <p class="text-muted m-b-0">lorem ipsum</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-center">
-                                                            <a href="#!" class="b-b-primary text-primary">View all</a>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>
+                                                                        Event Name</th>
+                                                                    <th>Start</th>
+                                                                    <th>End</th>
+                                                                    <th class="text-right">Venue</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+
+                                                                    //events 
+                                                            $date_today = date('Y-m-d');
+                                                            $sql = "SELECT * FROM events WHERE event_date >= '$date_today' ;";
+                                                            $query = $conn->query($sql);
+                                                            $count = $query->num_rows;
+
+                                                            if ($count > 0) :
+                                                                while ($row = $query->fetch_assoc()) :
+                                                                     $date_event=date_create($row['event_date']);
+                                                                     $date_from=date_create($row['event_from']);
+                                                                     $date_to=date_create($row['event_to']);
+
+                                                                    ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="d-inline-block align-middle">
+                                                                            <img src="../admin/uploads/events/<?php echo $row['display_image']; ?>" alt="event image" class="img-radius img-40 align-top m-r-15">
+                                                                            <div class="d-inline-block">
+                                                                                <h6> <?php echo $row['event_name']; ?></h6>
+                                                                                <p class="text-muted m-b-0">
+                                                                                <?php echo date_format($date_event,'d'); ?> <?php echo date_format($date_event,'F'); ?></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td><?php echo date_format($date_from,"h:i A"); ?></td>
+                                                                    <td><?php echo date_format($date_to,"h:i A"); ?></td>
+                                                                    <td class="text-right"><?php echo $row['event_venue']; ?></label></td>
+                                                                </tr>
+
+                                                            <?php endwhile;endif;
+                                                             ?>
+
+
+
+
+
+                                                                </tbody>
+                                                            </table>
+                                
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
-                                            <!--  project and team member end -->
+                                            <!--  member end -->
 
-                                            <div class="col-xl-4 col-md-12 mt-4">
-                                                <div class="card quater-card h-100">
-                                                    <div class="card-block">
-                                                        <h6 class="text-muted m-b-15">Your Attendance Records</h6>
-                                                        <h5>48</h5>
-                                                        <p class="text-muted">On-Time<span class="f-right">80%</span></p>
-                                                        <div class="progress"><div class="progress-bar bg-c-blue" style="width: 80%"></div></div>
-                                                        <h5 class="m-t-15">12</h5>
-                                                        <p class="text-muted">Late<span class="f-right">19%</span></p>
-                                                        <div class="progress"><div class="progress-bar bg-c-green" style="width: 19%"></div></div>
-                                                        <h5 class="m-t-15">4</h5>
-                                                        <p class="text-muted">Absent<span class="f-right">1%</span></p>
-                                                        <div class="progress"><div class="progress-bar bg-c-green" style="width: 1%"></div></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--  sale analytics end -->
-
-
-
-
-
-
-                                            
-                                        
-                                        </div>
+                               
                                     </div>
                                     <!-- Page-body end -->
                                 </div>
@@ -317,6 +400,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
             </div>
         </div>
     </div>
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php");  ?>
+    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php");  ?>
 </body>
 </html>

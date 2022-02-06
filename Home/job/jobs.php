@@ -1,15 +1,16 @@
-<?php 
+<?php
+session_start();
 $title = 'Job Offerings';
-include '../includes/head.php'; 
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/head.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
 ?>
 
 <body>
 
   <!--Top Header-->
-  <?php include '../includes/top-header.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/top-header.php"); ?>
     <!--Header-->
-  <?php include '../includes/header.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/header.php"); ?>
 
 
     <div class="container-fluid m-auto mb-md-5">
@@ -32,7 +33,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
         <div class="special_container">
           <div class="box b1 bg-theme m-0 p-0 d-inline-block d-lg-flex" style="height: 80px;">
             <div class="float-right float-lg-none">
-              <img class="img-60 mx-lg-3" src="/HUREMAS/Home/assets/images/acad.png" alt="Academic Personnel"/>
+              <img class="img-60 mx-lg-3" src="/Home/assets/images/acad.png" alt="Academic Personnel"/>
             </div>
             <div class="detail-box h-100 d-flex align-items-center">
               <h3>Academic</h3>
@@ -41,7 +42,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
 
           <div class="box b2 bg-theme m-0 p-0 d-inline-block d-lg-flex" style="height: 80px;">
             <div class="float-right float-lg-none">
-              <img class="img-60 mx-lg-3" src="/HUREMAS/Home/assets/images/admin.png" alt="Administration Personnel"/>
+              <img class="img-60 mx-lg-3" src="/Home/assets/images/admin.png" alt="Administration Personnel"/>
             </div>
             <div class="h-100 d-flex align-items-center">
               <h3>Administration</h3>
@@ -50,7 +51,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
 
            <div class="box b1 bg-theme m-0 p-0 d-inline-block d-lg-flex" style="height: 80px;">
             <div class="float-right float-lg-none">
-              <img class="img-80 mx-lg-3" src="/HUREMAS/Home/assets/images/non.png" alt="Non-Academic Personnel"/>
+              <img class="img-80 mx-lg-3" src="/Home/assets/images/non.png" alt="Non-Academic Personnel"/>
             </div>
             <div class="h-100 d-flex align-items-center">
               <h3>Non-Academic</h3>
@@ -93,7 +94,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
                     <h2 class="font-weight-bold"><?php echo $row['job_title']; ?></h2>
                     <ul>
                       <li><?php echo $row['job_term']; ?></li>
-                      <li><?php echo $row['job_type']; ?></li>
+                      <li class="d-none"><?php echo $row['job_type']; ?></li>
                       <li><?php echo $row['job_exp']; ?></li>
                     </ul>
                   </div>
@@ -109,7 +110,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
 
           <!--No Job Post-->
             <div class="col-lg-12 p-3 text-center">
-              <img src="/HUREMAS/Portal/assets/images/jobpost.jpg" alt="No Notification" class="rounded-circle img-fluid mx-auto d-block p-4 w-50">
+              <img src="/Portal/assets/images/jobpost.jpg" alt="No Notification" class="rounded-circle img-fluid mx-auto d-block p-4 w-50">
               <h5>THEIR ARE NO ACTIVE JOB POSTING AT THE MOMENT</h5>
               <label>Stay tune for updates or leave us a message  through email</label>
               <button type="button" class="btn btn-warning btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto text-white mb-3 mt-3 font-weight-bold reload_card">Refresh</button>
@@ -124,7 +125,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
   </section>
 
   <!--footer-->
-  <?php include '../includes/footer.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/footer.php"); ?>
 
   <script>
     $(document).ready(function() {
@@ -132,7 +133,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
       //Reload JOB
       $(document).on('click', '.reload_card', function(e) {
         //loading
-        $('#recent').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="/HUREMAS/Portal/admin/images/job_load.gif" />');
+        $('#recent').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="/Portal/admin/images/job_load.gif" />');
         $("#recent").load(location.href+" #recent>*","");
       }); 
 

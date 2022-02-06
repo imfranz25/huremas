@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 
 	$stmt = $conn->prepare("DELETE FROM events WHERE reference_id = ? ");

@@ -1,6 +1,6 @@
 <?php 
-
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if (isset($_POST['add_action'])) {
 		$admin = $user['firstname'].' '.$user['lastname'];

@@ -1,11 +1,15 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
 		$title = addslashes($_POST['title']);
 		$rate = $_POST['rate'];
+		$type = $_POST['type'];
+		$grade = $_POST['sslx'];
+		$step = $_POST['step'];
 
-		$sql = "INSERT INTO position (description, rate) VALUES ('$title', '$rate')";
+		$sql = "INSERT INTO position (description, rate,type,grade,step) VALUES ('$title', '$rate','$type','$grade','$step')";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Designation added successfully';
 		}

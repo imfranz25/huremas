@@ -359,6 +359,13 @@
                       <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
                       <label> Note: This process cannot be undone</label>
                     </div>
+                    <hr>
+                  <div class="form-group row">
+                    <label class="col-sm-3 col-form-label req">Password</label>
+                    <div class="col-sm-9">
+                      <input type="password" name="pass" class="form-control border border-secondary" required="" placeholder="Please enter your password for verification"  />
+                    </div>
+                  </div>
 	            	</div>
           	</div>
           	<div class="modal-footer">
@@ -510,6 +517,13 @@
           <div class="text-center">
             <p>Are you sure you want to delete this disciplinary category?</p>
             <h2 id="del_cat" class="bold h4"></h2>
+            <hr>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label req">Password</label>
+                <div class="col-sm-9">
+                  <input type="password" name="pass" class="form-control border border-secondary" required="" placeholder="Please enter your password for verification"  />
+                </div>
+              </div>
             <div class="text-center text-danger" >
               <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
               <label> Note: You can't delete a category if its currently applied in disciplinary action</label>

@@ -49,8 +49,8 @@
                           </li>
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
-                                  <img src="../assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                  <span>Dream</span>
+                                  <img src="/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="40" height="40" class="img-radius" alt="User-Profile-Image">
+                                  <span><?php echo $user['firstname']; ?></span>
                                   <i class="ti-angle-down"></i>
                               </a>
                               <ul class="show-notification profile-notification" id="profile_tab">

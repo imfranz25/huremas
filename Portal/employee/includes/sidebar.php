@@ -1,12 +1,11 @@
 <script>
-<?php
+  <?php 
   if (isset($_SESSION['type'])) {
-    if ($_SESSION['type']!='employee') {
-?>
+   if ($_SESSION['type']!='employee') {
+  ?>
   window.location.replace('../../index.php');
 <?php }} ?>
 </script>
-
           <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
@@ -14,9 +13,9 @@
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
                               <div class="main-menu-header">
-                                  <img class="img-80 img-radius" src="../assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                                  <img class="img-80 img-radius" src="/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="60" alt="User-Profile-Image">
                                   <div class="user-details">
-                                      <span id="more-details">Dream<i class="fa fa-caret-down"></i></span>
+                                      <span id="more-details"><?php echo $user['firstname']; ?><i class="fa fa-caret-down"></i></span>
                                   </div>
                               </div>
         
@@ -38,7 +37,7 @@
                                       <label class="float-label"><i class="fa fa-search m-r-10"></i>Search</label>
                                   </div>
                               </form>
-                          </div> -->
+                          </div>-->
                           <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Reports</div>
                           <ul class="pcoded-item pcoded-left-item nav">
                               <li class="nav-item">
@@ -49,6 +48,15 @@
                               </li>
                           
                               <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Manage</div>
+                              
+                              <li>
+                                <a href="schedule.php" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-calendar"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Schedule</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                              
                               <li>
                                 <a href="dtr.php" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-timer"></i><b>FC</b></span>
@@ -56,6 +64,7 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
+
 
                             <li>
                                 <a href="overtime.php" class="waves-effect waves-dark">
@@ -79,6 +88,13 @@
                                 <a href="cash_advance.php" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="fa fa-money"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Cash Advance</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="payroll_summary.php" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Payslip</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
@@ -124,6 +140,7 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                             </li>
+        
                           </ul>
         
                           

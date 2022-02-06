@@ -4,6 +4,45 @@ include 'includes/session.php';
 include 'includes/header.php';
 
 ?>
+ <style>
+
+  
+        .multipleSelection {
+            height: 310px;
+            overflow: auto;
+
+        }
+  
+        .selectBox {
+            position: relative;
+        }
+  
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+  
+        .overSelect {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+  
+        #checkBoxes {
+            display: block;
+            border: 1px #8DF5E4 solid;
+        }
+  
+        #checkBoxes label {
+            display: block;
+        }
+  
+        #checkBoxes label:hover {
+            background-color: #38c73a;
+        }
+    </style>
   <body>
   <?php //include 'includes/preloader.php'; ?>
   
@@ -69,13 +108,11 @@ include 'includes/header.php';
                             <section class="content">
 						      <div class="container-fluid">
 						         <?php 
-                        if (isset($_GET['page'])) {
-                          $page = $_GET['page'];
-                        }else{
-                          $page='employee_list';
-                        }
+						            $page = $_GET['page'];
 
 						            include $page.'.php';
+
+					
 						          ?>
 						      </div><!--/. container-fluid -->
 						    </section>
@@ -100,57 +137,75 @@ include 'includes/header.php';
 
 <script>
 
-// INITIALIZATION 
 $('#table1').DataTable();
 $('#benefit_record_table').DataTable();
 
-
-$(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.view').click(function(e){
-    e.preventDefault();
-    $('#view').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.photo').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.viewBenefits').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    var eid = $(this).data('eid');
-    populateBenefit(eid);
-    getBenefit(eid);
-    getRow(id);
-    $('#benModal').modal('show');
-  });
-
-  $('#addBeneFormat').click(function(e){
-    e.preventDefault();
-    $('#benefit_desc').val('');
-  });
+var show = true;
+function showCheckboxes() {
+            var checkboxes = 
+                document.getElementById("checkBoxes");
   
+            if (show) {
+                checkboxes.style.display = "block";
+                show = false;
+            } else {
+                checkboxes.style.display = "none";
+                show = true;
+            }
+        }
 
-});
+$('#category').on('change', function () {
+     var selectVal = $("#category option:selected").val();
+     var deducts = document.getElementById("deducts");
 
+
+     if (selectVal=='1') {
+      deducts.style.display = "block";
+
+     }else{
+      deducts.style.display = "none";
+     }
+});        
+
+function reload(id){
+
+  if(id=='1'){
+    $('#position').html('<?php $query = $conn->query("SELECT * FROM position WHERE type='1'");
+            while($prow = $query->fetch_assoc()){
+              echo '<option value="'.$prow['id'].'" data-rate="'.$prow['rate'].'">'.$prow['description'].'</option>';
+            }?>');
+    $('#income').html('Basic Salary');
+  }else{
+    $('#position').html('<?php $query = $conn->query("SELECT * FROM position WHERE type='2'");
+            while($prow = $query->fetch_assoc()){
+              echo '<option value="'.$prow['id'].'" data-rate="'.$prow['rate'].'">'.$prow['description'].'</option>';
+            }?>');
+     $('#income').html('Rate per hour');
+  }
+
+
+}
+
+function getDeduc(id){
+  $.ajax({
+    type: 'POST',
+    url: 'function/employee_deduction_row.php',
+    data: {id:id},
+    dataType: 'json',
+    success: function(response){
+        $('#deduc_list').html('');
+        let len= response.length;
+        if(len>0){
+            $('#deducts_view').removeClass('d-none');
+            for(let i=0;i<len;i++){
+                $('#deduc_list').append(`<li>${(response)[i].deduction_name}</li>`);
+            }
+        }else{
+          $('#deducts_view').addClass('d-none'); 
+        }
+    }
+  });
+}
 
 function getRow(id){
   
@@ -160,15 +215,13 @@ function getRow(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      //benefit record
-      $('#emp_name').html(response.firstname+' '+response.middlename+' '+response.lastname);
-      $('.emp_id_ben').val(response.employee_id);
-      //emp details
       $('.empid').val(response.empid);
+      $('.eid').val(response.employee_id);
       $('.employee_id').html(response.employee_id);
       $('.del_employee_name').html(response.firstname+' '+response.middlename+' '+response.lastname+' '+response.suffix);
       $('#employee_name').html(response.firstname+' '+response.middlename+' '+response.lastname+' '+response.suffix);
       
+      $('.recid').val(response.employee_id);
       $('#edit_firstname').val(response.firstname);
       $('#edit_middlename').val(response.middlename);
       $('#edit_lastname').val(response.lastname);
@@ -180,10 +233,43 @@ function getRow(id){
       $('#edit_email').val(response.email);
       $('#gender_val option[value='+response.sex+']').attr('selected','selected');
 
-      $('#position option[value='+response.position_id+']').attr('selected','selected');
+      
       $('#department1 option[value='+response.department_id+']').attr('selected','selected');
-      $('#schedule option[value='+response.schedule_id+']').attr('selected','selected');
       $('#category option[value='+response.category_id+']').attr('selected','selected');
+      
+      let avatar = (response.photo!='')?response.photo:'profile.jpg';
+      //view
+      $('#cimg_view').attr('src','/Portal/admin/images/'+avatar);
+      $('#view_firstname').val(response.firstname);
+      $('#view_middlename').val((response.middlename=='')?'N/A':response.middlename);
+      $('#view_lastname').val(response.lastname);
+      $('#view_suffix').val((response.suffix=='')?'N/A':response.suffix);
+      $('#view_address').val(response.address);
+      $('#datepicker_view').val(response.birthdate);
+      $('#view_contact').val(response.contact_info);
+      $('#view_mobile').val(response.mobile_no);
+      $('#view_email').val(response.email);
+      $('#gender_view').val(response.sex);
+      $('#view_category').val(response.cat);
+      $('#view_department1').val(response.title);
+      $('#view_position').val(response.description);
+      $('#view_sss').val(response.sss_id);
+      $('#view_pagibig').val(response.pagibig_id);
+      $('#view_phealth').val(response.philhealth_id);
+      $('#view_tin').val(response.tin_num);
+      $('#view_basic_salary').val(response.rate);
+      $('#view_date_hired').val(response.date_hired);
+
+
+      reload(response.category_id);
+
+      $('#position option[value='+response.position_id+']').attr('selected','selected');
+
+      if(response.category_id==1){
+        $('#income').html('Basic Salary');
+      }else{
+        $('#income').html('Rate per hour');
+      }
 
        $('#dbimage').val(response.photo);
 
@@ -192,21 +278,54 @@ function getRow(id){
       getSalary();
 
       $('#date_hired').val(response.date_hired);
-      $('#date_regular').val(response.date_regularization);
 
       $('#sss').val(response.sss_id);
       $('#pagibig').val(response.pagibig_id);
       $('#phealth').val(response.philhealth_id);
       $('#tin').val(response.tin_num);
 
-      $('#sss_prem').val(response.sss_prem);
-      $('#phealth_prem').val(response.philhealth_prem);
-      $('#pagibig_prem').val(response.pagibig_prem);
-
       var paths = "images/"+response.photo;
 
       $("#cimg").attr("src",paths);
-      
+
+      if(response.category_id=='1'){
+        deducts.style.display = "block";
+      }else{
+        deducts.style.display = "none";
+      }
+
+        //benefit record
+      $('#emp_name').html(response.firstname+' '+response.middlename+' '+response.lastname);
+      $('.emp_id_ben').val(response.employee_id);
+
+
+    }
+  });
+}
+
+function getRow2(id){
+  
+  $.ajax({
+    type: 'POST',
+    url: 'function/employee_deduction_row.php',
+    data: {id:id},
+    dataType: 'json',
+    success: function(response){
+
+
+      if(response.length>0){
+        for (var i = 0; i < response[0].rowcount; i = i + 1) {
+          $('.myCheckbox')[i].checked = false;
+         }
+
+
+         for (var i = 1; i < response.length+1; i = i + 1) {
+          var idcheck = "#cb"+response[i].deduction_id;
+          $(idcheck).prop('checked', true);
+         }
+       }
+
+
     }
   });
 }
@@ -271,37 +390,90 @@ function getBenefit(id){
   });
 }
 
+
+
 $(document).ready(function() {
-
-  // CHECK IF THERE IS STILL MODAL OPEN => TO SUPPORT SCROLLING EVEN IF WE CLOSE THE MODAL
-  $('body').on('hidden.bs.modal', function () {
-    if($('.modal.show').length > 0){
-      $('body').addClass('modal-open');
-    }
-  });
     
-   $('<form method="POST" id="select_form1" action="<?php $_PHP_SELF ?>">'+
-   	'<div class="pull-right" >Department: ' +
-      '<select class="form-control-sm" id="department" name="depts">'+
-      '<option value="">All</option>'+
-      '<?php $sql = "SELECT * FROM department_category order by title asc";
-   $query = $conn->query($sql);
-   while($row = $query->fetch_assoc()){?> ?>'+
-      '<option value="<?php echo $row['id']?>"<?=$row['id'] == $sel ? ' selected="selected"' : '';?>><?php echo $row['title']?></option>'+
+    //employee properties
+     $(document).on('click','.viewBenefits',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        var eid = $(this).data('eid');
+        populateBenefit(eid);
+        getBenefit(eid);
+        getRow(id);
+        $('#benModal').modal('show');
+      });
+      
+      $(document).on('click','.edit',function(e){
+        e.preventDefault();
+        $('#edit').modal('show');
+        var id = $(this).data('id');
+        var eid = $(this).data('eid');
+        getRow(id);
+        getRow2(eid);
+        
+      });
+    
+      $(document).on('click','.view',function(e){
+        e.preventDefault();
+        $('#view').modal('show');
+        var id = $(this).data('id');
+        //let eid = $(this).data('eid');
+        //getDeduc(eid);
+        getRow(id);
+      });
+    
 
-  	'<?php } ?>'+
-      '</select>' +
-      '</form>' +  
-      '</div>').appendTo("#table1_wrapper .dataTables_filter"); //example is our table id
+     $(document).on('click','.delete',function(e){
+        e.preventDefault();
+        $('#delete').modal('show');
+        var id = $(this).data('id');
+        getRow(id);
+      });
+    
+      $(document).on('click','.photo',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        getRow(id);
+      });
+    
+      $(document).on('click','#addBeneFormat',function(e){
+        e.preventDefault();
+        $('#benefit_desc').val('');
+      });
+    
+    
+    
+    
+    // CHECK IF THERE IS STILL MODAL OPEN => TO SUPPORT SCROLLING EVEN IF WE CLOSE THE MODAL
+      $('body').on('hidden.bs.modal', function () {
+        if($('.modal.show').length > 0){
+          $('body').addClass('modal-open');
+        }
+      });
 
-   $(".dataTables_filter label").addClass("pull-right");
+     $('<form method="POST" id="select_form1" action="<?php $_PHP_SELF ?>">'+
+     	'<div class="pull-right" >Department: ' +
+        '<select class="form-control-sm" id="department" name="depts">'+
+        '<option value="">All</option>'+
+        '<?php $sql = "SELECT * FROM department_category order by title asc";
+		 $query = $conn->query($sql);
+		 while($row = $query->fetch_assoc()){?> ?>'+
+        '<option value="<?php echo $row['id']?>"<?=$row['id'] == $sel ? ' selected="selected"' : '';?>><?php echo $row['title']?></option>'+
 
-   $('#department').change(function(){
-    $('#select_form1').submit();
+    	'<?php } ?>'+
+        '</select>' +
+        '</form>' +  
+        '</div>').appendTo("#table1_wrapper .dataTables_filter"); //example is our table id
 
-  });
+     $(".dataTables_filter label").addClass("pull-right");
 
+     $('#department').change(function(){
+      $('#select_form1').submit();
 
+   });
+   
    $(document).on('click','.viewBene',function(e){
     e.preventDefault();
     let id = $(this).data('id');
@@ -366,7 +538,7 @@ $(document).ready(function() {
     });
   });
 
-  $('#addbene_submit').on('submit',function(e){
+  $(document).on('submit','#addbene_submit',function(e){
     e.preventDefault();
     let form = $(this).serialize();
     let id = $('.emp_id_ben').val();
@@ -412,7 +584,25 @@ function getAge1(dateString) {
 function getSalary(){
     var sal = $('#position').find(':selected').data('rate');
     $('#daily_wage').val(sal);
-    $('#basic_salary').val(sal*26);
+  
+}
+
+function getSalary2(){
+    var sal = $('#position').find(':selected').data('rate');
+    var d1 = $('#schedule').find(':selected').data('in');
+    var d2 = $('#schedule').find(':selected').data('out');
+
+    if(sal!=null){
+        //create date format          
+        var timeStart = new Date("01/01/2007 " + d1).getHours();
+        var timeEnd = new Date("01/01/2007 " + d2).getHours();
+        var hourDiff = timeEnd - timeStart;
+
+        $('#daily_wage').val(sal);
+        $('#basic_salary').val(sal*26*hourDiff);
+    }
+
+    
 
 }
 

@@ -1,5 +1,5 @@
 <?php 
-$title ="Position";
+$title ="Designations & Departments";
 include 'includes/session.php';
 include 'includes/header.php';
 ?>
@@ -30,7 +30,7 @@ include 'includes/header.php';
                                           <li class="breadcrumb-item">
                                               <a href="index.php"> <i class="fa fa-home"></i> </a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="#!">Designations & Departments</a>
+                                          <li class="breadcrumb-item"><a href="position.php">Designations & Departments</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -112,6 +112,7 @@ include 'includes/header.php';
 
     
     <script>
+ssl_table();
 $(function(){
   $('.edit').click(function(e){
     e.preventDefault();
@@ -139,15 +140,88 @@ $(function(){
     var id = $(this).data('id');
     getRow2(id);
   });
-
-  $('.nav-link').click(function(e){
-    let link = $(this).attr('href');
-    $('.tab-pane').removeClass('active');
-    $(link).addClass('active');
-  });
-
-  
 });
+
+function changelabel(){
+    var sal = $("#typeS").val();
+    var bs = document.getElementById("bs");
+    var rph = document.getElementById("rph");
+    var rate = document.getElementById("rate");
+    
+    if(sal==1){
+      bs.style.display = "block";
+      rph.style.display = "none";
+      rate.value="";
+    }else{
+      rph.style.display = "block";
+      bs.style.display = "none";
+      rate.value=180;
+
+    }
+
+}
+
+function changelabel2(){
+    var sal = $("#typeS2").val();
+    var bs = document.getElementById("bs2");
+    var rph = document.getElementById("rph2");
+    var rate = document.getElementById("edit_rate");
+    
+    if(sal=='Contractual (CNT)'){
+      bs.style.display = "block";
+      rph.style.display = "none";
+
+    }else{
+      rph.style.display = "block";
+      bs.style.display = "none";
+
+    }
+
+}
+
+function ssl_table(){
+    var grade = $("#sslx").val();
+    var step = $("#step").val();
+    if((grade!="")&&(step!="")){
+      getSSL(grade,step);
+    }
+    
+}
+
+function ssl_table2(){
+    var grade = $("#sslx2").val();
+    var step = $("#step2").val();
+    if((grade!="")&&(step!="")){
+      getSSL2(grade,step);
+    }
+    
+}
+
+function getSSL(id,step){
+  $.ajax({
+    type: 'POST',
+    url: 'function/ssl_row.php',
+    data: {id:id,step:step},
+    dataType: 'json',
+    success: function(response){
+      $('#rate').val(response.res);
+
+    }
+  });
+}
+function getSSL2(id,step){
+  $.ajax({
+    type: 'POST',
+    url: 'function/ssl_row.php',
+    data: {id:id,step:step},
+    dataType: 'json',
+    success: function(response){
+      $('#edit_rate').val(response.res);
+    }
+  });
+}
+
+
 
 function getRow(id){
   $.ajax({
@@ -159,6 +233,17 @@ function getRow(id){
       $('#posid').val(response.id);
       $('#edit_title').val(response.description);
       $('#edit_rate').val(response.rate);
+      if(response.type==1){
+        $('#typeS2').val('Contractual (CNT)');
+      }else{
+        $('#typeS2').val('Job Order (JO)');
+      }
+      changelabel2();
+
+      $('#sslx2 option[value='+response.grade+']').attr('selected','selected');
+      $('#step2 option[value='+response.step+']').attr('selected','selected');
+      
+
       $('#del_posid').val(response.id);
       $('#del_position').html(response.description);
     }

@@ -81,7 +81,6 @@
                   <div class="col-sm-9">
                     <select name="term" class="form-control border border-secondary" required>
                       <option value="" selected>--Select Employement Term--</option>
-                      <option value="Permanent">Permanent</option>
                       <option value="Contract">Contract</option>
                       <option value="Temporary">Temporary</option>
                     </select>
@@ -89,11 +88,11 @@
                 </div>
 
                 <!--Employement Type-->
-                <div class="form-group row">
+                <div class="form-group row d-none">
                   <label class="col-sm-3 col-form-label req">Employement Type</label>
                   <div class="col-sm-9">
                     <select name="type" class="form-control border border-secondary" required>
-                      <option value="" selected>--Select Employement Type--</option>
+                      <option value="null" selected>--Select Employement Type--</option>
                       <option value="Full Time">Full Time</option>
                       <option value="Part Time">Part Time</option>
                     </select>
@@ -229,7 +228,6 @@
                   <label class="col-sm-3 col-form-label req">Employement Term</label>
                   <div class="col-sm-9">
                     <select name="term" class="form-control border border-secondary edit_term" required>
-                      <option value="Permanent">Permanent</option>
                       <option value="Contract">Contract</option>
                       <option value="Temporary">Temporary</option>
                     </select>
@@ -237,10 +235,11 @@
                 </div>
 
                 <!--Employement Type-->
-                <div class="form-group row">
+                <div class="form-group row d-none">
                   <label class="col-sm-3 col-form-label req">Employement Type</label>
                   <div class="col-sm-9">
                     <select name="type" class="form-control border border-secondary edit_type" required>
+                      <option value="null" selected>--select type--</option>
                       <option value="Full Time">Full Time</option>
                       <option value="Part Time">Part Time</option>
                     </select>
@@ -356,7 +355,7 @@
                 </div>
 
                 <!--Employement Type-->
-                <div class="form-group row">
+                <div class="form-group row d-none">
                   <label class="col-sm-3 col-form-label">Employement Type</label>
                   <div class="col-sm-9">
                     <input type="text" class="form-control border border-secondary edit_type" readonly />

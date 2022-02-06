@@ -188,7 +188,7 @@ function getRequest(id){
       $('.ereq_id').val(response.reference_id);
       $('.event_date_text').val((new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
       $('.event_display').html(response.display_image);
-      $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
+      $('.event_display').attr('href','/Portal/admin/uploads/events/'+response.display_image);
       $('.event_name').val(response.event_name);
       $('.event_from').val(response.event_from);
       $('.event_to').val(response.event_to);
@@ -217,7 +217,7 @@ function getRow(id){
       $('.event_date').val(response.event_date);
       $('.event_date').attr('min',response.event_date);
       $('.event_image').html(response.display_image);
-      $('.event_image').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
+      $('.event_image').attr('href','/Portal/admin/uploads/events/'+response.display_image);
       $('.event_name').val(response.event_name);
       $('.event_timefrom').val(response.event_from);
       $('.event_timeto').attr('min',response.event_from);
@@ -261,28 +261,28 @@ function check_image(file_input) {
 
 $(document).ready(function() {
 
-  $('.edit').click(function(e){
+  $(document).on('click','.edit',function(e){
     e.preventDefault();
     $('#editEvents').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
 
-  $('.delete').click(function(e){
+  $(document).on('click','.delete',function(e){
     e.preventDefault();
     $('#eventsDelete').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
 
-  $('.review_req').click(function(e){
+  $(document).on('click','.review_req',function(e){
     e.preventDefault();
     $('#reviewRequest').modal('show');
     var id = $(this).data('id');
     getRequest(id);
   });
 
-  $('.view_req').click(function(e){
+  $(document).on('click','.view_req',function(e){
     e.preventDefault();
     var id = $(this).data('id');
     getRequest(id);

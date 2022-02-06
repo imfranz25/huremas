@@ -1,0 +1,64 @@
+<?php
+session_start();
+	include 'includes/conn.php';
+	 include 'sendEmail.php';
+
+	if(isset($_POST['reset'])){
+        
+		$username = $_POST['username'];
+		$email = $_POST['email'];
+
+		$sql = "SELECT * FROM admin a left join employees e on a.employee_id=e.employee_id WHERE username = '$username'";
+
+		$query = $conn->query($sql);
+
+		if($query->num_rows < 1){
+            $_SESSION['error'] = 'Cannot find account with the username';
+		}
+		else{
+			$row = $query->fetch_assoc();
+			if($email==$row['email']){
+				$id = $row['employee_id'];
+				$check_archive = "SELECT employee_archive FROM employees WHERE employee_id = '$id'";
+				$check_query = $conn->query($check_archive);
+				// CONTINUE TO EMPLOYEE PAGE -> EMPLOYEE IS NOT IN ARCHIVED
+				if ($check_query->num_rows > 0 ) {
+				    
+				    
+
+					$gmail = $row['email'];
+				    $username = $row['username'];
+				    $default=$row['default_password'];
+				    
+				    $hashed_password = password_hash($row['default_password'], PASSWORD_DEFAULT);
+				    
+				    $sql1 = "UPDATE admin SET password = '$hashed_password' WHERE employee_id = '$id' ";
+				    $conn->query($sql1);
+				    
+				    $subject="Account Password Reset";
+				    $message = "Hello!,<br><br>Your account password has been reset  <br>Username: ".$username."<br>Default Password: ".$default." <br><br>Please change your password immediately!";
+				    
+				    $res= sendEmail($gmail,$subject,$message);
+				    
+				    $_SESSION['success'] = $res;
+				    
+
+				}else{
+					$_SESSION['error'] = 'Sorry your account is not active at the moment, please contact your administrator';
+				}
+
+			}
+			else{
+                $_SESSION['error'] = 'Incorrect email';
+			}
+		}
+		
+	}
+	else{
+        $_SESSION['error'] = 'Fill up the form first';
+	}
+    
+    header("location: forgot.php");
+
+
+?>

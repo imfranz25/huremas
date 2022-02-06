@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	//delete
 	$stmt = $conn->prepare("DELETE FROM deduction_vendor WHERE id = ? ;");

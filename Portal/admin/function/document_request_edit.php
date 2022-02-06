@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['reference_id_admin'])){
 		$reference_id = trim($_POST['reference_id_admin']);
@@ -57,7 +58,7 @@
 		if ($valid) {
 			echo ($conn->query($sql))?1:0;
 		}else{
-			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/request/".$new_filename)) {
+			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/Documents/request/".$new_filename)) {
 
 
 				$get_id = "SELECT employee_id FROM document_request WHERE reference_id = '$reply_id' ";

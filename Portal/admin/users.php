@@ -121,14 +121,18 @@ include 'includes/header.php';
                                               <td><?php echo $row['email']; ?></td>
                                               <td><?php echo $row['type']; ?></td>
                                               <td class="text-center">
+                                                  <?php if($row['aid']!='1'){ ?>
                                                       <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                                                   Action
                                                         </button>
                                                         <div class="dropdown-menu" style="">
+                                                            
                                                           <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"><i class="fa fa-edit"></i>Edit</a>
                                                           <div class="dropdown-divider"></div>
                                                           <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                                                         
                                                         </div>
+                                                         <?php } ?>
                                             </td>
                                             </tr>
                                       <?php }?>

@@ -1,5 +1,6 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
 
 	if(isset($_POST['document_id'])){
 		$document_id = $_POST['document_id'];
@@ -83,8 +84,8 @@
 					$valid=true;  //set to true temporarily
 					
 					//DELETE EXISTING FILE
-					if(file_exists($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/".$new_filename)){
-						if (unlink($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/".$new_filename)) {
+					if(file_exists($_SERVER['DOCUMENT_ROOT']."/Documents/".$new_filename)){
+						if (unlink($_SERVER['DOCUMENT_ROOT']."/Documents/".$new_filename)) {
 							$valid=true; 
 						}else{
 							$valid=false; 
@@ -93,7 +94,7 @@
 
 					// NOW MOVE THE FILE 
 					if ($valid) {
-						if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/".$new_filename)) {
+						if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/Documents/".$new_filename)) {
 							$valid=true; // document move success valid true
 						}else{
 							$valid=false; // document move failed valid false

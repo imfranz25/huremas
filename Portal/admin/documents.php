@@ -189,7 +189,7 @@ include 'includes/header.php';
                                           }
 
                                           // FILE SIZE
-                                          $file = $_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/".$row['document_id'].".".$ext;
+                                          $file = $_SERVER['DOCUMENT_ROOT']."/Documents/".$row['document_id'].".".$ext;
                                           $filesize = filesize($file); 
                                           $filesize = round($filesize / 1024 ,2)." KB";
 
@@ -423,7 +423,7 @@ function get_document(document_id){
         // VARIABLES
         let ext = (response.document_file).split('.').pop();
         let folder = (response.folder_name==null)?response.document_folder:response.folder_name;
-        let href = (response.document_type=='document')? "/HUREMAS/Documents/index.php?document_id="+response.document_hash : response.document_file;
+        let href = (response.document_type=='document')? "/Documents/index.php?document_id="+response.document_hash : response.document_file;
 
         // SET INFOS
         $('.view_upload_folder').val(folder);
@@ -762,7 +762,7 @@ function get_request(reference_id){
         if(response.request_file!=null){
           $('.view_request_file').attr('target','_blank');
           $('.view_request_file').html(response.request_file);
-          $('.view_request_file').attr('href','/HUREMAS/Documents/request/?reference_id='+response.file_hash);
+          $('.view_request_file').attr('href','/Documents/request/?reference_id='+response.file_hash);
         }
         
 
@@ -778,7 +778,7 @@ function get_request(reference_id){
       $('.view_request_status').val(set_req_status(response.request_status));
       $('.view_request_comment').val(response.request_comment);
       $('.request_file').html(response.request_file);
-      $('.request_file').attr('href','/HUREMAS/Documents/request/index.php?reference_id='+response.file_hash);
+      $('.request_file').attr('href','/Documents/request/index.php?reference_id='+response.file_hash);
 
       //view employee
       $('.view_request_date').val(new Date(response.request_date).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));

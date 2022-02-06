@@ -1,5 +1,6 @@
 <?php 
 $title="Profile";
+require_once '../includes/path.php';
 include 'includes/session.php';
 include 'includes/header.php';
 ?>
@@ -39,9 +40,9 @@ include 'includes/header.php';
               <!-- Profile Sidebar Header -->
               <div class="p-3 rounded-top" style="background: #379C43">
                 <div class="d-flex justify-content-center">
-                  <img class="img-80 img-radius m-2" src="../assets/images/avatar-4.jpg" alt="User-Profile-Image">
+                  <img class="img-radius m-2" src="<?php echo $global_link; ?>/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="150" alt="User-Profile-Image">
                 </div>    
-                <h5 class="text-center text-white">Dream</h5>    
+                <h5 class="text-center text-white"><?php echo $user['firstname']; ?></h5>    
               </div>
               <!-- Profile Sidebar Header **End**-->
               <ul class="nav nav-tabs md-tabs flex-column" id="profile_tab" role="tablist">
@@ -198,12 +199,12 @@ include 'includes/header.php';
                    </div> 
                 </div>
                 <!--Schedule -->
-                <div class="row d-flex m-3">
-                  <label class="col-lg-2 col-form-label">Schedule</label>
-                  <div class="col-lg-6">
-                    <input type="text"  id="schedule" class="form-control" readonly> 
-                   </div> 
-                </div>
+                <!--<div class="row d-flex m-3">-->
+                <!--  <label class="col-lg-2 col-form-label">Schedule</label>-->
+                <!--  <div class="col-lg-6">-->
+                <!--    <input type="text"  id="schedule" class="form-control" readonly> -->
+                <!--   </div> -->
+                <!--</div>-->
                 <!--Category -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Category</label>
@@ -245,6 +246,33 @@ include 'includes/header.php';
                   <label class="col-lg-2 col-form-label">TIN Number</label>
                   <div class="col-lg-6">
                     <input type="text"  id="tin" class="form-control" readonly> 
+                   </div> 
+                </div>
+                
+                <!--Account -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label"></label>
+                  <div class="col-lg-6">
+                    <h5 class="mt-3">Account Details</h5>
+                   </div> 
+                </div>
+                <!--Username -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Username</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="username" class="form-control" readonly> 
+                   </div> 
+                </div>
+                <!--Password -->
+                <div class="row d-flex m-3">
+                  <label class="col-lg-2 col-form-label">Default Password</label>
+                  <div class="col-lg-6">
+                    <input type="text"  id="password" class="form-control" readonly> 
+                    <div class="input-group-append">
+                      <span class="input-group-text text-info">
+                        <label><i class="fa fa-info-circle"></i> Note : Please change your password for the first time login.</label> 
+                      </span>
+                    </div>
                    </div> 
                 </div>
 
@@ -297,6 +325,8 @@ include 'includes/header.php';
               </div>
             </div>
             <!--Inbox End-->
+
+
 
             <!--=====================================================================-->
 
@@ -447,13 +477,16 @@ include 'includes/header.php';
             $('#age').val(getAge(response.birthdate));
             $('#mobile').val(response.mobile_no);
             $('#department').val(response.title);
-            $('#schedule').val(response.time_in+' - '+response.time_out);
+            //$('#schedule').val(response.time_in+' - '+response.time_out);
             $('#category').val(response.cat);
             //gov id
             $('#sss').val(response.sss_id);
             $('#pagibig').val(response.pagibig_id);
             $('#philhealth').val(response.philhealth_id);
             $('#tin').val(response.tin_num);
+            //account
+            $('#username').val(response.username);
+            $('#password').val(response.default_password);
             //religion
             //civil status
           }  
@@ -528,7 +561,7 @@ include 'includes/header.php';
         let url = window.location.href;
         $.ajax({
           type: 'POST',
-          url: '/HUREMAS/Portal/employee/function/notification_edit.php',
+          url: '<?php echo $global_link; ?>/Portal/employee/function/notification_edit.php',
           data: {id:id},
           dataType: 'json',
           success: function(response){
@@ -584,7 +617,7 @@ include 'includes/header.php';
           let id = $('#notif_id').val();
           $.ajax({
             type: 'POST',
-            url: '/HUREMAS/Portal/employee/function/notification_delete.php',
+            url: '<?php echo $global_link; ?>/Portal/employee/function/notification_delete.php',
             data: {id:id},
             dataType: 'json',
             success: function(response){

@@ -1,6 +1,6 @@
 <?php 
 
-	require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
 
 	if (isset($_POST['edit'])) {
 
@@ -45,11 +45,11 @@
 
 
 			if ($valid) {
-				if(file_exists($_SERVER['DOCUMENT_ROOT'].'/HUREMAS/Portal/admin/uploads/events/'.$new_filename)){
-					if (unlink($_SERVER['DOCUMENT_ROOT'].'/HUREMAS/Portal/admin/uploads/events/'.$new_filename)) {
+				if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename)){
+					if (unlink($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename)) {
 					}
 				}
-				move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/HUREMAS/Portal/admin/uploads/events/'.$new_filename);
+				move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename);
 			}
 
 		}

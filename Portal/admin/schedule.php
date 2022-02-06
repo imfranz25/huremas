@@ -22,7 +22,7 @@ include 'includes/header.php';
                               <div class="row align-items-center">
                                   <div class="col-md-8">
                                       <div class="page-header-title">
-                                          <h5 class="m-b-10">Schedules</h5>
+                                          <h5 class="m-b-10">Employee Schedule</h5>
                                           <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
                                       </div>
                                   </div>
@@ -66,24 +66,17 @@ include 'includes/header.php';
                         ?>
                             <!-- Main-body start -->
 
-                            
 
                             <div class="card">
                             <div class="card-header">
-                              <h5>
-                                <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Schedule List</a>
-                              </h5>
-                              <button type="button" class="btn btn-mat waves-effect waves-light btn-success float-right" data-toggle="modal" data-target="#addnew"><i class="fa fa-plus"></i>New</button>
-
-                            
-                                                <<!-- h5>Schedule List</h5>
+                                                <h5>Employee Schedule List</h5>
                                                 <div class="card-header-right">
                                                     <ul class="list-unstyled card-option">
                                                         <li><i class="fa fa fa-wrench open-card-option"></i></li>
                                                         <li><i class="fa fa-window-maximize full-card"></i></li>
                                                         <li><i class="fa fa-refresh reload-card"></i></li>
                                                     </ul>
-                                                </div> -->
+                                                </div>
                                             </div>
                             <div class="box-body">
                             <div class="card-block table-border-style">
@@ -92,37 +85,52 @@ include 'includes/header.php';
                                 <table id="table1" class="table table-striped table-bordered" style="width:100%">
                                     <thead >
                                     <tr>
-                                    <th>Schedule Code</th>
-                                    <th>Time In</th>
-                                    <th>Time Out</th>
-                                    <th>Tools</th>
+                                    <th width="3%">#</th>
+                                    <th width="10%">Employee ID</th>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th width="5%">Department</th>
+                                    <th>Position</th>
+                                    <th width="4%">Type</th>
+                                    <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $sql = "SELECT * FROM schedules";
+                                           $adds ="order by e.lastname DESC ";
+                                           $sel = "";
+                                           if(isset($_POST['depts'])) { 
+                                            if ($_POST['depts']!="") {
+                                              $adds = "WHERE e.department_id = '".$_POST['depts']."' order by e.lastname DESC";
+                                            }else{
+                                               $adds ="order by e.lastname DESC";
+                                            }
+                                            $sel = $_POST['depts'];
+                                           }
+                                            $sql = "SELECT *, e.id AS empid,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name FROM employees e LEFT JOIN position p ON p.id=e.position_id LEFT JOIN department_category dc ON dc.id = e.department_id   $adds";
                                             $query = $conn->query($sql);
+                                            $count=1;
                                             while($row = $query->fetch_assoc()){
+                                                $type ="CNT";
+                                                if($row['category_id']==2){
+                                                    $type ="JO";
+                                                }
                                             ?>
                                                 <tr>
-                                                <td><?php echo $row['schedcode']; ?></td>
-                                                <td><?php echo date('h:i A', strtotime($row['time_in'])); ?></td>
-                                                <td><?php echo date('h:i A', strtotime($row['time_out'])); ?></td>
-                                                <td>
-                                                
-                                                    <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
-                                                    </button>
+                                                <td><?php echo $count; ?></td>
+                                                <td><?php echo $row['employee_id']; ?></td>
+                                                <td class="text-center"><img src="<?php echo (!empty($row['photo']))? 'images/'.$row['photo']:'images/profile.jpg'; ?>" width="45px" height="45px"> </td>
+                                                <td><?php echo $row['name']; ?></td>
+                                                <td><?php echo $row['code']; ?></td>
+                                                <td><?php echo $row['description']; ?></td>
+                                                <td><?php echo $type; ?></td>
+                                                <td><button class='btn btn-success btn-sm edit btn-round' data-id='<?php echo $row['employee_id'];?>'><i class='fa fa-edit'></i> Manage Schedule</button></td>
 
-                                                    <div class="dropdown-menu" style="">
-                                                      <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i>Edit</a>
-                                                      <div class="dropdown-divider"></div>
-                                                      <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i>Delete</a>
-                                                    </div>
-
-
-                                                </td>
-                                                </tr>
-                                           <?php } ?>
+                                              </tr>
+                                              <?php
+                                              $count++;
+                                              }
+                                          ?>
                                         </tbody>
                                 </table>
                                     </div>
@@ -148,35 +156,14 @@ include 'includes/header.php';
 $(function(){
   $('.edit').click(function(e){
     e.preventDefault();
-    $('#edit').modal('show');
     var id = $(this).data('id');
-    getRow(id);
+    window.location.assign("schedule_edit.php?eid="+id);
+    
   });
 
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+
 });
 
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'function/schedule_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('#timeid').val(response.id);
-      $('#edit_time_in').val(response.time_in);
-      $('#edit_time_out').val(response.time_out);
-      $('#schedcode').html(response.schedcode);
-      $('#del_timeid').val(response.id);
-      $('#del_schedule').html(response.time_in+' - '+response.time_out);
-    }
-  });
-}
 
 $(document).ready(function() {
     $('#table1').DataTable();

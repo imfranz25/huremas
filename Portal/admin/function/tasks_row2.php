@@ -1,5 +1,6 @@
 <?php 
-	require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
+	require_once '../../includes/path.php';
+	require_once($_SERVER['DOCUMENT_ROOT'].$global_link."/Portal/admin/includes/session.php");
 	if(isset($_POST['id'])){
 		// initilization shit
 		$id = $_POST['id'];

@@ -1,5 +1,5 @@
 <?php
-	require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
 
 	if(isset($_POST['edit'])){
 		$reference_id = $_POST['reference_id'];
@@ -46,7 +46,7 @@
 		$sql = "UPDATE document_request SET request_comment= '$request_comment',request_status= 1 $file_query WHERE reference_id='$reference_id' ";
 
 		if ($valid) {
-			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/HUREMAS/Documents/request/".$new_filename)) {
+			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/Documents/request/".$new_filename)) {
 				//PUSH TO DB IF SUCCESS MOVED
 				if ($conn->query($sql)) {
 					$emp_id = $user['employee_id'];

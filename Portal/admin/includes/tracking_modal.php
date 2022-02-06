@@ -307,7 +307,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label req">Password</label>
                       <div class="col-sm-9">
-                        <input type="password" class="form-control border border-secondary " required name="pass" id="pass" placeholder="Please enter your password for verification" />
+                        <input type="password" class="form-control border border-secondary " required name="pass" id="pass_del" placeholder="Please enter your password for verification" />
                       </div>
                     </div>
                 </div>

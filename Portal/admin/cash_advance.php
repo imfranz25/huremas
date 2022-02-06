@@ -154,7 +154,7 @@ $(function(){
 function CA_row(id){
   $.ajax({
     type: 'POST',
-    url: '/HUREMAS/Portal/employee/function/CA_row.php',
+    url: '/Portal/employee/function/CA_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){

@@ -1,8 +1,8 @@
 <?php
 isset($_GET['job_code'])?$code = $_GET['job_code']:header('location:jobs.php');
 $title = 'Job Application';
-include '../includes/head.php'; 
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/head.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
 ?>
 <body>
 
@@ -51,9 +51,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
   ?>
 
   <!--Top Header-->
-  <?php include '../includes/top-header.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/top-header.php"); ?>
     <!--Header-->
-  <?php include '../includes/header.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/header.php"); ?>
 
 
     <div class="container-fluid mb-md-5">
@@ -71,7 +71,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
             <?php echo $job_title; ?>
             <ul class="font-weight-normal ml-3 h5 mt-3">
               <li><?php echo $job_term; ?></li>
-              <li><?php echo $job_type; ?></li>
+              <li class="d-none"><?php echo $job_type; ?></li>
               <li><?php echo $job_exp; ?></li>
             </ul>
             <div>
@@ -115,7 +115,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
                     <h2 class="h5">Salary Grade : <?php echo $row['job_grade'];  ?></h2>
                     <h2 class="h5">Department / Unit : <?php echo $row['title'];  ?></h2>
                     <h2 class="h5">Contract : <?php echo $row['job_term'];  ?></h2>
-                    <h2 class="h5">Working Hours : <?php echo $row['job_type'];  ?></h2>
+                    <h2 class="h5 d-none">Working Hours : <?php echo $row['job_type'];  ?></h2>
                   </div>
                   <div class="col-md-12">
                     <h4 class="text-gray-dark h4 font-weight-bold">
@@ -218,13 +218,13 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
    <?php }?>
 
   <!--Contact-->
-  <?php include_once '../includes/contact.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/contact.php"); ?>
 
   <!--footer-->
-  <?php include_once '../includes/footer.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/footer.php"); ?>
 
   <!--Applicant Form-->
-  <?php include '../includes/job_modal.php'; ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/job_modal.php"); ?>
 
 
   <script>
@@ -272,7 +272,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/conn.php"
         //get inputs
         var form_data = new FormData($('#form_add_candidate')[0]);
         $.ajax({
-            url: '/HUREMAS/Portal/admin/function/candidate_add.php',  
+            url: '/Portal/admin/function/candidate_add.php',  
             dataType: 'json',  
             cache: false,
             contentType: false,

@@ -1,5 +1,7 @@
 <?php
-	include '../includes/session.php';
+	require_once '../../includes/path.php';
+	require_once '../includes/session.php';
+	require_once 'sendEmail.php';
 
 	if (isset($_POST['fname'])) {
 		//personal
@@ -18,10 +20,10 @@
        	$applicant_no = trim($_POST['appno']);
 		$filename = $_FILES['pic']['name'];
 		$position = trim($_POST['posid']);
-		$schedule = $_POST['schedule'];
+		//$schedule = $_POST['schedule'];
 		$department = $_POST['department'];
-		$salary = $_POST['salary'];
-		$wage = $_POST['wage'];
+		//$salary = $_POST['salary'];
+		//$wage = $_POST['wage'];
 		$category = $_POST['category'];
 		//goverment mandatory
 		$sss = trim($_POST['sss']);
@@ -29,9 +31,9 @@
 		$philhealth = trim($_POST['philhealth']);
 		$tin = trim($_POST['tin']);
 		//contri
-		$sss_prem = trim($_POST['sssprem']);
-		$pagibig_prem = trim($_POST['pagibigprem']);
-		$philhealth_prem = trim($_POST['philhealthprem']);
+		//$sss_prem = trim($_POST['sssprem']);
+		//$pagibig_prem = trim($_POST['pagibigprem']);
+		//$philhealth_prem = trim($_POST['philhealthprem']);
 		//account
 		$username = trim($_POST['username']);
 		$ls = trim($_POST['ls']);
@@ -87,7 +89,7 @@
 
 
 		//insert employee
-		$sql = "INSERT INTO employees (employee_id, firstname, middlename,lastname,suffix ,address, birthdate,mobile_no, contact_info, email, sex, photo, created_date, position_id, schedule_id, department_id, category_id, date_hired, date_regularization,sss_id,pagibig_id,philhealth_id,tin_num,basic_salary,daily_wage,sss_prem,philhealth_prem,pagibig_prem) VALUES ('$employee_id', '$firstname','$middlename', '$lastname','$suffix', '$address', '$birthdate', '$mobile', '$contact','$email', '$sex', 'CVSU$new_filename' ,NOW(),$position,$schedule,$department,$category,NOW(),NOW(),'$sss','$pagibig','$philhealth','$tin',$salary,$wage,$sss_prem,$philhealth_prem,$pagibig_prem)";
+		$sql = "INSERT INTO employees (employee_id, firstname, middlename,lastname,suffix ,address, birthdate,mobile_no, contact_info, email, sex, photo, created_date, position_id, department_id, category_id, date_hired,sss_id,pagibig_id,philhealth_id,tin_num) VALUES ('$employee_id', '$firstname','$middlename', '$lastname','$suffix', '$address', '$birthdate', '$mobile', '$contact','$email', '$sex', 'CVSU$new_filename' ,NOW(),$position,$department,$category,NOW(),'$sss','$pagibig','$philhealth','$tin')";
 
 		//$check_user = "SELECT * FROM admin WHERE username ='$username' ";
 		//$query = $conn->query($check_user); // check if  dupli
@@ -123,6 +125,25 @@
 
 		//challenge
 		if (password_verify($pass,get_password($admin_id,$conn))) {
+		    
+		    
+		    $day = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+			$inn = array("7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30");
+			$outt = array("7:30", "8:00","8:30", "9:00","9:30", "10:00","10:30", "11:00","11:30", "12:00","12:30", "13:00","13:30", "14:00","14:30", "15:00","15:30", "16:00","16:30", "17:00","17:30", "18:00","18:30", "19:00","19:30", "20:00");
+			for ($i=0; $i < count($day); $i++) {
+
+				for ($j=0; $j <count($inn); $j++){
+
+					$sql2 = "INSERT INTO schedules (employee_id, time_in, time_out,day,isCheck) VALUES('$employee_id','$inn[$j]','$outt[$j]','$day[$i]','0') ";
+					$conn->query($sql2);
+					
+				}
+			}
+
+			$sql3 = "INSERT INTO `emp_max_hours`(`employee_id`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`) VALUES ('$employee_id','0','0','0','0','0','0') ";
+			$conn->query($sql3);
+	
+	
 	
 			if ($conn->query($sql) & $conn->query($admin) && $conn->query($update)) {
 
@@ -138,7 +159,14 @@
 				if ($result_recruit['onboarded']==$result_recruit['job_recruit']) {
 					$update_status = "UPDATE job SET job_status='inactive' WHERE job_code = '$onboard_job' ";
 					$conn->query($update_status);
+					
+					
 				}
+				
+        		    $subject="Account Created";
+        		    $message = "Hello!,<br><br>You may now login at : http://huremas-cvsuic.online/Portal  <br>Username: ".$username."<br>Default Password: ".$default." <br><br>Please change your password immediately!";
+		    
+		        $res= sendEmail($email,$subject,$message);
 				echo 1;
 			}else{
 				echo 0;

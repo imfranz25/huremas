@@ -1,11 +1,11 @@
 <?php 
 $title ="Event Request";
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
 
 ?>
   <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/preloader.php"); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
   
   <div id="pcoded" class="pcoded">
       
@@ -82,9 +82,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/header.ph
     </div>
 
     <?php 
-      require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/employee/includes/CA_modal.php");  
+      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/employee/includes/CA_modal.php");  
       require_once('includes/event_modal.php');
-      require_once($_SERVER['DOCUMENT_ROOT']."/HUREMAS/Portal/admin/includes/scripts.php");
+      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php");
     ?>
 
 
@@ -104,7 +104,7 @@ function event_request_row(id){
       //edit
       $('.event_reference').val(response.reference_id);
       $('.event_display').html(response.display_image);
-      $('.event_display').attr('href','/HUREMAS/Portal/admin/uploads/events/'+response.display_image);
+      $('.event_display').attr('href','/Portal/admin/uploads/events/'+response.display_image);
       $('.event_date').val(response.event_date);
       $('.event_date_text').val((new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
       $('.event_name').val(response.event_name);

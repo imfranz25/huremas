@@ -162,6 +162,7 @@
                     <label>Are you sure you want to delete the following training vendor?</label>
                     <h2 id="del_vendor" class="bold"></h2>
                     <label id="del_code"></label>
+                    <hr>
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Password</label>
                       <div class="col-sm-9">
