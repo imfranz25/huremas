@@ -1,25 +1,28 @@
 <?php
-session_start();
+	session_start();
 	include '../Database/conn.php';
 
 	if(isset($_POST['login'])){
-        
+
+		//prepared statement
+		$stmt = $conn->prepare("SELECT * FROM admin WHERE username = ? ");
+		$stmt->bind_param('s',$username);
+
+		//get values
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
-		$sql = "SELECT * FROM admin WHERE username = '$username'";
+		$stmt->execute();
+		$result = $stmt->get_result(); // get the mysqli result
 
-		$query = $conn->query($sql);
-
-		if($query->num_rows < 1){
-            $_SESSION['error'] = 'Cannot find account with the username';
-
-		}
-		else{
-			$row = $query->fetch_assoc();
+		if($result->num_rows < 1){
+      $_SESSION['error'] = 'Cannot find account with the username';
+		}else{
+			$row = $result->fetch_assoc(); // fetch data
 			if(password_verify($password, $row['password'])){
 				$id = $row['employee_id'];
-				$check_archive = "SELECT employee_archive FROM employees WHERE employee_id = '$id'";
+				$check_archive = "SELECT employee_archive FROM employees 
+													WHERE employee_id = '$id'";
 				$check_query = $conn->query($check_archive);
 				$archive_row = $check_query->fetch_assoc();
 				// CONTINUE TO EMPLOYEE PAGE -> EMPLOYEE IS NOT IN ARCHIVED
@@ -29,10 +32,9 @@ session_start();
 				}else{
 					$_SESSION['error'] = 'Sorry your account is not active at the moment, please contact your administrator';
 				}
-
 			}
 			else{
-                $_SESSION['error'] = 'Incorrect password';
+        $_SESSION['error'] = 'Incorrect password';
 			}
 		}
 		
@@ -41,7 +43,6 @@ session_start();
         $_SESSION['error'] = 'Input admin credentials first';
 	}
     
-    header("location: index.php");
-
+  header("location: index.php");
 
 ?>

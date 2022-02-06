@@ -123,7 +123,7 @@
 		if(isset($_SESSION['error'])):
   ?>
 		<div class='callout callout-danger text-center mt20'>
-  		<b><p>".$_SESSION['error']."</p> </b>
+  		<b><p><?php echo $_SESSION['error']; ?></p> </b>
   	</div>
 	<?php unset($_SESSION['error']); endif; ?>
 
