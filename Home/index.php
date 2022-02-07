@@ -378,8 +378,9 @@
 
           <?php 
             $first = true;
+            $news_count=0;
             while ($row = $query->fetch_assoc()) {
-
+              $news_count +=1;
               if ($first) {
                 $active = 'active';
                 $first = false;
@@ -409,14 +410,18 @@
         <?php } ?>
 
         </div>
-        <div class="btn-box">
-          <a class="carousel-control-prev"  href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="sr-only" >Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
+
+        <?php if ($news_count>1): ?>
+          <div class="btn-box">
+            <a class="carousel-control-prev"  href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="sr-only" >Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        <?php endif; ?>
+
       </div>
     </div>
   </section>
