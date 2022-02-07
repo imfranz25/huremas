@@ -3,6 +3,8 @@
 	require_once '../includes/session.php';
 
 	if (isset($_POST['edit'])) {
+
+    //get details & initialize
 		$reference_id = trim($_POST['reference_id']);
 		$date = trim($_POST['date']);
 		$headline = trim($_POST['headline']);
@@ -25,12 +27,12 @@
 			$image_query ='';
 		}
 
+    //update prepared stmt
+    $sql =  $conn->prepare("UPDATE news SET news_headline=? , news_details=?,
+            news_date=? $image_query WHERE reference_id=? ");
+    $sql->bind_param('ssss',$headline,$details,$date,$reference_id);
 
 		
-
-	
-		$sql = "UPDATE news SET news_headline='$headline', news_details='$details',news_date='$date'  $image_query WHERE reference_id='$reference_id' ";
-
 		if ($display!= '') {
 			if (!in_array($extension, $valid_extension)) {
 			    $_SESSION['error'] = 'Invalid File Type';
@@ -53,7 +55,7 @@
 
 		if ($valid) {
 
-			if($conn->query($sql)){
+			if($sql->execute()){
 				$_SESSION['success'] = 'News updated successfully';
 			}
 			else{
