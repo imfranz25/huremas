@@ -2,11 +2,11 @@
   <section class="info_section layout_padding">
     <div class="container" >
       <div>
-      <a href="index.php">
+      <a href="<?php echo $global_link; ?>/Home/">
           <img src="<?php echo $global_link; ?>/Home/assets/images/cvsu-logo.png" alt="Cavite State University" style="width: 100%;height: auto;max-width: 180px;" class="cvsu-logo" />
       </a>
-      <a href="https://www.youtube.com/channel/UCMraY_VdxLvKTktj1el5FwQ" class="social mx-2"><i class="fab fa-youtube fa-2x"></i></a>
-      <a href="https://www.facebook.com/cvsuimusofficialpage" class="social mx-2"><i class="fab fa-facebook fa-2x"></i></a>
+      <a target="_blank" href="https://www.youtube.com/channel/UCMraY_VdxLvKTktj1el5FwQ" class="social mx-2"><i class="fab fa-youtube fa-2x"></i></a>
+      <a target="_blank" href="https://www.facebook.com/cvsuimusofficialpage" class="social mx-2"><i class="fab fa-facebook fa-2x"></i></a>
       </div>
     </div>
     <div >
@@ -47,12 +47,31 @@
               <li>
                 <a class="nav-link" href="<?php echo $global_link; ?>/Home/job/jobs.php"> Job Offering <span class="sr-only">(current)</span></a>
               </li>
+
+              <?php  
+                $today = Date('Y-m-d');
+                $sql = "SELECT id FROM news WHERE news_date >= $today ";
+                $query = $conn->query($sql);
+                if ($query->num_rows > 0):
+              ?>
+
               <li>
                 <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#news"> News and Updates </a>
               </li>
+
+              <?php 
+                endif; 
+                $sql2 = "SELECT id FROM events WHERE event_date >= $today ";
+                $query2 = $conn->query($sql2);
+                if ($query2->num_rows > 0):
+              ?>
+
               <li>
                 <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#events"> Events </a>
               </li>
+
+            <?php endif; ?>
+
               <li>
                 <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#about"> About Us </a>
               </li>
@@ -67,16 +86,16 @@
             </h5>
             <ul class="navbar-nav  ">
               <li >
-                <a href="index.html">
+                <a>
                   <i class="fas fa-map-marker-alt fa-2xs mx-2"></i> Cavite Civic Center, Palico IV, Imus City, Cavite 4103<br /><br />
               </li>
               <li class="nav-item">
-                <a href="about.html">
+                <a>
                 <i class="fas fa-mobile-alt fa-2xs mx-2"></i>
                 (046) 471-6607<br /><br />
               </li>
               <li class="nav-item">
-                <a href="course.html"> <i class="fas fa-globe-americas fa-2xs mx-2"></i> hrdoimus@cvsu.edu.ph</a></a>
+                <a href="mailto:hrdoimus@cvsu.edu.ph"> <i class="fas fa-globe-americas fa-2xs mx-2"></i> hrdoimus@cvsu.edu.ph</a></a>
               </li>
 
             </ul>
