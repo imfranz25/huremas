@@ -26,7 +26,8 @@
           <!-- DONT SHOW NEWS AND UPDATE TAB IF THERE IS NO NEWS -->
 
           <?php  
-            $sql = "SELECT id FROM news";
+            $today = Date('Y-m-d');
+            $sql = "SELECT id FROM news WHERE news_date >= $today ";
             $query = $conn->query($sql);
             if ($query->num_rows > 0):
           ?>
@@ -39,8 +40,8 @@
 
           <?php 
             endif;
-            $sql2 = "SELECT id FROM events";
-            $query2 = $conn->query($sql);
+            $sql2 = "SELECT id FROM events WHERE event_date >= $today ";
+            $query2 = $conn->query($sql2);
             if ($query2->num_rows > 0):
           ?>
 
