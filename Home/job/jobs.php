@@ -1,16 +1,17 @@
 <?php
-session_start();
-$title = 'Job Offerings';
-require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/head.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
+  session_start();
+  $title = 'Job Offerings';
+  require_once('../includes/path.php');
+  require_once("../includes/head.php");
+  require_once($_SERVER['DOCUMENT_ROOT'].$global_link."/Database/conn.php");
 ?>
 
 <body>
 
   <!--Top Header-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/top-header.php"); ?>
+  <?php require_once("../includes/top-header.php"); ?>
     <!--Header-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/header.php"); ?>
+  <?php require_once("../includes/header.php"); ?>
 
 
     <div class="container-fluid m-auto mb-md-5">
@@ -33,7 +34,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
         <div class="special_container">
           <div class="box b1 bg-theme m-0 p-0 d-inline-block d-lg-flex" style="height: 80px;">
             <div class="float-right float-lg-none">
-              <img class="img-60 mx-lg-3" src="/Home/assets/images/acad.png" alt="Academic Personnel"/>
+              <img class="img-60 mx-lg-3" src="../assets/images/acad.png" alt="Academic Personnel"/>
             </div>
             <div class="detail-box h-100 d-flex align-items-center">
               <h3>Academic</h3>
@@ -42,7 +43,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
 
           <div class="box b2 bg-theme m-0 p-0 d-inline-block d-lg-flex" style="height: 80px;">
             <div class="float-right float-lg-none">
-              <img class="img-60 mx-lg-3" src="/Home/assets/images/admin.png" alt="Administration Personnel"/>
+              <img class="img-60 mx-lg-3" src="../assets/images/admin.png" alt="Administration Personnel"/>
             </div>
             <div class="h-100 d-flex align-items-center">
               <h3>Administration</h3>
@@ -51,7 +52,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
 
            <div class="box b1 bg-theme m-0 p-0 d-inline-block d-lg-flex" style="height: 80px;">
             <div class="float-right float-lg-none">
-              <img class="img-80 mx-lg-3" src="/Home/assets/images/non.png" alt="Non-Academic Personnel"/>
+              <img class="img-80 mx-lg-3" src="../assets/images/non.png" alt="Non-Academic Personnel"/>
             </div>
             <div class="h-100 d-flex align-items-center">
               <h3>Non-Academic</h3>
@@ -106,17 +107,17 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
             </div>
             <?php }?>
           <!--Job Post End-->
-        <?php }if ($show_count < 1){ ?>
+          <?php }if ($show_count < 1){ ?>
 
-          <!--No Job Post-->
+            <!--No Job Post-->
             <div class="col-lg-12 p-3 text-center">
-              <img src="/Portal/assets/images/jobpost.jpg" alt="No Notification" class="rounded-circle img-fluid mx-auto d-block p-4 w-50">
+              <img src="<?php echo $global_link; ?>/Portal/assets/images/jobpost.jpg" alt="No Job Posting" class="rounded-circle img-fluid mx-auto d-block p-4 w-50">
               <h5>THEIR ARE NO ACTIVE JOB POSTING AT THE MOMENT</h5>
               <label>Stay tune for updates or leave us a message  through email</label>
               <button type="button" class="btn btn-warning btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto text-white mb-3 mt-3 font-weight-bold reload_card">Refresh</button>
             </div>
 
-        <?php } ?>
+          <?php } ?>
 
           </div>
         </div>
@@ -125,18 +126,16 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
   </section>
 
   <!--footer-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/footer.php"); ?>
+  <?php require_once("../includes/footer.php"); ?>
 
   <script>
     $(document).ready(function() {
-
       //Reload JOB
       $(document).on('click', '.reload_card', function(e) {
         //loading
-        $('#recent').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="/Portal/admin/images/job_load.gif" />');
+        $('#recent').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="<?php echo $global_link; ?>/Portal/admin/images/job_load.gif" />');
         $("#recent").load(location.href+" #recent>*","");
       }); 
-
     }); 
   </script>
 
