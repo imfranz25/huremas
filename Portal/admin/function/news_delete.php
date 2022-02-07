@@ -2,18 +2,45 @@
 	require_once '../../includes/path.php';
 	require_once '../includes/session.php';
 
-
+  //delete news prepare
 	$stmt = $conn->prepare("DELETE FROM news WHERE reference_id = ? ");
 	$stmt->bind_param("s", $delete);
 
+  //select 
+  $select = $conn->prepare("SELECT display_image FROM news WHERE reference_id= ? ");
+  $select->bind_param("s", $delete);
+
 	function delete($id){
-		global $stmt,$delete;
+
+    //initialize
+		global $stmt,$delete,$select,$global_link;
 		$delete = $id;
-		$stmt->execute() ? $_SESSION['success'] = 'News deleted successfully' : $_SESSION['error'] = 'Connection Timeout';
+    $isDeleted = false; // set to true if the display is deleted
+
+    //get display image
+    $select->execute();
+    $result = $select->get_result();
+    $row = $result->fetch_assoc();
+
+    //DELETE  FILE
+    if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link."/Portal/admin/uploads/news/".$row['display_image'])){
+      if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link."/Portal/admin/uploads/news/".$row['display_image'])) {
+        $isDeleted = true;
+      }
+    }
+    //delete db news info
+    if ($isDeleted) {
+      ($stmt->execute())? $_SESSION['success'] = 'News deleted successfully' :
+        $_SESSION['error'] = 'Connection Timeout';
+    }else{
+      $_SESSION['error'] = 'Something went wrong';
+    }  
+
 	}
 
 	if(isset($_POST['delete'])){
-		// initialization shitty
+
+		// initialization
 		$id  = explode(',', $_POST['id']);
 		$pass  = $_POST['pass'];
 		$employee_id = $user['employee_id'];
