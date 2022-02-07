@@ -226,7 +226,6 @@
                       </div>
                     </div>
 
-
                     <div class="col-xl-3 col-md-6">
                       <div class="card">
                         <div class="card-block">
@@ -253,22 +252,30 @@
                       </div>
                     </div>
 
-                    <!-- Column xl 6 start -->
-                    <div class="col-xl-8 col-md-12">
-
+                    <!-- Partition 1 -->
+                    <div class="col-xl-8">
+                      <!-- Pending Dis Tasks -->
                       <div class="card table-card">
                         <div class="card-header">
                           <h5>Pending Disciplinary Tasks</h5>
-                          <div class="card-header-right">
-                            <ul class="list-unstyled card-option">
-                              <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                              <li><i class="fa fa-window-maximize full-card"></i></li>
-                              <li><i class="fa fa-minus minimize-card"></i></li>
-                              <li><i class="fa fa-refresh reload-card"></i></li>
-                            </ul>
-                          </div>
                         </div>
                         <div class="card-block">
+
+                          <?php
+
+                            $sql = "SELECT *,concat(e.lastname,', ',e.firstname,' ',e.middlename) AS name,t.description AS td 
+                                          FROM task t 
+                                          LEFT JOIN employees e ON e.employee_id=t.employee_id 
+                                          LEFT JOIN department_category ddc ON e.department_id=ddc.id 
+                                          LEFT JOIN position p ON p.id=e.position_id WHERE t.status='0' 
+                                          ORDER BY unix_timestamp(t.date_created) ASC";
+                            $query = $conn->query($sql);
+                            $count = $query->num_rows; 
+
+                            if ($count>0){
+
+                          ?>
+
                           <div class="table-responsive">
                             <table class="table table-hover">
                               <thead>
@@ -281,14 +288,11 @@
                               <tbody>
 
                                 <?php
-                                  $sql = "SELECT *,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name,t.description as td FROM task t left join employees e on e.employee_id=t.employee_id LEFT JOIN department_category ddc ON e.department_id=ddc.id LEFT JOIN position p ON p.id=e.position_id WHERE t.status='0' order by unix_timestamp(t.date_created) asc";
-                                  $query = $conn->query($sql);
-                                  $count = $query->num_rows;
 
-                                  if ($count > 0) :
-                                     while ($row = $query->fetch_assoc()) :
-                                      $dues=date_create($row['due_date']);
-                                  ?>
+                                  while ($row = $query->fetch_assoc()) :
+                                    $dues=date_create($row['due_date']);
+
+                                ?>
 
                                 <tr>
                                   <td>
@@ -305,132 +309,159 @@
                                   <td><?php echo $row['code']; ?></td>
                                   <td><?php echo date_format($dues,"F d, Y"); ?></td>
                                 </tr>
+                                <?php endwhile;?>
+                              </tbody>
+                            </table>
 
-                                <?php endwhile;endif;?>
+                            <div class="text-right m-r-20">
+                              <a href="tasks.php" class=" b-b-primary text-primary">View all Tasks</a>
+                            </div>
+
+                          </div>
+
+                          <?php }else{ ?>
+
+                            <!--No Job Post-->
+                            <div class="col-lg-12 p-3 text-center">
+                              <img src="<?php echo $global_link; ?>/Portal/assets/images/no_training.png" alt="No Notification" class="rounded-circle img-fluid mx-auto d-block p-4 w-50">
+                              <h5>THEIR ARE NO PENDING DISCIPLINARY TASK AT THE MOMENT</h5>
+                              <label>You can view pending disciplinary task here.</label>
+                            </div>
+
+                          <?php } ?>
+
+
+                        </div>
+
+
+
+                      </div>
+
+                      <!-- Upcoming Events -->
+                      <div class="card table-card">
+                        <div class="card-header">
+                          <h5>Upcoming Events</h5>
+                        </div>
+                        <div class="card-block">
+
+                          <?php  
+
+                            $date_today = date('Y-m-d');
+                            $sql = "SELECT * FROM events 
+                                    WHERE event_date >= '$date_today' ;";
+                            $query = $conn->query($sql);
+                            $count = $query->num_rows;
+
+                            if ($count>0) { 
+
+                          ?>
+
+                          <div class="table-responsive">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>Event Name</th>
+                                  <th>Start</th>
+                                  <th>End</th>
+                                  <th class="text-right">Venue</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                <?php
+
+                                  while ($row = $query->fetch_assoc()) :
+                                    //create date for formatting
+                                    $date_event=date_create($row['event_date']);
+                                    $date_from=date_create($row['event_from']);
+                                    $date_to=date_create($row['event_to']);
+
+                                ?>
+
+                                <tr>
+                                  <td>
+                                    <div class="d-inline-block align-middle">
+                                      <img src="uploads/events/<?php echo $row['display_image']; ?>" alt="event image" class="img-radius img-40 align-top m-r-15">
+                                      <div class="d-inline-block">
+                                        <h6> <?php echo $row['event_name']; ?></h6>
+                                        <p class="text-muted m-b-0">
+                                        <?php echo date_format($date_event,'d'); ?> <?php echo date_format($date_event,'F'); ?></p>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td><?php echo date_format($date_from,"h:i A"); ?></td>
+                                  <td><?php echo date_format($date_to,"h:i A"); ?></td>
+                                  <td class="text-right">
+                                    <?php echo $row['event_venue']; ?>
+                                  </td>
+                                </tr>
+
+                                <?php endwhile;  ?>
 
                               </tbody>
-                             </table>
-                              <div class="text-right m-r-20">
-                                <a href="tasks.php" class=" b-b-primary text-primary">View all Tasks</a>
-                              </div>
+                            </table>
+
+                            <div class="text-right m-r-20">
+                              <a href="events.php" class=" b-b-primary text-primary">View all Events</a>
                             </div>
+
                           </div>
-                        </div>
-                      </div>
 
-                      <!-- Calendar -->
-                      <div class="col-xl-4 col-md-12">
-                        <div class="card">
-                          <div class="card-block">
-                            <div class="row">
-                              <div class="col">
-                                <h4>Calendar</h4>
-                              </div>
+                          <?php }else{ ?>
+
+                            <!--No Job Post-->
+                            <div class="col-lg-12 p-3 text-center">
+                              <img src="<?php echo $global_link; ?>/Portal/assets/images/no_event.png" alt="No Notification" class="rounded-circle img-fluid mx-auto d-block p-4 w-50">
+                              <h5>THEIR ARE NO EVENTS AT THE MOMENT</h5>
+                              <label>You can view upcoming events here.</label>
                             </div>
-                            <div class="row">
-                              <div id="caleandar"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
 
-                       <!-- EVENTS start -->
-                      <div class="col-xl-8 col-md-12">
-                        <div class="card table-card">
-                          <div class="card-header">
-                            <h5>Upcoming Events</h5>
-                            <div class="card-header-right">
-                              <ul class="list-unstyled card-option">
-                                <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                <li><i class="fa fa-window-maximize full-card"></i></li>
-                                <li><i class="fa fa-minus minimize-card"></i></li>
-                                <li><i class="fa fa-refresh reload-card"></i></li>
-                              </ul>
-                            </div>
-                          </div>
-                          <div class="card-block">
-                            <div class="table-responsive">
-                              <table class="table table-hover">
-                                <thead>
-                                  <tr>
-                                    <th>Event Name</th>
-                                    <th>Start</th>
-                                    <th>End</th>
-                                    <th class="text-right">Venue</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <?php
+                          <?php } ?>
 
-                                    $date_today = date('Y-m-d');
-                                    $sql = "SELECT * FROM events WHERE event_date >= '$date_today' ;";
-                                    $query = $conn->query($sql);
-                                    $count = $query->num_rows;
-
-                                    if ($count > 0) :
-                                      while ($row = $query->fetch_assoc()) :
-                                        $date_event=date_create($row['event_date']);
-                                        $date_from=date_create($row['event_from']);
-                                        $date_to=date_create($row['event_to']);
-
-                                  ?>
-
-                                  <tr>
-                                    <td>
-                                      <div class="d-inline-block align-middle">
-                                        <img src="uploads/events/<?php echo $row['display_image']; ?>" alt="event image" class="img-radius img-40 align-top m-r-15">
-                                        <div class="d-inline-block">
-                                          <h6> <?php echo $row['event_name']; ?></h6>
-                                          <p class="text-muted m-b-0">
-                                          <?php echo date_format($date_event,'d'); ?> <?php echo date_format($date_event,'F'); ?></p>
-                                        </div>
-                                      </div>
-                                    </td>
-                                    <td><?php echo date_format($date_from,"h:i A"); ?></td>
-                                    <td><?php echo date_format($date_to,"h:i A"); ?></td>
-                                    <td class="text-right">
-                                      <?php echo $row['event_venue']; ?>
-                                    </td>
-                                  </tr>
-
-                                  <?php endwhile; endif; ?>
-
-                                </tbody>
-                              </table>
-                              <div class="text-right m-r-20">
-                                <a href="events.php" class=" b-b-primary text-primary">View all Events</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <!-- Attendance Percentage -->
-                      <div class="col-xl-4 col-md-12">
-                        <div class="card quater-card">
-                          <div class="card-block">
-                            <h6 class="text-muted m-b-15">Today's Attendance</h6>
-                            <h5><?php echo $ontimes; ?></h5>
-                            <p class="text-muted">On-Time
-                              <span class="f-right"><?php echo $rate."%" ?></span>
-                            </p>
-                            <div class="progress">
-                              <div class="progress-bar bg-c-blue" style="width: <?php echo $rate."%" ?>"></div>
-                            </div>
-                            <h5 class="m-t-15"><?php echo $laters; ?></h5>
-                            <p class="text-muted">Late
-                              <span class="f-right"><?php echo $latep."%" ?></span>
-                            </p>
-                            <div class="progress">
-                              <div class="progress-bar bg-c-green" style="width: <?php echo $latep."%" ?>"></div>
-                            </div>
-                          </div>
                         </div>
                       </div>
 
                     </div>
-                    <!-- Column xl 6 end -->
+
+
+                    <!-- Partition 2 -->
+                    <div class="col-xl-4">
+                      <!-- Calendar -->
+                      <div class="card">
+                        <div class="card-block">
+                          <h4>Calendar</h4>
+                          <div class="row">
+                            <div id="caleandar"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Attendance -->
+                      <div class="card quater-card">
+                        <div class="card-block">
+                          <h6 class="text-muted m-b-15">Today's Attendance</h6>
+                          <h5><?php echo $ontimes; ?></h5>
+                          <p class="text-muted">On-Time
+                            <span class="f-right"><?php echo $rate."%" ?></span>
+                          </p>
+                          <div class="progress">
+                            <div class="progress-bar bg-c-blue" style="width: <?php echo $rate."%" ?>"></div>
+                          </div>
+                          <h5 class="m-t-15"><?php echo $laters; ?></h5>
+                          <p class="text-muted">Late
+                            <span class="f-right"><?php echo $latep."%" ?></span>
+                          </p>
+                          <div class="progress">
+                            <div class="progress-bar bg-c-green" style="width: <?php echo $latep."%" ?>"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+
 
 
                   </div>
