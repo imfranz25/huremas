@@ -193,7 +193,6 @@
         //edit
         $('.reference_id').val(response.reference_id);
         $('.event_date').val(response.event_date);
-        $('.event_date').attr('min',response.event_date);
         $('.event_image').html(response.display_image);
         $('.event_image').attr('href','<?php echo $global_link; ?>/Portal/admin/uploads/events/'+response.display_image);
         $('.event_name').val(response.event_name);

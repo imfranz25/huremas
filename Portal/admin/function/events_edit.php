@@ -4,6 +4,7 @@
 
 	if (isset($_POST['edit'])) {
 
+    // get values
 		$reference_id = trim($_POST['reference_id']);
 		$date = $_POST['event_date'];
 		$event_name = trim($_POST['event_name']);
@@ -23,13 +24,12 @@
 			//set filename
 			$new_filename = $reference_id.".".$extension;
 			$image_query = ", display_image='$new_filename' ";
-		}else{
+		}else {
 			$image_query ='';
 		}
 
-
-	
-		$sql = "UPDATE events SET event_name='$event_name',event_date='$date',event_from='$event_from',event_to='$event_to',event_venue='$venue'  $image_query WHERE reference_id='$reference_id' ";
+    $sql = $conn->prepare("UPDATE events SET event_name=? ,event_date=? ,event_from=? ,event_to=? ,event_venue=?  $image_query WHERE reference_id=? ");
+    $sql->bind_param('ssssss',$event_name,$date,$event_from,$event_to,$venue,$reference_id);
 
 		if ($display!= '') {
 			if (!in_array($extension, $valid_extension)) {
@@ -39,37 +39,30 @@
 				$_SESSION['error'] = 'File size exceeds the maximum limit';
 				$valid = false;
 			}
-			
 			if ($valid) {
-				if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename)){
-					if (unlink($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename)) {
+				if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/events/'.$new_filename)) {
+					if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/events/'.$new_filename)) {
 					}
 				}
-
 				//move file
-				move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename);
-
+				move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/events/'.$new_filename);
 			}
 		}
 
 		if ($valid) {
-
-			if($conn->query($sql)){
+			if($sql->execute()) {
 				$_SESSION['success'] = 'Event updated successfully';
 			}
-			else{
+			else {
 				$_SESSION['error'] = 'Connection Time-out';
 			}
 		}
 
-		
-		
-	}else{
+	}else {
 		$_SESSION['error'] = 'Fill up add form first';
 	}	
 
 	header('location: ../events.php');
-
 
 ?>
 
