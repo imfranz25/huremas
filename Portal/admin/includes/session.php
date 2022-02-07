@@ -52,6 +52,7 @@
 
 	}
 
+  // get password for challenge (deletion of records)
 	function get_password($employee_id,$conn){
 		$verify = "SELECT password FROM admin WHERE employee_id = '$employee_id' ";
 		$query = $conn->query($verify);
@@ -59,9 +60,23 @@
 		return $row['password'];
 	}
 
+  //send notifs based on role type
 	function send_notif($conn, $employee_id, $title, $link, $type){
 		$sql = "INSERT INTO notification (employee_id, title, link, type) VALUES ('$employee_id', '$title','$link','$type')";
 		$conn->query($sql);
 	}
+
+  //generate id for references
+  function generate_id(){
+    $letters = '';
+    $numbers = '';
+    foreach (range('A', 'Z') as $char) {
+        $letters .= $char;
+    }
+    for($i = 0; $i < 10; $i++){
+      $numbers .= $i;
+    }
+    return substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
+  }
 
 ?>
