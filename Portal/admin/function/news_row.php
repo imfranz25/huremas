@@ -2,24 +2,30 @@
 	require_once '../../includes/path.php';
 	require_once '../includes/session.php';
 
-	if(isset($_POST['id'])){
-		$id = $_POST['id'];
-		$sql = "SELECT * FROM news WHERE reference_id = '$id'";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+  //prepared statement for selecting news infos
+  $get_news = $conn->prepare("SELECT * FROM news WHERE reference_id = ? ");
+  $get_news->bind_param('s',$id);
 
+	if(isset($_POST['id'])){
+    global $get_news;
+		
+    $id = $_POST['id'];
+		$get_news->execute();
+    $result = $get_news->get_result();
+		$row = $result->fetch_assoc();
 		echo json_encode($row);
+
 	}else if(isset($_POST['ids'])){
-		// initilization shit
+    global $get_news;
+
+		// initilization
 		$ids =$_POST['ids'];
 		$headline = array();
-		$stmt = $conn->prepare("SELECT * FROM news WHERE reference_id = ? ");
-		$stmt->bind_param("s", $id);
 
 		for ($i=0; $i < count($ids); $i++) { 
 			$id = $ids[$i];
-			$stmt->execute();
-			$result = $stmt->get_result();
+			$get_news->execute();
+			$result = $get_news->get_result();
 			$row = $result->fetch_assoc();
 			array_push($headline, $row['news_headline']);
 		}
