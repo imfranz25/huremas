@@ -30,5 +30,6 @@
 			array_push($headline, $row['news_headline']);
 		}
 		echo json_encode($headline);
+
 	}
 ?>
