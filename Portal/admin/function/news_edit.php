@@ -41,13 +41,13 @@
 			}
 			
 			if ($valid) {
-				if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/news/'.$new_filename)){
-					if (unlink($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/news/'.$new_filename)) {
+				if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$new_filename)){
+					if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$new_filename)) {
 					}
 					
 				}
 				//move file
-				move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/news/'.$new_filename);
+				move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$new_filename);
 			}
 		}
 

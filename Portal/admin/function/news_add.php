@@ -3,7 +3,11 @@
 	require_once '../includes/session.php';
 
 	if (isset($_POST['add'])) {
+    //prepared statement for insert
+    $sql = $conn->prepare("INSERT INTO news (reference_id,news_headline,display_image,news_details,news_date) VALUES (?,?,?,?,?)");
+    $sql->bind_param('sssss',$reference_id,$headline,$new_filename,$details,$date);
 
+    //get data
 		$date = trim($_POST['date']);
 		$headline = trim($_POST['headline']);
 		$details = trim($_POST['details']);
@@ -29,9 +33,6 @@
 		//set filename
 		$new_filename = $reference_id.".".$extension;
 
-	
-		$sql = "INSERT INTO news (reference_id,news_headline,display_image,news_details,news_date) VALUES ('$reference_id','$headline','$new_filename','$details','$date')";
-
 		if (!in_array($extension, $valid_extension)) {
 		    $_SESSION['error'] = 'Invalid File Type';
 		}else if ($file_size > 5242880) { //5MB Maximum file size
@@ -39,7 +40,7 @@
 		}else{
 			//move file
 			move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$new_filename);
-			if($conn->query($sql)){
+			if($sql->execute()){
 				$_SESSION['success'] = 'News published successfully';
 			}
 			else{
