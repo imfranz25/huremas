@@ -1,34 +1,32 @@
 <?php 
-$title="Profile";
-require_once '../includes/path.php';
-include 'includes/session.php';
-include 'includes/header.php';
+  $title="Profile";
+  require_once '../includes/path.php';
+  include 'includes/session.php';
+  include 'includes/header.php';
 ?>
+
 <!-- Remove Green Theme Temporarily including shadows -->  
 <style type="text/css">
   body[themebg-pattern="theme1"] {
-  background-color: #f3f3f3;}
+    background-color: #f3f3f3;
+  }
   .pcoded .pcoded-container {
-  -webkit-box-shadow: none;
-          box-shadow: none }
+    -webkit-box-shadow: none;
+    box-shadow: none 
+  }
   .link{
     cursor: pointer;
   }
-
 </style>
 
 <body>
-  <?php include 'includes/preloader.php'; ?>
+  <?php include_once 'includes/preloader.php'; ?>
   
-    <!-- Pcoded -->  
     <div id="pcoded" class="pcoded">
-        <!-- Pcoded Container-->   
-        <div class="pcoded-container">
-        <!-- Navigation Header -->
-        <?php include 'includes/navbar.php'?>
-        <!-- Navigation Header End -->
-
-        <!--================================================================================== -->
+      <div class="pcoded-container">
+      <?php require_once 'includes/navbar.php'?>
+ 
+        <!--================================================================ -->
 
         <!-- Profile Page Row -->    
         <div class="container-fluid row mt-5">
@@ -73,7 +71,7 @@ include 'includes/header.php';
           <!-- Profile Menu Column End-->
 
 
-          <!--========================================================================= -->
+          <!--==================================================================== -->
 
           <!-- Profile Page Column -->
           <div class="col-lg-9 tab-content">
@@ -127,20 +125,6 @@ include 'includes/header.php';
                     <input type="text" id="sex" class="form-control" readonly> 
                   </div> 
                 </div>
-                <!--Religion -->
-                <!-- <div class="row d-flex m-3">
-                  <label class="col-lg-2 col-form-label">Religion</label>
-                  <div class="col-lg-6">
-                    <input type="text" name="religion" id="religion" class="form-control" readonly> 
-                  </div> 
-                </div> -->
-                <!--Civil Status -->
-                <!-- <div class="row d-flex m-3">
-                  <label class="col-lg-2 col-form-label">Civil Status</label>
-                  <div class="col-lg-6">
-                    <input type="text" name="civilstatus" id="civilstatus" class="form-control" readonly> 
-                  </div> 
-                </div> -->
                 <!--Contact Details -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label"></label>
@@ -176,7 +160,6 @@ include 'includes/header.php';
                     <input type="email"  id="email" class="form-control" readonly> 
                   </div> 
                 </div>
-
                 <!--Employee Details -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label"></label>
@@ -198,13 +181,6 @@ include 'includes/header.php';
                     <input type="text"  id="department" class="form-control" readonly> 
                    </div> 
                 </div>
-                <!--Schedule -->
-                <!--<div class="row d-flex m-3">-->
-                <!--  <label class="col-lg-2 col-form-label">Schedule</label>-->
-                <!--  <div class="col-lg-6">-->
-                <!--    <input type="text"  id="schedule" class="form-control" readonly> -->
-                <!--   </div> -->
-                <!--</div>-->
                 <!--Category -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label">Category</label>
@@ -212,7 +188,6 @@ include 'includes/header.php';
                     <input type="text"  id="category" class="form-control" readonly> 
                    </div> 
                 </div>
-
                 <!--Goverment -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label"></label>
@@ -248,7 +223,6 @@ include 'includes/header.php';
                     <input type="text"  id="tin" class="form-control" readonly> 
                    </div> 
                 </div>
-                
                 <!--Account -->
                 <div class="row d-flex m-3">
                   <label class="col-lg-2 col-form-label"></label>
@@ -275,14 +249,12 @@ include 'includes/header.php';
                     </div>
                    </div> 
                 </div>
-
-
               </div>
               <!-- Card Block End-->
             </div>
             <!-- Card Container End-->
 
-            <!--=====================================================================-->
+            <!--================================================================-->
 
             <!-- Inbox Container-->
             <div class="card tab-pane fade" id="inbox">
@@ -291,7 +263,6 @@ include 'includes/header.php';
                 <h5>Notification</h5>
               </div> 
               <div class="card-block">
-
                 <!-- Inbox Sample *-->
                 <div id="inbox-content">
                   <!-- Inbox Table-->
@@ -317,18 +288,11 @@ include 'includes/header.php';
                 </div>
                 <!--No Notification Message End-->
 
-
-
-                <!--=========================SAMPLE MESSAGE==============================-->
-
-
               </div>
             </div>
             <!--Inbox End-->
 
-
-
-            <!--=====================================================================-->
+            <!--=============================================================-->
 
             <!-- Settings Container-->
             <div class="card tab-pane fade" id="setting">
@@ -392,10 +356,9 @@ include 'includes/header.php';
                     <div class="col-lg-4">
                       <input type="reset" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center mb-3 mt-3 mx-auto" id="clear_setting" name="clear" value="Clear" />
                     </div>
+                  </div>
                 </form>
-                </div>
                 <!--Card Block Settings **End**-->
-
               </div>
             </div>
             <!--Settings End-->
@@ -677,9 +640,6 @@ include 'includes/header.php';
         }
         //ACTIVE TAB **END**
 
-        
-
-
 
       });//JQUERY **END**
 
@@ -687,8 +647,6 @@ include 'includes/header.php';
       get_profile();
       get_notification();
       
-
-
 
     </script>
    
