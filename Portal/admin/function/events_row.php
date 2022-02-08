@@ -32,5 +32,8 @@
 		}
 		echo json_encode($event_name);
 
-	}
+	}else{
+    header('location:../events.php');
+  }
+
 ?>
