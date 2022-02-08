@@ -3,17 +3,21 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['delete'])){
-		$id = $_POST['id'];
-		$sql = "UPDATE employees SET employee_archive=1 WHERE id = '$id'";
-		if($conn->query($sql)){
+    //prepare stmt delete emp
+		$sql = $conn->prepare("UPDATE employees SET employee_archive=1 WHERE id = ? ");
+    $sql->bind_param('s',$id);
+    //get id
+    $id = $_POST['id'];
+
+		if($sql->execute()){
 			$_SESSION['success'] = 'Employee archived successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 	}
 	else{
-		$_SESSION['error'] = 'Select item to delete first';
+		$_SESSION['error'] = 'Select an employee to continue';
 	}
 
 	header('location: ../employee.php?page=employee_list');
