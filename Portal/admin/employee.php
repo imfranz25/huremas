@@ -358,8 +358,6 @@
     }
   }
 
-
-
   $(document).ready(function() {
     
     //employee properties
