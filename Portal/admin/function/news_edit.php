@@ -43,8 +43,15 @@
 			}
 			
 			if ($valid) {
-				if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$new_filename)){
-					if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$new_filename)) {
+
+        $select=$conn->prepare("SELECT display_image FROM news WHERE reference_id=?");
+        $select->bind_param('s',$reference_id);
+        $select->execute();
+        $result = $select->get_result();
+        $row = $result->fetch_assoc();
+
+				if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$row['display_image'])){
+					if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/news/'.$row['display_image'])) {
 					}
 					
 				}
