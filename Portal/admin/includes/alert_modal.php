@@ -1,56 +1,56 @@
 <style>
   /* CUSTOMIZE ALERT MODAL FOR MOVING APPLICANTS */
-.modal-confirm .modal-content {
-  padding: 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-}
-.modal-confirm .modal-header {
-  border-bottom: none;   
-  position: relative;
-  text-align: center;
-  margin: -20px -20px 0;
-  border-radius: 5px 5px 0 0;
-  padding: 35px;
-}
-.modal-confirm h4 {
-  text-align: center;
-  font-size: 36px;
-  margin: 10px 0;
-}
-.modal-confirm .form-control, .modal-confirm .btn {
-  min-height: 40px;
-  border-radius: 3px; 
-}
-.modal-confirm .close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: #fff;
-  text-shadow: 2px 1px black;
-  opacity: 0.5;
-}
-.modal-confirm .close:hover {
-  opacity: 0.8;
-}
-.modal-confirm .icon-box {
-  color: #fff;    
-  width: 95px;
-  height: 95px;
-  display: inline-block;
-  border-radius: 50%;
-  z-index: 9;
-  padding: 15px;
-  text-align: center;
-}
-.modal-confirm .icon-box i {
-  font-size: 64px;
-  margin: -4px 0 0 -4px;
-}
-.modal-confirm.modal-dialog {
-  margin-top: 80px;
-}
+  .modal-confirm .modal-content {
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+  }
+  .modal-confirm .modal-header {
+    border-bottom: none;   
+    position: relative;
+    text-align: center;
+    margin: -20px -20px 0;
+    border-radius: 5px 5px 0 0;
+    padding: 35px;
+  }
+  .modal-confirm h4 {
+    text-align: center;
+    font-size: 36px;
+    margin: 10px 0;
+  }
+  .modal-confirm .form-control, .modal-confirm .btn {
+    min-height: 40px;
+    border-radius: 3px; 
+  }
+  .modal-confirm .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    text-shadow: 2px 1px black;
+    opacity: 0.5;
+  }
+  .modal-confirm .close:hover {
+    opacity: 0.8;
+  }
+  .modal-confirm .icon-box {
+    color: #fff;    
+    width: 95px;
+    height: 95px;
+    display: inline-block;
+    border-radius: 50%;
+    z-index: 9;
+    padding: 15px;
+    text-align: center;
+  }
+  .modal-confirm .icon-box i {
+    font-size: 64px;
+    margin: -4px 0 0 -4px;
+  }
+  .modal-confirm.modal-dialog {
+    margin-top: 80px;
+  }
 
 </style>
 
