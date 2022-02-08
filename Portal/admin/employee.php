@@ -173,7 +173,7 @@
         
         let avatar = (response.photo!='')?response.photo:'profile.jpg';
         //view
-        $('#cimg_view').attr('src','<?php echo $global_link; ?>/Portal/admin/images/'+avatar);
+        $('#cimg_view').attr('src','uploads/profile/'+avatar);
         $('#view_firstname').val(response.firstname);
         $('#view_middlename').val((response.middlename=='')?'N/A':response.middlename);
         $('#view_lastname').val(response.lastname);
@@ -216,7 +216,7 @@
         $('#phealth').val(response.philhealth_id);
         $('#tin').val(response.tin_num);
 
-        var paths = "images/"+response.photo;
+        var paths = "uploads/profile/"+response.photo;
         $("#cimg").attr("src",paths);
 
         if(response.category_id=='1'){

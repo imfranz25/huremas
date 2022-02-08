@@ -25,6 +25,7 @@
             </tr>
           </thead>
           <tbody id="tbody">
+
             <?php
            		$adds ="order by e.lastname DESC ";
            		$sel = "";
@@ -44,14 +45,14 @@
               $query = $conn->query($sql);
               $count=1;
 
-                while($row = $query->fetch_assoc()):
-                  $type ="CNT";
-                  if($row['category_id']==2){
-                      $type ="JO";
-                  }
-                  if ($row['employee_archive']==1) {
-                     continue;
-                  }
+              while($row = $query->fetch_assoc()):
+                $type ="CNT";
+                if($row['category_id']==2){
+                    $type ="JO";
+                }
+                if ($row['employee_archive']==1) {
+                   continue;
+                }
             ?>
 
             <tr>
@@ -81,10 +82,12 @@
                 </div>
               </td>
             </tr>
+
             <?php
               $count++;
               endwhile;
             ?>
+
           </tbody>
         </table>
       </div>
