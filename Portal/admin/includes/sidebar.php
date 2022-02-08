@@ -13,7 +13,7 @@
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
                               <div class="main-menu-header">
-                                  <img class="img-80 img-radius" src="<?php echo $global_link; ?>/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="60" alt="User-Profile-Image">
+                                  <img class="img-80 img-radius" src="<?php echo $global_link; ?>/Portal/admin/uploads/profile/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="60" alt="User-Profile-Image">
                                   <div class="user-details">
                                       <span id="more-details"><?php echo $user['firstname']; ?><i class="fa fa-caret-down"></i></span>
                                   </div>
