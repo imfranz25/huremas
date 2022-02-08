@@ -33,15 +33,22 @@
 
 		if ($display!= '') {
 			if (!in_array($extension, $valid_extension)) {
-			    $_SESSION['error'] = 'Invalid File Type';
-			    $valid = false;
+			   $_SESSION['error'] = 'Invalid File Type';
+			   $valid = false;
 			}else if ($file_size > 5242880) { //5MB Maximum file size
 				$_SESSION['error'] = 'File size exceeds the maximum limit';
 				$valid = false;
 			}
 			if ($valid) {
-				if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/events/'.$new_filename)) {
-					if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/events/'.$new_filename)) {
+
+        $select=$conn->prepare("SELECT display_image FROM events WHERE reference_id=?");
+        $select->bind_param('s',$reference_id);
+        $select->execute();
+        $result = $select->get_result();
+        $row = $result->fetch_assoc();
+
+				if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/events/'.$row['display_image'])) {
+					if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link.'/Portal/admin/uploads/events/'.$row['display_image'])) {
 					}
 				}
 				//move file
