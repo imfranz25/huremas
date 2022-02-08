@@ -6,7 +6,7 @@
 ?>
 
 <body>
-  <?php include_once 'includes/preloader.php'; ?>
+  <?php //include_once 'includes/preloader.php'; ?>
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
     <?php require_once 'includes/navbar.php'?>
@@ -47,8 +47,17 @@
           <section class="content">
             <div class="container-fluid">
               <?php 
-                $page = $_GET['page'];
-                require_once $page.'.php';
+                if (isset($_GET['page'])) {
+                  $page = $_GET['page'];
+                  if (file_exists($page.'.php')) {
+                    require_once $page.'.php';
+                  }else{
+                    require_once 'employee_list.php';
+                  }
+                }else{
+                  require_once 'employee_list.php';
+                }
+                
               ?>
             </div>
           </section>
