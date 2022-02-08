@@ -191,7 +191,7 @@
         $('#view_pagibig').val(response.pagibig_id);
         $('#view_phealth').val(response.philhealth_id);
         $('#view_tin').val(response.tin_num);
-        $('#view_basic_salary').val(response.rate);
+        $('.view_basic_salary').val(response.rate);
         $('#view_date_hired').val(response.date_hired);
 
         reload(response.category_id);

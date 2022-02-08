@@ -26,7 +26,7 @@
 		if(!empty($filename)){
 
       //select existing photo then delete it
-      $select = $conn->prepare("SELECT photo FROM employees WHERE WHERE id = ? ");
+      $select = $conn->prepare("SELECT photo FROM employees WHERE id = ? ");
       $select->bind_param('s',$empid);
 
       //file size
@@ -36,7 +36,7 @@
       //get extension 
       $extension = pathinfo($_FILES["img"]["name"])['extension'];
       //set filename
-      $new_filename = $employee_id.".".$extension;
+      $new_filename = $empid1.".".$extension;
 
       if (!in_array($extension, $valid_extension)) {
         $_SESSION['error'] = 'Invalid File Type';

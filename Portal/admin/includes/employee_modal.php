@@ -95,31 +95,31 @@
                 <div class="col-md-6  ">
                   <div class="form-group">
                     <label for="" class="control-label req">First Name</label>
-                    <input type="text" id="edit_firstname" name="firstname" class="form-control form-control-sm" required >
+                    <input type="text" id="edit_firstname" name="firstname" class="form-control border border-secondary" required >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label">Middle Name (optional)</label>
-                    <input type="text" id="edit_middlename" name="middlename" class="form-control form-control-sm" >
+                    <input type="text" id="edit_middlename" name="middlename" class="form-control border border-secondary" >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label">Last Name</label>
-                    <input type="text" id="edit_lastname" name="lastname" class="form-control form-control-sm" required >
+                    <input type="text" id="edit_lastname" name="lastname" class="form-control border border-secondary" required >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label">Suffix (optional)</label>
-                    <input type="text" id="edit_suffix" name="suffix" class="form-control form-control-sm" >
+                    <input type="text" id="edit_suffix" name="suffix" class="form-control border border-secondary" >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label req">Date of Birth</label>
-                    <input type="date" id="datepicker_edit" onchange="getAge(this.value)"  name="bday" class="form-control form-control-sm" required >
+                    <input type="date" id="datepicker_edit" onchange="getAge(this.value)"  name="bday" class="form-control border border-secondary" required >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label">Age</label>
-                    <input type="text" id="age" name="age" class="form-control form-control-sm" readonly="" >
+                    <input type="text" id="age" name="age" class="form-control border border-secondary" readonly="" >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label req">Sex</label>
-                    <select name="sex" id="gender_val" class="form-control form-control-sm select2">
+                    <select name="sex" id="gender_val" class="form-control border border-secondary select2">
                       <option value="">--Select--</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
@@ -127,15 +127,15 @@
                   </div>
                   <div class="form-group">
                     <label class="control-label req">Address</label>
-                    <textarea class="form-control" rows="2" id="edit_address"  name="address" required=""></textarea>
+                    <textarea class="form-control border border-secondary" rows="2" id="edit_address"  name="address" required=""></textarea>
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label req">Mobile Number</label>
-                    <input type="text" id="mobile" name="mobile" class="form-control form-control-sm" >
+                    <input type="text" id="mobile" name="mobile" class="form-control border border-secondary" >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label req">Contact Number</label>
-                    <input type="text" id="edit_contact" name="contact" class="form-control form-control-sm" >
+                    <input type="text" id="edit_contact" name="contact" class="form-control border border-secondary" >
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -146,17 +146,17 @@
                   <div class="form-group ">
                     <div class="custom-file">
                     	<input type="hidden" name="dbimage" id="dbimage">
-                      <input type="file" class="" id="customFile" name="img" onchange="displayImg(this,$(this))">
+                      <input type="file" class="" id="customFile" accept="image/*" name="img" onchange="displayImg(this,$(this))">
                     </div>
                   </div> 
                   <div class="form-group">
                     <label class="control-label">Email</label>
-                    <input type="email" id="edit_email" class="form-control form-control-sm" name="email" required >
+                    <input type="email" id="edit_email" class="form-control border border-secondary" name="email" required >
                     <small id="#msg"></small>
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label req">Category</label>
-                    <select class="form-control" name="category" id="category" required onchange="reload(this.value)">
+                    <select class="form-control border border-secondary" name="category" id="category" required onchange="reload(this.value)">
                       <option value="" selected>--Select--</option>
                       <?php
                         $sql = "SELECT * FROM employment_category ";
@@ -171,7 +171,7 @@
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label req">Department</label>
-                    <select class="form-control" id="department1" name="department" required>
+                    <select class="form-control border border-secondary" id="department1" name="department" required>
                       <option value="" selected>--Select--</option>
                       <?php
                         $sql = "SELECT * FROM department_category";
@@ -187,12 +187,12 @@
 
                   <div class="form-group">
                     <label for="" class="control-label req">Designation</label>
-                    <select class="form-control" name="position" id="position" onchange="getSalary()" required>
+                    <select class="form-control border border-secondary" name="position" id="position" onchange="getSalary()" required>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label req">Date Hired</label>
-                    <input type="date" name="date_hired" id="date_hired" class="form-control form-control-sm" value="<?php echo date('Y-m-d'); ?>" required >
+                    <input type="date" name="date_hired" id="date_hired" class="form-control border border-secondary" value="<?php echo date('Y-m-d'); ?>" required >
                   </div>
                 </div>
               </div>
@@ -210,26 +210,26 @@
                 <div class="col-md-6 border-right">
                   <div class="form-group">
                     <label for="" class="control-label req">TIN NUMBER</label>
-                    <input type="text" name="tin" id="tin" class="form-control form-control-sm" >
+                    <input type="text" name="tin" id="tin" class="form-control border border-secondary" >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label ">SSS</label>
-                    <input type="text" name="sss" id="sss" class="form-control form-control-sm" >
+                    <input type="text" name="sss" id="sss" class="form-control border border-secondary" >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label ">PAGIBIG</label>
-                    <input type="text" name="pagibig" id="pagibig" class="form-control form-control-sm" >
+                    <input type="text" name="pagibig" id="pagibig" class="form-control border border-secondary" >
                   </div>
                   <div class="form-group">
                     <label for="" class="control-label ">PHILHEALTH</label>
-                    <input type="text" name="phealth" id="phealth" class="form-control form-control-sm" >
+                    <input type="text" name="phealth" id="phealth" class="form-control border border-secondary" >
                   </div>  
                 </div>
 
                 <div class="col-md-6 border-right">
                   <div class="form-group">
                     <label id="income" for="" class="control-label">Basic Salary</label>
-                    <input type="text" id="basic_salary" name="basic_salary" class="form-control form-control-sm" readonly="">
+                    <input type="text" id="basic_salary" name="basic_salary" class="form-control border border-secondary view_basic_salary" readonly="">
                   </div>
                   <div id="deducts" style="display: none;">
                     <div class="form-group">
@@ -360,6 +360,7 @@
                 <div class="form-group d-flex justify-content-center align-items-center">
                   <img src="" alt="Avatar" id="cimg_view" class="img-thumbnail img-fluid" width="143" height="143">
                 </div>
+                <hr>
                 <div class="form-group">
                   <label class="control-label">Email</label>
                   <input type="email" id="view_email" class="form-control border border-secondary" readonly >
@@ -414,7 +415,7 @@
               <div class="col-md-6 border-right">
                 <div class="form-group">
                   <label id="income" for="" class="control-label">Basic Salary</label>
-                  <input type="text" id="view_basic_salary"  class="form-control border border-secondary" readonly="">
+                  <input type="text" class="form-control border border-secondary view_basic_salary" readonly="">
                 </div> 
                 <div id="deducts_view" class="d-none">
                   <h4>DEDUCTIONS</h4>
@@ -453,7 +454,7 @@
           <div class="form-group">
             <label for="photo" class="col-sm-3 control-label">Update Photo</label>
             <div class="col-sm-9">
-              <input type="file" id="photo" name="photo" required>
+              <input type="file" id="photo" name="photo" accept="image/*" required>
             </div>
           </div>
         </div>
