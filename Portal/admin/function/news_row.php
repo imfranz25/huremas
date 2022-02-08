@@ -31,5 +31,8 @@
 		}
 		echo json_encode($headline);
 
-	}
+	}else{
+    header('location:../news.php');
+  }
+
 ?>
