@@ -38,7 +38,7 @@
               <!-- Profile Sidebar Header -->
               <div class="p-3 rounded-top" style="background: #379C43">
                 <div class="d-flex justify-content-center">
-                  <img class="img-radius m-2" src="<?php echo $global_link; ?>/Portal/admin/images/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="150" alt="User-Profile-Image">
+                  <img class="img-radius m-2" src="uploads/profile/<?php echo (!empty($user['photo']))?$user['photo']:'profile.jpg'; ?>" width="150" height="150" alt="User-Profile-Image">
                 </div>    
                 <h5 class="text-center text-white"><?php echo $user['firstname']; ?></h5>    
               </div>
