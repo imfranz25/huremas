@@ -6,11 +6,38 @@
 	$stmt = $conn->prepare("DELETE FROM events WHERE reference_id = ? ");
 	$stmt->bind_param("s", $delete);
 
+  //select display img and then delete it
+  $select = $conn->prepare("SELECT display_image FROM events WHERE reference_id= ? ");
+  $select->bind_param("s", $delete);
+
 	function delete($id){
-		global $stmt,$delete;
-		$delete = $id;
-		$stmt->execute() ? $_SESSION['success'] = 'Event(s) deleted successfully' : $_SESSION['error'] = 'Connection Timeout';
+
+    //initialize
+		global $stmt,$delete,$select,$global_link;
+    $delete = $id;
+    $isDeleted = false; // set to true if the display is deleted
+
+    //get display image
+    $select->execute();
+    $result = $select->get_result();
+    $row = $result->fetch_assoc();
+
+		//DELETE  FILE
+    if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link."/Portal/admin/uploads/events/".$row['display_image'])){
+      if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link."/Portal/admin/uploads/events/".$row['display_image'])) {
+        $isDeleted = true;
+      }
+    }
+    //delete db news info
+    if ($isDeleted) {
+      ($stmt->execute())? $_SESSION['success'] = 'Event(s) deleted successfully' :
+      $_SESSION['error'] = 'Connection Timeout';
+    }else{
+      $_SESSION['error'] = 'Something went wrong';
+    }  
+
 	}
+
 
 	if(isset($_POST['delete'])){
 		// initialization shitty
@@ -26,7 +53,7 @@
 				delete($id[0]);
 			}
 		}else{
-			 $_SESSION['error'] = 'Incorrect Password, please try again';
+			$_SESSION['error'] = 'Incorrect Password, please try again';
 		}
 
 	}
