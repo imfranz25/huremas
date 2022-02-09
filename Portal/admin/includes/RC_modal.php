@@ -73,8 +73,6 @@
 <!--CA Request Review **End**-->
 
 
-
-
 <!-- RC Request Review-->
 <div class="modal fade" id="view">
   <!--Modal Dialog-->
@@ -141,6 +139,3 @@
   <!--Modal Dialog **end**-->
 </div>
 <!--CA Request Review **End**-->
-
-
-
