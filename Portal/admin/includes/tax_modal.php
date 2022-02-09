@@ -1,90 +1,83 @@
 
 
-<!----============================================Tax============================-------------->
+<!----===================================Tax============================-------------->
 
 
 <!-- Add Tax-->
 <div class="modal fade" id="taxNew">
-    <!--Modal Dialog-->
-    <div class="modal-dialog modal-lg">
-        <!--Modal Content-->
-        <div class="modal-content">
-            <!--Modal Header-->
-            <div class="modal-header">
-              <h4 class="modal-title"><b>Add Tax</b></h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
+  <!--Modal Dialog-->
+  <div class="modal-dialog modal-lg">
+    <!--Modal Content-->
+    <div class="modal-content">
+      <!--Modal Header-->
+      <div class="modal-header">
+        <h4 class="modal-title"><b>Add Tax</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      </div>
+      <!--Modal Header **End**-->
+      <form class="form-horizontal" id="form_tax" method="POST" action="function/tax_add.php" oninput="tax_amt.value=amount.value" >
+        <!--Modal Body-->
+        <div class="modal-body">
+          <!--Tax Name-->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label req">Name</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control border border-secondary" name="name" autocomplete="off" required />
             </div>
-            <!--Modal Header **End**-->
-            <!--Modal Body-->
-            <div class="modal-body">
-              <form class="form-horizontal" id="form_tax" method="POST" action="function/tax_add.php" oninput="tax_amt.value=amount.value" >
+            <div class="col-sm-2">
+              <label class="h-100 d-flex align-items-center" for="Tcheck"><input  type="checkbox"  id="Tcheck" class="mr-2" name="status" value="active" checked />Active</label>
+            </div>
+          </div>
+          <!--Tax Vendor-->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label req">Vendor</label>
+            <div class="col-sm-9">
+              <select id="vendor" name="vendor" class="form-control border border-secondary" required>
+                <option value="" selected>--Select Vendor--</option>
+                 <?php
+                    $sql = "SELECT * FROM deduction_vendor";
+                    $query = $conn->query($sql);
+                    while($vrow = $query->fetch_assoc()){
+                      echo "<option value='".$vrow['id']."'>".$vrow['vendor_name']."</option>";
+                    }
+                  ?>
+              </select>
+            </div>
+          </div>
+          <!--Tax Type-->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label req">Type</label>
+            <div class="col-sm-9">
+              <select id="type" name="type" class="form-control taxstype border border-secondary" required>
+                <option value="" selected>--Select Type--</option>
+                <option value="Fixed Amount">Fixed Amount</option>
+                <option value="Percentage">Percentage</option>
+              </select>
+            </div>
+          </div>
+          <!--Tax Amount-->
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label amt_title req">Amount</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control tax_valid border border-secondary" name="amount" step=".01" min="0" required autocomplete="off" max="999999" onKeyPress="if(this.value.length==8) return false;" />
+              <div class="input-group-append d-none for_class">
+                <span class="input-group-text"><strong class="text-danger">Formula :</strong>
+                  <label class="for_title"></label> 
+                  <output id="tax_amt"></output>
+                  <label class="tax_unit"></label>
+                </span>
+              </div>
+            </div>
+          </div>
 
-                <!--Tax Name-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">Name</label>
-                  <div class="col-sm-7">
-                    <input type="text" class="form-control border border-secondary" name="name" autocomplete="off" required />
-                  </div>
-                  <div class="col-sm-2">
-                    <label class="h-100 d-flex align-items-center" for="Tcheck"><input  type="checkbox"  id="Tcheck" class="mr-2" name="status" value="active" checked />Active</label>
-                  </div>
-                </div>
-
-                <!--Tax Vendor-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">Vendor</label>
-                  <div class="col-sm-9">
-                    <select id="vendor" name="vendor" class="form-control border border-secondary" required>
-                      <option value="" selected>--Select Vendor--</option>
-                       <?php
-                          $sql = "SELECT * FROM deduction_vendor";
-                          $query = $conn->query($sql);
-                          while($vrow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$vrow['id']."'>".$vrow['vendor_name']."</option>
-                            ";
-                          }
-                        ?>
-                    </select>
-                  </div>
-                </div>
-
-                <!--Tax Type-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">Type</label>
-                  <div class="col-sm-9">
-                    <select id="type" name="type" class="form-control taxstype border border-secondary" required>
-                      <option value="" selected>--Select Type--</option>
-                      <option value="Fixed Amount">Fixed Amount</option>
-                      <option value="Percentage">Percentage</option>
-                    </select>
-                  </div>
-                </div>
-
-
-                <!--Tax Amount-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label amt_title req">Amount</label>
-                  <div class="col-sm-9">
-                    <input type="number" class="form-control tax_valid border border-secondary" name="amount" step=".01" min="0" required autocomplete="off" max="999999" onKeyPress="if(this.value.length==8) return false;" />
-                    <div class="input-group-append d-none for_class">
-                      <span class="input-group-text"><strong class="text-danger">Formula :</strong>
-                        <label class="for_title"></label> 
-                        <output id="tax_amt"></output>
-                        <label class="tax_unit"></label>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Tax From-->
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label req">From Gross Pay Amount (Minimum)</label>
-                  <div class="col-sm-9">
-                    <input type="number" class="form-control tax_from border border-secondary" name="from" step=".01" required autocomplete="off" max="999999" onKeyPress="if(this.value.length==9) return false;" />
-                  </div>
-                </div>
+            <!--Tax From-->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label req">From Gross Pay Amount (Minimum)</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control tax_from border border-secondary" name="from" step=".01" required autocomplete="off" max="999999" onKeyPress="if(this.value.length==9) return false;" />
+              </div>
+            </div>
 
                 <!--Tax To-->
                 <div class="form-group row">
