@@ -2,28 +2,41 @@
 	require_once '../../includes/path.php';
 	require_once '../includes/session.php';
 
-	if(isset($_POST['id'])){
-		$id = $_POST['id'];
-		$sql = "SELECT * FROM deduction_vendor WHERE id = '$id'";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+  //prepare stmt select values
+  $sql = $conn->prepare("SELECT * FROM deduction_vendor WHERE id = ? ");
+  $sql->bind_param('d',$id);
 
-		echo json_encode($row);
+	if(isset($_POST['id'])){
+		
+    global $id,$sql;
+
+    //execute
+    $id = $_POST['id'];
+    $sql->execute();
+    $result = $sql->get_result();
+		$row = $result->fetch_assoc();
+		echo json_encode($row); // echo via json encode
+
 	}
 	else if(isset($_POST['ids'])){
-		// initilization shit
+
+    global $id,$sql;
+    
+		// initilization 
 		$ids =$_POST['ids'];
 		$name = array();
-		$stmt = $conn->prepare("SELECT * FROM deduction_vendor WHERE id = ? ");
-		$stmt->bind_param("d", $id);
 
 		for ($i=0; $i < count($ids); $i++) { 
 			$id = $ids[$i];
-			$stmt->execute();
-			$result = $stmt->get_result();
+			$sql->execute();
+			$result = $sql->get_result();
 			$user = $result->fetch_assoc();
 			array_push($name, $user['vendor_name']);
 		}
 		echo json_encode($name);
-	}
+
+	}else{
+    header('location:../deduction.php');
+  }
+
 ?>
