@@ -10,87 +10,91 @@
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
       <?php require_once 'includes/navbar.php'?>
-      <?php require_once 'includes/sidebar.php'?>
-      <div class="pcoded-content">
-        <!-- Page-header start -->
-        <div class="page-header">
-          <div class="page-block">
-            <div class="row align-items-center">
-              <div class="col-md-8">
-                <div class="page-header-title">
-                  <h5 class="m-b-10">Overtime Category</h5>
-                  <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+        <div class="pcoded-main-container">
+          <div class="pcoded-wrapper">
+          <?php require_once 'includes/sidebar.php'?>
+          <div class="pcoded-content">
+            <!-- Page-header start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <div class="page-header-title">
+                      <h5 class="m-b-10">Overtime Category</h5>
+                      <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="breadcrumb-title">
+                      <li class="breadcrumb-item">
+                          <a href="index.php"> <i class="fa fa-home"></i> </a>
+                      </li>
+                      <li class="breadcrumb-item"><a href="#!">Employee</a></li>
+                      <li class="breadcrumb-item"><a href="overtime.php">Overtime</a></li>
+                      <li class="breadcrumb-item">
+                        <a href="overtime_category.php">Overtime Category</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <ul class="breadcrumb-title">
-                  <li class="breadcrumb-item">
-                      <a href="index.php"> <i class="fa fa-home"></i> </a>
-                  </li>
-                  <li class="breadcrumb-item"><a href="#!">Employee</a></li>
-                  <li class="breadcrumb-item"><a href="overtime.php">Overtime</a></li>
-                  <li class="breadcrumb-item">
-                    <a href="overtime_category.php">Overtime Category</a>
-                  </li>
-                </ul>
-              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Page-header end -->
-        <div class="pcoded-inner-content">
-          <div class='alert alert-danger alert-dismissible' hidden="" id="showdanger">
-            <button type='button' class='close' data-hide='alert' aria-hidden='true'>&times;</button>
-            <h4><i class='icon fa fa-warning'></i> Note !</h4>
-            <label id="warning"></label>
-          </div>
-          <?php include_once 'includes/session_alert.php'; ?>           
-          <!-- Main-body start -->
-          <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addOT"><i class="fa fa-plus"></i>New</button>
-          <a href="overtime.php" style="float:right;">
-            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-chevron-left"></i>Back</button>
-          </a>
-          <div class="card">
-            <div class="card-header">
-              <h5>Overtime List</h5>
-            </div>
-            <div class="box-body">
-              <div class="card-block table-border-style">
-                <div class="table-responsive">
-                  <table id="table1" class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Overtime Name</th>
-                        <th>Rate</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody id="tbody">
-                      <?php
-                        $sql = "SELECT * FROM overtime";
-                        $query = $conn->query($sql);
-                        while($row = $query->fetch_assoc()){
-                      ?>
-                      <tr>
-                        <td><?php echo ucfirst($row['overtime_name']); ?></td>
-                        <td><?php echo $row['overtime_rate']; ?>%</td>
-                        <td><?php echo ucfirst($row['status']); ?></td>
-                        <td>
-                          <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
-                          </button>
-                          <div class="dropdown-menu" style="">
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
-                          </div>
-                        </td>
-                      </tr>
-                      <?php }?>
-                    </tbody>
-                  </table>
+            <!-- Page-header end -->
+            <div class="pcoded-inner-content">
+              <div class='alert alert-danger alert-dismissible' hidden="" id="showdanger">
+                <button type='button' class='close' data-hide='alert' aria-hidden='true'>&times;</button>
+                <h4><i class='icon fa fa-warning'></i> Note !</h4>
+                <label id="warning"></label>
+              </div>
+              <?php include_once 'includes/session_alert.php'; ?>           
+              <!-- Main-body start -->
+              <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addOT"><i class="fa fa-plus"></i>New</button>
+              <a href="overtime.php" style="float:right;">
+                <button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-chevron-left"></i>Back</button>
+              </a>
+              <div class="card">
+                <div class="card-header">
+                  <h5>Overtime List</h5>
+                </div>
+                <div class="box-body">
+                  <div class="card-block table-border-style">
+                    <div class="table-responsive">
+                      <table id="table1" class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th>Overtime Name</th>
+                            <th>Rate</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody">
+                          <?php
+                            $sql = "SELECT * FROM overtime";
+                            $query = $conn->query($sql);
+                            while($row = $query->fetch_assoc()){
+                          ?>
+                          <tr>
+                            <td><?php echo ucfirst($row['overtime_name']); ?></td>
+                            <td><?php echo $row['overtime_rate']; ?>%</td>
+                            <td><?php echo ucfirst($row['status']); ?></td>
+                            <td>
+                              <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+                              </button>
+                              <div class="dropdown-menu" style="">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                              </div>
+                            </td>
+                          </tr>
+                          <?php }?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
