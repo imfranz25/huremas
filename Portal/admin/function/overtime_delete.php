@@ -2,39 +2,41 @@
 	require_once '../../includes/path.php';
 	require_once '../includes/session.php';
 
-	$stmt = $conn->prepare("DELETE FROM overtime WHERE id = ? ");
-	$stmt->bind_param("d", $delete);
 
-	function delete($id){
-		global $stmt,$delete;
-		$delete = $id;
-		$stmt->execute() ? $_SESSION['success'] = 'Overtime record deleted successfully' : $_SESSION['error'] = 'Connection Timeout';
-	}
 
 	if(isset($_POST['delete'])){
-		// initialization shitty
+
+		// initialization 
 		$id  = $_POST['id'];
+    // check stmt if records found dont delete oke?
+		$check = $conn->prepare("SELECT * FROM overtime_request WHERE overtime_code = ? ");
+    $check->bind_param('s',$id);
+    $check->execute();
+    $result = $check->get_result();
 
 
-		$check = "SELECT * FROM overtime_request WHERE overtime_code = '$id' ";
-		$query = $conn->query($check);
-		$count = mysqli_num_rows($query);
+		if ($result->num_rows==0) {
 
-		if ($count==0) {
-
+      //get values
+      $check_row = $result->fetch_assoc();
 			$pass  = $_POST['pass'];
 			$employee_id = $user['employee_id'];
 
+      //delete stmt
+      $stmt = $conn->prepare("DELETE FROM overtime WHERE id = ? ");
+      $stmt->bind_param("d", $id);
+
 			//challenge
 			if (password_verify($pass,get_password($employee_id,$conn))) {
-				// if (count($id) > 1) {
-				// 	array_map('delete', $id);
-				// }else{
-					delete($id[0]);
-				//}
+        if ($stmt->execute()) {
+          $_SESSION['success'] = 'Overtime record deleted successfully';
+        }else{
+          $_SESSION['error'] = 'Connection Timeout';
+        }
 			}else{
-				 $_SESSION['error'] = 'Incorrect Password, please try again';
+				$_SESSION['error'] = 'Incorrect Password, please try again';
 			}
+
 		}else{
 			$_SESSION['error'] = 'Overtime category is currently in used';
 		}

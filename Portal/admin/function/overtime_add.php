@@ -3,17 +3,19 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
-		$status = isset($_POST['status']) ? $_POST['status'] : "inactive";
-		$name = $_POST['name'];
-		$rate = $_POST['rate'];
 
-		$sql = "INSERT INTO overtime (overtime_name, overtime_rate, status) VALUES ('$name',$rate,'$status')";	
+		$sql = $conn->prepare("INSERT INTO overtime (overtime_name, overtime_rate, status) VALUES (?,?,?)");	
+    $sql->bind_param('sds',$name,$rate,$status);
+
+    $status = isset($_POST['status']) ? $_POST['status'] : "inactive";
+    $name = $_POST['name'];
+    $rate = $_POST['rate'];
 		
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Overtime added successfully';
 		}
 		else{
-			$_SESSION['error'] = "Overtime Code already exist";
+			$_SESSION['error'] = "Connection Timeout";
 		}
 
 	}else{

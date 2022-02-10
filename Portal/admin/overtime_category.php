@@ -101,6 +101,7 @@
   </div>
 
 
+
   <?php include 'includes/overtime_modal.php'; ?>
   <?php include 'includes/scripts.php'; ?>
 
@@ -128,7 +129,6 @@
       }
     });
   }
-
 
   $(document).ready(function() {
 

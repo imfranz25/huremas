@@ -65,10 +65,10 @@
         </button>
     	</div>
       <form class="form-horizontal" method="POST" action="function/overtime_delete.php">
-        <input type="hidden" id="overtime_id" name="id">
-    	 <div class="modal-body">	
+        <input type="text" id="overtime_id" name="id">
+    	  <div class="modal-body">	
       		<div class="text-center">
-          	<label>Are you sure you want to delete this overtime record(s) ? </label>
+          	<label>Are you sure you want to delete this overtime record? </label>
           	<h2 class="bold" id="overtime_name"></h2>
             <hr>
             <div class="form-group row">

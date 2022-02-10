@@ -3,21 +3,21 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
-		$id = $_POST['OT_id'];
-		$status = isset($_POST['edit_status']) ? $_POST['edit_status'] : "inactive";
-		$name = $_POST['edit_name'];
-		$rate = $_POST['edit_rate'];
+	  // edit prepare stmt
+		$sql = $conn->prepare("UPDATE overtime SET  status = ?, overtime_name = ?, overtime_rate = ? WHERE id = ? ");
+    $sql->bind_param('ssdd',$status,$name,$rate,$id);
+    //get values
+    $id = $_POST['OT_id'];
+    $status = isset($_POST['edit_status']) ? $_POST['edit_status'] : "inactive";
+    $name = $_POST['edit_name'];
+    $rate = $_POST['edit_rate'];
 		
-		$sql = "UPDATE overtime SET  status = '$status', overtime_name = '$name', overtime_rate = $rate WHERE id = $id ";
-		
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Overtime updated successfully';
 		}
 		else{
-			$_SESSION['error'] = "Overtime Code already exist";
+			$_SESSION['error'] = "Connection Timeout";
 		}
-
-
 	}
 	else{
 		$_SESSION['error'] = 'Select overtime record to edit first';
