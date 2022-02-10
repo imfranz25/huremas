@@ -11,79 +11,83 @@
     <div class="pcoded-overlay-box"></div>
       <div class="pcoded-container navbar-wrapper">         
         <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
-        <div class="pcoded-content">
-          <!-- Page-header start -->
-          <div class="page-header">
-            <div class="page-block">
-              <div class="row align-items-center">
-                <div class="col-md-8">
-                  <div class="page-header-title">
-                    <h5 class="m-b-10">Overtime</h5>
-                    <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <ul class="breadcrumb-title">
-                    <li class="breadcrumb-item">
-                      <a href="index.php"> <i class="fa fa-home"></i></a>
-                    </li>
-                    <li class="breadcrumb-item"><a href="#!">Employee</a>
-                    </li>
-                    <li class="breadcrumb-item"><a href="overtime.php">Overtime</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Page-header end -->
-          <div class="pcoded-inner-content">
-            <?php include_once 'includes/session_alert.php'; ?>   
-            <!-- Main-body start -->
-            <a href="overtime_category.php">
-              <button type="button" class="btn btn-mat waves-effect waves-light btn-success" >
-                <i class="fa fa-folder-open-o"></i>Overtime Category
-              </button>
-            </a>
-            <div class="card">
-              <div class="card-block">
-                <div class="col-xl-12 col-xl-6">
-                  <!-- Nav tabs -->
-                  <ul class="nav nav-tabs md-tabs" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" data-toggle="tab" href="#CAreq" role="tab">Pending</a>
-                      <div class="slide"></div>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link " data-toggle="tab" href="#CAapp" role="tab">Approved</a>
-                      <div class="slide"></div>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" data-toggle="tab" href="#CArej" role="tab">Rejected</a>
-                      <div class="slide"></div>
-                    </li>
-                  </ul>
-
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="CAreq" role="tabpanel">
-                      <br>
-                      <?php include 'OT_request.php'; ?>  
+        <div class="pcoded-main-container">
+          <div class="pcoded-wrapper">
+            <?php include 'includes/sidebar.php'?>
+            <div class="pcoded-content">
+              <!-- Page-header start -->
+              <div class="page-header">
+                <div class="page-block">
+                  <div class="row align-items-center">
+                    <div class="col-md-8">
+                      <div class="page-header-title">
+                        <h5 class="m-b-10">Overtime</h5>
+                        <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+                      </div>
                     </div>
-                    <div class="tab-pane " id="CAapp" role="tabpanel">
-                      <br>
-                      <?php include 'OT_approved.php'; ?>   
-                    </div>
-                    <div class="tab-pane " id="CArej" role="tabpanel">
-                      <br>
-                      <?php include 'OT_rejected.php'; ?>   
+                    <div class="col-md-4">
+                      <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item">
+                          <a href="index.php"> <i class="fa fa-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#!">Employee</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="overtime.php">Overtime</a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
-
                 </div>
               </div>
-              <!-- Main-body end -->
+              <!-- Page-header end -->
+              <div class="pcoded-inner-content">
+                <?php include_once 'includes/session_alert.php'; ?>   
+                <!-- Main-body start -->
+                <a href="overtime_category.php">
+                  <button type="button" class="btn btn-mat waves-effect waves-light btn-success" >
+                    <i class="fa fa-folder-open-o"></i>Overtime Category
+                  </button>
+                </a>
+                <div class="card">
+                  <div class="card-block">
+                    <div class="col-xl-12 col-xl-6">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs md-tabs" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" data-toggle="tab" href="#CAreq" role="tab">Pending</a>
+                          <div class="slide"></div>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link " data-toggle="tab" href="#CAapp" role="tab">Approved</a>
+                          <div class="slide"></div>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="tab" href="#CArej" role="tab">Rejected</a>
+                          <div class="slide"></div>
+                        </li>
+                      </ul>
+
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="CAreq" role="tabpanel">
+                          <br>
+                          <?php include 'OT_request.php'; ?>  
+                        </div>
+                        <div class="tab-pane " id="CAapp" role="tabpanel">
+                          <br>
+                          <?php include 'OT_approved.php'; ?>   
+                        </div>
+                        <div class="tab-pane " id="CArej" role="tabpanel">
+                          <br>
+                          <?php include 'OT_rejected.php'; ?>   
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- Main-body end -->
+                </div>
+              </div>
             </div>
           </div>
         </div>

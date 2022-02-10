@@ -174,6 +174,7 @@
         $('#category option[value='+response.category_id+']').attr('selected','selected');
         
         let avatar = (response.photo!='')?response.photo:'profile.jpg';
+
         //view
         $('#cimg_view').attr('src','uploads/profile/'+avatar);
         $('#view_firstname').val(response.firstname);
@@ -218,7 +219,7 @@
         $('#phealth').val(response.philhealth_id);
         $('#tin').val(response.tin_num);
 
-        var paths = "uploads/profile/"+response.photo;
+        var paths = "uploads/profile/"+avatar;
         $("#cimg").attr("src",paths);
 
         if(response.category_id=='1'){

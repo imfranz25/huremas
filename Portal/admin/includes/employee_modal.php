@@ -141,7 +141,7 @@
                 <div class="col-md-6">
                 	<label for="" class="control-label">Profile Photo</label>
                   <div class="form-group d-flex justify-content-center align-items-center">
-                    <img src="../assets/profile/avatar-blank.jpg" alt="Avatar" id="cimg" class="img-thumbnail img-fluid" width="143" height="143">
+                    <img src="uploads/profile/profile.jpg" alt="Avatar" id="cimg" class="img-thumbnail img-fluid" width="143" height="143">
                   </div>
                   <div class="form-group ">
                     <div class="custom-file">

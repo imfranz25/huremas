@@ -21,31 +21,31 @@
         <div class="col-md-6 ">
           <div class="form-group">
             <label for="" class="control-label req">First Name</label>
-            <input type="text" name="firstname" class="form-control form-control-sm" required >
+            <input type="text" name="firstname" class="form-control border border-secondary" required >
           </div>
           <div class="form-group">
             <label for="" class="control-label">Middle Name (optional)</label>
-            <input type="text" name="middlename" class="form-control form-control-sm" >
+            <input type="text" name="middlename" class="form-control border border-secondary" >
           </div>
           <div class="form-group">
             <label for="" class="control-label">Last Name</label>
-            <input type="text" name="lastname" class="form-control form-control-sm" required >
+            <input type="text" name="lastname" class="form-control border border-secondary" required >
           </div>
           <div class="form-group">
             <label for="" class="control-label">Suffix (optional)</label>
-            <input type="text" name="suffix" class="form-control form-control-sm" >
+            <input type="text" name="suffix" class="form-control border border-secondary" >
           </div>
           <div class="form-group">
             <label for="" class="control-label req">Date of Birth</label>
-            <input type="date" onchange="getAge(this.value)" value="2000-01-01"  id="bdays" name="bday" class="form-control form-control-sm" required >
+            <input type="date" onchange="getAge(this.value)" value="2000-01-01"  id="bdays" name="bday" class="form-control border border-secondary" required >
           </div>
           <div class="form-group">
             <label for="" class="control-label">Age</label>
-            <input type="text" id="age" name="age" class="form-control form-control-sm" readonly="" >
+            <input type="text" id="age" name="age" class="form-control border border-secondary" readonly="" >
           </div>
           <div class="form-group">
             <label for="" class="control-label req">Sex</label>
-            <select name="sex" id="designation_id" class="form-control form-control-sm select2">
+            <select name="sex" id="designation_id" class="form-control border border-secondary select2">
               <option value="">--Select--</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -53,21 +53,22 @@
           </div>
           <div class="form-group">
             <label class="control-label req">Address</label>
-            <textarea class="form-control" rows="2"  name="address" required=""></textarea>
+            <textarea class="form-control border border-secondary" rows="2"  name="address" required=""></textarea>
           </div>
           <div class="form-group">
             <label for="" class="control-label req">Mobile Number</label>
-            <input type="text" name="mobile" class="form-control form-control-sm" >
+            <input type="text" name="mobile" class="form-control border border-secondary" >
           </div>
           <div class="form-group">
             <label for="" class="control-label req">Contact Number</label>
-            <input type="text" name="contact" class="form-control form-control-sm" >
+            <input type="text" name="contact" class="form-control border border-secondary" >
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group d-flex justify-content-center align-items-center">
             <img src="../assets/profile/avatar-blank.jpg" alt="Avatar" id="cimg" class="img-thumbnail img-fluid" width="143" height="143">
           </div>
+          <hr>
           <div class="form-group ">
             <label for="" class="control-label">Profile Photo</label>
             <div class="custom-file">
@@ -76,7 +77,7 @@
           </div>
           <div class="form-group">
             <label class="control-label">Email</label>
-            <input type="email" class="form-control form-control-sm" name="email" required >
+            <input type="email" class="form-control border border-secondary" name="email" required >
             <small id="#msg"></small>
           </div>
           <div class="form-group">
@@ -91,7 +92,7 @@
           </div>
           <div class="form-group">
             <label for="" class="control-label req">Department</label>
-            <select class="form-control" id="department" name="department" required>
+            <select class="form-control border border-secondary" id="department" name="department" required>
               <option value="" selected>--Select--</option>
               <?php
                 $sql = "SELECT * FROM department_category";
@@ -104,7 +105,7 @@
           </div>
           <div class="form-group">
             <label for="" class="control-label req">Designation</label>
-            <select class="form-control" name="position" id="position" onchange="getSalary()" required>
+            <select class="form-control border border-secondary" name="position" id="position" onchange="getSalary()" required>
               <option value="" selected>--Select--</option>
               <?php
                 $sql = "SELECT * FROM position WHERE type = '1'";
@@ -117,7 +118,7 @@
           </div>
           <div class="form-group">
             <label for="" class="control-label req">Date Hired</label>
-            <input type="date" name="date_hired" class="form-control form-control-sm" value="<?php echo date('Y-m-d'); ?>" required >
+            <input type="date" name="date_hired" class="form-control border border-secondary" value="<?php echo date('Y-m-d'); ?>" required >
           </div>
           <br><br><br>
           <div class="col-md-6 border-bottom">
@@ -126,7 +127,7 @@
           <hr>
           <div class="form-group">
             <label for="" class="control-label">Basic Salary</label>
-            <input type="text" id="basic_salary" name="basic_salary" class="form-control form-control-sm" readonly="">
+            <input type="text" id="basic_salary" name="basic_salary" class="form-control border border-secondary" readonly="">
           </div>
         </div>
       </div>
@@ -144,19 +145,19 @@
         <div class="col-md-6 border-right">
         	<div class="form-group">
             <label for="" class="control-label req">TIN NUMBER</label>
-            <input type="text" name="tin" class="form-control form-control-sm" required="" >
+            <input type="text" name="tin" class="form-control border border-secondary" required="" >
           </div>
           <div class="form-group">
             <label for="" class="control-label ">SSS</label>
-            <input type="text" name="sss" class="form-control form-control-sm" >
+            <input type="text" name="sss" class="form-control border border-secondary" >
           </div>
           <div class="form-group">
             <label for="" class="control-label ">PAGIBIG</label>
-            <input type="text" name="pagibig" class="form-control form-control-sm" >
+            <input type="text" name="pagibig" class="form-control border border-secondary" >
           </div>
           <div class="form-group">
             <label for="" class="control-label ">PHILHEALTH</label>
-            <input type="text" name="phealth" class="form-control form-control-sm" >
+            <input type="text" name="phealth" class="form-control border border-secondary" >
           </div>
         </div>
         <div class="col-md-6 border-right">
