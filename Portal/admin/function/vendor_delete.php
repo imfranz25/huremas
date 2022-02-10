@@ -32,7 +32,7 @@
 	}
 
 	if(isset($_POST['delete'])){
-		// initialization shitty
+		// initialization
 		$id  = explode(',', $_POST['id']);
 
 		if (count($id) > 1) {

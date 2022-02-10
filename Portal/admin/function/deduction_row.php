@@ -2,23 +2,29 @@
 	require_once '../../includes/path.php';
 	require_once '../includes/session.php';
 
-	if(isset($_POST['id'])){
-		// initilization shit
-		$id = $_POST['id'];
-		$sql = "SELECT * FROM deduction WHERE id = '$id'";
+  $stmt = $conn->prepare("SELECT * FROM deduction WHERE id = ? ");
+  $stmt->bind_param("d", $id);
 
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+	if(isset($_POST['id'])){
+
+    global $id,$stmt;
+
+		// initilization 
+		$id = $_POST['id'];
+		$stmt->execute();
+    $result = $stmt->get_result();
+		$row = $result->fetch_assoc();
 
 		echo json_encode($row);
 	}
 
 	else if(isset($_POST['ids'])){
-		// initilization shit
+    
+    global $id,$stmt;
+
+		// initilization 
 		$ids =$_POST['ids'];
 		$name = array();
-		$stmt = $conn->prepare("SELECT * FROM deduction WHERE id = ? ");
-		$stmt->bind_param("d", $id);
 
 		for ($i=0; $i < count($ids); $i++) { 
 			$id = $ids[$i];

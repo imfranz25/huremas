@@ -3,13 +3,19 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
+
+    //prepared stmt insert deduc
+    $sql = $conn->prepare("INSERT INTO deduction (deduction_code,deduction_name,deduction_type,deduction_desc,deduction_vendor,amount_rate,deduction_limit,deduction_period) VALUES (?,?,?,?,?,?,?,?)"); 
+    $sql->bind_param('ssssddds',$code,$name,$type,$desc,$vendor,$amount,$limit,$period);
+
+    //get values
 		$name = trim($_POST['name']);
 		$type = trim($_POST['type']);
 		$vendor = trim($_POST['vendor']);
 		$amount = trim($_POST['amount']);
 		$desc = trim($_POST['desc']);
-		isset($_POST['limit']) ? $limit = trim($_POST['limit']) : $limit ="0";
-		isset($_POST['period']) ? $period = trim($_POST['period']) : $period ="None";
+		$limit = isset($_POST['limit']) ?  trim($_POST['limit']) : "0";
+		$period = isset($_POST['period']) ? trim($_POST['period']) : "None";
 
 		//ensure default values for limit and period  if fixed 
 		if ($type == "Fixed Amount") {
@@ -18,24 +24,14 @@
 		}
 
 		//creating deduc_code
-		$letters = '';
-		$numbers = '';
-		foreach (range('A', 'Z') as $char) {
-		    $letters .= $char;
-		}
-		for($i = 0; $i < 10; $i++){
-			$numbers .= $i;
-		}
-		$code = substr(str_shuffle($letters), 0, 4).substr(str_shuffle($numbers), 0, 4);
+		$code = 'CVSUDT'.generate_id();
 
 		
-		$sql = "INSERT INTO deduction (deduction_code,deduction_name,deduction_type,deduction_desc,deduction_vendor,amount_rate,deduction_limit,deduction_period) VALUES ('CVSUDT$code','$name','$type','$desc',$vendor,$amount,$limit,'$period')";	
-
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Deduction record added successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 
 	}else{
