@@ -97,57 +97,46 @@
     
 <script>
 
+  function OT_row(id){
+    $.ajax({
+      type: 'POST',
+      url: 'function/OT_row.php',
+      data: {id:id},
+      dataType: 'json',
+      success: function(response){
+        //review
+        $('#OT_id').val(response.oids);
+        $('#name').val(response.name); 
+        $('#date').val(response.date); 
+        $('#startTime').val(response.start); 
+        $('#endTime').val(response.end); 
+        $('#OT_reason').val(response.reason);
 
-function OT_row(id){
-  $.ajax({
-    type: 'POST',
-    url: 'function/OT_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      //review
-      $('#OT_id').val(response.oids);
-      $('#name').val(response.name); 
-      $('#date').val(response.date); 
-      $('#startTime').val(response.start); 
-      $('#endTime').val(response.end); 
-      $('#OT_reason').val(response.reason);
+        var timeStart = new Date("01/01/2021 " + response.start).getHours();
+        var timeEnd = new Date("01/01/2021 " + response.end).getHours();
+        var hourDiff = timeEnd - timeStart;   
+        $('#total').val(Math.abs(Math.round(hourDiff))); 
+        $('#total1').val(Math.abs(Math.round(hourDiff))); 
 
-      var timeStart = new Date("01/01/2021 " + response.start).getHours();
-      var timeEnd = new Date("01/01/2021 " + response.end).getHours();
-      var hourDiff = timeEnd - timeStart;   
-      $('#total').val(Math.abs(Math.round(hourDiff))); 
-      $('#total1').val(Math.abs(Math.round(hourDiff))); 
+        //view
+        $('#name1').val(response.name); 
+        $('#date1').val(response.date); 
+        $('#startTime1').val(response.start); 
+        $('#endTime1').val(response.end); 
+        $('#OT_reason1').val(response.reason);
+        $('#evalby').val(response.evaluated_by);
 
-      //view
-      $('#name1').val(response.name); 
-      $('#date1').val(response.date); 
-      $('#startTime1').val(response.start); 
-      $('#endTime1').val(response.end); 
-      $('#OT_reason1').val(response.reason);
-      $('#evalby').val(response.evaluated_by);
-
-      if (response.status==2) {
-        $('#ottype1').hide();
-      }else{
-        $('#ottype1').show();
-      }
-
-      $('#type1').val(response.otname+" - ("+response.ors+"%)");
-      $('#note1').val(response.notes);
+        if (response.status==2) {
+          $('#ottype1').hide();
+        }else{
+          $('#ottype1').show();
+        }
+        $('#type1').val(response.otname+" - ("+response.ors+"%)");
+        $('#note1').val(response.notes);
           
-
-      //view
-
-
-
-      
-    }
-  });
-}
-
-
-
+      }
+    });
+  }
 
   $(document).ready(function() {
 
