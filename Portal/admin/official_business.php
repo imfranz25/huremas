@@ -9,10 +9,10 @@
   <?php include_once 'includes/preloader.php'; ?>
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
-      <?php include 'includes/navbar.php'?>
+      <?php require_once 'includes/navbar.php'?>
       <div class="pcoded-main-container">
         <div class="pcoded-wrapper">
-          <?php include 'includes/sidebar.php'?>
+          <?php require_once 'includes/sidebar.php'?>
           <div class="pcoded-content">
             <!-- Page-header start -->
             <div class="page-header">
@@ -85,8 +85,8 @@
     </div>
   </div>
 
-  <?php include 'includes/OB_modal.php'; ?>
-  <?php include 'includes/scripts.php'; ?>
+  <?php require_once 'includes/OB_modal.php'; ?>
+  <?php require_once 'includes/scripts.php'; ?>
 
     
 <script>
