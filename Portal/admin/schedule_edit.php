@@ -65,7 +65,7 @@
               <?php include_once 'includes/session_alert.php'; ?>   
               <!-- Main-body start -->
                <a href="schedule.php"><button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-arrow-left"></i>Back</button></a>
-               <button type="button" onClick="printDiv()" class="btn btn-mat waves-effect waves-light btn-success" style='float:right;margin-left:20px;'><i class="fa fa-print"></i>Print</button>
+               <button type="button" onclick="printDiv()" class="btn btn-mat waves-effect waves-light btn-success" style='float:right;margin-left:20px;'><i class="fa fa-print"></i>Print</button>
                <a href="#"><button type="button" class="btn btn-mat waves-effect waves-light btn-success update" style="float:right;" data-id='<?php echo $eid; ?>'><i class="fa fa-floppy-o"></i>Update</button></a>
               <div class="card">
                 <div class="card-header">
@@ -194,8 +194,8 @@
     newWin = window.open("");
     newWin.document.write(divToPrint.outerHTML);
     newWin.print();
-    newWin.close();
-    endingx();     
+    //newWin.close();
+    //endingx();     
   }
 
   function endingx(){
