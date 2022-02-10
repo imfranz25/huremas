@@ -64,13 +64,13 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                       <div class="tab-pane active" id="CAreq" role="tabpanel">
-                        <?php include 'CA_request.php'; ?>  
+                        <?php require_once 'CA_request.php'; ?>  
                       </div>
                       <div class="tab-pane " id="CAapp" role="tabpanel">
-                        <?php include 'CA_approved.php'; ?>   
+                        <?php require_once 'CA_approved.php'; ?>   
                       </div>
                       <div class="tab-pane " id="CArej" role="tabpanel">
-                        <?php include 'CA_rejected.php'; ?>   
+                        <?php require_once 'CA_rejected.php'; ?>   
                       </div>
                     </div>
                   </div>

@@ -20,4 +20,20 @@
     <?php echo $_SESSION['success']; ?>
   </div>
 
-<?php unset($_SESSION['success']); endif; ?>
+<?php 
+  unset($_SESSION['success']); 
+  endif;  
+  if(isset($_SESSION['warning'])):
+?>
+                    
+  <div class='alert alert-danger alert-dismissible'>
+    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;
+    </button>
+    <h4>
+      <i class='icon fa fa-warning'></i> 
+      Note! (Please Update Deduction/Tax Vendor first !)
+    </h4>
+    <?php echo $_SESSION['warning']; ?>
+  </div>
+                                               
+<?php unset($_SESSION['warning']); endif; ?>
