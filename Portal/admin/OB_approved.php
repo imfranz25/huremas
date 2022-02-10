@@ -6,7 +6,7 @@
   <div class="box-body">
     <div class="card-block table-border-style">
       <div class="table-responsive">
-        <table id="table2" class="table table-striped table-bordered" style="width:100%">
+        <table id="table2" class="table table-striped table-bordered">
           <thead>
             <tr>
               <th width="5%">Employee</th>
