@@ -8,7 +8,7 @@
   <div class="box-body">
     <div class="card-block table-border-style">
       <div class="table-responsive">
-        <table id="table1" class="table table-striped table-bordered" style="width:100%">
+        <table id="table1" class="table table-striped table-bordered">
           <thead>
             <tr>
               <th>Reference ID</th>
