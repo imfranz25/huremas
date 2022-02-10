@@ -78,13 +78,6 @@
                     $row = $query->fetch_assoc();
                     echo $row['name'];?>
                   </h5>
-                  <div class="card-header-right">
-                    <ul class="list-unstyled card-option">
-                      <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                      <li><i class="fa fa-window-maximize full-card"></i></li>
-                      <li><i class="fa fa-refresh reload-card"></i></li>
-                    </ul>
-                  </div>
                 </div>
                 <div class="box-body">
                   <div class="card-block table-border-style">
@@ -206,13 +199,13 @@
 
   $(document).ready(function(){
 
-    $(document).on('click','.update',function(){
+    $(document).on('click','.update',function(e){
       e.preventDefault();
       var id = $(this).data('id');
       updatex(id);
     });
 
-    $(document).on('click','.tds',function(){
+    $(document).on('click','.tds',function(e){
       //$(this).addClass("selected");
       if(datas.includes($(this).attr('id'))){
         datas = arrayRemove(datas, $(this).attr('id'));

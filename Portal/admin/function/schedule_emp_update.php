@@ -12,16 +12,20 @@
     $sql->bind_param('s',$eid);
 
 		if($sql->execute()){
-      $sql1 = $conn->prepare("UPDATE schedules SET isCheck='1' WHERE id = ? AND employee_id=? ");
-      $sql1->bind_param('ss',$eid,$id_param);
+      //prepare stmt for updating new records for scheds
+      $update = $conn->prepare("UPDATE schedules SET isCheck='1' WHERE id = ? AND employee_id= ? ");
+      $update->bind_param('ss',$id_param,$eid);
+      //execute via loop
       for ($i=0; $i < count($id); $i++) { 
         $id_param = $id[$i];
-        $sql1->execute();
+        $update->execute();
       }
 			$_SESSION['success'] = 'Schedule updated successfully';
-		}
+		}else{
+      $_SESSION['error'] = 'Something went wrong, please try again';
+    }
 
 	}else{
-    
+    header('location:schedule.php');
   }
 ?>
