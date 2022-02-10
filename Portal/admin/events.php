@@ -12,137 +12,140 @@
       
     <div class="pcoded-container navbar-wrapper">         
       <?php include 'includes/navbar.php'?>
-      <?php include 'includes/sidebar.php'?>
-    
-      <div class="pcoded-content">
-        <!-- Page-header start -->
-        <div class="page-header">
-          <div class="page-block">
-            <div class="row align-items-center">
-              <div class="col-md-8">
-                <div class="page-header-title">
-                  <h5 class="m-b-10">Events</h5>
-                  <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <ul class="breadcrumb-title">
-                  <li class="breadcrumb-item">
-                      <a href="index.php"> <i class="fa fa-home"></i> </a>
-                  </li>
-                  <li class="breadcrumb-item"><a href="events.php">Events</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pcoded Inner Content -->
-        <div class="pcoded-inner-content">
-          <div class='alert alert-danger alert-dismissible' hidden="" id="showdanger">
-            <button type='button' class='close' data-hide='alert' aria-hidden='true'>&times;</button>
-            <h4><i class='icon fa fa-warning'></i> Note !</h4>
-             <label id="warning"></label>
-          </div>
-
-          <?php include_once 'includes/session_alert.php'; ?>         
-
-          <?php 
-
-            $rsql = "SELECT COUNT(*) FROM event_request 
-                    WHERE request_status = 0";
-            $rquery=$conn->query($rsql);
-            $row = $rquery->fetch_assoc();
-
-            if ($row['COUNT(*)']==0) {
-              $count='';
-            }else{
-              $count=$row['COUNT(*)'];
-            }
-
-          ?>
-
-          <!-- Main-body start -->
-          <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addEvents"><i class="fa fa-plus"></i>Add Events</button>
-          <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" id="deleteAllEvents"><i class="fa fa-trash"></i>Delete</button>
-
-                        
-          <div class="card">
-            <div class="card-header">
-              <h5>
-                <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Event List</a>
-              </h5>
-              <button type="button" class="btn btn-success m-0 float-right" data-target="#eRequest" data-toggle="modal" >
-                <i class="fa fa-exchange"></i>Event Requests
-                <?php if ($count!='') { ?>
-                  <span class="badge text-light bg-danger mx-1">
-                  <?php echo "$count"; ?></span>
-                <?php } ?>
-              </button>
-            </div>
-
-            <div class="box-body">
-              <div class="card-block table-border-style" style="min-height: 400px;">
-                <div class="table-responsive">
-                  <table id="table1" class="table table-striped table-bordered" >
-                    <thead>
-                      <tr>
-                        <th style="max-width: 15px;">
-                          <div class="custom-control custom-checkbox m-0 p-0">
-                            <input type="checkbox" class="custom-control-input" id="globalcheck" />
-                            <label class="custom-control-label d-flex align-items-center text-center" for="globalcheck"></label>
-                          </div>
-                        </th>
-                        <th>Reference ID</th>
-                        <th>Event Date</th>
-                        <th>Name</th>
-                        <th>Time</th>
-                        <th>Venue</th>
-                        <th>Tools</th>
-                      </tr>
-                    </thead>
-                    <tbody id="tbody_events">
-
-                      <?php
-                        $sql = "SELECT * FROM events";
-                        $query = $conn->query($sql);
-                        while($row = $query->fetch_assoc()):
-                      ?>
-
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox m-0 p-0">
-                            <input type="checkbox" class="custom-control-input" id="n<?php echo $row['reference_id']; ?>" />
-                            <label class="custom-control-label d-flex align-items-center text-center" for="n<?php echo $row['reference_id']; ?>"></label>
-                          </div>  
-                        </td>
-                        <td><?php echo $row['reference_id']; ?></td>
-                        <td><?php echo (new Datetime($row['event_date']))->format('F d, Y'); ?></td>
-                        <td><?php echo $row['event_name']; ?></td>
-                        <td><?php echo (new Datetime($row['event_from']))->format('h:i a').' - '.(new Datetime($row['event_to']))->format('h:i a'); ?></td>
-                        <td><?php echo $row['event_venue']; ?></td>
-                        <td>
-                          <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
-                          </button>
-                          <div class="dropdown-menu" style="">
-                            <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Edit</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>
-                          </div>
-                        </td>
-                      </tr>
-                      <?php endwhile; ?>
-                    </tbody>
-                  </table>
+      <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+          <?php include 'includes/sidebar.php'?>
+          <div class="pcoded-content">
+            <!-- Page-header start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <div class="page-header-title">
+                      <h5 class="m-b-10">Events</h5>
+                      <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="breadcrumb-title">
+                      <li class="breadcrumb-item">
+                          <a href="index.php"> <i class="fa fa-home"></i> </a>
+                      </li>
+                      <li class="breadcrumb-item"><a href="events.php">Events</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- Box Body End -->
+
+            <!-- Pcoded Inner Content -->
+            <div class="pcoded-inner-content">
+              <div class='alert alert-danger alert-dismissible' hidden="" id="showdanger">
+                <button type='button' class='close' data-hide='alert' aria-hidden='true'>&times;</button>
+                <h4><i class='icon fa fa-warning'></i> Note !</h4>
+                 <label id="warning"></label>
+              </div>
+
+              <?php include_once 'includes/session_alert.php'; ?>         
+
+              <?php 
+
+                $rsql = "SELECT COUNT(*) FROM event_request 
+                        WHERE request_status = 0";
+                $rquery=$conn->query($rsql);
+                $row = $rquery->fetch_assoc();
+
+                if ($row['COUNT(*)']==0) {
+                  $count='';
+                }else{
+                  $count=$row['COUNT(*)'];
+                }
+
+              ?>
+
+              <!-- Main-body start -->
+              <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#addEvents"><i class="fa fa-plus"></i>Add Events</button>
+              <button type="button" class="btn btn-mat waves-effect waves-light btn-danger" id="deleteAllEvents"><i class="fa fa-trash"></i>Delete</button>
+
+                            
+              <div class="card">
+                <div class="card-header">
+                  <h5>
+                    <a type="button" class="btn btn-mat waves-effect waves-light btn-default">Event List</a>
+                  </h5>
+                  <button type="button" class="btn btn-success m-0 float-right" data-target="#eRequest" data-toggle="modal" >
+                    <i class="fa fa-exchange"></i>Event Requests
+                    <?php if ($count!='') { ?>
+                      <span class="badge text-light bg-danger mx-1">
+                      <?php echo "$count"; ?></span>
+                    <?php } ?>
+                  </button>
+                </div>
+
+                <div class="box-body">
+                  <div class="card-block table-border-style" style="min-height: 400px;">
+                    <div class="table-responsive">
+                      <table id="table1" class="table table-striped table-bordered" >
+                        <thead>
+                          <tr>
+                            <th style="max-width: 15px;">
+                              <div class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input" id="globalcheck" />
+                                <label class="custom-control-label d-flex align-items-center text-center" for="globalcheck"></label>
+                              </div>
+                            </th>
+                            <th>Reference ID</th>
+                            <th>Event Date</th>
+                            <th>Name</th>
+                            <th>Time</th>
+                            <th>Venue</th>
+                            <th>Tools</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody_events">
+
+                          <?php
+                            $sql = "SELECT * FROM events";
+                            $query = $conn->query($sql);
+                            while($row = $query->fetch_assoc()):
+                          ?>
+
+                          <tr>
+                            <td>
+                              <div class="custom-control custom-checkbox m-0 p-0">
+                                <input type="checkbox" class="custom-control-input" id="n<?php echo $row['reference_id']; ?>" />
+                                <label class="custom-control-label d-flex align-items-center text-center" for="n<?php echo $row['reference_id']; ?>"></label>
+                              </div>  
+                            </td>
+                            <td><?php echo $row['reference_id']; ?></td>
+                            <td><?php echo (new Datetime($row['event_date']))->format('F d, Y'); ?></td>
+                            <td><?php echo $row['event_name']; ?></td>
+                            <td><?php echo (new Datetime($row['event_from']))->format('h:i a').' - '.(new Datetime($row['event_to']))->format('h:i a'); ?></td>
+                            <td><?php echo $row['event_venue']; ?></td>
+                            <td>
+                              <button type="button" class="btn btn-default btn-sm btn-flat border-success wave-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Action
+                              </button>
+                              <div class="dropdown-menu" style="">
+                                <a class="dropdown-item edit" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-edit"></i>Edit</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item delete text-danger" href="javascript:void(0)" data-id="<?php echo $row['reference_id'] ?>"><i class="fa fa-trash"></i>Delete</a>
+                              </div>
+                            </td>
+                          </tr>
+                          <?php endwhile; ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- Box Body End -->
+              </div>
+              <!-- Card End -->
+            </div>
+            <!-- Pcoded Inner Content End-->
           </div>
-          <!-- Card End -->
         </div>
-        <!-- Pcoded Inner Content End-->
       </div>
     </div>
   </div>

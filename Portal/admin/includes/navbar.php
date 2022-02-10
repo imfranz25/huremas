@@ -73,6 +73,7 @@
   </div>
 </nav>
 
+
 <script>
   // STORE PAGE LINK TO SESSION STORAGE
   function store(id){

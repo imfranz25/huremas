@@ -10,60 +10,62 @@
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
     <?php require_once 'includes/navbar.php'?>
-    <?php require_once 'includes/sidebar.php'?>
-    
-      <div class="pcoded-content">
-        <!-- Page-header start -->
-        <div class="page-header">
-          <div class="page-block">
-            <div class="row align-items-center">
-              <div class="col-md-8">
-                <div class="page-header-title">
-                  <h5 class="m-b-10">Employee List</h5>
-                  <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+      <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+          <?php require_once 'includes/sidebar.php'?>
+          <div class="pcoded-content">
+            <!-- Page-header start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <div class="page-header-title">
+                      <h5 class="m-b-10">Employee List</h5>
+                      <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="breadcrumb-title">
+                      <li class="breadcrumb-item">
+                          <a href="index.php"> <i class="fa fa-home"></i> </a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="#!">Employee</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="employee.php?page=employee_list">Employee List</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <ul class="breadcrumb-title">
-                  <li class="breadcrumb-item">
-                      <a href="index.php"> <i class="fa fa-home"></i> </a>
-                  </li>
-                  <li class="breadcrumb-item">
-                    <a href="#!">Employee</a>
-                  </li>
-                  <li class="breadcrumb-item">
-                    <a href="employee.php?page=employee_list">Employee List</a>
-                  </li>
-                </ul>
-              </div>
             </div>
+
+            <!-- Page-Innder Content -->
+            <div class="pcoded-inner-content">
+              <?php include_once 'includes/session_alert.php'; ?>         
+              <!-- Main-body start -->
+              <section class="content">
+                <div class="container-fluid">
+                  <?php 
+                    if (isset($_GET['page'])) {
+                      $page = $_GET['page'];
+                      if (file_exists($page.'.php')) {
+                        require_once $page.'.php';
+                      }else{
+                        require_once 'employee_list.php';
+                      }
+                    }else{
+                      require_once 'employee_list.php';
+                    }
+                    
+                  ?>
+                </div>
+              </section>
+            </div>
+            <!-- Page-Innder Content End -->
           </div>
         </div>
-
-        <!-- Page-Innder Content -->
-        <div class="pcoded-inner-content">
-          <?php include_once 'includes/session_alert.php'; ?>         
-          <!-- Main-body start -->
-          <section class="content">
-            <div class="container-fluid">
-              <?php 
-                if (isset($_GET['page'])) {
-                  $page = $_GET['page'];
-                  if (file_exists($page.'.php')) {
-                    require_once $page.'.php';
-                  }else{
-                    require_once 'employee_list.php';
-                  }
-                }else{
-                  require_once 'employee_list.php';
-                }
-                
-              ?>
-            </div>
-          </section>
-        </div>
-        <!-- Page-Innder Content End -->
-
       </div>
     </div>
   </div>
