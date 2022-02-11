@@ -1,6 +1,6 @@
 <?php 
   $title ="Benefits";
-  require_once 'includes/session.php';
+  require_once '../includes/path.php';
   require_once 'includes/session.php';
   require_once 'includes/header.php';
 ?>
