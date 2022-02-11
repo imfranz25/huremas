@@ -4,34 +4,35 @@
 
 	if(isset($_POST['delete'])){
 
-		$id = addslashes($_POST['id']);
-
-		$check = "SELECT COUNT(*) FROM disciplinary_action WHERE reason = $id ";
-		$query = $conn->query($check);
-		$row = $query->fetch_assoc();
+    //prepared stmt
+		$check = $conn->prepare("SELECT COUNT(*) FROM disciplinary_action WHERE reason =? ");
+    $check->bind_param('d',$id);
+    //get values
+    $id = addslashes($_POST['id']);
+    $check->execute();
+    $result = $check->get_result();
+		$row = $result->fetch_assoc();
 		$count = $row['COUNT(*)'];
 		
-
 		if ($count==0) {
-			$sql = "DELETE FROM disciplinary_category WHERE id = $id ";
-			
+      //delete category
+			$sql = $conn->prepare("DELETE FROM disciplinary_category WHERE id = ? ");
+      $sql->bind_param('d',$id);
+			//get pass
 			$pass  = $_POST['pass'];
-            $employee_id = $user['employee_id'];
-            
-            //challenge
-            if (password_verify($pass,get_password($employee_id,$conn))) {
-            	if($conn->query($sql)){
-            		$_SESSION['success'] = 'Disciplinary category deleted';
-            	}
-            	else{
-            		$_SESSION['error'] = 'Connection Timeout';
-            	}
-            }else{
-            	 $_SESSION['error'] = 'Incorrect Password, please try again';
-            }
-			
-			
-			
+      $employee_id = $user['employee_id'];
+      
+      //challenge
+      if (password_verify($pass,get_password($employee_id,$conn))) {
+      	if($sql->execute()){
+      		$_SESSION['success'] = 'Disciplinary category deleted';
+      	}
+      	else{
+      		$_SESSION['error'] = 'Connection Timeout';
+      	}
+      }else{
+      	 $_SESSION['error'] = 'Incorrect Password, please try again';
+      }
 		}else{
 			$_SESSION['error'] = 'Disciplinary Category currently in used';
 		}

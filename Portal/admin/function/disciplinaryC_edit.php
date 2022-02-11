@@ -3,16 +3,16 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
-
+    //prepared stmt
+    $sql = $conn->prepare("UPDATE disciplinary_category SET title=?, cat_type=?, details=? WHERE id = ? ");
+    $sql->bind_param('ssss',$title,$cat_type,$details,$id);
+    //get values
 		$id = addslashes($_POST['id']);
 		$title = addslashes($_POST['title']);
 		$cat_type = addslashes($_POST['cat_type']);
 		$details = addslashes($_POST['details']);
 
-
-		$sql = "UPDATE disciplinary_category SET title='$title', cat_type='$cat_type', details='$details' WHERE id = '$id' ";
-
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Disciplinary category updated successfully';
 		}
 		else{

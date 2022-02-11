@@ -18,24 +18,18 @@
 			$action_query="";
 		}
 
-		$sql = "UPDATE disciplinary_action SET employee_id='$employee_id', reason=$reason, internal_note='$description' $action_query WHERE reference_id ='$reference' ";
+		$sql = $conn->prepare("UPDATE disciplinary_action SET employee_id=?, reason=?, internal_note=? $action_query WHERE reference_id =? ");
+    $sql->bind_param('sdss',$employee_id,$reason,$description,$reference);
 
-		if($conn->query($sql)){
-
-			// $get_id = "SELECT employee_id FROM cash_advance WHERE id = $id ";
-			// $query = $conn->query($get_id);
-			// $row = $query->fetch_assoc();
-			// $emp_id = $row['employee_id'];
+		if($sql->execute()){
+      //send notif to emloyee
 			$title = "Disciplinary record update";
 			send_notif($conn, $employee_id, $title, 'disciplinary.php', 'employee');
-
-
 			$_SESSION['success'] = 'Disciplinary action updated successfully';
 		}
 		else{
 			$_SESSION['error'] = 'Connection Timeout';
 		}
-		
 	}else{
 		$_SESSION['error'] = 'Fill up add form first';
 	}	

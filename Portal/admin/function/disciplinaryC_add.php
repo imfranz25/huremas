@@ -3,14 +3,16 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
-		
+
+    //prepared stmt
+    $sql = $conn->prepare("INSERT INTO disciplinary_category (title, cat_type,details) VALUES (?, ?, ?)");
+    $sql->bind_param('sss',$title,$cat_type,$details);
+		//get values
 		$title = addslashes($_POST['title']);
 		$cat_type = addslashes($_POST['cat_type']);
 		$details = addslashes($_POST['details']);
 
-
-		$sql = "INSERT INTO disciplinary_category (title, cat_type,details) VALUES ('$title', '$cat_type', '$details')";
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Disciplinary category added successfully';
 		}
 		else{
