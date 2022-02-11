@@ -12,12 +12,12 @@
         <table id="table1" class="table table-striped table-bordered" style="width:100%">
           <thead>
             <tr>
-                <th>Reference</th>
-                <th>Employee</th>
-                <th>Issued</th>
-                <th>Reason</th>
-                <th>State</th>
-                <th>Action</th>
+              <th>Reference</th>
+              <th>Employee</th>
+              <th>Issued</th>
+              <th>Reason</th>
+              <th>State</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
