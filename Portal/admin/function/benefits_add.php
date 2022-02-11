@@ -3,26 +3,20 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
+
+    $sql = $conn->prepare("INSERT INTO benefits (benefit_id,benefit_name, description) VALUES (?,?,?) ");
+    $sql->bind_param('sss',$benefit_id,$name,$description);
+    //get values
 		$name = addslashes($_POST['title']);
 		$description = addslashes($_POST['description']);
-
 		//creating benefit_id
-		$letters = '';
-		$numbers = '';
-		foreach (range('A', 'Z') as $char) {
-		    $letters .= $char;
-		}
-		for($i = 0; $i < 10; $i++){
-			$numbers .= $i;
-		}
-		$benefit_id = substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
+		$benefit_id = 'CVSUBEN'.generate_id();
 
-		$sql = "INSERT INTO benefits (benefit_id,benefit_name, description) VALUES ('CVSUBEN$benefit_id','$name', '$description')";
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Benefit added successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 	}	
 	else{
