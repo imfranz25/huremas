@@ -49,5 +49,8 @@
 		}
 		echo json_encode($output); // SEND OUTPUT
 	}//POST METHOD CONFIRM **END**
+  else{
+    header('location:../profile.php');
+  }
 
 ?>

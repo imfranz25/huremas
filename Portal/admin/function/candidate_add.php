@@ -24,7 +24,8 @@
 		//set filename
 		$new_filename = $applicant_no.".".$extension;
 		
-		$sql = "INSERT INTO applicant (applicant_no,job_code,first_name,middle_name,last_name,email,contact,attachment,stage) VALUES ('$applicant_no', '$code', '$fname', '$mname', '$lname', '$email', '$contact', '$new_filename','New Candidates')";
+		$sql = $conn->prepare("INSERT INTO applicant (applicant_no,job_code,first_name,middle_name,last_name,email,contact,attachment,stage) VALUES (?, ?, ?, ?, ?, ?, ?, ?,'New Candidates')");
+    $sql->bind_param('ssssssss',$applicant_no,$code,$fname,$mname,$lname,$email,$contact,$new_filename);
 
 		//valid extension array (document Type)
 		$valid_extension = array('pdf', 'docx', 'doc', 'docm', 'dot', 'docm', 'dotx');
@@ -36,17 +37,18 @@
 		}else{
 			//move file
 			move_uploaded_file($_FILES["resume"]["tmp_name"], '../uploads/applicant/'.$applicant_no.".".$extension);
-			echo ($conn->query($sql)) ? 1 : 0;
+			echo ($sql->execute()) ? 1 : 0;
 			
 
 		    $subject="Application Received";
 		    $message = "Hello!,<br><br>Your job application has been received, we will notify you if your application has been evaluated. <br>For more  email us at hrdoimus@cvsu.edu.ph";
-		    
 		    $res= sendEmail($email,$subject,$message);
 
 			
 		}
-	}
+	}else{
+    header('location: ../applicant.php');
+  }
 
 
 

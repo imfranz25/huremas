@@ -4,25 +4,31 @@
 
 	if(isset($_POST['reject']) || isset($_POST['approve'])){
 
-		$reviewed_by = $user['firstname'].' '.$user['lastname'];
-		$id = trim($_POST['id']);
-		$notes = isset($_POST['notes']) ? trim($_POST['notes']) : '';
-		$status = isset($_POST['reject'])? 'Rejected' : 'Approved';
-
-
-		$sql = "UPDATE cash_advance SET status='$status', notes = '$notes',reviewed_by='$reviewed_by'  WHERE id=$id ";
+    //prepared stmt update ca
+		$sql = $conn->prepare("UPDATE cash_advance SET status=?, notes = ?,reviewed_by=?  WHERE id=? ");
+    $sql->bind_param('sssd',$status,$notes,$reviewed_by,$id);
+    //ge values
+    $reviewed_by = $user['firstname'].' '.$user['lastname'];
+    $id = trim($_POST['id']);
+    $notes = isset($_POST['notes']) ? trim($_POST['notes']) : '';
+    $status = isset($_POST['reject'])? 'Rejected' : 'Approved';
 
 	
-		if($conn->query($sql)){
+		if($sql->execute()){
 
-			$get_id = "SELECT employee_id FROM cash_advance WHERE id = $id ";
-			$query = $conn->query($get_id);
-			$row = $query->fetch_assoc();
+      //get the emp id first then notif
+			$get_id = $conn->prepare("SELECT employee_id FROM cash_advance WHERE id = ? ");
+      $get_id->bind_param('d',$id);
+      $get_id->execute();
+			$result = $get_id->get_result();
+			$row = $result->fetch_assoc();
 			$emp_id = $row['employee_id'];
+
 			$title = "Your cash advance request has been ".lcfirst($status);
 			send_notif($conn, $emp_id, $title, 'cash_advance.php', 'employee');
 
 			$_SESSION['success'] = 'Cash Advance proccessed successfully';
+      
 		}else{
 			$_SESSION['error'] = 'Connection Timeout';
 		}

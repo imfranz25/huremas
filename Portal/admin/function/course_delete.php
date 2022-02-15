@@ -18,9 +18,11 @@
 		$id  = $_POST['id'];
 		$employee_id = $user['employee_id'];
 
-		$check = "SELECT * FROM training_list WHERE training_course = $id ";
-		$query = $conn->query($check);
-		$count = mysqli_num_rows($query);
+		$check = $conn->prepare("SELECT * FROM training_list WHERE training_course = ? ");
+    $check->bind_param('d',$id);
+    $check->execute();
+		$result = $check->get_result();
+		$count = mysqli_num_rows($result);
 
 		if ($count==0) {
 			//challenge

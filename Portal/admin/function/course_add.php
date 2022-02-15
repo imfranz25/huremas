@@ -8,9 +8,10 @@
 		$title = trim($_POST['title']);
 		$details = trim($_POST['details']);
 
-		$sql = "INSERT INTO training_course (course_code,course_title,course_details) VALUES ('$code','$title','$details')";	
+		$sql = $conn->prepare("INSERT INTO training_course (course_code,course_title,course_details) VALUES (?,?,?)");	
+    $sql->bind_param('sss',$code,$title,$details);
 
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Course added successfully';
 		}
 		else{
