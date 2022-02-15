@@ -42,6 +42,8 @@
 		$row = $result->fetch_assoc();
 		echo json_encode($row);
 
-	}
-  
+	}else {
+    header('location: ../applicant.php');
+  }
+
 ?>

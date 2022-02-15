@@ -61,5 +61,7 @@
 
 		echo json_encode($row);
 
-	}
+	}else {
+    header('location: ../archive.php');
+  }
 ?>

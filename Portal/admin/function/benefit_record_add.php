@@ -13,6 +13,8 @@
 
 		echo ($sql->execute())?1:0; //1 ok - 0 error
 
-	}
+	}else {
+    header('location: ../benefits.php');
+  }
 
 ?>

@@ -35,5 +35,7 @@
 			echo 0;
 		}
 
-	}
+	}else {
+    header('location: ../archive.php');
+  }
 ?>
