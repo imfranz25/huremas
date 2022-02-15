@@ -3,20 +3,24 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['code']) && isset($_POST['stage'])){
+
 		$code = $_POST['code'];
 		$stage = $_POST['stage'];
 		$applicants = array('count'=> 0,'length'=> 0);
 		$onboard = ($stage=='Hired')? 'On-Board': $stage;
 		//SQL QUERY FROM 3 TABLES
-		$sql = "SELECT *, applicant.id AS aid, position.type AS ptype FROM applicant
-		RIGHT JOIN job ON applicant.job_code=job.job_code 
-		RIGHT JOIN position ON job.job_position=position.id 
-		RIGHT JOIN employment_category ec ON position.type=ec.id
-		RIGHT JOIN department_category ON department_category.id=job.job_dept 
-		WHERE job.job_code='$code' ; ";
-		$query = $conn->query($sql);
+		$sql = $conn->prepare("SELECT *, applicant.id AS aid, position.type AS ptype 
+      FROM applicant
+      RIGHT JOIN job ON applicant.job_code=job.job_code 
+      RIGHT JOIN position ON job.job_position=position.id 
+      RIGHT JOIN employment_category ec ON position.type=ec.id
+      RIGHT JOIN department_category ON department_category.id=job.job_dept 
+      WHERE job.job_code=? ; ");
+    $sql->bind_param('s',$code);
+    $sql->execute();
+		$result = $sql->get_result();
 
-		while ($row = $query->fetch_assoc()){
+		while ($row = $result->fetch_assoc()){
 			//PUSH ALL DETAILS ALONG WITH JOB TITLE AND AMONG OTHER FOR DISPLAY
 			array_push($applicants, $row);
 			//GET LENGTH AND STORE IT IN DIFFERENT KEY VALUE FOR REFERENCE
@@ -27,11 +31,17 @@
 			}
 		}
 		echo json_encode($applicants);
+
 	}else if (isset($_POST['aid'])) {
+
 		$applicant_id = $_POST['aid'];
-		$sql = "SELECT * FROM applicant WHERE id = $applicant_id ";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+		$sql = $conn->prepare("SELECT * FROM applicant WHERE id = ? ");
+    $sql->bind_param('d',$applicant_id);
+    $sql->execute();
+		$result = $sql->get_result();
+		$row = $result->fetch_assoc();
 		echo json_encode($row);
+
 	}
+  
 ?>

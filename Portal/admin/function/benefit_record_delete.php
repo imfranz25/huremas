@@ -3,9 +3,15 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['id'])){
-		$record_id = $_POST['id'];
-		$sql = "DELETE FROM benefit_record WHERE id= $record_id ";
-		echo ($conn->query($sql))?1:0;
+    
+    //prepared stmt
+		$sql = $conn->prepare("DELETE FROM benefit_record WHERE id= ? ");
+    $sql->bind_param('d',$record_id);
+    //get id
+    $record_id = $_POST['id'];
+
+		echo ($sql->execute())?1:0;
+
 	}
 
 ?>

@@ -28,10 +28,12 @@
 
 
 		if ($table!='') {
-			$sql = "UPDATE $table SET $update = 0 WHERE $reference = '$id' ";
-			echo ($conn->query($sql))? 1: 0;
-		}else{
+			$sql = $conn->prepare("UPDATE $table SET $update = 0 WHERE $reference = ? ");
+      $sql->bind_param('s',$id);
+			echo ($sql->execute())? 1: 0;
+		}else {
 			echo 0;
 		}
+
 	}
 ?>

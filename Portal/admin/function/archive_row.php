@@ -4,6 +4,7 @@
 
 
 	function filterType($archive_type){
+
 		$selectors = array();
 		if ($archive_type=='folder') {
 			$selectors['table']= 'document_folder LEFT JOIN employees ON employees.employee_id=document_folder.folder_created_by';
@@ -47,13 +48,16 @@
 		echo json_encode($output);
 	}
 	else if(isset($_POST['s_type'])) { // Query for Specific archive (for retrieve modal)
+
 		$archive_type = $_POST['s_type'];
 		$id = $_POST['s_id'];
 		$table = filterType($archive_type)['table'];
 		$primary = filterType($archive_type)['primary'];
-		$sql = "SELECT * FROM $table WHERE $primary='$id' ";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+		$sql = $conn->prepare("SELECT * FROM $table WHERE $primary=? ");
+    $sql->bind_param('s',$id);
+    $sql->execute();
+		$result = $sql->get_result();
+		$row = $result->fetch_assoc();
 
 		echo json_encode($row);
 
