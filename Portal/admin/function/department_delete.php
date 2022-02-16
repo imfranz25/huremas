@@ -3,25 +3,32 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['delete'])){
+    //get id
 		$id = $_POST['id'];
-
-		$check_job = "SELECT * FROM job WHERE job_dept = $id ";
-		$query_job = $conn->query($check_job);
-		$count_job = mysqli_num_rows($query_job);
-
-		$check = "SELECT * FROM employees WHERE department_id = $id ";
-		$query = $conn->query($check);
-		$count = mysqli_num_rows($query);
+    //select job by department if its currently in use
+		$check_job = $conn->prepare("SELECT * FROM job WHERE job_dept = ? ");
+    $check_job->bind_param('d',$id);
+    $check_job->execute();
+    $result = $check_job->get_result();
+		$count_job = $result->num_rows;
+    // select emp by department if its currently in use
+		$check = $conn->prepare("SELECT * FROM employees WHERE department_id = ? ");
+    $check->bind_param('d',$id);
+    $check->execute();
+		$result = $check->get_result();
+		$count = $result->num_rows;
 
 		if ($count==0 && $count_job==0) {
-			
-			$sql = "DELETE FROM department_category WHERE id = '$id'";
+			//delete prepared
+			$sql = $conn->prepare("DELETE FROM department_category WHERE id = ? ");
+      $sql->bind_param('s',$id);
+      //get values
 			$pass = $_POST['pass'];
 			$employee_id = $user['employee_id'];
 
 			//challenge
 			if (password_verify($pass,get_password($employee_id,$conn))) {
-				if($conn->query($sql)){
+				if($sql->execute()){
 					$_SESSION['success'] = 'Department deleted successfully';
 				}
 				else{

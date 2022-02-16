@@ -3,15 +3,25 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['id'])){
-		$id = $_POST['id'];
 
-		$sql = "SELECT r.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name,t.task,((((r.efficiency + r.timeliness + r.quality + r.accuracy)/4)/5) * 100) as pa FROM ratings r inner join employees e on e.employee_id = r.employee_id inner join task t on t.id = r.task_id  where r.id = $id";
+    //select prepared stmt
+		$sql = $conn->prepare("SELECT r.*,CONCAT(e.lastname,', ',e.firstname,' ',e.middlename) AS name,t.task,
+      ((((r.efficiency + r.timeliness + r.quality + r.accuracy)/4)/5) * 100) AS pa 
+      FROM ratings r INNER JOIN employees e ON e.employee_id = r.employee_id 
+      INNER JOIN task t ON t.id = r.task_id  WHERE r.id = ? ");
+    $sql->bind_param('d',$id);
 
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
-
+    //get id
+    $id = $_POST['id'];
+    $sql->execute();
+		$result = $sql->get_result();
+		$row = $result->fetch_assoc();
 		$row['pa'] = number_format($row['pa'],2).'%';
 
 		echo json_encode($row);
-	}
+
+	}else{
+    header('location: ../performance_eval.php?page=evaluation');
+  }
+
 ?>

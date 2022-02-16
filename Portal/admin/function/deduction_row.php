@@ -34,7 +34,9 @@
 			array_push($name, $user['deduction_name']);
 		}
 		echo json_encode($name);
-	}
+	}else{
+    header('location: ../deduction.php');
+  }
 
 
 ?>

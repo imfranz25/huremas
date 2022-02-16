@@ -9,7 +9,7 @@
 	function delete($id){
 		global $stmt,$delete;
 		$delete = $id;
-		$stmt->execute() ? $_SESSION['success'] = 'Deduction record(s) deleted successfully' : $_SESSION['error'] = $conn->error;
+		$stmt->execute() ? $_SESSION['success'] = 'Deduction record(s) deleted successfully' : $_SESSION['error'] = 'Connection Timeout';
 	}
 
 	if(isset($_POST['delete'])){

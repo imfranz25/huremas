@@ -3,14 +3,25 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['id'])){
-		// initilization shit
-		$id = $_POST['id'];
-		$sql = "SELECT a.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name,a.id as aid,e.id as eid FROM attendance a left join employees e on a.employee_id=e.employee_id WHERE a.id = '$id'";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+		
+
+		$sql = $conn->prepare("SELECT a.*,CONCAT(e.lastname,', ',e.firstname,' ',e.middlename) AS name,a.id AS aid,e.id AS eid 
+      FROM attendance a 
+      LEFT JOIN employees e ON a.employee_id=e.employee_id 
+      WHERE a.id = ? ");
+    $sql->bind_param('s',$id);
+
+    // get id 
+    $id = $_POST['id'];
+    $sql->execute();
+		$result = $sql->get_result();
+		$row = $result->fetch_assoc();
 
 		echo json_encode($row);
-	}
+
+	}else{
+    header('location: ../dtr.php');
+  }
 
 ?>
 

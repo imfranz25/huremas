@@ -2,25 +2,27 @@
 	require_once '../../includes/path.php';
 	require_once($_SERVER['DOCUMENT_ROOT'].$global_link."/Portal/admin/includes/session.php");
 
-	//sample ID
-	$id =$_SESSION["id"];
+  if (isset($_SESSION["id"])) {
 
-	$sql = "SELECT * FROM employees 
-			LEFT JOIN position ON position.id=employees.position_id 
-			LEFT JOIN department_category dc ON dc.id=employees.department_id 
-			LEFT JOIN employment_category ec ON ec.id=employees.category_id 
-			LEFT JOIN admin ON admin.employee_id=employees.employee_id 
-			WHERE employees.employee_id = '$id' ";
+    //select emp details
+    $sql = $conn->prepare("SELECT * FROM employees 
+        LEFT JOIN position ON position.id=employees.position_id 
+        LEFT JOIN department_category dc ON dc.id=employees.department_id 
+        LEFT JOIN employment_category ec ON ec.id=employees.category_id 
+        LEFT JOIN admin ON admin.employee_id=employees.employee_id 
+        WHERE employees.employee_id = ? ");
+    $sql->bind_param('s',$id);
+    //sample ID
+    $id =$_SESSION["id"];
+    $sql->execute();
+    $result = $sql->get_result();
+    $row = $result->fetch_assoc();
 
-	$query = $conn->query($sql);
-	$row = $query->fetch_assoc();
+    echo json_encode($row);
 
-    //		LEFT JOIN schedules ON schedules.id=employees.schedule_id 
-	//$row['time_in'] =  (new Datetime($row['time_in']))->format('h:i A');
-	//$row['time_out'] = (new Datetime($row['time_out']))->format('h:i A');
+  }else{
+    header('location: ../profile.php');
+  }
 
-
-	echo json_encode($row);
-
-
+	
 ?>

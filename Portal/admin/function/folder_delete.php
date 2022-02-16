@@ -4,15 +4,16 @@
 
 	if(isset($_POST['archive'])){
 
-		$id = $_POST['folder_id'];
+    //archive folder prepared stmt
+		$folder = $conn->prepare("UPDATE document_folder SET folder_archive=1 WHERE folder_id = ? ");
+    $folder->bind_param('s',$id);
+    //get id
+    $id = $_POST['folder_id'];
 
-		$folder = "UPDATE document_folder SET folder_archive=1 WHERE folder_id = '$id'";
-
-		if ($conn->query($folder)) {
+		if ($folder->execute()) {
 			$_SESSION['success'] = 'Folder archived successfully';
 		}else{
 			$_SESSION['error'] = 'Something went wrong';
-
 		}
 	}
 

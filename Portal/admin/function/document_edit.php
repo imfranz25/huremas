@@ -3,6 +3,8 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['document_id'])){
+
+    //ge values
 		$document_id = $_POST['document_id'];
 		$status = ($_POST['status']=='lock')?1:0;
 		$valid = false;
@@ -19,22 +21,35 @@
 
 		// CHECK IF STATUS IS VALID
 		if ($valid) {
-			$sql = "UPDATE documents SET document_status=$status WHERE document_id='$document_id' ";
-			echo ($conn->query($sql))? (($status==1)?1:0):2;
+
+      //update docu preapred stmt
+			$sql = $conn->prepare("UPDATE documents SET document_status=? WHERE document_id=? ");
+      $sql->bind_param('ds',$status,$document_id);
+
+			echo ($sql->execute())? (($status==1)?1:0):2;
 		}else{
 			echo 3; //invalid password
 		}
+
 	}else if(isset($_POST['archive'])){
-		$document_id = $_POST['document_id_archive'];
-		$sql = "UPDATE documents SET document_archive=1 WHERE document_id='$document_id' ";
-		if($conn->query($sql)){
+
+    //prepared stmt docu update
+		$sql = $conn->prepare("UPDATE documents SET document_archive=1 WHERE document_id=? ");
+    $sql->bind_param('s',$document_id);
+    //get id
+    $document_id = $_POST['document_id_archive'];
+
+
+		if($sql->execute()){
 			$_SESSION['success']='Document archived successfully';
 		}else{
 			$_SESSION['error']='Document archive failed';
 		}
 		header('location:../documents.php');
+
 	}else if(isset($_POST['edit'])){
 
+    //get values
 		$document_id = $_POST['document_id_edit'];
 		$document_name = trim($_POST['name']);
 		$document_folder = $_POST['document_folder'];
@@ -62,8 +77,9 @@
 			$file_query=",document_file='$document_file' ";
 		}
 
-
-		$sql = "UPDATE documents SET document_name='$document_name',document_owner='$document_owner',document_folder='$document_folder',document_details='$document_details' $file_query WHERE document_id='$document_id' ";
+    //update prepared stmt
+		$sql = $conn->prepare("UPDATE documents SET document_name=?,document_owner=?,document_folder=?,document_details=? $file_query WHERE document_id=? ");
+    $sql->bind_param('sssss',$document_name,$document_owner,$document_folder,$document_details,$document_id);
 
 		// MAKE SURE THE DOCUMENT IS UPLOADED BEFORE PUSHING DATA TO DATABASE
 		$valid=false;
@@ -84,8 +100,8 @@
 					$valid=true;  //set to true temporarily
 					
 					//DELETE EXISTING FILE
-					if(file_exists($_SERVER['DOCUMENT_ROOT']."/Documents/".$new_filename)){
-						if (unlink($_SERVER['DOCUMENT_ROOT']."/Documents/".$new_filename)) {
+					if(file_exists($_SERVER['DOCUMENT_ROOT'].$global_link."/Documents/".$new_filename)){
+						if (unlink($_SERVER['DOCUMENT_ROOT'].$global_link."/Documents/".$new_filename)) {
 							$valid=true; 
 						}else{
 							$valid=false; 
@@ -94,7 +110,7 @@
 
 					// NOW MOVE THE FILE 
 					if ($valid) {
-						if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/Documents/".$new_filename)) {
+						if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'].$global_link."/Documents/".$new_filename)) {
 							$valid=true; // document move success valid true
 						}else{
 							$valid=false; // document move failed valid false
@@ -107,7 +123,7 @@
 		}
 
 		if ($valid) {
-			if($conn->query($sql)){
+			if($sql->execute()){
 				$_SESSION['success']='Document changes saved successfully';
 			}else{
 				$_SESSION['error']='Document update failed';
@@ -117,14 +133,23 @@
 		}
 		
 		header('location:../documents.php');
+
 	}else if (isset($_POST['document_starred'])) {
+
+    //get values
 		$document_starred = $_POST['document_starred'];
 		$document_id = $_POST['document_id_starred'];
 		$status = ($document_starred=='1')?0:1;
-		$sql="UPDATE documents SET document_starred=$status WHERE document_id='$document_id' ";
-		if ($conn->query($sql)) {
+    //prepared stmt
+		$sql=$conn->prepare("UPDATE documents SET document_starred=? WHERE document_id=? ");
+    $sql->bind_param('ds',$status,$document_id);
+
+		if ($sql->execute()) {
 			echo json_encode($status);
 		}
-	}		
+    
+	}else{
+    header('location:../documents.php');
+  }		
 
 ?>

@@ -6,12 +6,13 @@
 		$title = addslashes($_POST['title']);
 		$rate = $_POST['code'];
 
-		$sql = "INSERT INTO department_category (title, code) VALUES ('$title', '$rate')";
-		if($conn->query($sql)){
+		$sql = $conn->prepare("INSERT INTO department_category (title, code) VALUES (?, ?)");
+    $sql->bind_param('ss',$title,$rate);
+		if($sql->execute()){
 			$_SESSION['success'] = 'Department added successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 	}	
 	else{

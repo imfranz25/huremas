@@ -3,18 +3,26 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
-		$id = $_POST['aid'];
-		$in = $_POST['timein'];
-		$out = $_POST['timeout'];
 
-		
-		$sql = "UPDATE attendance SET time_in = '$in', time_out = '$out' WHERE id = $id ";
-		
-		if($conn->query($sql)){
+		//update attendance prepared stmt
+		$sql = $conn->prepare("UPDATE attendance SET time_in = ?, time_out = ? WHERE id = ? ");
+    $sql->bind_param('ssd',$in,$out,$id);
 
-			$get_id = "SELECT employee_id FROM attendance WHERE id = $id ";
-			$query = $conn->query($get_id);
-			$row = $query->fetch_assoc();
+    //get details
+    $id = $_POST['aid'];
+    $in = $_POST['timein'];
+    $out = $_POST['timeout'];
+		
+		if($sql->execute()){
+
+
+      //get emp id
+			$get_id = $conn->prepare("SELECT employee_id FROM attendance WHERE id = ? ");
+      $get_id->bind_param('d',$id);
+      $get_id->execute();
+			$result = $get_id->get_result();
+			$row = $result->fetch_assoc();
+      //getch values & send notif
 			$employee_id = $row['employee_id']; 
 			$title = "Your attendance record has been updated";
 			send_notif($conn, $employee_id, $title, 'dtr.php', 'employee');
@@ -22,8 +30,6 @@
 			$_SESSION['success'] = 'Attendance updated successfully';
 		}
 		
-
-
 	}
 	else{
 		$_SESSION['error'] = 'Select attendance record to edit first';

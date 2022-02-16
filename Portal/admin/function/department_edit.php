@@ -3,16 +3,20 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
-		$id = $_POST['id'];	
-		$title = addslashes($_POST['title']);
-		$rate = $_POST['code'];
 
-		$sql = "UPDATE department_category SET title = '$title', code = '$rate' WHERE id = '$id'";
-		if($conn->query($sql)){
+    //update dep cat prepared stmt
+		$sql = $conn->prepare("UPDATE department_category SET title = ?, code = ? WHERE id = ? ");
+    $sql->bind_param('sss',$title,$rate,$id);
+    //get values
+    $id = $_POST['id']; 
+    $title = addslashes($_POST['title']);
+    $rate = $_POST['code'];
+
+		if($sql->execute()){
 			$_SESSION['success'] = 'Department updated successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = 'Connection Timeout';
 		}
 	}
 	else{

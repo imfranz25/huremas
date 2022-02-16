@@ -4,31 +4,22 @@
 
 	//admin id
 	$id = $user['employee_id'];
+  $sql = $conn->prepare("INSERT INTO documents (document_id,document_name,document_type,document_owner,document_folder,document_details,document_created,document_file) VALUES (?,?,'document',?,?,?,?,?)");
 
-	function create_id(){
-		//creating document_id
-		$letters = '';
-		$numbers = '';
-		foreach (range('A', 'Z') as $char) {
-		    $letters .= $char;
-		}
-		for($i = 0; $i < 10; $i++){
-			$numbers .= $i;
-		}
-		return "CVSUDOXC".substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 6);
-	}
 
 	if(isset($_POST['add'])){
+
+    global $sql;
+
+    //get values
 		$folder_id = $_POST['folder_id'];
 		$name = addslashes($_POST['name']);
 		$file = $_FILES['file']['name'];
 		$owner = isset($_POST['owner'])? $_POST['owner']: '';
 		$details = addslashes($_POST['details']);
 
-		
-		$document_id = create_id();
-
-
+		//generate docu id
+		$document_id = 'CVSUDOXC'.generate_id();
 		// get extension 
 		$extension = pathinfo($file)['extension'];
 		//set filename
@@ -40,9 +31,8 @@
 		//$valid_extension = array('pdf', 'docx', 'doc', 'docm', 'dot', 'docm', 'dotx');
 
 
-
-
-		$sql = "INSERT INTO documents (document_id,document_name,document_type,document_owner,document_folder,document_details,document_created,document_file) VALUES ('$document_id','$name','document','$owner','$folder_id','$details','$id','$file')";
+		//bind params
+    $sql->bind_param('sssssss',$document_id,$name,$owner,$folder_id,$details,$id,$file);
 
 
 		// if (!in_array($extension, $valid_extension)) {
@@ -50,21 +40,24 @@
 		if ($file_size > 5242880) { //5MB Maximum file size
 			$_SESSION['error'] = 'Document exceeds the maximum 5 MB limit, please try again';
 		}else{
-			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT']."/Documents/".$new_filename)) {
+			if (move_uploaded_file($_FILES["file"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'].$global_link."/Documents/".$new_filename)) {
 				//PUSH TO DB IF SUCCESS MOVED
-				if ($conn->query($sql)) {
+				if ($sql->execute()) {
 					$_SESSION['success'] ='Document uploaded successfully';
 				}else{
 					$_SESSION['error'] ='Document uploaded failed';
 				}
 			}else{
-					$_SESSION['error'] ='Document uploaded failed, file type is not supported. Please try again';
-				
+				$_SESSION['error'] ='Document uploaded failed, file type is not supported. Please try again';
 			}
 		}
 
 
 	}else if (isset($_POST['add_via_request'])) {
+
+    global $sql;
+
+    //get values
 		$folder_id = $_POST['folder'];
 		$name = trim($_POST['name']);
 		$request_id = $_POST['reference_id'];
@@ -72,16 +65,24 @@
 		$details = trim($_POST['details']);
 		$file=$_POST['file'];
 
+    //generate docu id
+		$document_id = 'CVSUDOXC'.generate_id();
 
-
-		$document_id = create_id();
+    //get file properties
 		$extension = pathinfo($file)['extension'];
 		$old_name = $request_id.".".$extension;
 		$new_filename = $document_id.".".$extension;
-		if (copy($_SERVER['DOCUMENT_ROOT'].'/Documents/request/'.$old_name, $_SERVER['DOCUMENT_ROOT'].'/Documents/'.$new_filename)) {
-			$sql = "INSERT INTO documents (document_id,document_name,document_type,document_owner,document_folder,document_details,document_created,document_file) VALUES ('$document_id','$name','document','$owner','$folder_id','$details','$id','$file')";
-			$update = "UPDATE document_request SET folder_id='$folder_id', request_status=3 WHERE reference_id = '$request_id' ";
-			if ($conn->query($sql) && $conn->query($update)) {
+
+		if (copy($_SERVER['DOCUMENT_ROOT'].$global_link.'/Documents/request/'.$old_name, $_SERVER['DOCUMENT_ROOT'].$global_link.'/Documents/'.$new_filename)) {
+
+      //bind params
+      $sql->bind_param('sssssss',$document_id,$name,$owner,$folder_id,$details,$id,$file);
+
+			$update = $conn->prepare("UPDATE document_request SET folder_id=?, request_status=3 WHERE reference_id = ? ");
+      $update->bind_param('ss',$folder_id,$request_id);
+
+
+			if ($sql->execute() && $update->execute()) {
 				$_SESSION['success'] ='Document validated successfully';
 			}else{
 				$_SESSION['error'] ='Document validate failed';

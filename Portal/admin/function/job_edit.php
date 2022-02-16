@@ -3,6 +3,8 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
+
+    //get values
 		$id = trim($_POST['id']);
 		$title = trim($_POST['title']);
 		$position = trim($_POST['position']);
@@ -15,15 +17,19 @@
 		$desc = trim($_POST['desc']);
 
 
-		$sql = "UPDATE job SET job_title='$title', job_position=$position, job_recruit=$recruit, job_dept='$department', job_term='$term', job_type='$type', job_exp='$exp', job_grade=$grade, job_desc='$desc' WHERE id=$id ";
+		$sql = $conn->prepare("UPDATE job SET job_title=?, job_position=?, job_recruit=?, job_dept=? , job_term=?, job_type=?, job_exp=?, job_grade=?, job_desc=? WHERE id=? ");
+    $sql->bind_param('sddssssdsd',$title,$position,$recruit,$department,$term,$type,$exp,$grade,$desc,$id);
 
-		$check = "SELECT *, job.id AS jid, (SELECT COUNT(stage) FROM  applicant WHERE job_code = job.job_code AND stage='On-Board') AS onboard FROM job WHERE id=$id  ";
-		$query = $conn->query($check);
-		$row = $query->fetch_assoc();
+		$check = $conn->prepare("SELECT *, job.id AS jid, (SELECT COUNT(stage) FROM  applicant WHERE job_code = job.job_code AND stage='On-Board') AS onboard FROM job WHERE id=?  ");
+    $check->bind_param('d',$id);
+    $check->execute();
+		$result = $check->get_result();
+		$row = $result->fetch_assoc();
 
 		//dont update recuit  if recruit count is lower that onboard applicants
 		if ($row['onboard']<=$recruit) {
-			if($conn->query($sql)){
+      
+			if($sql->execute()){
 
 				$_SESSION['success'] = 'Job updated successfully';
 
@@ -42,8 +48,6 @@
 
 					$stmt->execute();
 				}
-
-
 			}
 			else{
 				$_SESSION['error'] = "Connection Timeout";
@@ -52,12 +56,10 @@
 			$_SESSION['error'] = "Opps, the recruit count (".$recruit.") cannot be updated since there are already ".$row['onboard']." applicants onboarded in this job ";
 		}
 
-
-		
-	
-
 	}else{
 		$_SESSION['error'] = 'Fill up add form first';
 	}
+
 	header('location: ../applicant.php');
+
 ?>

@@ -4,14 +4,15 @@
 
 	if(isset($_POST['edit'])){
 
-		$name = addslashes($_POST['name']);
-		$details = addslashes($_POST['details']);
-		$folder_id = addslashes($_POST['folder_id']);
+    //update prepared stmt
+		$sql = $conn->prepare("UPDATE document_folder SET folder_name = ?, folder_details = ? WHERE folder_id = ? ");
+    $sql->bind_param('sss',$name,$details,$folder_id);
+    //get values
+    $name = addslashes($_POST['name']);
+    $details = addslashes($_POST['details']);
+    $folder_id = addslashes($_POST['folder_id']);
 
-
-		$sql = "UPDATE document_folder SET folder_name = '$name', folder_details = '$details' WHERE folder_id = '$folder_id' ";
-		
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Folder updated successfully';
 		}
 		else{

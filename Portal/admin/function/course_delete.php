@@ -22,7 +22,7 @@
     $check->bind_param('d',$id);
     $check->execute();
 		$result = $check->get_result();
-		$count = mysqli_num_rows($result);
+		$count = $result->num_rows;
 
 		if ($count==0) {
 			//challenge

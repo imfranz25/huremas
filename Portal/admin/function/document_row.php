@@ -10,12 +10,20 @@
 		$_SESSION['query']=$_POST['query'];
 		echo 1;
 	}else if (isset($_POST['document_id'])) {
-		$id=$_POST['document_id'];
-		$sql="SELECT * FROM documents LEFT JOIN document_folder ON document_folder.folder_id=documents.document_folder WHERE document_id ='$id' ";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+
+    //prepared stmt select docu by docu id
+		$sql=$conn->prepare("SELECT * FROM documents LEFT JOIN document_folder ON document_folder.folder_id=documents.document_folder WHERE document_id =? ");
+    $sql->bind_param('s',$id);
+    //get id
+    $id=$_POST['document_id'];
+    $sql->execute();
+		$result = $sql->get_result();
+		$row = $result->fetch_assoc();
 		$row['document_hash']=password_hash($row['document_id'], PASSWORD_DEFAULT);
 		echo json_encode($row);
-	}
+
+	}else{
+    header('location:../documents.php');
+  }  
 
 ?>
