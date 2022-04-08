@@ -26,7 +26,9 @@
 			array_push($name, $user['overtime_name']);
 		}
 		echo json_encode($name);
-	}
+	}else{
+    header('location: ../overtime_category.php');
+  }
 
 ?>
 

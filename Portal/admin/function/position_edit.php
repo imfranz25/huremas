@@ -3,23 +3,24 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
+
+    // get details
 		$id = $_POST['id'];	
 		$title = addslashes($_POST['title']);
 		$rate = $_POST['rate'];
 		$type = $_POST['type'];
 		$grade = $_POST['sslx2'];
 		$step = $_POST['step2'];
-		$res=1;
-		if($type!='Contractual (CNT)'){
-			$res=2;
-		}
+		$res = ($type!='Contractual (CNT)') ? 2: 1;
 
-		$sql = "UPDATE position SET description = '$title', rate = '$rate', grade = '$grade',step ='$step', type = '$res' WHERE id = '$id'";
-		if($conn->query($sql)){
+		$sql = $conn->prepare("UPDATE position SET description = ?, rate = ?, grade = ?,step =?, type = ? WHERE id = ? ");
+    $sql->bind_param('ssssss',$title,$rate,$grade,$step,$res,$id);
+
+		if($sql->execute()){
 			$_SESSION['success'] = 'Designation updated successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = "Connection Timeout";
 		}
 	}
 	else{

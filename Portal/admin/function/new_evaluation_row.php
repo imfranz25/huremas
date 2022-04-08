@@ -3,21 +3,29 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['employee_id'])){
-		$employee_id = $_POST['employee_id'];
 
-
-		$sql = "SELECT * FROM task where employee_id = '$employee_id' and status = '2' and id not in (SELECT task_id FROM ratings)";
-		$query = $conn->query($sql);
+    //prepared stmt
+		$sql = $conn->prepare("SELECT * FROM task 
+      WHERE employee_id = ? 
+      AND status = '2' AND id 
+      NOT IN (SELECT task_id FROM ratings)");
+    $sql->bind_param('s',$employee_id);
+    //get id
+    $employee_id = $_POST['employee_id'];
+    $sql->execute();
+		$result = $sql->get_result();
 
 		$data = array();
-		if($query->num_rows > 0){
-              while($row = $query->fetch_assoc()){
-              	$data[] = $row;
-              }
+		if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+      	$data[] = $row;
+      }
 		}
 
 		echo json_encode($data);
 
-	}
+	}else{
+    location('location: ../task.php');
+  }
 
 ?>

@@ -3,17 +3,23 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['delete'])){
-		$id = $_POST['id'];
-		$sql = "DELETE FROM payroll_coverage_table WHERE pay_code = '$id'";
-		if($conn->query($sql)){
 
-			$sql = "DELETE FROM payroll_summary WHERE pay_code = '$id'";
-			$conn->query($sql);
+    //get id
+		$id = $_POST['id'];
+
+		$sql = $conn->prepare("DELETE FROM payroll_coverage_table WHERE pay_code = ? ");
+    $sql->bind_param('s',$id);
+
+		if($sql->execute()){
+
+      $sql = $conn->prepare("DELETE FROM payroll_summary WHERE pay_code = ? ");
+      $sql->bind_param('s',$id);
+			$sql->execute();
 
 			$_SESSION['success'] = 'Payroll deleted successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = "Connection Timeout";
 		}
 	}
 	else{

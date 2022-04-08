@@ -3,17 +3,22 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
-		$Sdate = $_POST['Sdate'];
-		$Edate = $_POST['Edate'];
-		$Pdate = $_POST['pDate'];
-		$code = $_POST['id'];
+		
+    //prepared stmt
+		$sql = $conn->prepare("UPDATE payroll_coverage_table SET Sdate = ?, Edate = ?, Pdate = ? WHERE pay_code = ? ");
+    $sql->bind_param('ssss',$Sdate,$Edate,$Pdate,$code);
 
-		$sql = "UPDATE payroll_coverage_table SET Sdate = '$Sdate', Edate = '$Edate', Pdate = '$Pdate' WHERE pay_code = '$code'";
-		if($conn->query($sql)){
+    // get values
+    $code = $_POST['id'];
+    $Sdate = $_POST['Sdate'];
+    $Edate = $_POST['Edate'];
+    $Pdate = $_POST['pDate'];
+
+		if($sql->execute()){
 			$_SESSION['success'] = 'Payroll updated successfully';
 		}
 		else{
-			$_SESSION['error'] = $conn->error;
+			$_SESSION['error'] = "Connection Timeout";
 		}
 	}
 	else{
