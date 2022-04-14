@@ -6,7 +6,7 @@
 ?>
 
 <body>
-  <?php //include_once 'includes/preloader.php'; ?>
+  <?php include_once 'includes/preloader.php'; ?>
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
     <?php require_once 'includes/navbar.php'?>

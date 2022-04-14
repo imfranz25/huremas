@@ -5993,7 +5993,7 @@ table tbody .border-bottom-info td {
       Left-side-menu css start
 ==========================  **/
 .main-menu {
-  border:  1px solid transparent;
+  border:  1px solid rgba(0,0,0,0);
   float: left;
   width: 235px;
   z-index: 99;

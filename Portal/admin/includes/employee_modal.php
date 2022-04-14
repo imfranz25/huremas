@@ -10,11 +10,11 @@
       </div>
       <div class="modal-body">
         <div class="form-group form-default text-center">
-          <a href="employee.php?page=new_employee_cnt">
+          <!-- <a href="employee.php?page=new_employee_cnt">
             <button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-plus"></i>Contractual</button>
           </a>
           <br>
-          <hr>
+          <hr> -->
           <a href="employee.php?page=new_employee_jo">
             <button type="button" class="btn btn-mat waves-effect waves-light btn-success" ><i class="fa fa-plus"></i>Job Order</button>
           </a>

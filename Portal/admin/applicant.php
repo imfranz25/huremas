@@ -1,243 +1,222 @@
 <?php 
-$title ="Applicant Tracking";
-include 'includes/session.php';
-include 'includes/header.php';
+  $title ="Applicant Tracking";
+  require_once '../includes/path.php';
+  require_once 'includes/session.php';
+  require_once 'includes/header.php';
 ?>
-  <body>
+
+<body>
   <?php include 'includes/preloader.php'; ?>
-  
   <div id="pcoded" class="pcoded">
-        <div class="pcoded-container navbar-wrapper">         
-        <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
-        
-        
-                  <div class="pcoded-content">
-                      <!-- Page-header start -->
-                      <div class="page-header">
-                          <div class="page-block">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      <div class="page-header-title">
-                                          <h5 class="m-b-10">Applicant Tracking</h5>
-                                          <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.php"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="#!">Applicant Tracking</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
+    <div class="pcoded-container navbar-wrapper">         
+      <?php include 'includes/navbar.php'?>
+      <?php include 'includes/sidebar.php'?>
+        <div class="pcoded-content">
+
+          <!-- Page-header start -->
+          <div class="page-header">
+            <div class="page-block">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <div class="page-header-title">
+                    <h5 class="m-b-10">Applicant Tracking</h5>
+                    <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                      <a href="index.php"> <i class="fa fa-home"></i> </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                      <a href="#!">Applicant Tracking</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>  
+          </div>
+
+          <!-- Page-header end -->
+          <div class="pcoded-inner-content">
+            <?php include_once 'includes/session_alert.php'; ?>         
+            <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#newJob" id="btnJob">
+              <i class="fa fa-plus"></i>Add New Job
+            </button>
+            <div class="btn-group float-right">
+              <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
+              <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
+                <a class="dropdown-item filter_job active" data-id='all' href="javascript:void(0)" id="job_all">All</a>
+                <a class="dropdown-item filter_job" data-id='starred' href="javascript:void(0)">Starred</a>
+                <a class="dropdown-item filter_job" data-id='active' href="javascript:void(0)">Active</a>
+                <a class="dropdown-item filter_job" data-id='inactive' href="javascript:void(0)">Inactive</a>
+              </div>
+            </div>
+            <!-- Main-body start -->
+            <div class="card mb-0 ">    
+              <div class="card-header">
+                <ul class="breadcrumb-title">
+                  <li class="breadcrumb-item">
+                    <a class="reload_card" href="javascript:void(0)"><h5>Recruitment</h5></a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a class="reload_card" href="javascript:void(0)">
+                      <label id="job_breadcrumb">All</label>
+                    </a>
+                  </li>
+                </ul>
+                <div class="card-header-right">
+                  <ul class="list-unstyled card-option">
+                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                    <li><i class="fa fa-refresh reload_card"></i></li>
+                  </ul>
+                </div>
+              </div>      
+
+              <div class="box-body" id="job_data" style="height: 500px;">
+                <div class="card-block table-border-style row text-justify mh-100" style="overflow-y: scroll !important;">
+                  <!--PHP Start-->
+                  <?php 
+                    //initialization
+                    $show_count = 0;
+                    //filter out when session filter isset
+                    if (isset($_SESSION['filter'])) {
+                      $sort = $_SESSION['filter'];
+                      unset($_SESSION['filter']);
+                    }else{
+                      $sort = 'all';
+                    }
+                    //SET FILTER TVALUE
+                    if($sort=='starred'){
+                      $filter = "WHERE job.job_status='starred' ";
+                    }else{
+                      //Default Filter (Show all star->act->inac)
+                      $filter = "ORDER BY case WHEN job.job_status = 'starred' THEN 1 WHEN job.job_status = 'active' THEN 2 ELSE 3 END ASC";
+                    }
 
 
-                        <?php
-                            if(isset($_SESSION['success'])){
-                                echo "
-                                    <div class='alert alert-success alert-dismissible'>
-                                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                    <h4><i class='icon fa fa-check'></i> Success!</h4>
-                                    ".$_SESSION['success']."
-                                    </div>
-                                ";
-                                unset($_SESSION['success']);
-                            }
-                            if(isset($_SESSION['error'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Error!</h4>
-                                ".$_SESSION['error']."
-                                </div>
-                            ";
-                            unset($_SESSION['error']);
-                            }
-                            if(isset($_SESSION['warning'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Note! (Please Update Deduction/Tax Vendor first !)</h4>
-                                ".$_SESSION['warning']."
-                                </div>
-                            ";
-                            unset($_SESSION['warning']);
-                            }
-                            
-                        ?>
+                    $sql = "SELECT *, job.id AS jid, (SELECT COUNT(job_code) FROM  applicant WHERE job_code = job.job_code AND stage='New Candidates') AS newapp, (SELECT COUNT(stage) FROM  applicant WHERE job_code = job.job_code AND stage='On-Board') AS onboard FROM job LEFT JOIN position ON position.id=job.job_position $filter ";
 
-                        <button type="button" class="btn btn-mat waves-effect waves-light btn-success" data-toggle="modal" data-target="#newJob" id="btnJob"><i class="fa fa-plus"></i>Add New Job</button>
+                    $query = $conn->query($sql);
 
-                        
+                    if ($query->num_rows > 0) {
+                      while($row = $query->fetch_assoc()){
+                        //Starred Design
+                        if ($row['job_status']=='starred') {
+                          $star = 'fa-star';
+                        }else{$star = 'fa-star-o';}
+                        //show active (hired==full -> continue)
+                        if($sort=='active'){
+                          if ($row['onboard']>=$row['job_recruit']){continue;}
+                        }else if ($sort=='inactive') {
+                          if ($row['onboard']<$row['job_recruit']){
+                            continue;}
+                        }
+                        //increment showed details
+                        $show_count += 1;
+                  ?>
 
-                        <div class="btn-group float-right">
-                          <button type="button" class="btn btn-mat waves-effect waves-light btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><i class="fa fa-filter"></i>Filter</button>
-                          <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;">
-                            <a class="dropdown-item filter_job active" data-id='all' href="javascript:void(0)" id="job_all">All</a>
-                            <a class="dropdown-item filter_job" data-id='starred' href="javascript:void(0)">Starred</a>
-                            <a class="dropdown-item filter_job" data-id='active' href="javascript:void(0)">Active</a>
-                            <a class="dropdown-item filter_job" data-id='inactive' href="javascript:void(0)">Inactive</a>
-                          </div>
-                        </div>
-                        
-                            <!-- Main-body start -->
-                            <div class="card mb-0 ">    
-                              <div class="card-header">
-                                <ul class="breadcrumb-title">
-                                  <li class="breadcrumb-item">
-                                    <a class="reload_card" href="javascript:void(0)"><h5>Recruitment</h5></a>
-                                  </li>
-                                  <li class="breadcrumb-item">
-                                    <a class="reload_card" href="javascript:void(0)"><label id="job_breadcrumb">All</label></a>
-                                  </li>
-                                  <!--Filter here-->
-                                </ul>
-                                <div class="card-header-right">
-                                  <ul class="list-unstyled card-option">
-                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
-                                    <li><i class="fa fa-window-maximize full-card"></i></li>
-                                    <li><i class="fa fa-refresh reload_card"></i></li>
-                                  </ul>
-                                </div>
-                              </div>         
-                              <div class="box-body" id="job_data" style="height: 500px;">
-                                <div class="card-block table-border-style row text-justify mh-100" style="overflow-y: scroll !important;">
-                                  <!--PHP Start-->
-                                  <?php 
-
-                                    //initialization
-                                    $show_count = 0;
-                                    
-                                    //filter out when session filter isset
-                                    if (isset($_SESSION['filter'])) {
-                                      $sort = $_SESSION['filter'];
-                                      unset($_SESSION['filter']);
-                                    }else{
-                                      $sort = 'all';
-                                    }
-                                    
-                                    //SET FILTER TVALUE
-                                    if($sort=='starred'){
-                                      $filter = "WHERE job.job_status='starred' ";
-                                    }else{
-                                      //Default Filter (Show all star->act->inac)
-                                        $filter = "ORDER BY case WHEN job.job_status = 'starred' THEN 1 WHEN job.job_status = 'active' THEN 2 ELSE 3 END ASC";
-                                    }
-
-
-
-                                    $sql = "SELECT *, job.id AS jid, (SELECT COUNT(job_code) FROM  applicant WHERE job_code = job.job_code AND stage='New Candidates') AS newapp, (SELECT COUNT(stage) FROM  applicant WHERE job_code = job.job_code AND stage='On-Board') AS onboard FROM job LEFT JOIN position ON position.id=job.job_position $filter ";
-
-                                    $query = $conn->query($sql);
-
-                                      if ($query->num_rows > 0) {
-                                        while($row = $query->fetch_assoc()){
-                                          //Starred Design
-                                          if ($row['job_status']=='starred') {
-                                            $star = 'fa-star';
-                                          }else{$star = 'fa-star-o';}
-                                          //show active (hired==full -> continue)
-                                          if($sort=='active'){
-                                            if ($row['onboard']>=$row['job_recruit']){continue;}
-                                          }else if ($sort=='inactive') {
-                                            if ($row['onboard']<$row['job_recruit']){
-                                              continue;}
-                                          }
-                                          //increment showed details
-                                          $show_count += 1;
-                                          
-                                  ?>
-
-                                  <!--Sample Recuit Box-->
-                                  <div class="col-md-6 col-lg-4">
-                                    <div class="card rounded border border-secondary">
-                                      <div class="card-header p-0 m-0">
-                                        <div class="bg-success text-white px-3 pt-3 pb-1 rounded-top">
-                                          <h4>
-                                            <a href="javascript:void(0)"><i data-id="<?php echo $row['job_code']; ?>" class="fa <?php echo $star; ?> starred text-warning f-20 mr-2" style="color: white;" id="<?php echo $row['job_code']; ?>"></i></a><?php echo $row['description'];  ?>
-                                            <!-- Settings Dropdown -->
-                                            <div class="btn-group float-right">
-                                               <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-ellipsis-v f-16 text-white" ></i></a>
-                                              <div class="dropdown-menu">
-                                                <a class="dropdown-item" class="btn" href="javascript:void(0)"  onclick="showView(<?php echo $row['jid'];?>)">Details</a>
-                                                <a href="javascript:void(0)" class="dropdown-item" class="btn" onclick="showEdit(<?php echo $row['jid'];?>)">Edit</a>
-                                                <a href="javascript:void(0)" class="dropdown-item" class="btn" onclick="showTrack('<?php echo $row['job_code'];?>')">Show Applicants</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a href="javascript:void(0)" class="dropdown-item text-danger btn" onclick="showDelete(<?php echo $row['jid'];?>)">Delete</a>
-                                              </div>
-                                            </div>
-                                          </h4>
-                                        </div>
-                                      </div>
-
-                                      <div class="card-body row pt-4 pb-2">
-                                        <div class="col-12 col-sm-5">
-                                          <a type="button" class="btn bg-success text-white rounded f-13 p-2" onclick="showTrack('<?php echo $row['job_code'];?>')" ><i class="fa fa-id-card mr-1"></i>Applicants</a>
-                                        </div>
-                                        <div class="col-12 col-sm-7">
-                                          <div class="d-flex align-content-center"><label class="badge badge-danger mr-1 f-14"><?php echo $row['newapp']; ?></label>&nbsp;<label>New Application</label></div>
-                                          <div class="d-flex align-content-center"><label class="badge badge-info mr-1 f-14"><?php echo $row['job_recruit']; ?></label>&nbsp;<label>to Recruit</label></div>
-                                          <div class="d-flex align-content-center"><label class="badge badge-success mr-1 f-14"><?php echo $row['onboard']; ?></label>&nbsp;<label>On-Boarded</label></div>
-                                        </div>
-                                      </div>
-
-                                      <div class="card-footer border border-top-1 p-0 m-0">
-                                        <div class="text-white rounded-bottom p-1">
-                                          <h4 class="text-right pr-2">
-                                          <a href="<?php echo "http://huremas-cvsuic.online/Home/job/job-posted.php?job_code=".password_hash($row['job_code'],PASSWORD_DEFAULT); ?>" class="copy_link">
-                                            <i class="fa fa-paperclip mr-2"></i>Share Tracker</a>
-                                          </h4>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <?php 
-                                    }}if ($show_count < 1){
-                                  ?>
-
-                                  <!--No Job Post-->
-                                  <div class="row m-auto">
-                                    <div class="col-lg-12 p-3 text-center">
-                                      <img src="../assets/images/jobpost.jpg" alt="No Notification" class="img-radius img-fluid mx-auto d-block p-4 w-50">
-                                      <h5>THERE ARE NO ACTIVE JOB POSTING AT THE MOMENT</h5>
-                                      <label>Create Job Details to view job posts here !</label>
-                                      <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3 reload_card">Refresh</button>
-                                    </div>
-                                  </div>
-                                  <!--No Job Post End-->
-
-                                  <?php } ?>
-                                  <!--PHP END-->
-                                </div>
+                  <!--Sample Recuit Box-->
+                  <div class="col-md-6 col-lg-4">
+                    <div class="card rounded border border-secondary">
+                      <div class="card-header p-0 m-0">
+                        <div class="bg-success text-white px-3 pt-3 pb-1 rounded-top">
+                          <h4>
+                            <a href="javascript:void(0)">
+                              <i data-id="<?php echo $row['job_code']; ?>" class="fa <?php echo $star; ?> starred text-warning f-20 mr-2" style="color: white;" id="<?php echo $row['job_code']; ?>"></i></a><?php echo $row['description'];  ?>
+                            <!-- Settings Dropdown -->
+                            <div class="btn-group float-right">
+                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fa fa-ellipsis-v f-16 text-white" ></i>
+                                </a>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" class="btn" href="javascript:void(0)"  onclick="showView(<?php echo $row['jid'];?>)">Details</a>
+                                <a href="javascript:void(0)" class="dropdown-item" class="btn" onclick="showEdit(<?php echo $row['jid'];?>)">Edit</a>
+                                <a href="javascript:void(0)" class="dropdown-item" class="btn" onclick="showTrack('<?php echo $row['job_code'];?>')">Show Applicants</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="javascript:void(0)" class="dropdown-item text-danger btn" onclick="showDelete(<?php echo $row['jid'];?>)">Delete</a>
                               </div>
                             </div>
-                            <!-- Main-body end -->
-                      
-  
+                          </h4>
                         </div>
-                        <!--Pcoded Inner COntent **end**-->
+                      </div>
+
+                      <div class="card-body row pt-4 pb-2">
+                        <div class="col-12 col-sm-5">
+                          <a type="button" class="btn bg-success text-white rounded f-13 p-2" onclick="showTrack('<?php echo $row['job_code'];?>')" >
+                            <i class="fa fa-id-card mr-1"></i>Applicants
+                          </a>
+                        </div>
+                        <div class="col-12 col-sm-7">
+                          <div class="d-flex align-content-center">
+                            <label class="badge badge-danger mr-1 f-14">
+                              <?php echo $row['newapp']; ?>
+                            </label>&nbsp;
+                            <label>New Application</label>
+                          </div>
+                          <div class="d-flex align-content-center">
+                            <label class="badge badge-info mr-1 f-14">
+                              <?php echo $row['job_recruit']; ?>
+                            </label>&nbsp;
+                            <label>to Recruit</label>
+                          </div>
+                          <div class="d-flex align-content-center">
+                            <label class="badge badge-success mr-1 f-14">
+                              <?php echo $row['onboard']; ?>
+                            </label>&nbsp;
+                            <label>On-Boarded</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="card-footer border border-top-1 p-0 m-0">
+                        <div class="text-white rounded-bottom p-1">
+                          <h4 class="text-right pr-2">
+                            <a href="<?php echo "http://huremas-cvsuic.online/Home/job/job-posted.php?job_code=".password_hash($row['job_code'],PASSWORD_DEFAULT); ?>" class="copy_link">
+                              <i class="fa fa-paperclip mr-2"></i>Share Tracker
+                            </a>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <!--Pcoded  COntent **end**-->
+
+                  <?php 
+                    }}if ($show_count < 1){
+                  ?>
+
+                  <!--No Job Post-->
+                  <div class="row m-auto">
+                    <div class="col-lg-12 p-3 text-center">
+                      <img src="../assets/images/jobpost.jpg" alt="No Notification" class="img-radius img-fluid mx-auto d-block p-4 w-50">
+                      <h5>THERE ARE NO ACTIVE JOB POSTING AT THE MOMENT</h5>
+                      <label>Create Job Details to view job posts here !</label>
+                      <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3 reload_card">Refresh</button>
+                    </div>
+                  </div>
+                  <!--No Job Post End-->
+                  <?php } ?>
+                  <!--PHP END-->
+                </div>
+              </div>
+            </div>
+            <!-- Main-body end -->
+          </div>
+          <!--Pcoded Inner COntent **end**-->
         </div>
+        <!--Pcoded  COntent **end**-->
+      </div>
     </div>
 
 
-    <?php 
-      include 'includes/applicant_modal.php';
-      include 'includes/tracking_modal.php';
-      include 'includes/onboard_modal.php';
-      include 'includes/alert_modal.php';
-      include 'includes/scripts.php';
-    ?>   
+<?php 
+  include 'includes/applicant_modal.php';
+  include 'includes/tracking_modal.php';
+  include 'includes/onboard_modal.php';
+  include 'includes/alert_modal.php';
+  include 'includes/scripts.php';
+?>   
 
 <script>
 
@@ -537,7 +516,6 @@ $(document).ready(function() {
     }
   });
 
-
   // COPY LINK AND SHOW TOOLTIP
   //$('.copy_link').tooltip({title: "Link Copied!", trigger: "click"});
   $(document).on("mouseenter",'.copy_link', function (e) {
@@ -794,9 +772,6 @@ $(document).ready(function() {
     getapplicant(code,'Hired'); // reload page (stay on page)
   }); 
   
-
-  
-
 });
 </script>
 
