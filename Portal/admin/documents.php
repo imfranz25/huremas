@@ -1,361 +1,306 @@
 <?php 
-$title ="Document";
-require_once '../includes/path.php';
-require_once 'includes/session.php';
-require_once 'includes/header.php';
-
+  $title ="Document";
+  require_once '../includes/path.php';
+  require_once 'includes/session.php';
+  require_once 'includes/header.php';
 ?>
-  <body>
-  <?php //include 'includes/preloader.php'; ?>
-  
+
+<body>
+  <?php include 'includes/preloader.php'; ?>
   <div id="pcoded" class="pcoded">
-        <div class="pcoded-container navbar-wrapper">         
-        <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
-        
-        
-                  <div class="pcoded-content pb-0 mb-0">
-                      <!-- Page-header start -->
-                      <div class="page-header">
-                          <div class="page-block">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      <div class="page-header-title">
-                                          <h5 class="m-b-10">Document Management</h5>
-                                          <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.php"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="#documents.php">Document</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
+    <div class="pcoded-container navbar-wrapper">         
+    <?php include 'includes/navbar.php'?>
+      <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+          <?php include 'includes/sidebar.php'?>
+          <div class="pcoded-content pb-0 mb-0">
+            <!-- Page-header start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <div class="page-header-title">
+                      <h5 class="m-b-10">Document Management</h5>
+                      <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="breadcrumb-title">
+                      <li class="breadcrumb-item">
+                        <a href="index.php"> <i class="fa fa-home"></i> </a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="#documents.php">Document</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Page-header end -->
+
+            <div class="pcoded-inner-content">
+              <?php include_once 'includes/session_alert.php'; ?>         
+              <!-- Document Body -->
+              <div class="row pb-0 mb-0 pl-2">
+                <div class="col-md-9 p-0 m-0 pr-1">
+                  <div class="card rounded p-0 pb-0 mb-0" >
+                    <div class="border rounded">
+                      <div class="card-header pb-4">
+                        <h5>
+                          <i class="ti-files mx-2" aria-hidden="true"></i> 
+                          <label id="folder_title">Institutional Records</label>
+                        </h5>
+
+                        <button type="button" class="btn btn-warning dropdown-toggle float-right text-dark" data-toggle="dropdown" aria-expanded="true">Option
+                        </button>
+                        <button type="button" class="btn btn-info float-right folder_insert mx-2 d-none" id="folder_view_btn" data-target="#view_custom" data-toggle="modal" aria-expanded="true"><i class="fa fa-info-circle"></i> About this Folder
+                        </button>
+
+                        <div class="dropdown-menu" style="">
+                          <a class="dropdown-item folder_insert d-none" href="javascript:void(0)" id="edit_folder" data-folder="Institutional Records" data-folder_id="Institutional Records">Edit Folder</a>
+                          <a class="dropdown-item folder_insert" href="javascript:void(0)" id="upload_docu" data-folder="Institutional Records" data-folder_id="Institutional Records">Upload Document</a>
+                          <a class="dropdown-item folder_insert" href="javascript:void(0)" id="add_url" data-folder="Institutional Records" data-folder_id="Institutional Records">Add URL</a>
+                          <div class="dropdown-divider del_fold d-none"></div>
+                          <a class="dropdown-item folder_insert del_fold d-none text-" href="javascript:void(0)" id="del_folder" data-folder="Institutional Records">Move to Archive</a>
+                        </div>
                       </div>
-                      <!-- Page-header end -->
 
-                      <div class="pcoded-inner-content">
+                      <div class="container col-12 mt-3 my-0 py-0">
+                        <div class="input-group mb-3 container">
+                          <input type="text" data-folder_id="Institutional Records" class="form-control search_document" placeholder="Search by Document Name, File Name, or Upload Date" id="search_document" aria-label="Search" aria-describedby="basic-addon1">
+                          <div class="input-group-addon btn_search">
+                            <span class="input-group-text" id="basic-addon1">
+                            <i class="ti-search"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
+                    <div class="box-body container text-dark" id="document_file" style="max-height: 79vh;min-height: 79vh;overflow-y: auto;" >
+                      <!-- Sample Document UI Format -->
+                      <div class="row">
+                        <?php 
+                          $docu_count = 0;
+                          //DOCUMENT -> FOLDER TO BE DISPLAY
+                          $folder_query="WHERE document_folder='Institutional Records' ";
+                          if (isset($_SESSION['folder_name'])) {
+                            $folder_name = $_SESSION['folder_name'];
+                            $folder_query = "WHERE document_folder='$folder_name' ";
+                            unset($_SESSION['folder_name']);
+                          }
+                          // QUERY
+                          if (isset($_SESSION['query'])) {
+                            $search =$_SESSION['query'];
+                            unset($_SESSION['query']);
+                          }else{
+                            unset($search);
+                          }
 
-                        <?php
-                            if(isset($_SESSION['success'])){
-                                echo "
-                                    <div class='alert alert-success alert-dismissible'>
-                                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                    <h4><i class='icon fa fa-check'></i> Success!</h4>
-                                    ".$_SESSION['success']."
-                                    </div>
-                                ";
-                                unset($_SESSION['success']);
+                          //EXTENSIONS
+                          $ext_dp = array(array('docx', 'doc', 'docm', 'dot', 'docm', 'dotx'),array('pdf'),array('zip'),array('rar'),array('jpeg','jpg','png','gif'),array('xlsx','xlsm','xlsb','xltx'));
+                          $doc_dp = array("word.png","pdf.png","zip.jpg","rar.png","img.png","excel.png");
+
+                          $sql = "SELECT * FROM documents $folder_query AND document_archive != 1 ORDER BY document_starred DESC";
+                          $query = $conn->query($sql);
+
+                          while ($row = $query->fetch_assoc()) {
+                            //INITIALIZATION
+                            $file_date =(new Datetime($row['document_date']))->format('F d, Y');
+                            $type = $row['document_type'];
+                            $icon ='';
+                            // FILTER DOCUMENTS IF THE USER -> SEARCH
+                            if (isset($search)) {
+                              //FOUND SET TO DEFAULT FALSE
+                              $found=false;
+                              //CHECK DOCUMENT NAME
+                              $check_name = (stripos($row['document_name'], $search)>-1);
+                              //CHECK DOCUMENT DATE
+                              $check_date = (stripos($file_date, $search)>-1);
+                              //CHECK FILE NAME
+                              $check_file = (stripos($row['document_file'], $search))> -1;
+                              // IF EITHER OF THESE TEST CASES MATCH  THE USER QUESRY -> SET FOUND TO TRUE
+                              if ($check_name || $check_date || $check_file) {
+                                $found=true;
+                              }
+                              // SKIP THIS RECORD IF IT DOESNT MATCH THE QUERY
+                              if (!$found) {
+                                continue;
+                              }
+                            }//END SEARCH
+
+                            if ($type!='url') {
+                              $ext = pathinfo($row['document_file'], PATHINFO_EXTENSION);
+                              for ($i=0; $i < sizeof($ext_dp) ; $i++) { 
+                                if (in_array($ext, $ext_dp[$i])) {
+                                  $icon = $doc_dp[$i];
+                                  break;
+                                }
+                              }
+                              // FILE SIZE
+                              $file = $_SERVER['DOCUMENT_ROOT']."/Documents/".$row['document_id'].".".$ext;
+                              $filesize = filesize($file); 
+                              $filesize = round($filesize / 1024 ,2)." KB";
                             }
-                            if(isset($_SESSION['error'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Error!</h4>
-                                ".$_SESSION['error']."
-                                </div>
-                            ";
-                            unset($_SESSION['error']);
+
+                            // SET ICON IMGAGE
+                            if ($icon=='') {
+                              if ($type=='document') {
+                                $icon = "file.png";
+                              }else{
+                                $icon = "url.jpg";
+                              }
                             }
-                            if(isset($_SESSION['warning'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Note! (Please Update Deduction/Tax Vendor first !)</h4>
-                                ".$_SESSION['warning']."
-                                </div>
-                            ";
-                            unset($_SESSION['warning']);
-                            }
-                            
+
+                            $docu_count +=1;
                         ?>
 
-                        <!-- Document Body -->
-                        <div class="row pb-0 mb-0 pl-2">
-                          <div class="col-md-9 p-0 m-0 pr-1">
-                            <div class="card rounded p-0 pb-0 mb-0" >
-
-                              <div class="border rounded">
-                                <div class="card-header pb-4">
-                                  <h5><i class="ti-files mx-2" aria-hidden="true"></i> <label id="folder_title">Institutional Records</label></h5>
-                                  <button type="button" class="btn btn-warning dropdown-toggle float-right text-dark" data-toggle="dropdown" aria-expanded="true">Option
-                                  </button>
-                                  <button type="button" class="btn btn-info float-right folder_insert mx-2 d-none" id="folder_view_btn" data-target="#view_custom" data-toggle="modal" aria-expanded="true"><i class="fa fa-info-circle"></i> About this Folder
-                                  </button>
-                                  <div class="dropdown-menu" style="">
-
-                                    <a class="dropdown-item folder_insert d-none" href="javascript:void(0)" id="edit_folder" data-folder="Institutional Records" data-folder_id="Institutional Records">Edit Folder</a>
-
-                                    <a class="dropdown-item folder_insert" href="javascript:void(0)" id="upload_docu" data-folder="Institutional Records" data-folder_id="Institutional Records">Upload Document</a>
-
-                                    <a class="dropdown-item folder_insert" href="javascript:void(0)" id="add_url" data-folder="Institutional Records" data-folder_id="Institutional Records">Add URL</a>
-
-                                    <div class="dropdown-divider del_fold d-none"></div>
-
-                                    <a class="dropdown-item folder_insert del_fold d-none text-" href="javascript:void(0)" id="del_folder" data-folder="Institutional Records">Move to Archive</a>
-
-
-                                  </div>
-                                </div>
-
-                                <div class="container col-12 mt-3 my-0 py-0">
-                                  <div class="input-group mb-3 container">
-                                    <input type="text" data-folder_id="Institutional Records" class="form-control search_document" placeholder="Search by Document Name, File Name, or Upload Date" id="search_document" aria-label="Search" aria-describedby="basic-addon1">
-                                    <div class="input-group-addon btn_search">
-                                      <span class="input-group-text" id="basic-addon1">
-                                      <i class="ti-search"></i></span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-
-
-                              <div class="box-body container text-dark" id="document_file" style="max-height: 79vh;min-height: 79vh;overflow-y: auto;" >
-
-                                <!-- Sample Document UI Format -->
-                                <div class="row">
+                        <div class="col-md-6 document_uploads" data-id="<?php echo $row['document_id']; ?>" style="cursor:pointer;">
+                          <div class="row p-3">
+                            <div class="col-3 p-0 m-0 border border-right-0 border-success rounded-left">
+                              <img src="../assets/images/document_dp/<?php echo $icon; ?>" alt="<?php echo ucfirst($row['document_name']); ?>" class="img-fluid" style="max-height: 100px;min-height: 100px;background: darkgreen;width: 100%;"  />
+                            </div>
+                            <div class="col-9 rounded-right border border-left-0 border-success" style="max-height: 100px;">
+                              <div class="row">
+                                <div class="col-10 p-1 pl-3 bg-success text-white"><?php echo ucfirst($row['document_name']); ?></div>
+                                <div class="col-2 p-1 bg-success">
                                   <?php 
-
-                                      $docu_count = 0;
-                                      //DOCUMENT -> FOLDER TO BE DISPLAY
-                                      $folder_query="WHERE document_folder='Institutional Records' ";
-                                      if (isset($_SESSION['folder_name'])) {
-                                        $folder_name = $_SESSION['folder_name'];
-                                        $folder_query = "WHERE document_folder='$folder_name' ";
-                                        unset($_SESSION['folder_name']);
-                                      }
-                                      // QUERY
-                                      if (isset($_SESSION['query'])) {
-                                        $search =$_SESSION['query'];
-                                        unset($_SESSION['query']);
-                                      }else{
-                                        unset($search);
-                                      }
-
-                                      //EXTENSIONS
-                                      $ext_dp = array(array('docx', 'doc', 'docm', 'dot', 'docm', 'dotx'),array('pdf'),array('zip'),array('rar'),array('jpeg','jpg','png','gif'),array('xlsx','xlsm','xlsb','xltx'));
-                                      $doc_dp = array("word.png","pdf.png","zip.jpg","rar.png","img.png","excel.png");
-
-                                      $sql = "SELECT * FROM documents $folder_query AND document_archive != 1 ORDER BY document_starred DESC";
-                                      $query = $conn->query($sql);
-                                      while ($row = $query->fetch_assoc()) {
-
-                                        //INITIALIZATION
-                                        $file_date =(new Datetime($row['document_date']))->format('F d, Y');
-                                        $type = $row['document_type'];
-                                        $icon ='';
-
-                                        // FILTER DOCUMENTS IF THE USER -> SEARCH
-                                        if (isset($search)) {
-
-                                          //FOUND SET TO DEFAULT FALSE
-                                          $found=false;
-                                          //CHECK DOCUMENT NAME
-                                          $check_name = (stripos($row['document_name'], $search)>-1);
-                                          //CHECK DOCUMENT DATE
-                                          $check_date = (stripos($file_date, $search)>-1);
-                                          //CHECK FILE NAME
-                                          $check_file = (stripos($row['document_file'], $search))> -1;
-
-                                          // IF EITHER OF THESE TEST CASES MATCH  THE USER QUESRY -> SET FOUND TO TRUE
-                                          if ($check_name || $check_date || $check_file) {
-                                            $found=true;
-                                          }
-
-                                          // SKIP THIS RECORD IF IT DOESNT MATCH THE QUERY
-                                          if (!$found) {
-                                            continue;
-                                          }
-
-                                        }//END SEARCH
-
-
-
-                                        
-
-                                        if ($type!='url') {
-
-                                          $ext = pathinfo($row['document_file'], PATHINFO_EXTENSION);
-                                          for ($i=0; $i < sizeof($ext_dp) ; $i++) { 
-                                            if (in_array($ext, $ext_dp[$i])) {
-                                              $icon = $doc_dp[$i];
-                                              break;
-                                            }
-                                          }
-
-                                          // FILE SIZE
-                                          $file = $_SERVER['DOCUMENT_ROOT']."/Documents/".$row['document_id'].".".$ext;
-                                          $filesize = filesize($file); 
-                                          $filesize = round($filesize / 1024 ,2)." KB";
-
-                                        }
-
-                                        if ($icon=='') {
-                                          if ($type=='document') {
-                                            $icon = "file.png";
-                                          }else{
-                                            $icon = "url.jpg";
-                                          }
-                                        }
-
-
-                                        $docu_count +=1;
-                                    ?>
-                                  <div class="col-md-6 document_uploads" data-id="<?php echo $row['document_id']; ?>" style="cursor:pointer;">
-                                    <div class="row p-3">
-                                      <div class="col-3 p-0 m-0 border border-right-0 border-success rounded-left">
-                                        <img src="../assets/images/document_dp/<?php echo $icon; ?>" alt="<?php echo ucfirst($row['document_name']); ?>" class="img-fluid" style="max-height: 100px;min-height: 100px;background: darkgreen;width: 100%;"  />
-                                      </div>
-                                      <div class="col-9 rounded-right border border-left-0 border-success" style="max-height: 100px;">
-                                        <div class="row">
-                                          <div class="col-10 p-1 pl-3 bg-success text-white"><?php echo ucfirst($row['document_name']); ?></div>
-                                          <div class="col-2 p-1 bg-success">
-                                            <?php 
-                                            $star = ($row['document_starred']==0)? 'fa-star-o':'fa-star';
-                                            ?>
-                                            <a href="javascript:void(0)" class="pull-right mr-1">
-                                              <i class="fa <?php echo $star; ?> text-warning"></i>
-                                            </a>
-                                            <?php if ($row['document_status']==1){?>
-                                              <a href="javascript:void(0)" class="pull-right mr-1">
-                                                <i class="ti-lock text-white"></i>
-                                              </a>
-                                            <?php } ?>
-                                          </div>
-
-                                          <!-- Link -->
-                                          <?php if ($row['document_type']=='url') { ?>
-                                            <div class="col-12 my-2 mt-3">
-                                              <a target="_blank" href="<?php echo $row['document_file']; ?>" >
-                                                <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 200px;">
-                                                  <i class="ti-world mr-1"></i>
-                                                  <?php echo $row['document_file']; ?>
-                                                </div>
-                                              </a>
-                                            </div>
-                                          <?php }else{ ?>
-                                            <!-- blank space -->
-                                            <div class="col-12 my-2 mt-3">
-                                              <a href="javascript:void(0)">
-                                                <div class="d-inline-flex align-middle align-items-center">
-                                                  <i class="ti-files mr-1"></i>
-                                                  <?php echo $filesize; ?>
-                                                </div>
-                                              </a>
-                                            </div>
-                                          <?php } ?>
-
-                                          <div class="col-12">
-                                            <?php echo $file_date; ?>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                <?php }if ($docu_count==0 && !isset($search)) {
-                                ?>
-                                  <!--No Documents-->
-                                  <div class="row m-auto">
-                                    <div class="col-lg-12 p-3 text-center">
-                                      <img src="../assets/images/no_docu.png" alt="No Document Upload" class="img-radius img-fluid mx-auto d-block p-4 w-50">
-                                      <h5>THERE ARE NO DOCUMENT UPLOAD IN THIS FOLDER</h5>
-                                      <label>Add Documents / URL in this folder by clicking Add URL or Upload in Folder Option.</label>
-                                      <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3 reload_documents">Refresh</button>
-                                    </div>
-                                  </div>
-                                  <!--No Documents End-->
-                                <?php }else if ($docu_count==0 && isset($search)) {?>
-
-                                  <!--No Documents-->
-                                  <div class="row m-auto">
-                                    <div class="col-lg-12 p-3 text-center">
-                                      <img src="../assets/images/not_found.jpg" alt="Search Not Found" class="img-radius img-fluid mx-auto d-block p-4 w-50">
-                                      <h5>FILE NOT FOUND</h5>
-                                      <label>You can try to search via document name, file name, or date from the file was created</label>
-                                      <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3 reload_documents">Back</button>
-                                    </div>
-                                  </div>
-                                  <!--No Documents End-->
-
-                                <?php unset($search); }  ?>
+                                  $star = ($row['document_starred']==0)? 'fa-star-o':'fa-star';
+                                  ?>
+                                  <a href="javascript:void(0)" class="pull-right mr-1">
+                                    <i class="fa <?php echo $star; ?> text-warning"></i>
+                                  </a>
+                                  <?php if ($row['document_status']==1){?>
+                                    <a href="javascript:void(0)" class="pull-right mr-1">
+                                      <i class="ti-lock text-white"></i>
+                                    </a>
+                                  <?php } ?>
                                 </div>
-                                <!-- Sample Document UI Format End-->
-                              
+
+                                <!-- Link -->
+                                <?php if ($row['document_type']=='url') { ?>
+                                  <div class="col-12 my-2 mt-3">
+                                    <a target="_blank" href="<?php echo $row['document_file']; ?>" >
+                                      <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 200px;">
+                                        <i class="ti-world mr-1"></i>
+                                        <?php echo $row['document_file']; ?>
+                                      </div>
+                                    </a>
+                                  </div>
+                                <?php }else{ ?>
+                                  <!-- blank space -->
+                                  <div class="col-12 my-2 mt-3">
+                                    <a href="javascript:void(0)">
+                                      <div class="d-inline-flex align-middle align-items-center">
+                                        <i class="ti-files mr-1"></i>
+                                        <?php echo $filesize; ?>
+                                      </div>
+                                    </a>
+                                  </div>
+                                <?php } ?>
+
+                                <div class="col-12">
+                                  <?php echo $file_date; ?>
+                                </div>
                               </div>
                             </div>
                           </div>
+                        </div>
 
-                          <!-- Ease Access -->
-                          <div class="col-md-3 text-white pl-0 pb-0 mb-0">
+                      <?php 
+                        }if ($docu_count==0 && !isset($search)) {
+                      ?>
 
-                              <div class="card mb-0 pb-3 h-100" style="overflow-y:auto;max-height: 100vh;min-height:100vh;">
-                                <div class="card-header d-flex justify-content-center">
-                                  <button type="button" class="btn btn-mat waves-effect waves-light btn-success m-0 w-100" data-target="#document_request_modal" data-toggle="modal" id="req_btn"><i class="ti-support"></i>Document Requests</button>
-                                </div>
-                                <div class="card-header">
-                                  <h5><i class="fa fa-folder-o mr-2" aria-hidden="true"></i> Folders</h5>
-                                </div>
-                                <div class="box-body container text-dark">
-                                  <ul class="list-group">
-                          
-                                      <a class="nav-item active rounded bg p-1 pl-3 mb-0 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="Institutional Records" data-folder_id="Institutional Records" href="javascript:void(0)">Institutional Records</a>
+                      <!--No Documents-->
+                      <div class="row m-auto">
+                        <div class="col-lg-12 p-3 text-center">
+                          <img src="../assets/images/no_docu.png" alt="No Document Upload" class="img-radius img-fluid mx-auto d-block p-4 w-50">
+                          <h5>THERE ARE NO DOCUMENT UPLOAD IN THIS FOLDER</h5>
+                          <label>Add Documents / URL in this folder by clicking Add URL or Upload in Folder Option.</label>
+                          <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3 reload_documents">Refresh</button>
+                        </div>
+                      </div>
+                      <!--No Documents End-->
+                                
+                      <?php }else if ($docu_count==0 && isset($search)) {?>
 
-                                      <a class="nav-item rounded bg p-1 pl-3 mb-0 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="Employees Resume" data-folder_id="Employees Resume" href="javascript:void(0)">Employees' Resume</a>
-
-                                      <a class="nav-item rounded bg p-1 pl-3 mb-0 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="Human Resource" data-folder_id="Human Resource" href="javascript:void(0)">Human Resource</a>
-
-                                  </ul>
-                                </div>
-                                <div class="card-header">
-                                  <h5><i class="fa fa-folder-o mr-2" aria-hidden="true"></i> Custom Folders</h5>
-                                  <button type="button" class="btn btn-mat waves-effect waves-light btn-success m-0 float-right mr-2 p-1 px-3 add_custom">+</button>
-                                </div>
-                                <div class="box-body container text-dark">
-                                  <ul class="list-group" id="tracking_tab" role="tablist">
-                                    <?php 
-                                      $sql = "SELECT * FROM document_folder WHERE NOT folder_archive=1 ";
-                                      $query = $conn->query($sql);
-                                      while ($row = $query->fetch_assoc()) {
-                                    ?>
-
-                                      <a class="nav-item rounded bg p-1 mb-0 pl-3 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="<?php echo $row['folder_name']; ?>" data-folder_id="<?php echo $row['folder_id']; ?>" href="javascript:void(0)"><?php echo ucfirst(strtolower($row['folder_name'])); ?></a>
-
-                                  <?php } ?>
-                                  </ul>
-                                </div>
-                            </div>
-
+                        <!--No Documents-->
+                        <div class="row m-auto">
+                          <div class="col-lg-12 p-3 text-center">
+                            <img src="../assets/images/not_found.jpg" alt="Search Not Found" class="img-radius img-fluid mx-auto d-block p-4 w-50">
+                            <h5>FILE NOT FOUND</h5>
+                            <label>You can try to search via document name, file name, or date from the file was created</label>
+                            <button type="button" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center w-25 d-block mx-auto mb-3 mt-3 reload_documents">Back</button>
                           </div>
+                        </div>
+                        <!--No Documents End-->
 
-                        </div>
-                        <!-- Document Body -->
-                        
-                        </div>
-                        <!--Pcoded Inner COntent **end**-->
+                      <?php unset($search); }  ?>
+
+                    </div>
+                    <!-- Sample Document UI Format End-->
+                    
                   </div>
-                  <!--Pcoded  COntent **end**-->
+                </div>
+              </div>
+
+              <!-- Ease Access -->
+              <div class="col-md-3 text-white pl-0 pb-0 mb-0">
+                <div class="card mb-0 pb-3 h-100" style="overflow-y:auto;max-height: 100vh;min-height:100vh;">
+                  <div class="card-header d-flex justify-content-center">
+                    <button type="button" class="btn btn-mat waves-effect waves-light btn-success m-0 w-100" data-target="#document_request_modal" data-toggle="modal" id="req_btn"><i class="ti-support"></i>Document Requests</button>
+                  </div>
+                  <div class="card-header">
+                    <h5><i class="fa fa-folder-o mr-2" aria-hidden="true"></i> Folders</h5>
+                  </div>
+                    <div class="box-body container text-dark">
+                      <ul class="list-group">
+                        <a class="nav-item active rounded bg p-1 pl-3 mb-0 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="Institutional Records" data-folder_id="Institutional Records" href="javascript:void(0)">Institutional Records</a>
+                        <a class="nav-item rounded bg p-1 pl-3 mb-0 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="Employees Resume" data-folder_id="Employees Resume" href="javascript:void(0)">Employees' Resume</a>
+                        <a class="nav-item rounded bg p-1 pl-3 mb-0 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="Human Resource" data-folder_id="Human Resource" href="javascript:void(0)">Human Resource</a>
+                      </ul>
+                    </div>
+                    <div class="card-header">
+                      <h5><i class="fa fa-folder-o mr-2" aria-hidden="true"></i> Custom Folders</h5>
+                      <button type="button" class="btn btn-mat waves-effect waves-light btn-success m-0 float-right mr-2 p-1 px-3 add_custom">+</button>
+                    </div>
+                    <div class="box-body container text-dark">
+                      <ul class="list-group" id="tracking_tab" role="tablist">
+                        <?php 
+                          $sql = "SELECT * FROM document_folder WHERE NOT folder_archive=1 ";
+                          $query = $conn->query($sql);
+                          while ($row = $query->fetch_assoc()) {
+                        ?>
+                          <a class="nav-item rounded bg p-1 mb-0 pl-3 text-left folder-list folder-class list-group-item border-0" data-toggle="list" data-folder="<?php echo $row['folder_name']; ?>" data-folder_id="<?php echo $row['folder_id']; ?>" href="javascript:void(0)"><?php echo ucfirst(strtolower($row['folder_name'])); ?></a>
+                        <?php } ?>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Document Body -->
+                        
+            </div>
+            <!--Pcoded Inner COntent **end**-->
+          </div>
+          <!--Pcoded  COntent **end**-->
         </div>
+      </div>
     </div>
+  </div>
 
 
-    <?php 
-      include 'includes/document_modal.php';
-      include 'includes/document_request_modal.php';
-      include 'includes/alert_modal.php';
-      include 'includes/scripts.php';
-    ?>   
+<?php 
+  include 'includes/document_modal.php';
+  include 'includes/document_request_modal.php';
+  include 'includes/alert_modal.php';
+  include 'includes/scripts.php';
+?>   
 
 <script>
 
-  var table_emp = $('#table1').DataTable({'order' : []});
-  var table_hr = $('#table2').DataTable({'order' : []});
+var table_emp = $('#table1').DataTable({'order' : []});
+var table_hr = $('#table2').DataTable({'order' : []});
 
 //GET ALL FOLDER INFORMATIONS
 function get_folder(folder_id){
@@ -835,7 +780,6 @@ function set_request_reject(reference_id){
 
 $(document).ready(function() {
 
-
   // CHECK IF THERE IS STILL MODAL OPEN => TO SUPPORT SCROLLING EVEN IF WE CLOSE THE MODAL
   $('body').on('hidden.bs.modal', function () {
     if($('.modal.show').length > 0){
@@ -1059,12 +1003,6 @@ $(document).ready(function() {
   $(document).on('click', '.req_tab', function(e) {
     e.preventDefault();
     $('.trojan_slide').remove();
-    // let tab =$(this).attr('href');
-    // $('#ereq_tab').tab('hide');
-    // $('#hrreq_tab').tab('hide');
-    //$(tab).tab('show');
-
-
   });
 
   // REQ BTN
@@ -1145,11 +1083,6 @@ $(document).ready(function() {
     get_request(reference_id);
     $('#employee_request_review').modal('show');
   });
-
-
-  
-
-  
 
   // ADMIN EDIT REQUEST FORM 
   $(document).on('submit', '#admin_edit_request_form', function(e) {
@@ -1311,16 +1244,8 @@ $(document).ready(function() {
     });
   });//**end**
 
- 
-
-
-
-  
-
-
 });
 </script>
-
 
 </body>
 </html>
