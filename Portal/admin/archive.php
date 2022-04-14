@@ -1,177 +1,147 @@
 <?php 
-$title ="Archives";
-include 'includes/session.php';
-include 'includes/header.php';
+  $title ="Archives";
+  require_once '../includes/path.php';
+  require_once 'includes/session.php';
+  require_once 'includes/header.php';
 ?>
-  <body>
-  <?php //include 'includes/preloader.php'; ?>
-  
+
+<body>
+  <?php include 'includes/preloader.php'; ?>
   <div id="pcoded" class="pcoded">
-        <div class="pcoded-container navbar-wrapper">         
-        <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
-        
-        
-                  <div class="pcoded-content pb-0 mb-0">
-                      <!-- Page-header start -->
-                      <div class="page-header">
-                          <div class="page-block">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      <div class="page-header-title">
-                                          <h5 class="m-b-10">Document Management</h5>
-                                          <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.php"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="#archive.php">Archive</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Page-header end -->
-
-                      <div class="pcoded-inner-content">
-
-
-                        <?php
-                            if(isset($_SESSION['success'])){
-                                echo "
-                                    <div class='alert alert-success alert-dismissible'>
-                                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                    <h4><i class='icon fa fa-check'></i> Success!</h4>
-                                    ".$_SESSION['success']."
-                                    </div>
-                                ";
-                                unset($_SESSION['success']);
-                            }
-                            if(isset($_SESSION['error'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Error!</h4>
-                                ".$_SESSION['error']."
-                                </div>
-                            ";
-                            unset($_SESSION['error']);
-                            }
-                        ?>
-
-                        <!-- Archive Body -->
-                        <div class="row pb-0 mb-0 pl-2">
-                          <div class="col-md-9 p-0 m-0 pr-1">
-                            <div class="card rounded p-0 pb-0 mb-0" >
-
-                              <div class="border rounded">
-                                <div class="card-header pb-4">
-                                  <h5>
-                                    <i class="ti-files mx-2" aria-hidden="true"></i> 
-                                    <label id="archive_title">Archived Folders</label>
-                                  </h5>
-                                </div>
-                              </div>
-
-                              <div class="box-body container text-dark" id="document_file" style="max-height: 79vh;min-height: 89vh;overflow-y: auto;" >
-
-                                <!-- Table -->
-                                <div class="card-block table-border-style" style="min-height: 400px;">
-                                  <div class="table-responsive">
-                                    <table id="archive_table" class="table table-striped table-bordered" style="width:100%">
-                                      <thead>
-                                        <tr>
-                                          <th id="name">Folder Name</th>
-                                          <th>Date Created</th>
-                                          <th id="created">Created By</th>
-                                          <th style="max-width: 60px;">Action</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody id="tbody_archive">
-                                        
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                                <!-- Table End -->
-
-                              </div>
-                            </div>
-                          </div>
-
-                          <!-- Ease Access -->
-                          <div class="col-md-3 text-white pl-0 pb-0 mb-0">
-                              
-                            <div class="card mb-0 pb-3" style="min-height: 100vh;">
-                              <div class="card-header">
-                                <h5>
-                                  <i class="fa fa-archive mr-2" aria-hidden="true"></i> Archive List
-                                </h5>
-                              </div>
-
-                              <div class="box-body container-fluid text-dark">
-                                <ul class="list-group">
-                                  <li class="nav-item ">
-                                    <a class="nav-link active rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="folder" href="javascript:void(0)">Folders</a>
-                                  </li>
-                                  <li class="nav-item ">
-                                    <a class="nav-link rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="document" href="javascript:void(0)">Documents</a>
-                                  </li>
-                                  <li class="nav-item ">
-                                    <a class="nav-link rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="employee" href="javascript:void(0)">Employees</a>
-                                  </li>
-                                </ul>
-                              </div>
-
-                            </div>
-                          </div>
-
-                        </div>
-                        <!-- Archive Body End -->
-                        
-                      </div>
-                      <!--Pcoded Inner COntent **end**-->
-                  </div>
-                  <!--Pcoded  COntent **end**-->
-        </div>
-    </div>
-
-
-
-    <!-- Archive Retrieve -->
-    <div class="modal fade" id="retrieveModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title"><b id="r-title">Retrieve</b></h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center">
-                        <label>Are you sure you want to retrieve this archive?</label>
-                        <h2 id="retrieve_title" class="bold"></h2>
-                        <label id="archive_created"></label>
+    <div class="pcoded-container navbar-wrapper">         
+      <?php include 'includes/navbar.php'?>
+        <div class="pcoded-main-container">
+          <div class="pcoded-wrapper">
+            <?php include 'includes/sidebar.php'?>
+          <div class="pcoded-content pb-0 mb-0">
+            <!-- Page-header start -->
+            <div class="page-header">
+              <div class="page-block">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <div class="page-header-title">
+                      <h5 class="m-b-10">Document Management</h5>
+                      <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
                     </div>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="breadcrumb-title">
+                      <li class="breadcrumb-item">
+                        <a href="index.php"><i class="fa fa-home"></i></a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="#archive.php">Archive</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-                  <button type="submit" class="btn btn-warning text-dark btn-flat" id="retrieveSubmit"><i class="fa fa-archive"></i> Retrieve</button>
-                </div>
+              </div>
             </div>
+            <!-- Page-header end -->
+
+            <div class="pcoded-inner-content">
+              <?php include_once 'includes/session_alert.php'; ?>         
+              <!-- Archive Body -->
+              <div class="row pb-0 mb-0 pl-2">
+                <div class="col-md-9 p-0 m-0 pr-1">
+                  <div class="card rounded p-0 pb-0 mb-0" >
+                    <div class="border rounded">
+                      <div class="card-header pb-4">
+                        <h5>
+                          <i class="ti-files mx-2" aria-hidden="true"></i> 
+                          <label id="archive_title">Archived Folders</label>
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="box-body container text-dark" id="document_file" style="max-height: 79vh;min-height: 89vh;overflow-y: auto;" >
+                      <!-- Table -->
+                      <div class="card-block table-border-style" style="min-height: 400px;">
+                        <div class="table-responsive">
+                          <table id="archive_table" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                              <tr>
+                                <th id="name">Folder Name</th>
+                                <th>Date Created</th>
+                                <th id="created">Created By</th>
+                                <th style="max-width: 60px;">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tbody_archive">
+                              <!-- Table Info Insert Here thru JS function -->
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <!-- Table End -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Ease Access -->
+                <div class="col-md-3 text-white pl-0 pb-0 mb-0">
+                  <div class="card mb-0 pb-3" style="min-height: 100vh;">
+                    <div class="card-header">
+                      <h5>
+                        <i class="fa fa-archive mr-2" aria-hidden="true"></i> Archive List
+                      </h5>
+                    </div>
+                    <div class="box-body container-fluid text-dark">
+                      <ul class="list-group">
+                        <li class="nav-item ">
+                          <a class="nav-link active rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="folder" href="javascript:void(0)">Folders</a>
+                        </li>
+                        <li class="nav-item ">
+                          <a class="nav-link rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="document" href="javascript:void(0)">Documents</a>
+                        </li>
+                        <li class="nav-item ">
+                          <a class="nav-link rounded p-1 pl-3 mb-0 list-group-item border-0 archive-list" data-toggle="list" data-archive="employee" href="javascript:void(0)">Employees</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Archive Body End -->
+            </div>
+            <!--Pcoded Inner COntent **end**-->
+          </div>
+          <!--Pcoded  COntent **end**-->
         </div>
+      </div>
+
+
+
+      <!-- Archive Retrieve -->
+      <div class="modal fade" id="retrieveModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title"><b id="r-title">Retrieve</b></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <label>Are you sure you want to retrieve this archive?</label>
+                <h2 id="retrieve_title" class="bold"></h2>
+                <label id="archive_created"></label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+              <button type="submit" class="btn btn-warning text-dark btn-flat" id="retrieveSubmit"><i class="fa fa-archive"></i> Retrieve</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-
-
-    <?php 
-      include 'includes/alert_modal.php';
-      include 'includes/scripts.php';
-    ?>   
+<?php 
+  include 'includes/alert_modal.php';
+  include 'includes/scripts.php';
+?>   
 
 <script>
 
