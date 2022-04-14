@@ -4,6 +4,7 @@
 
 	if(isset($_POST['add'])){
 
+    // get details
 		$id = $user['employee_id'];
 		$folder_id = $_POST['folder_id'];
 		$name = addslashes($_POST['name']);
@@ -12,26 +13,16 @@
 		$details = addslashes($_POST['details']);
 
 		//creating document_id
-		$letters = '';
-		$numbers = '';
-		foreach (range('A', 'Z') as $char) {
-		    $letters .= $char;
-		}
-		for($i = 0; $i < 10; $i++){
-			$numbers .= $i;
-		}
-		$document_id = "CVSULINK".substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 6);
+    $document_id = 'CVSULINK'.generate_id();
 
+		$sql = $conn->prepare("INSERT INTO documents (document_id,document_name,document_type,document_owner,document_folder,document_details,document_created,document_file) VALUES (?,?,'url',?,?,?,?,?'')");
+    $sql->bind_param('sssssss',$document_id,$name,$owner,$folder_id,$details,$id,$link);
 
-		$sql = "INSERT INTO documents (document_id,document_name,document_type,document_owner,document_folder,document_details,document_created,document_file) VALUES ('$document_id','$name','url','$owner','$folder_id','$details','$id','$link')";
-
-
-		if ($conn->query($sql)) {
+		if ($sql->execute()) {
 			$_SESSION['success']='URL added successfully';
 		}else{
 			$_SESSION['error']='URL add failed';
 		}
-
 
 	}	
 	else{

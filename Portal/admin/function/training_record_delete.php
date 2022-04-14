@@ -3,20 +3,31 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['refcode'])){
+
+    //get code
 		$refcode = $_POST['refcode'];
-		$sql = "UPDATE training_record SET status='Rejected' WHERE reference_no ='$refcode' ";	
-		echo ($conn->query($sql))? 1:0;
+		$sql = $conn->prepare("UPDATE training_record SET status='Rejected' WHERE reference_no =? ");	
+    $sql->bind_param('s',$refcode);
+		echo ($sql->execute())? 1:0;
+
 	}else if (isset($_POST['status'])) {
+
+    // get details
 		$status = $_POST['status'];
 		$review_code = $_POST['review_code'];
 		$code = $_POST['add_training_code'];
 
-		$sql = "UPDATE training_record SET status='$status' WHERE reference_no ='$review_code' ";	
+    // prepared stmt
+		$sql = $conn->prepare("UPDATE training_record SET status=? WHERE reference_no =? ");
+    $sql->bind_param('ss',$status,$review_code);
 
 		if ($status != 'Rejected') {
 
-			$check_size ="SELECT *,(SELECT COUNT(*) FROM training_record WHERE training_record.training_code='$code' AND (status='Finished' OR status='Reviewed' OR status='On-going')) AS basecount FROM training_list WHERE training_list.training_code ='$code'";
-			$query = $conn->query($check_size);
+      // check size
+			$check_size = $conn->prepare("SELECT *,(SELECT COUNT(*) FROM training_record WHERE training_record.training_code=? AND (status='Finished' OR status='Reviewed' OR status='On-going')) AS basecount FROM training_list WHERE training_list.training_code =? ");
+      $check_size->bind_param('ss',$code,$code);
+      $check_size->execute();
+			$query = $check_size->get_result();
 			$row = $query->fetch_assoc();
 
 			if ($row['batch_size']>$row['basecount']) {
@@ -25,15 +36,17 @@
 				if ($end<=$today) {
 					echo 3;
 				}else{
-					echo ($conn->query($sql))? 1:0;
+					echo ($sql->execute())? 1:0;
 				}
 			}else{
 				echo 2;
 			}
-
+      
 		}else{
-			echo ($conn->query($sql))? 1:0;
+			echo ($sql->execute())? 1:0;
 		}
 	
-	}
+	} else {
+    header('location: ../training_vendor.php');
+  }
 ?>

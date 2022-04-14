@@ -4,6 +4,7 @@
 
 	if(isset($_POST['add'])){
 
+    // get details
 		$vendor_name = trim($_POST['name']);
 		$email = trim($_POST['email']);
 		$contact = trim($_POST['contact']);
@@ -11,20 +12,12 @@
 		$exp = trim($_POST['exp']);
 
 		//creating benefit_id
-		$letters = '';
-		$numbers = '';
-		foreach (range('A', 'Z') as $char) {
-		    $letters .= $char;
-		}
-		for($i = 0; $i < 10; $i++){
-			$numbers .= $i;
-		}
-		$vendor_code = 'CVSUTV'.substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 7);
+    $vendor_code = 'CVSUTV'.generate_id();
 
+		$sql = $conn->prepare("INSERT INTO training_vendor (vendor_code,vendor_name,email,contact,experience,contact_person) VALUES (?,?,?,?,?,?)");	
+    $sql->bind_param('ssssss',$vendor_code,$vendor_name,$email,$contact,$exp,$c_person);
 
-		$sql = "INSERT INTO training_vendor (vendor_code,vendor_name,email,contact,experience,contact_person) VALUES ('$vendor_code','$vendor_name','$email','$contact','$exp','$c_person')";	
-
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Training vendor added successfully';
 		}
 		else{

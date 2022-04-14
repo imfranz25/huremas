@@ -3,6 +3,8 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
+
+    // get details
 		$title = trim($_POST['title']);
 		$objective = trim($_POST['objective']);
 		$course = $_POST['course'];
@@ -16,21 +18,13 @@
 		$details = trim($_POST['details']);
 		$duration =abs(strtotime($to)-strtotime($from))/(60*60); //duration
 
-		//training code
-		$letters = '';
-		$numbers = '';
-		foreach (range('A', 'Z') as $char) {
-		    $letters .= $char;
-		}
-		for($i = 0; $i < 10; $i++){
-			$numbers .= $i;
-		}
-		$code = 'CVSUTRA'.substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 7);
+    //generate training code
+    $code = 'CVSUTRA'.generate_id();
 
-		$sql = "INSERT INTO training_list (training_code,training_title,training_objective,training_course,batch_size,schedule_from,schedule_to,training_mode,training_details,training_duration,training_vendor,training_trainer,training_experience,training_status) VALUES ('$code','$title','$objective',$course,$size,'$from','$to','$mode','$details','$duration',$vendor,'$trainer','$exp','active')";	
+		$sql = $conn->prepare("INSERT INTO training_list (training_code,training_title,training_objective,training_course,batch_size,schedule_from,schedule_to,training_mode,training_details,training_duration,training_vendor,training_trainer,training_experience,training_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'active')");
+    $sql->bind_param('sssddsssssdss',$code,$title,$objective,$course,$size,$from,$to,$mode,$details,$duration,$vendor,$trainer,$exp); 
 
-
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Training posted successfully';
 		}
 		else{

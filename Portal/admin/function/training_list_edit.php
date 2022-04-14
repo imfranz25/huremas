@@ -3,6 +3,8 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['edit'])){
+
+    // get details
 		$code = trim($_POST['code']);
 		$title = trim($_POST['title']);
 		$objective = trim($_POST['objective']);
@@ -17,16 +19,20 @@
 		$details = trim($_POST['details']);
 		$duration =abs(strtotime($to)-strtotime($from))/(60*60); //duration
 
-		$check_att = "SELECT SUM(CASE WHEN (status = 'Finished' OR status = 'Reviewed' OR status = 'On-going') THEN 1 ELSE 0 END) AS basecount FROM training_record WHERE training_code ='$code' ";
-		$query = $conn->query($check_att);
-		$basecount = $query->fetch_assoc();
+		$check_att = $conn->prepare("SELECT SUM(CASE WHEN (status = 'Finished' OR status = 'Reviewed' OR status = 'On-going') THEN 1 ELSE 0 END) AS basecount FROM training_record WHERE training_code =? ");
+    $check_att->bind_param('s',$code);
+    $check_att->execute();
+		$result = $check_att->get_result();
+		$basecount = $result->fetch_assoc();
 
 
-		$sql = "UPDATE training_list SET training_title ='$title', training_objective ='$objective', training_course=$course ,batch_size =$size ,schedule_from ='$from' ,schedule_to ='$to',training_mode ='$mode',training_details ='$details',training_duration ='$duration',training_vendor =$vendor,training_trainer ='$trainer',training_experience ='$exp' WHERE training_code ='$code' ";	
+		$sql = $conn->prepare("UPDATE training_list SET training_title =?, training_objective =?, training_course=? ,batch_size =? ,schedule_from =? ,schedule_to =? ,training_mode =? ,training_details =? ,training_duration =?,training_vendor =? ,training_trainer =?,training_experience =? WHERE training_code =? ");	
+    $sql->bind_param('ssddsssssdsss',$title,$objective,$course,$size,$from,$to,$mode,$details,$duration,$vendor,$trainer,$exp,$code);
+    // #9 string
+		// echo json_encode($basecount['basecount']);
 
-		echo json_encode($basecount['basecount']);
 		if ($basecount['basecount']<=$size) {
-			if($conn->query($sql)){
+			if($sql->execute()){
 				$_SESSION['success'] = 'Training updated successfully';
 			}
 			else{
