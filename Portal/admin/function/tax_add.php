@@ -3,6 +3,8 @@
 	require_once '../includes/session.php';
 
 	if(isset($_POST['add'])){
+
+    // get details
 		$name = trim($_POST['name']);
 		$status = isset($_POST['status']) ? $_POST['status'] : "inactive";
 		$vendor = trim($_POST['vendor']);
@@ -14,21 +16,13 @@
 		$end = isset($_POST['end']) ? $_POST['end'] : "";
 		$desc = trim($_POST['desc']);
 
-		//tax code
-		$letters = '';
-		$numbers = '';
-		foreach (range('A', 'Z') as $char) {
-		    $letters .= $char;
-		}
-		for($i = 0; $i < 10; $i++){
-			$numbers .= $i;
-		}
-		$code = substr(str_shuffle($letters), 0, 3).substr(str_shuffle($numbers), 0, 9);
+    //generate tax code
+    $code = 'CVSUTAX'.generate_id();
 
-		$sql = "INSERT INTO tax (tax_code,tax_name,tax_vendor,tax_type,tax_amount,amount_from,amount_to,tax_status,tax_start,tax_end,tax_desc) VALUES ('CVSUTAX$code','$name','$vendor','$type',$amount,$from,$to,'$status','$start','$end','$desc')";	
+		$sql = $conn->prepare("INSERT INTO tax (tax_code,tax_name,tax_vendor,tax_type,tax_amount,amount_from,amount_to,tax_status,tax_start,tax_end,tax_desc) VALUES (?,?,?,?,?,?,?,?,?,?,?)");	
+    $sql->bind_param('ssssdddssss',$code,$name,$vendor,$type,$amount,$from,$to,$status,$start,$end,$desc);
 
-
-		if($conn->query($sql)){
+		if($sql->execute()){
 			$_SESSION['success'] = 'Tax added successfully';
 		}
 		else{

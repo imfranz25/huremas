@@ -4,7 +4,7 @@
 
 	if(isset($_POST['id'])){
 		//sched preapred stmt
-		$sql = $conn->prepare("SELECT * FROM schedules WHERE id = '$id' ");
+		$sql = $conn->prepare("SELECT * FROM schedules WHERE id = ? ");
     $sql->bind_param('s',$id);
     //get id
     $id = $_POST['id'];
@@ -12,5 +12,7 @@
     $result = $sql->get_result();
 		$row = $result->fetch_assoc();
 		echo json_encode($row);
-	}
+	} else {
+    header('location:schedule.php');
+  }
 ?>
