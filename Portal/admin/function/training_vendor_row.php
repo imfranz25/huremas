@@ -17,7 +17,8 @@
 		echo json_encode($row);
 
 	}else if(isset($_POST['ids'])){
-		// initilization shit
+
+		// initilization
 		$ids =$_POST['ids'];
 		$vendor_name = array();
 		$stmt = $conn->prepare("SELECT * FROM training_vendor WHERE id = ? ");
@@ -31,6 +32,7 @@
 			array_push($vendor_name, $row['vendor_name']);
 		}
 		echo json_encode($vendor_name);
+
 	} else {
     header('location: ../training_vendor.php');
   }

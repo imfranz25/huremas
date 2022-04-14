@@ -1,7 +1,9 @@
 <?php 
 $title ="Document";
-include 'includes/session.php';
-include 'includes/header.php';
+require_once '../includes/path.php';
+require_once 'includes/session.php';
+require_once 'includes/header.php';
+
 ?>
   <body>
   <?php //include 'includes/preloader.php'; ?>
