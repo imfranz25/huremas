@@ -33,8 +33,9 @@
                   <?php
                     $sql = "SELECT * FROM ssl_table ";
                           $query = $conn->query($sql);
-                          while($prow = $query->fetch_assoc()){
-                    echo "<option value='".$prow['id']."'>Salary Grade - ".$prow['salary_grade']."</option>";
+                    while($prow = $query->fetch_assoc()){
+                      echo "<option value='".$prow['id']."'>Salary Grade - ".$prow['salary_grade']."</option>";
+                    }
                   ?>
                 </select>
                 <label  for="" class="control-label"> - </label>
@@ -153,6 +154,13 @@
               <i class="fa fa-exclamation-circle mx-1" aria-hidden="true"></i>
               <label> Note: This process cannot be undone</label>
             </div>
+            <hr>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label req">Password</label>
+              <div class="col-sm-9">
+                <input type="password" name="pass" class="form-control border border-secondary" required="" placeholder="Please enter your password for verification"  />
+              </div>
+            </div> 
         	</div>
         </div>
       	<div class="modal-footer">

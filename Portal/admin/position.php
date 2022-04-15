@@ -6,13 +6,13 @@
 ?>
 
 <body>
-  <?php include 'includes/preloader.php'; ?>
+  <?php include_once 'includes/preloader.php'; ?>
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
-      <?php include 'includes/navbar.php'?>
+      <?php include_once 'includes/navbar.php'?>
         <div class="pcoded-main-container">
           <div class="pcoded-wrapper">
-            <?php include 'includes/sidebar.php'?>
+            <?php include_once 'includes/sidebar.php'?>
             <div class="pcoded-content">
               <!-- Page-header start -->
               <div class="page-header">
@@ -77,10 +77,9 @@
         </div>
       </div>
 
-  <?php include 'includes/position_modal.php'; ?>
-  <?php include 'includes/scripts.php'; ?>
+  <?php require_once 'includes/position_modal.php'; ?>
+  <?php require_once 'includes/scripts.php'; ?>
 
-    
 
 <script>
 

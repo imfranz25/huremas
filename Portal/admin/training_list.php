@@ -429,7 +429,7 @@
   //RELOAD JOB DETAILS
   function reload_training_details(filter){
     //loading
-    $('#training_data').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="images/job_load.gif" />');
+    $('#training_data').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="../assets/images/job_load.gif" />');
     //default show ALL Job
     $('.filter_tra').removeClass('active');
     $('#training_all').addClass('active');
