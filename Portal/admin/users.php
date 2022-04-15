@@ -184,8 +184,8 @@ $(document).ready(function() {
   });
 
   $("[data-hide]").on("click", function(){
-      $("#showdanger").attr('hidden',true);
-    });
+    $("#showdanger").attr('hidden',true);
+  });
 
    $('#employee_id').change(function () {
     var ln = $(this).find(':selected').data('ln');
