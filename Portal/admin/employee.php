@@ -518,6 +518,7 @@
         data: form,
         dataType: 'json',
         success: function(response){
+          console.log(response);
           $('#addBene').modal('hide');
           if(response=='1'){
             getBenefit(id);

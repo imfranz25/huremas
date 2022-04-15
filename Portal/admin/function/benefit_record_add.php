@@ -6,7 +6,7 @@
 
 		//insert prepared stmt
 		$sql = $conn->prepare("INSERT INTO benefit_record (benefit_id,employee_id) VALUES (?,?)");
-    $sql->bind_param('ss',$benefit_id,$employee_id)
+    $sql->bind_param('ss',$benefit_id,$employee_id);
     //get values
     $employee_id = $_POST['emp_id_ben'];
     $benefit_id = $_POST['benefit'];

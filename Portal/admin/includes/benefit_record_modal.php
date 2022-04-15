@@ -1,5 +1,4 @@
 
-<!-- Event Request -->
 <div class="modal fade" id="benModal">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
