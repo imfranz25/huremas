@@ -544,7 +544,7 @@ $(document).ready(function() {
   });
 
   //MOVE APPLICANT
-  $('.move_id').click(function(e){
+  $(document).on("click",'.move_id', function (e) {
     e.preventDefault();
     $('#moveApp').modal('show');
     //initialize value
@@ -597,7 +597,7 @@ $(document).ready(function() {
   });
 
   // ENABLE SEND-TEXT AREA EDIT
-  $('#edit_btn').click(function(e){
+  $(document).on("click",'#edit_btn', function (e) {
     $(this).addClass('d-none');
     $('#add_btn').removeClass('d-none');
     $('#note_text').removeAttr('readonly');
@@ -672,19 +672,19 @@ $(document).ready(function() {
   });
 
   //RELOAD
-  $('.reload_app').click(function(e){
+  $(document).on("click",'.reload_app', function (e) {
     e.preventDefault();
     reload_job_details('All'); //reload job details
   });
 
   //RESET ADD CANDIDATE
-  $('#addCandi').click(function(e){
+  $(document).on("click",'#addCandi', function (e) {
     e.preventDefault();
     $('#form_add_candidate')[0].reset();
   });
   
   //FILTER JOB
-  $('.filter_job').click(function(e){
+  $(document).on("click",'.filter_job', function (e) {
     e.preventDefault();
     const filter = $(this).attr('data-id');
     //reload
