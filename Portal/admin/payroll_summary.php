@@ -442,7 +442,7 @@ $(document).ready(function() {
     $('#select_form1').submit();
   });
 
-  $(document).click('click','.view',function(e){
+  $(document).on('click','.view',function(e){
     e.preventDefault();
     $('#view').modal('show');
     var id = $(this).data('id');

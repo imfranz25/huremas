@@ -101,14 +101,14 @@ function getRow(id){
 
 $(document).ready(function() {
 
-  $('.delete_evaluation').click(function(e){
+  $(document).on('click','.delete_evaluation',function(e){
     e.preventDefault();
     $('#deleteEval').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
 
-  $('.view_evaluation').click(function(e){
+  $(document).on('click','.view_evaluation',function(e){
     e.preventDefault();
     $('#viewEval').modal('show');
     var id = $(this).data('id');
