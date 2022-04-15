@@ -35,25 +35,3 @@
   <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
   <!-- Summernote -->
   <script src="../assets/summernote/summernote.js"></script>
-
-
-  <!-- Sample DataTable Properties (For Reference :) by Francis Ong ) -->
-  <!-- =============================================================== -->
-
-  <!-- <script>
-
-  $(function () {
-    $('#example1').DataTable({
-      responsive: true
-    })
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  });
-
-  </script> -->
