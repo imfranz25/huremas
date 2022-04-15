@@ -188,26 +188,27 @@ function getRow(id){
 
 $(document).ready(function() {
 
-  $('.edit').click(function(e){
+  $(document).on("click",'.edit', function (e) {
     e.preventDefault();
     $('#editDTR').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
 
-  $('.delete').click(function(e){
+  $(document).on("click",'.delete', function (e) {
     e.preventDefault();
     $('#deleteDTR').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
 
-   $('#shown_date').change(function(){
-      $('#date_form').submit();
-   });
-   $('#shown_date2').change(function(){
-      $('#date_form').submit();
-   });
+  $(document).on("change",'#shown_date', function (e) {
+    $('#date_form').submit();
+  });
+
+  $(document).on("change",'#shown_date2', function (e) {
+    $('#date_form').submit();
+  });
   
   // to avoid the re-initialization of datatable
   if ( ! $.fn.DataTable.isDataTable( '#table1' ) ) {
@@ -215,7 +216,7 @@ $(document).ready(function() {
   }//**end**
 
   //select all
-  $('#globalcheck').click(function(e){
+  $(document).on("click",'#globalcheck', function (e) {
     if(this.checked) {
       $(':checkbox').each(function() {
         this.checked = true;                        
