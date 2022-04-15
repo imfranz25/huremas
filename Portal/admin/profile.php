@@ -1,8 +1,9 @@
 <?php 
   $title="Profile";
   require_once '../includes/path.php';
-  include 'includes/session.php';
-  include 'includes/header.php';
+  require_once '../includes/path.php';
+  require_once 'includes/session.php';
+  require_once 'includes/header.php';
 ?>
 
 <!-- Remove Green Theme Temporarily including shadows -->  
@@ -21,13 +22,10 @@
 
 <body>
   <?php include_once 'includes/preloader.php'; ?>
-  
     <div id="pcoded" class="pcoded">
       <div class="pcoded-container">
       <?php require_once 'includes/navbar.php'?>
- 
         <!--================================================================ -->
-
         <!-- Profile Page Row -->    
         <div class="container-fluid row mt-5">
           <!-- Profile Menu Column -->
@@ -69,7 +67,6 @@
             <!-- Card - Profile Menu End-->
           </div>
           <!-- Profile Menu Column End-->
-
 
           <!--==================================================================== -->
 
@@ -402,253 +399,245 @@
     </div>
 
 
-
-
-
-
     <?php include 'includes/scripts.php'; ?>
  
-    <script>
+<script>
 
-      //GET AGE
-      function getAge(dateString) {
-        var today = new Date();
-        var birthDate = new Date(dateString);
-        var age = today.getFullYear() - birthDate.getFullYear();
-        var m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
+  //GET AGE
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
     }
+    return age;
+  }
 
-      //GET PROFILE DETAILS
-      function get_profile(){
-        $.ajax({
-          type: 'POST',
-          url: 'function/get_profile.php',
-          dataType: 'json',
-          success: function(response){
-            $('#employeeid').val(response.employee_id);
-            $('#fullname').val(response.firstname+' '+response.middlename+' '+response.lastname+' '+response.suffix);
-            $('#address').val(response.address);
-            $('#birthdate').val(new Date(response.birthdate).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
-            $('#contact').val(response.contact_info);
-            $('#email').val(response.email);
-            $('#sex').val(response.sex).html(response.sex);
-            $('#position').val(response.description);
-            $('#age').val(getAge(response.birthdate));
-            $('#mobile').val(response.mobile_no);
-            $('#department').val(response.title);
-            //$('#schedule').val(response.time_in+' - '+response.time_out);
-            $('#category').val(response.cat);
-            //gov id
-            $('#sss').val(response.sss_id);
-            $('#pagibig').val(response.pagibig_id);
-            $('#philhealth').val(response.philhealth_id);
-            $('#tin').val(response.tin_num);
-            //account
-            $('#username').val(response.username);
-            $('#password').val(response.default_password);
-            //religion
-            //civil status
-          }  
-        });
-      }//GET PROFILE DETAILS ****END*****
-
-
-      //GET NOTIF
-      function get_notification(){
-        $("#notif-body").html("");
-        $.ajax({
-          type: 'POST',
-          url: 'function/notification_row.php',
-          dataType: 'json',
-          success: function(response){
-           if (response.length > 0 ) {
-            $("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
-            $("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
-            $("#clear").removeClass("d-none");
-            
-            for (var i = 0; i < response.length; i++) {
-              let bold = '';
-              if ((response)[i].bell) {}
-              $("#notif-body").append(`
-                <tr>
-                  <td class="align-middle link" 
-                    data-link="${(response)[i].link}" 
-                    data-open="${(response)[i].open}"
-                    data-id="${(response)[i].nid}">
-                    <i class="fa fa-bell mx-2 ${(response)[i].bell}"></i>
-                    <span class="text-dark" style="font-weight:bold;">
-                      ${(response)[i].title}
-                    </span>
-                  </td>
-                  <td class="text-muted align-middle link" 
-                    data-link="${(response)[i].link}" 
-                    data-open="${(response)[i].open}"
-                    data-id="${(response)[i].nid}">
-                    ${(response)[i].date}
-                  </td>
-                  <td class="align-middle">
-                    <a href="javascript:void(0)" data-id="${(response)[i].nid}" class="delete_notif text-danger"><i class="fa fa-trash m-1 float-right"></i></a>
-                  </td>
-                </tr> 
-              `);
-            }
+  //GET PROFILE DETAILS
+  function get_profile(){
+    $.ajax({
+      type: 'POST',
+      url: 'function/get_profile.php',
+      dataType: 'json',
+      success: function(response){
+        $('#employeeid').val(response.employee_id);
+        $('#fullname').val(response.firstname+' '+response.middlename+' '+response.lastname+' '+response.suffix);
+        $('#address').val(response.address);
+        $('#birthdate').val(new Date(response.birthdate).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));
+        $('#contact').val(response.contact_info);
+        $('#email').val(response.email);
+        $('#sex').val(response.sex).html(response.sex);
+        $('#position').val(response.description);
+        $('#age').val(getAge(response.birthdate));
+        $('#mobile').val(response.mobile_no);
+        $('#department').val(response.title);
+        //$('#schedule').val(response.time_in+' - '+response.time_out);
+        $('#category').val(response.cat);
+        //gov id
+        $('#sss').val(response.sss_id);
+        $('#pagibig').val(response.pagibig_id);
+        $('#philhealth').val(response.philhealth_id);
+        $('#tin').val(response.tin_num);
+        //account
+        $('#username').val(response.username);
+        $('#password').val(response.default_password);
+        //religion
+        //civil status
+      }  
+    });
+  }//GET PROFILE DETAILS ****END*****
 
 
-           }else{
-            $("#inbox-content").addClass("d-none"); // HIDE TABLE
-            $("#no_notif").removeClass("d-none"); // NO NOTIF
-            $("#clear").addClass("d-none");
-           }
-          }  
-        });
-      }//GET NOTIF ****END*****
-
-      //REMOVE ERROR/SUCCESS MESSAGES
-      function remove_message(){
-        $("#currentpass").removeClass("is-invalid");
-        $("#newpass").removeClass("is-invalid");
-        $("#confirmpass").removeClass("is-invalid");
-        $("#alert-success").addClass("d-none");
-        $("#alert-error").addClass("d-none");
-      }//REMOVE ERROR/SUCCESS MESSAGES **END**
-
-      function change_title(title){
-        document.title=(title+' | HUREMAS - CvSU Imus');
-      }
-
-      function update_openlink(id,link){
-        let url = window.location.href;
-        $.ajax({
-          type: 'POST',
-          url: '<?php echo $global_link; ?>/Portal/employee/function/notification_edit.php',
-          data: {id:id},
-          dataType: 'json',
-          success: function(response){
-            if(response=='1'){
-              location.replace(link);
-            }else{
-              location.replace(url);
-            }
-          }  
-        });
-      }
-
-      //JQUERY
-      $(document).ready(function() {
-
-        //REFRESH INBOX
-        $('#refresh_inbox').click(function(e){
-          e.preventDefault();
-          //$("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
-          //$("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
-          get_notification();
-        });
-        //REFRESH INBOX **END**
-
-        //CLEAR
-        $('#clear_setting').click(function(e){
-          //REMOVE CLASSES
-          remove_message();
-        });//CLEAR **END**
-
-        // CLICKED LINK
-        $(document).on('click','.link',function(e){
-          e.preventDefault();
-          let link = $(this).data('link');
-          let open = $(this).data('open');
-          let id = $(this).data('id');
-          if (open==0) {
-            update_openlink(id,link);
-          }else{
-            location.replace(link);
-          }
-        });
-
-        $(document).on('click','.delete_notif',function(e){
-          e.preventDefault();
-          $('#notif_id').val($(this).data('id'));
-          $('#deleteNotif').modal('show');
-        });
-
-        $(document).on('submit','#notif_form',function(e){
-          e.preventDefault();
-          //let url = window.location.href;
-          let id = $('#notif_id').val();
-          $.ajax({
-            type: 'POST',
-            url: '<?php echo $global_link; ?>/Portal/employee/function/notification_delete.php',
-            data: {id:id},
-            dataType: 'json',
-            success: function(response){
-              window.location.reload();
-            }  
-          });
-        });
-
-        //CHANGE PASSWORD
-        $('#change').submit(function(e){
-          e.preventDefault();
-          //INITIALIZATION > SANITIZE DATA
-          var currentpass = $("#currentpass").val().trim();
-          var newpass = $("#newpass").val().trim();
-          var confirmpass = $("#confirmpass").val().trim();
-          remove_message(); //REMOVE CLASSES
-
-            $.ajax({
-            type: 'POST',
-            url: 'function/change_password.php',
-            data:{currentpass:currentpass,newpass:newpass,confirmpass:confirmpass},
-            dataType: 'json',
-            success: function(response){
-              if(response.error_current){
-                $("#currentpass").addClass("is-invalid");
-                $("#current-invalid").html(response.error_current);
-              }
-              else if(response.error_new){
-                $("#newpass").addClass("is-invalid");
-                $("#new-invalid").html(response.error_new);
-              }
-              else if(response.error_confirm){
-                $("#confirmpass").addClass("is-invalid");
-                $("#confirm-invalid").html(response.error_confirm);
-              }
-              else if(response.error){
-                $("#alert-error").removeClass("d-none");
-                $("#error-message").html(response.error);
-              }
-              else{
-                $("#alert-success").removeClass("d-none");
-                $("#success-message").html(response.success);
-                $('#change')[0].reset(); //RESET FORM AFTER SUCCESS UPDATE :)  UwU
-              }
-            }  
-          });
-        });//CHANGE PASSWORD **END**
-
-
-        // STORE ACTIVE TAB (INCASE USER RELOAD THE PAGE IT RETURNS TO ACTIVATED TAB) :) UWU
-        $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-            sessionStorage.setItem('activeTab', $(e.target).attr('href'));
-        });
-        var activeTab = sessionStorage.getItem('activeTab');
-        if(activeTab){
-            $('#profile_tab a[href="' + activeTab + '"]').tab('show');
+  //GET NOTIF
+  function get_notification(){
+    $("#notif-body").html("");
+    $.ajax({
+      type: 'POST',
+      url: 'function/notification_row.php',
+      dataType: 'json',
+      success: function(response){
+       if (response.length > 0 ) {
+        $("#inbox-content").removeClass("d-none"); // SAMPLE ONLY
+        $("#no_notif").addClass("d-none"); // HIDE NO MESSAGE
+        $("#clear").removeClass("d-none");
+        
+        for (var i = 0; i < response.length; i++) {
+          let bold = '';
+          if ((response)[i].bell) {}
+          $("#notif-body").append(`
+            <tr>
+              <td class="align-middle link" 
+                data-link="${(response)[i].link}" 
+                data-open="${(response)[i].open}"
+                data-id="${(response)[i].nid}">
+                <i class="fa fa-bell mx-2 ${(response)[i].bell}"></i>
+                <span class="text-dark" style="font-weight:bold;">
+                  ${(response)[i].title}
+                </span>
+              </td>
+              <td class="text-muted align-middle link" 
+                data-link="${(response)[i].link}" 
+                data-open="${(response)[i].open}"
+                data-id="${(response)[i].nid}">
+                ${(response)[i].date}
+              </td>
+              <td class="align-middle">
+                <a href="javascript:void(0)" data-id="${(response)[i].nid}" class="delete_notif text-danger"><i class="fa fa-trash m-1 float-right"></i></a>
+              </td>
+            </tr> 
+          `);
         }
-        //ACTIVE TAB **END**
+       }else{
+        $("#inbox-content").addClass("d-none"); // HIDE TABLE
+        $("#no_notif").removeClass("d-none"); // NO NOTIF
+        $("#clear").addClass("d-none");
+       }
+      }  
+    });
+  }//GET NOTIF ****END*****
 
+  //REMOVE ERROR/SUCCESS MESSAGES
+  function remove_message(){
+    $("#currentpass").removeClass("is-invalid");
+    $("#newpass").removeClass("is-invalid");
+    $("#confirmpass").removeClass("is-invalid");
+    $("#alert-success").addClass("d-none");
+    $("#alert-error").addClass("d-none");
+  }//REMOVE ERROR/SUCCESS MESSAGES **END**
 
-      });//JQUERY **END**
+  function change_title(title){
+    document.title=(title+' | HUREMAS - CvSU Imus');
+  }
 
-      //EXECEUTE GET PROFILE FUNCTION
-      get_profile();
+  function update_openlink(id,link){
+    let url = window.location.href;
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo $global_link; ?>/Portal/employee/function/notification_edit.php',
+      data: {id:id},
+      dataType: 'json',
+      success: function(response){
+        if(response=='1'){
+          location.replace(link);
+        }else{
+          location.replace(url);
+        }
+      }  
+    });
+  }
+
+  //JQUERY
+  $(document).ready(function() {
+
+    //REFRESH INBOX
+    $('#refresh_inbox').click(function(e){
+      e.preventDefault();
       get_notification();
-      
+    });
+    //REFRESH INBOX **END**
 
-    </script>
+    //CLEAR
+    $('#clear_setting').click(function(e){
+      //REMOVE CLASSES
+      remove_message();
+    });//CLEAR **END**
+
+    // CLICKED LINK
+    $(document).on('click','.link',function(e){
+      e.preventDefault();
+      let link = $(this).data('link');
+      let open = $(this).data('open');
+      let id = $(this).data('id');
+      if (open==0) {
+        update_openlink(id,link);
+      }else{
+        location.replace(link);
+      }
+    });
+
+    $(document).on('click','.delete_notif',function(e){
+      e.preventDefault();
+      $('#notif_id').val($(this).data('id'));
+      $('#deleteNotif').modal('show');
+    });
+
+    $(document).on('submit','#notif_form',function(e){
+      e.preventDefault();
+      //let url = window.location.href;
+      let id = $('#notif_id').val();
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo $global_link; ?>/Portal/employee/function/notification_delete.php',
+        data: {id:id},
+        dataType: 'json',
+        success: function(response){
+          window.location.reload();
+        }  
+      });
+    });
+
+    //CHANGE PASSWORD
+    $('#change').submit(function(e){
+      e.preventDefault();
+      //INITIALIZATION > SANITIZE DATA
+      var currentpass = $("#currentpass").val().trim();
+      var newpass = $("#newpass").val().trim();
+      var confirmpass = $("#confirmpass").val().trim();
+      remove_message(); //REMOVE CLASSES
+
+        $.ajax({
+        type: 'POST',
+        url: 'function/change_password.php',
+        data:{currentpass:currentpass,newpass:newpass,confirmpass:confirmpass},
+        dataType: 'json',
+        success: function(response){
+          if(response.error_current){
+            $("#currentpass").addClass("is-invalid");
+            $("#current-invalid").html(response.error_current);
+          }
+          else if(response.error_new){
+            $("#newpass").addClass("is-invalid");
+            $("#new-invalid").html(response.error_new);
+          }
+          else if(response.error_confirm){
+            $("#confirmpass").addClass("is-invalid");
+            $("#confirm-invalid").html(response.error_confirm);
+          }
+          else if(response.error){
+            $("#alert-error").removeClass("d-none");
+            $("#error-message").html(response.error);
+          }
+          else{
+            $("#alert-success").removeClass("d-none");
+            $("#success-message").html(response.success);
+            $('#change')[0].reset(); //RESET FORM AFTER SUCCESS UPDATE :)  UwU
+          }
+        }  
+      });
+    });//CHANGE PASSWORD **END**
+
+
+    // STORE ACTIVE TAB (INCASE USER RELOAD THE PAGE IT RETURNS TO ACTIVATED TAB) :) UWU
+    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        sessionStorage.setItem('activeTab', $(e.target).attr('href'));
+    });
+    var activeTab = sessionStorage.getItem('activeTab');
+    if(activeTab){
+        $('#profile_tab a[href="' + activeTab + '"]').tab('show');
+    }
+    //ACTIVE TAB **END**
+
+
+  });//JQUERY **END**
+
+  //EXECEUTE GET PROFILE FUNCTION
+  get_profile();
+  get_notification();
+  
+
+</script>
    
 </body>
 </html>
