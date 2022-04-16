@@ -8,10 +8,10 @@
 		$id = $_POST['id'];
     // prepared stmt
 		$sql = $conn->prepare("SELECT a.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name,a.id as aid FROM admin a inner join employees e on a.employee_id=e.employee_id WHERE a.id = ? ");
-    $sql ->bind_param('s',$id);
-    $sql ->execute();
+    $sql->bind_param('s',$id);
+    $sql->execute();
     // fetch details
-		$query = $conn->query($sql);
+		$query = $sql->get_result();
 		$row = $query->fetch_assoc();
 
 		echo json_encode($row);

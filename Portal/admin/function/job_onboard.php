@@ -96,7 +96,7 @@
 
 				if(!empty($filename)){
 					//move file
-					move_uploaded_file($_FILES['pic']['tmp_name'], '../uploads/profile/CVSU'.$new_filename);	
+					move_uploaded_file($_FILES['pic']['tmp_name'], '../uploads/profile/'.$new_filename);	
 				}
 
 				//execeute test recruit after onboarding applicant
