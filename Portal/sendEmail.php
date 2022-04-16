@@ -15,8 +15,8 @@
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = '465';
     $mail->isHTML();
-    $mail->Username = 'dailysurg1001@gmail.com';
-    $mail->Password = 'frewgod2956';
+    $mail->Username = '';
+    $mail->Password = '';
 
     $mail->SetFrom('syratech@huremas-cvsuic.online');
     $mail->Subject = $subject;
