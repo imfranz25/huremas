@@ -200,6 +200,14 @@ $(document).ready(function() {
   // POPULATE TABLE
   ssl_table();
 
+  // ensure that the other tab pane is hidden when the other one is shown :)
+  $('.nav-tabs a').on('shown.bs.tab', function(){
+    var activeTab = $(this).attr('href');
+    $(".tab-pane").hide();
+    $(activeTab).show();
+  });//**end**
+  
+
   // DATA TABLE
   $('#table1').DataTable();
   $('#table2').DataTable();
