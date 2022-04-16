@@ -13,7 +13,7 @@
     $code = trim($_POST['code']);
 
 		//check
-		$check = $conn->prepare("SELECT *, (SELECT COUNT(stage) FROM applicant WHERE applicant.job_code = ? AND stage IN ('Hired','On-Board')  AS hired FROM job WHERE job.job_code = ?  ");
+		$check = $conn->prepare("SELECT *, (SELECT COUNT(stage) FROM applicant WHERE applicant.job_code = ? AND stage IN ('Hired','On-Board'))  AS hired FROM job WHERE job.job_code = ?  ");
     $check->bind_param('ss',$code,$code);
     $check->execute();
     $result = $check->get_result();
@@ -38,7 +38,7 @@
 		$note = trim($_POST['note']);
 		//UPDATE
 		$sql = $conn->prepare("UPDATE applicant SET notes=? WHERE id=? ");
-    $sql->prepare('sd',$note,$id);
+    $sql->bind_param('sd',$note,$id);
 		//IF SOMETHING WENT WRONG SET THE PREVIOUS NOTES
 		$select = $conn->prepare("SELECT notes FROM applicant WHERE id=? ");
     $select->bind_param('d',$id);
@@ -57,6 +57,7 @@
 		//check
 		$check = $conn->prepare("SELECT *, (SELECT COUNT(stage) FROM applicant WHERE applicant.job_code = ? AND stage ='On-Board') AS hired FROM job WHERE job.job_code = ?  ");
     $check->bind_param('ss',$code,$code);
+    $check->execute();
     $result = $check->get_result();
     $row = $result->fetch_assoc();
 

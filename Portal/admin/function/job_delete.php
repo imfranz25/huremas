@@ -9,7 +9,7 @@
 		$job = $conn->prepare("DELETE FROM job WHERE id = ? ");
     $job->bind_param('s',$id);
 
-		$applicant = "DELETE FROM applicant WHERE job_code = ? ";
+		$applicant = $conn->prepare("DELETE FROM applicant WHERE job_code = ? ");
     $applicant->bind_param('s',$code);
 
     //get details
