@@ -15,7 +15,7 @@
 		//creating document_id
     $document_id = 'CVSULINK'.generate_id();
 
-		$sql = $conn->prepare("INSERT INTO documents (document_id,document_name,document_type,document_owner,document_folder,document_details,document_created,document_file) VALUES (?,?,'url',?,?,?,?,?'')");
+		$sql = $conn->prepare("INSERT INTO documents (document_id,document_name,document_type,document_owner,document_folder,document_details,document_created,document_file) VALUES (?,?,'url',?,?,?,?,?)");
     $sql->bind_param('sssssss',$document_id,$name,$owner,$folder_id,$details,$id,$link);
 
 		if ($sql->execute()) {

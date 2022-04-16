@@ -484,7 +484,7 @@ async function document_list(folder_id){
 //DOCUMENT SEARCH
 async function document_search(folder_id,query){
   query = query.trim();
-  $('#document_file').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="images/job_load.gif" />');
+  $('#document_file').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="../assets/images/job_load.gif" />');
   let search = new Promise(function(resolve) {
     setTimeout(function() {
       $.ajax({
