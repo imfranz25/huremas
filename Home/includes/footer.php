@@ -3,14 +3,14 @@
     <div class="container" >
       <div>
       <a href="<?php echo $global_link; ?>/Home/">
-          <img src="<?php echo $global_link; ?>/Home/assets/images/cvsu-logo.png" alt="Cavite State University" style="width: 100%;height: auto;max-width: 180px;" class="cvsu-logo" />
+        <img src="<?php echo $global_link; ?>/Home/assets/images/cvsu-logo.png" alt="Cavite State University" style="width: 100%;height: auto;max-width: 180px;" class="cvsu-logo" />
       </a>
       <a target="_blank" href="https://www.youtube.com/channel/UCMraY_VdxLvKTktj1el5FwQ" class="social mx-2"><i class="fab fa-youtube fa-2x"></i></a>
       <a target="_blank" href="https://www.facebook.com/cvsuimusofficialpage" class="social mx-2"><i class="fab fa-facebook fa-2x"></i></a>
       </div>
     </div>
     <div >
-        <hr />
+      <hr />
     </div>
     <div class="container" >
       <div class="row mar-3">
@@ -70,7 +70,7 @@
                 <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#events"> Events </a>
               </li>
 
-            <?php endif; ?>
+              <?php endif; ?>
 
               <li>
                 <a class="nav-link" href="<?php echo $global_link; ?>/Home/index.php?#about"> About Us </a>
@@ -97,14 +97,12 @@
               <li class="nav-item">
                 <a href="mailto:hrdoimus@cvsu.edu.ph"> <i class="fas fa-globe-americas fa-2xs mx-2"></i> hrdoimus@cvsu.edu.ph</a></a>
               </li>
-
             </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
-
   <!-- end info section -->
 
   <!-- footer section -->
@@ -113,11 +111,7 @@
       &copy; <?php echo date('Y'); ?> 
       HUREMAS - CVSU Imus Campus All Rights Reserved.
     </p>
-  
   </footer>
 
- 
   <!-- footer section -->
-
-  <script type="text/javascript" src="assets/js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap.js"></script>
