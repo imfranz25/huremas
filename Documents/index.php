@@ -4,9 +4,10 @@
 		margin: 0;
 	}
 </style>
+
 <?php 
-	session_start();
-	include '../Portal/admin/includes/conn.php';
+  require_once '../Portal/includes/path.php';
+	require_once '../Portal/admin/includes/session.php';
 
 	$valid = false;
 	$isImage = false;
