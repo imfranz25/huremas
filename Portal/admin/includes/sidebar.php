@@ -210,7 +210,7 @@
           <span class="pcoded-mcaret"></span>
         </a>
       </li>
-      <li>
+      <li id="payroll">
         <a href="payroll_list.php" class="waves-effect waves-dark">
           <span class="pcoded-micon"><i class="ti-money"></i><b>FC</b></span>
           <span class="pcoded-mtext" data-i18n="nav.form-components.main">Payroll
@@ -287,9 +287,10 @@
     }
     if ((url).href.indexOf("overtime_category") != -1 || (url).href.indexOf("new_employee_cnt") != -1 || (url).href.indexOf("new_employee_jo") != -1) {
       $("#employee").addClass('active'); // ACTIVATE ACTIVE
-    }
-    else if ((url).href.indexOf("new_evaluation") != -1 || (url).href.indexOf("edit_evaluation") != -1) {
+    }else if ((url).href.indexOf("new_evaluation") != -1 || (url).href.indexOf("edit_evaluation") != -1) {
       $("#evaluation").addClass('active'); // ACTIVATE ACTIVE
+    }else if ((url).href.indexOf("payroll_summary") != -1 ) {
+      $("#payroll").addClass('active'); // ACTIVATE ACTIVE
     }
   });
 
