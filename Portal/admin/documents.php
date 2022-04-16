@@ -138,7 +138,7 @@
                                 }
                               }
                               // FILE SIZE
-                              $file = $_SERVER['DOCUMENT_ROOT']."/Documents/".$row['document_id'].".".$ext;
+                              $file = $_SERVER['DOCUMENT_ROOT'].$global_link."/Documents/".$row['document_id'].".".$ext;
                               $filesize = filesize($file); 
                               $filesize = round($filesize / 1024 ,2)." KB";
                             }
@@ -463,7 +463,7 @@ function get_document(document_id){
 //GET DOCUMENT LIST VIA DOCUMENT ID -> RELOAD DIV
 async function document_list(folder_id){
   //LOADING WHILE SETTING UP
-  $('#document_file').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="images/job_load.gif" />');
+  $('#document_file').html('<img class="img-radius img-fluid mx-auto d-block p-4 w-50 mb-5" src="../assets/images/job_load.gif" />');
       $.ajax({
           async:'false',
           type: 'POST',
