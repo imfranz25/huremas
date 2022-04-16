@@ -370,7 +370,7 @@ function get_document(document_id){
         // VARIABLES
         let ext = (response.document_file).split('.').pop();
         let folder = (response.folder_name==null)?response.document_folder:response.folder_name;
-        let href = (response.document_type=='document')? "/Documents/index.php?document_id="+response.document_hash : response.document_file;
+        let href = (response.document_type=='document')? "../../Documents/index.php?document_id="+response.document_hash : response.document_file;
 
         // SET INFOS
         $('.view_upload_folder').val(folder);
