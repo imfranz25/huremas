@@ -183,10 +183,11 @@
                                         //checking max hours per day
                                         if($row2['time_out']==null){$hours=0;}
                                         if($hours>=$row[$day]){$hours=$row[$day];}
-                                        if($row['category_id']==1){
-                                          $rate=round($rate,2);
-                                          $rate = $rate/$row[$day];
-                                        }
+
+                                        // if($row['category_id']==1){
+                                        //   $rate=round($rate,2);
+                                        //   $rate = $rate/$row[$day];
+                                        // }
 
                                         //calcu late, phours etc.
                                         $late += (($row[$day]-$hours) * $rate );
