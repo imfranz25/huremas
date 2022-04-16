@@ -1,9 +1,11 @@
 <?php
-isset($_GET['job_code'])?$code = $_GET['job_code']:header('location:jobs.php');
-$title = 'Job Application';
-require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/head.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
+  isset($_GET['job_code'])?$code = $_GET['job_code']:header('location:jobs.php');
+  $title = 'Job Application';
+  require_once("../../Portal/includes/path.php");
+  require_once("../includes/head.php");
+  require_once("../../Database/conn.php");
 ?>
+
 <body>
 
   <!--Override Hero_area style-->
@@ -32,9 +34,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
     $sql = "SELECT *, (SELECT COUNT(stage) FROM  applicant WHERE (stage='On-Board' OR stage='Hired') AND applicant.job_code=job.job_code ) AS hired FROM job WHERE job_status != 'inactive' ";
     $query = $conn->query($sql);
     while ($row = $query->fetch_assoc()) {
-      if ($row['hired']>=$row['job_recruit']) {
-        continue;
-      }
+      if ($row['hired']>=$row['job_recruit']) continue;
       if (password_verify($row['job_code'], $code)) {
         $verify = true;
         $job_code = $row['job_code'];
@@ -45,16 +45,13 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
         break;
       }
     }
-    if ($verify != true) {
-      header('location:jobs.php');
-    }
+    if ($verify != true) header('location:jobs.php');
   ?>
 
   <!--Top Header-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/top-header.php"); ?>
-    <!--Header-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/header.php"); ?>
-
+  <?php require_once("../includes/top-header.php"); ?>
+  <!--Header-->
+  <?php require_once("../includes/header.php"); ?>
 
     <div class="container-fluid mb-md-5">
       <div class="row mx-2">
@@ -82,12 +79,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
         </div>
       </div>
     </div>
-    
-
   </div>
-
-
-
 
   <section id="recent">
     <div class="container">
@@ -98,10 +90,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
             <!--PHP Start-->
             <?php                       
               $sql = "SELECT * FROM job LEFT JOIN position ON position.id=job.job_position LEFT JOIN department_category ON department_category.id=job.job_dept WHERE job_code = '$job_code' ";
-
               $query = $conn->query($sql);
               $row = $query->fetch_assoc(); 
-
             ?>
             <!--Sample Recuit Box-->
             <div class="col-lg-12 mt-2">
@@ -110,12 +100,14 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
                   <div class="col-md-12 mb-5">
                     <h2 class="font-weight-bold"><?php echo $row['job_title']; ?></h2>
                     <hr class="divider" />
-                    <h2 class="h5">Position : <?php echo $row['description'];  ?></h2>
-                    <h2 class="h5">Experience : <?php echo $row['job_exp'];  ?></h2>
-                    <h2 class="h5">Salary Grade : <?php echo $row['job_grade'];  ?></h2>
-                    <h2 class="h5">Department / Unit : <?php echo $row['title'];  ?></h2>
+                    <h2 class="h5">Position : <?php echo $row['description']; ?></h2>
+                    <h2 class="h5">Experience : <?php echo $row['job_exp']; ?></h2>
+                    <h2 class="h5">Salary Grade : <?php echo $row['job_grade']; ?></h2>
+                    <h2 class="h5">Department / Unit : <?php echo $row['title']; ?></h2>
                     <h2 class="h5">Contract : <?php echo $row['job_term'];  ?></h2>
-                    <h2 class="h5 d-none">Working Hours : <?php echo $row['job_type'];  ?></h2>
+                    <h2 class="h5 d-none">
+                      Working Hours : <?php echo $row['job_type'];  ?>
+                    </h2>
                   </div>
                   <div class="col-md-12">
                     <h4 class="text-gray-dark h4 font-weight-bold">
@@ -143,7 +135,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
                 </div>
               </div>
             </div>
-
           </div>
           <!--Job Post End-->
         </div>
@@ -174,85 +165,77 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
   ?>
   <section class="quality layout_padding mb-5">
     <div class="container row">
-        <div class="col-md-12 col-lg-4 mx-0 px-0 my-auto text-lg-left">
-          <h1 class="display-4">Most Recent <label class="text-warning">Jobs</label></h1>
-        </div>
-
-            <?php
-                $limit =0;                       
-                while($row = $query2->fetch_assoc()){     
-                  if ($row['hired']>=$row['job_recruit']) {
-                    continue;
-                  }
-                  //limit 2
-                  if ($limit==2) {
-                    break;
-                  }
-                  $limit +=1;  
-                $url_code = password_hash($row['job_code'],PASSWORD_DEFAULT);                      
-            ?>
-            <!--Sample Recuit Box-->
-            <div class="col-md-6 <?php echo $col; ?> text-dark text-left p-3">
-              <div class="card border p-3 h-100" style="box-shadow: 2px 2px 20px green;border-radius: 30px;">
-                <div class="card-body row">
-                  <div class="col-md-12">
-                    <h2 class="font-weight-bold"><?php echo $row['job_title']; ?></h2>
-                    <ul>
-                      <li><?php echo $row['job_term']; ?></li>
-                      <li><?php echo $row['job_type']; ?></li>
-                      <li><?php echo $row['job_exp']; ?></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="mx-3 mb-2">
-                  <a type="button" class="btn bg-warning text-white font-weight-bold f-13 p-2 px-3 float-right" href='job-posted.php?job_code=<?php echo $url_code;?>' style='border-radius: 40px;'><i class="fa fa-id-card mr-1"></i>Apply Now !</a>
-                </div>
-              </div>
+      <div class="col-md-12 col-lg-4 mx-0 px-0 my-auto text-lg-left">
+        <h1 class="display-4">Most Recent 
+          <label class="text-warning">Jobs</label>
+        </h1>
+      </div>
+      <?php
+        $limit =0;                       
+        while($row = $query2->fetch_assoc()){     
+          if ($row['hired']>=$row['job_recruit']) continue;
+          //limit 2
+          if ($limit==2) break;
+          $limit +=1;  
+      ?>
+      <!--Sample Recuit Box-->
+      <div class="col-md-6 <?php echo $col; ?> text-dark text-left p-3">
+        <div class="card border p-3 h-100" style="box-shadow: 2px 2px 20px green;border-radius: 30px;">
+          <div class="card-body row">
+            <div class="col-md-12">
+              <h2 class="font-weight-bold"><?php echo $row['job_title']; ?></h2>
+              <ul>
+                <li><?php echo $row['job_term']; ?></li>
+                <li><?php echo $row['job_type']; ?></li>
+                <li><?php echo $row['job_exp']; ?></li>
+              </ul>
             </div>
-            <?php }?>
-
+          </div>
+          <div class="mx-3 mb-2">
+            <a type="button" class="btn bg-warning text-white font-weight-bold f-13 p-2 px-3 float-right" href='job-posted.php?job_code=<?php echo $url_code;?>' style='border-radius: 40px;'><i class="fa fa-id-card mr-1"></i>Apply Now !</a>
+          </div>
+        </div>
+      </div>
+      <?php }?>
     </div>
   </section>
   <!-- quality policy section -->
 
-   <?php }?>
+  <?php }?>
 
   <!--Contact-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/contact.php"); ?>
-
+  <?php require_once("../includes/contact.php"); ?>
   <!--footer-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/footer.php"); ?>
-
+  <?php require_once("../includes/footer.php"); ?>
   <!--Applicant Form-->
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Home/includes/job_modal.php"); ?>
-
+  <?php require_once("../includes/job_modal.php"); ?>
 
   <script>
 
     //CHECK IF FILE IS VALID
     function check_file(file_input) {
-        //valid extension 
-        const valid_file = ['pdf', 'docx', 'doc', 'docm', 'dot', 'docm', 'dotx'];
-        if (file_input.type == "file") {
-            //get value and extension
-            const file_name = file_input.value;
-            const extension = file_name.substr((file_name.lastIndexOf('.') +1));
-            if (file_name.length > 0) { //check if there is selected file
-              var file_size = file_input.files[0].size/1024/1024; //file size in MB
-              if (file_size <= 5){ // Maximum of 5MB Image Upload
-                if(!valid_file.includes(extension)){ // check if extension is valid
-                  file_input.value = '';
-                  $('#fullModal').modal('show');
-                  $('#warn_msg').html('Invalid file format !');
-                }
-              }else{
-                file_input.value = '';
-                $('#fullModal').modal('show');
-                $('#warn_msg').html('The attachment size exceeds the allowable limit !');
-              }
+      //valid extension 
+      const valid_file = ['pdf', 'docx', 'doc', 'docm', 'dot', 'docm', 'dotx'];
+      if (file_input.type == "file") {
+        //get value and extension
+        const file_name = file_input.value;
+        const extension = file_name.substr((file_name.lastIndexOf('.') +1));
+        if (file_name.length > 0) { //check if there is selected file
+          var file_size = file_input.files[0].size/1024/1024; //file size in MB
+          if (file_size <= 5){ // Maximum of 5MB Image Upload
+            if(!valid_file.includes(extension)){ // check if extension is valid
+              file_input.value = '';
+              $('#fullModal').modal('show');
+              $('#warn_msg').html('Invalid file format !');
             }
+          }else{
+            file_input.value = '';
+            $('#fullModal').modal('show');
+            $('#warn_msg').html('The attachment size exceeds the allowable limit !');
+          }
         }
-        return true;
+      }
+      return true;
     }
 
     $(document).ready(function() {
@@ -272,35 +255,34 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/conn.php");
         //get inputs
         var form_data = new FormData($('#form_add_candidate')[0]);
         $.ajax({
-            url: '/Portal/admin/function/candidate_add.php',  
-            dataType: 'json',  
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,                         
-            type: 'POST',
-            success: function(response){
-                if (response=='1'){ // 1 Successful
-                  $('#successModal').modal('show');
-                  $('#success_msg').html('Application sent succesfully');
-                  // reload page (redirect to new candidate)
-                  $(".tab_code").removeClass('active');
-                  $("#candiTab").addClass('active');
-                  //hide modal
-                  $("#newApp").modal('hide');
-                }else if (response=='2'){ // 2 maximum size limit
-                  $('#fullModal').modal('show');
-                  $('#warn_msg').html('The attachment size exceeds the allowable limit !');
-                }else if (response=='3'){ // 3 invalid format
-                  $('#fullModal').modal('show');
-                  $('#warn_msg').html('Invalid file format !');
-                }else{ // failed
-                  $('#errorModal').modal('show');
-                  $('#error_msg').html('Application failed');
-                }
+          url: '../../Portal/admin/function/candidate_add.php',  
+          dataType: 'json',  
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: form_data,                         
+          type: 'POST',
+          success: function(response){
+            if (response=='1'){ // 1 Successful
+              $('#successModal').modal('show');
+              $('#success_msg').html('Application sent succesfully');
+              // reload page (redirect to new candidate)
+              $(".tab_code").removeClass('active');
+              $("#candiTab").addClass('active');
+              //hide modal
+              $("#newApp").modal('hide');
+            }else if (response=='2'){ // 2 maximum size limit
+              $('#fullModal').modal('show');
+              $('#warn_msg').html('The attachment size exceeds the allowable limit !');
+            }else if (response=='3'){ // 3 invalid format
+              $('#fullModal').modal('show');
+              $('#warn_msg').html('Invalid file format !');
+            }else{ // failed
+              $('#errorModal').modal('show');
+              $('#error_msg').html('Application failed');
             }
-         });
-      
+          }
+        });
       });
 
 

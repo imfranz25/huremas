@@ -1,10 +1,13 @@
 <?php
+  session_start();
+  $_SESSION['add_candidate'] = true; // set add candidate
 	require_once '../../includes/path.php';
 	require_once '../includes/session.php';
 	require_once 'sendEmail.php';
+  unset($_SESSION['add_candidate']); // unset after using
+
 
 	if (isset($_POST['code'])) {
-
 		//get values
 		$code =  trim($_POST['code']);
 		$fname = trim($_POST['fname']);
@@ -44,12 +47,10 @@
 		    $message = "Hello!,<br><br>Your job application has been received, we will notify you if your application has been evaluated. <br>For more  email us at hrdoimus@cvsu.edu.ph";
 		    $res= sendEmail($email,$subject,$message);
 
-			
 		}
 	}else{
     header('location: ../applicant.php');
   }
-
 
 
 

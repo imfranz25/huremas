@@ -1,56 +1,62 @@
 <?php
-	session_start();
+  // START SESSION IF ADD CANDI IS NOT SET
+  if (!isset($_SESSION['add_candidate'])) session_start();
 	require_once $_SERVER['DOCUMENT_ROOT'].$global_link.'/Database/conn.php';
 
+  // REDIRECT TO INDEX (HOME) IF NOT AUTHENTICATED
 	if(!isset($_SESSION['id']) || trim($_SESSION['id']) == ''){
-		header('location: ../index.php');
-	}
+    // EXCEPT FOR ADDING A CANDIDATE
+    if (!isset($_SESSION['add_candidate'])) {
+      header('location: ../index.php');
+    }
+	} else {
+    // SELECT USER INFOS
+    $sql = "SELECT * FROM admin LEFT JOIN employees ON employees.employee_id=admin.employee_id WHERE admin.employee_id = '".$_SESSION['id']."'";
+    $query = $conn->query($sql);
+    $user = $query->fetch_assoc();
 
-	$sql = "SELECT * FROM admin LEFT JOIN employees ON employees.employee_id=admin.employee_id WHERE admin.employee_id = '".$_SESSION['id']."'";
-	$query = $conn->query($sql);
-	$user = $query->fetch_assoc();
+    //UPDATE TRAINING RECORD
+    $update_record = $conn->prepare("UPDATE training_record SET status=? WHERE training_code = ? AND (status ='On-going' OR status='Finished') ");
+    $update_record->bind_param('ss',$status,$code);
 
-	//UPDATE TRAINING RECORD
-	$update_record = $conn->prepare("UPDATE training_record SET status=? WHERE training_code = ? AND (status ='On-going' OR status='Finished') ");
-	$update_record->bind_param('ss',$status,$code);
+    //UPDATE TRAINING 
+    $update_training = $conn->prepare("UPDATE training_list SET training_status=? WHERE training_code = ? ");
+    $update_training->bind_param('ss',$status_t,$code);
 
-	//UPDATE TRAINING 
-	$update_training = $conn->prepare("UPDATE training_list SET training_status=? WHERE training_code = ? ");
-	$update_training->bind_param('ss',$status_t,$code);
+    $select = "SELECT * FROM training_record LEFT JOIN training_list ON training_list.training_code=training_record.training_code";
+    $query = $conn->query($select);
 
-	$select = "SELECT * FROM training_record LEFT JOIN training_list ON training_list.training_code=training_record.training_code";
-	$query = $conn->query($select);
+    while ($trow=$query->fetch_assoc()) {
+      $today = strtotime(date('Y-m-d'));
+      $end = strtotime($trow['schedule_to']);
+      $code = $trow['training_code'];
 
-	while ($trow=$query->fetch_assoc()) {
-		$today = strtotime(date('Y-m-d'));
-		$end = strtotime($trow['schedule_to']);
-		$code = $trow['training_code'];
+      //record
+      // AUTOMATICALLY SET STATUS -> FINISH IF END DATE <= TODAY
+      // AND IF STATUS IS FINISHED AND THE ADMIN EXTEND THE END DATE -> CHANGE TO ONGOING
+      if ($trow['status']=='On-going') {
+        if ($today>=$end) {
+          $status='Finished';
+          $update_record->execute();
+        }
+      }else if ($trow['status']=='Finished') {
+        if ($today<$end) {
+          $status='On-going';
+          $update_record->execute();
+        }
+      }
+      //list
+      if ($today>=$end) {
+        $status_t='inactive';
+        $update_training->execute();
+      }else{
+        $status_t='active';
+        $update_training->execute();
+      }
+    }
+  }
 
-		//record
-		// AUTOMATICALLY SET STATUS -> FINISH IF END DATE <= TODAY
-		// AND IF STATUS IS FINISHED AND THE ADMIN EXTEND THE END DATE -> CHANGE TO ONGOING
-		if ($trow['status']=='On-going') {
-			if ($today>=$end) {
-				$status='Finished';
-				$update_record->execute();
-			}
-		}else if ($trow['status']=='Finished') {
-			if ($today<$end) {
-				$status='On-going';
-				$update_record->execute();
-			}
-		}
-
-		//list
-		if ($today>=$end) {
-			$status_t='inactive';
-			$update_training->execute();
-		}else{
-			$status_t='active';
-			$update_training->execute();
-		}
-
-	}
+	
 
   // get password for challenge (deletion of records)
 	function get_password($employee_id,$conn){
