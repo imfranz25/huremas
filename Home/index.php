@@ -2,7 +2,7 @@
   $title = 'Home';
   session_start();
   require_once("includes/path.php");
-  require_once($_SERVER['DOCUMENT_ROOT'].$global_link."/Database/conn.php");
+  require_once("../Database/conn.php");
   require_once("includes/head.php");
 ?>
 
