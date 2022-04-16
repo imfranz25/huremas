@@ -53,7 +53,7 @@
 
 
 		//insert employee
-		$sql = $conn->prepare("INSERT INTO employees (employee_id, firstname, middlename,lastname,suffix ,address, birthdate,mobile_no, contact_info, email, sex, photo, created_date, position_id, department_id, category_id, date_hired,sss_id,pagibig_id,philhealth_id,tin_num) VALUES (?,?,?,?,?,?, ?,?,?,?,?,?,NOW(),?,?,?,NOW(),?,?,?,?)");
+		$sql = $conn->prepare("INSERT INTO employees (employee_id, firstname, middlename,lastname,suffix ,address, birthdate,mobile_no, contact_info, email, sex, photo, created_date, position_id, department_id, category_id, date_hired,sss_id,pagibig_id,philhealth_id,tin_num) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NOW(),?,?,?,NOW(),?,?,?,?)");
     $sql->bind_param('ssssssssssssdddssss',$employee_id,$firstname,$middlename,$lastname,$suffix,$address,$birthdate,$mobile,$contact,$email,$sex,$new_filename,$position,$department,$category,$sss,$pagibig,$philhealth,$tin);
 
 		//insert account details to admin
@@ -96,7 +96,7 @@
 
 				if(!empty($filename)){
 					//move file
-					move_uploaded_file($_FILES['pic']['tmp_name'], '../images/CVSU'.$new_filename);	
+					move_uploaded_file($_FILES['pic']['tmp_name'], '../uploads/profile/CVSU'.$new_filename);	
 				}
 
 				//execeute test recruit after onboarding applicant
@@ -113,11 +113,12 @@
 					
 				}
 				
-		    $subject="Account Created";
-		    $message = "Hello!,<br><br>You may now login at : http://huremas-cvsuic.online/Portal  <br>Username: ".$username."<br>Default Password: ".$default." <br><br>Please change your password immediately!";
-        $res= sendEmail($email,$subject,$message);
+		    // $subject="Account Created";
+		    // $message = "Hello!,<br><br>You may now login at : http://huremas-cvsuic.online/Portal  <br>Username: ".$username."<br>Default Password: ".$default." <br><br>Please change your password immediately!";
+      //   $res= sendEmail($email,$subject,$message);
         
 				echo 1;
+        
 			}else{
 				echo 0;
 			}
