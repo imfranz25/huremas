@@ -1,161 +1,93 @@
 <?php 
-$title ="Cash Advance";
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
-
+  $title ="Cash Advance";
+  require_once '../includes/path.php';
+  require_once("../admin/includes/session.php");
+  require_once("../admin/includes/header.php");
 ?>
-  <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
-  
+
+<body>
+  <?php include_once("../admin/includes/preloader.php");  ?>
   <div id="pcoded" class="pcoded">
-      
-        <div class="pcoded-container navbar-wrapper">         
-        <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
-        
-        
-                  <div class="pcoded-content">
-                      <!-- Page-header start -->
-                      <div class="page-header">
-                          <div class="page-block">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      <div class="page-header-title">
-                                          <h5 class="m-b-10">Cash Advance</h5>
-                                          <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.php"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="index.php">Home</a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="cash_advance.php">Cash Advance</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
-                        <?php
-    
-                            if(isset($_SESSION['error'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Error!</h4>
-                                ".$_SESSION['error']."
-                                </div>
-                            ";
-                            unset($_SESSION['error']);
-                            }
-                            if(isset($_SESSION['success'])){
-                            echo "
-                                <div class='alert alert-success alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-check'></i> Success!</h4>
-                                ".$_SESSION['success']."
-                                </div>
-                            ";
-                            unset($_SESSION['success']);
-                            }
-
-                            
-                        ?>
-                            <!-- Main-body start -->
-                        <div class="card">
-                        <div class="card-block">
-
-                            <div class="col-xl-12 col-xl-6">
-                                <div class="sub-title"></div>
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs md-tabs" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#CAreq" role="tab">Pending</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#CAapp" role="tab">Approved</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#CArej" role="tab">Rejected</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                    </ul>
-
-                                    <!-- Tab panes -->
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="CAreq" role="tabpanel">
-                                            <br>
-                                            <?php require_once 'CA_request.php'; ?>  
-                                        </div>
-
-                                        <div class="tab-pane" id="CAapp" role="tabpanel">
-                                            <br>
-                                            <?php require_once 'CA_approved.php'; ?>   
-                                        </div>
-
-                                        <div class="tab-pane" id="CArej" role="tabpanel">
-                                            <br>
-                                            <?php require_once 'CA_rejected.php'; ?>   
-                                        </div>
-                                    </div>
-
-
-                        </div>
-                        </div>
- 
-                             <!-- Main-body end -->
-                        </div>
-                    </div>
+    <div class="pcoded-container navbar-wrapper">         
+    <?php include 'includes/navbar.php'?>
+    <?php include 'includes/sidebar.php'?>
+      <div class="pcoded-content">
+        <!-- Page-header start -->
+        <div class="page-header">
+          <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <div class="page-header-title">
+                  <h5 class="m-b-10">Cash Advance</h5>
+                  <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
                 </div>
+              </div>
+              <div class="col-md-4">
+                <ul class="breadcrumb-title">
+                  <li class="breadcrumb-item">
+                    <a href="index.php"> <i class="fa fa-home"></i> </a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="index.php">Home</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="cash_advance.php">Cash Advance</a>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
+        <!-- Page-header end -->
+
+        <div class="pcoded-inner-content">
+          <?php include_once '../admin/includes/session_alert.php'; ?>         
+          <!-- Main-body start -->
+          <div class="card">
+            <div class="card-block">
+              <div class="col-xl-12 col-xl-6">
+                <div class="sub-title"></div>
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs md-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#CAreq" role="tab">Pending</a>
+                      <div class="slide"></div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#CAapp" role="tab">Approved</a>
+                      <div class="slide"></div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#CArej" role="tab">Rejected</a>
+                      <div class="slide"></div>
+                    </li>
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="CAreq" role="tabpanel">
+                      <?php require_once 'CA_request.php'; ?>  
+                    </div>
+                    <div class="tab-pane" id="CAapp" role="tabpanel">
+                      <?php require_once 'CA_approved.php'; ?>   
+                    </div>
+                    <div class="tab-pane" id="CArej" role="tabpanel">
+                      <?php require_once 'CA_rejected.php'; ?>   
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Main-body end -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/employee/includes/CA_modal.php");  ?>
+  <?php require_once("includes/CA_modal.php");  ?>
+  <?php require_once("../admin/includes/scripts.php"); ?>
 
-    <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php"); ?>
-
-
-    
-    <script>
-$(function(){
-
-  //CA Request Properties
-  $('.edit_req').click(function(e){
-    e.preventDefault();
-    $('#edit_req').modal('show');
-    var id = $(this).data('id');
-    CA_row(id);
-  });
-  $('.desc').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    CA_row(id);
-  });
-  $('.cancel_req').click(function(e){
-    e.preventDefault();
-    $('#cancelCA').modal('show');
-    var id = $(this).data('id');
-    CA_row(id);
-  });
-
-  //view satus
-  $('.stat_desc').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    CA_row(id);
-  });
-
-
-});
-
+<script>
 
 function CA_row(id){
   $.ajax({
@@ -176,11 +108,9 @@ function CA_row(id){
       $('.edit_CA_notes').val(response.notes);
       $('.edit_CA_status').val(response.status);
       $('.edit_CA_review').val(response.reviewed_by);
-      
     }
   });
 }
-
 
 $(document).ready(function() {
 
@@ -197,6 +127,34 @@ $(document).ready(function() {
     $(".tab-pane").hide();
     $(activeTab).show();
   });//**end**
+
+  //CA Request Properties
+  $(document).on('click','.edit_req',function(e){
+    e.preventDefault();
+    $('#edit_req').modal('show');
+    var id = $(this).data('id');
+    CA_row(id);
+  });
+
+  $(document).on('click','.desc',function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    CA_row(id);
+  });
+
+  $(document).on('click','.cancel_req',function(e){
+    e.preventDefault();
+    $('#cancelCA').modal('show');
+    var id = $(this).data('id');
+    CA_row(id);
+  });
+
+  //view satus
+  $(document).on('click','.stat_desc',function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    CA_row(id);
+  });
   
 });
 
