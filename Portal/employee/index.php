@@ -9,8 +9,8 @@
   <?php //require_once("../admin/includes/preloader.php");  ?>
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
-      <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php';
+      <?php include_once 'includes/navbar.php'?>
+        <?php include_once 'includes/sidebar.php';
 
           //get reports
           $trainings=0;
