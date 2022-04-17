@@ -1,95 +1,64 @@
 <?php 
-$title ="Event Request";
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
-
+  $title ="Event Request";
+  require_once '../includes/path.php';
+  require_once("../admin/includes/session.php");
+  require_once("../admin/includes/header.php");
 ?>
-  <body>
-  <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
-  
+
+<body>
+  <?php include_once("../admin/includes/preloader.php");  ?>
   <div id="pcoded" class="pcoded">
-      
-        <div class="pcoded-container navbar-wrapper">         
-        <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
-        
-        
-                  <div class="pcoded-content">
-                      <!-- Page-header start -->
-                      <div class="page-header">
-                          <div class="page-block">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      <div class="page-header-title">
-                                          <h5 class="m-b-10">Event Request</h5>
-                                          <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.php"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="index.php">Home</a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="events.php">Event Request</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
-                        <?php
-    
-                            if(isset($_SESSION['error'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Error!</h4>
-                                ".$_SESSION['error']."
-                                </div>
-                            ";
-                            unset($_SESSION['error']);
-                            }
-                            if(isset($_SESSION['success'])){
-                            echo "
-                                <div class='alert alert-success alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-check'></i> Success!</h4>
-                                ".$_SESSION['success']."
-                                </div>
-                            ";
-                            unset($_SESSION['success']);
-                            }
-
-                            
-                        ?>
-                            <!-- Main-body start -->
-                        <div class="card">
-                        <div class="card-block">
-                          <?php require_once 'event_request.php'; ?>
-                        </div>
-                        </div>
- 
-                             <!-- Main-body end -->
-                        </div>
-                    </div>
+    <div class="pcoded-container navbar-wrapper">         
+    <?php include 'includes/navbar.php'?>
+    <?php include 'includes/sidebar.php'?>
+      <div class="pcoded-content">
+        <!-- Page-header start -->
+        <div class="page-header">
+          <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <div class="page-header-title">
+                  <h5 class="m-b-10">Event Request</h5>
+                  <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
                 </div>
+              </div>
+              <div class="col-md-4">
+                <ul class="breadcrumb-title">
+                  <li class="breadcrumb-item">
+                    <a href="index.php"> <i class="fa fa-home"></i> </a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="index.php">Home</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="events.php">Event Request</a>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
+        <!-- Page-header end -->
+
+        <div class="pcoded-inner-content">
+          <!-- Main-body start -->
+          <div class="card">
+            <div class="card-block">
+              <?php require_once 'event_request.php'; ?>
+            </div>
+          </div>
+          <!-- Main-body end -->
+        </div>
+      </div>
     </div>
+  </div>
 
-    <?php 
-      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/employee/includes/CA_modal.php");  
-      require_once('includes/event_modal.php');
-      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php");
-    ?>
+  <?php 
+    require_once("includes/CA_modal.php");  
+    require_once('includes/event_modal.php');
+    require_once("../admin/includes/scripts.php");
+  ?>
 
-
-
-    
 <script>
 
 
@@ -166,27 +135,26 @@ $(document).ready(function() {
   }//**end**
 
   //Event Request Properties
-  $('.edit').click(function(e){
+  $(document).on('click','.edit',function(e){
     e.preventDefault();
     $('#editRequest').modal('show');
     var id = $(this).data('id');
     event_request_row(id);
   });
 
-  $('.view').click(function(e){
+  $(document).on('click','.view',function(e){
     e.preventDefault();
     $('#viewRequest').modal('show');
     var id = $(this).data('id');
     event_request_row(id);
   });
   
-  $('.delete').click(function(e){
+  $(document).on('click','.delete',function(e){
     e.preventDefault();
     $('#cancelRequest').modal('show');
     var id = $(this).data('id');
     event_request_row(id);
   });
-  
   
 });
 
