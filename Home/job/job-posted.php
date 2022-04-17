@@ -1,7 +1,7 @@
 <?php
   isset($_GET['job_code'])?$code = $_GET['job_code']:header('location:jobs.php');
   $title = 'Job Application';
-  require_once("../../Portal/includes/path.php");
+  require_once("../includes/path.php");
   require_once("../includes/head.php");
   require_once("../../Database/conn.php");
 ?>
@@ -72,7 +72,7 @@
               <li><?php echo $job_exp; ?></li>
             </ul>
             <div>
-              <a type="button" class="btn bg-warning text-white font-weight-bold p-2 px-4 apply_now" data-id='<?php echo $row['job_code']; ?>' style='border-radius: 40px;'><h5 class="font-weight-bold"><i class="fa fa-id-card mr-1"></i>Apply Now !</h5></a>
+              <a type="button" class="btn bg-warning text-white font-weight-bold p-2 px-4 apply_now" data-id='<?php echo $row['job_code']; ?>' style='border-radius: 40px;'><h5 class="font-weight-bold pt-2" ><i class="fa fa-id-card mr-1"></i>Apply Now !</h5></a>
             </div>
             </h1>
           </div>
