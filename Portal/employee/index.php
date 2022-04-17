@@ -6,7 +6,7 @@
 ?>
 
 <body>
-  <?php //require_once("../admin/includes/preloader.php");  ?>
+  <?php require_once("../admin/includes/preloader.php");  ?>
   <div id="pcoded" class="pcoded">
     <div class="pcoded-container navbar-wrapper">         
       <?php include_once 'includes/navbar.php'?>
