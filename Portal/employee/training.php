@@ -1,141 +1,98 @@
 <?php 
-$title ="Trainings";
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
+  $title ="Trainings";
+  require_once '../includes/path.php';
+  require_once("../admin/includes/session.php");
+  require_once("../admin/includes/header.php");
 ?>
-  <body>
-   <?php require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/preloader.php"); ?>
-  
+
+<body>
+  <?php include_once("../admin/includes/preloader.php");  ?>
   <div id="pcoded" class="pcoded">
-        <div class="pcoded-container navbar-wrapper">         
-        <?php include 'includes/navbar.php'?>
-        <?php include 'includes/sidebar.php'?>
-        
-        
-                  <div class="pcoded-content">
-                      <!-- Page-header start -->
-                      <div class="page-header">
-                          <div class="page-block">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      <div class="page-header-title">
-                                          <h5 class="m-b-10">Training</h5>
-                                          <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.php"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="training.php">Training</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
-
-
-                        <?php
-                            if(isset($_SESSION['success'])){
-                                echo "
-                                    <div class='alert alert-success alert-dismissible'>
-                                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                    <h4><i class='icon fa fa-check'></i> Success!</h4>
-                                    ".$_SESSION['success']."
-                                    </div>
-                                ";
-                                unset($_SESSION['success']);
-                            }
-                            if(isset($_SESSION['error'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Error!</h4>
-                                ".$_SESSION['error']."
-                                </div>
-                            ";
-                            unset($_SESSION['error']);
-                            }
-                            if(isset($_SESSION['warning'])){
-                            echo "
-                                <div class='alert alert-danger alert-dismissible'>
-                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-                                <h4><i class='icon fa fa-warning'></i> Note! (Please Update Deduction/Tax Vendor first !)</h4>
-                                ".$_SESSION['warning']."
-                                </div>
-                            ";
-                            unset($_SESSION['warning']);
-                            }
-                            
-                        ?>
-
-                             <!-- Main-body start -->
-                            <div class="card">             
-                              <div class="box-body">
-                                <div class="card-block table-border-style">
-
-                                  <div class="col-xl-12 col-xl-6">
-                                      <!-- Nav tabs -->
-                                      <ul class="nav nav-tabs md-tabs" role="tablist" id="training_tab">
-                                        <li class="nav-item">
-                                          <a class="nav-link" data-toggle="tab" href="#reqtab" role="tab">Request</a>
-                                          <div class="slide"></div>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link active" data-toggle="tab" href="#attab" role="tab">My Trainings</a>
-                                          <div class="slide"></div>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link" data-toggle="tab" href="#rejtab" role="tab">Rejected</a>
-                                          <div class="slide"></div>
-                                        </li>
-                                      </ul>
-                                  </div>
-
-                                      <!-- Tab panes -->
-                                  <div class="tab-content">
-                                    <!--Vendor Table-->
-                                    <div class="card container tab-pane fade" id="reqtab">
-                                       <?php include 'training_request.php'; ?>  
-                                    </div>
-                                    <!--Deduction Table-->
-                                    <div class="card container tab-pane fade show active" id="attab">
-                                      <?php include 'training_list.php'; ?>
-                                    </div>
-                                    <!--Tax Table-->
-                                    <div class="card container tab-pane fade" id="rejtab">
-                                      <?php include 'training_reject.php'; ?>
-                                    </div>
-                                  </div>
-                                      <!-- Tab panes **End** -->
-                                </div>
-                              </div>
-                            </div>
-                            <!-- Main-body end -->
-                      
-                                         
-  
-                        </div>
-                        <!--Pcoded Inner COntent **end**-->
-                  </div>
-                  <!--Pcoded  COntent **end**-->
+    <div class="pcoded-container navbar-wrapper">         
+    <?php include 'includes/navbar.php'?>
+    <?php include 'includes/sidebar.php'?>
+      <div class="pcoded-content">
+        <!-- Page-header start -->
+        <div class="page-header">
+          <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <div class="page-header-title">
+                  <h5 class="m-b-10">Training</h5>
+                  <p class="m-b-0">Welcome to HUREMAS - CvSU IMUS</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <ul class="breadcrumb-title">
+                  <li class="breadcrumb-item">
+                    <a href="index.php"> <i class="fa fa-home"></i> </a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="training.php">Training</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- Page-header end -->
+                        
+        <div class="pcoded-inner-content">
+          <?php include_once '../admin/includes/session_alert.php'; ?>         
+          <!-- Main-body start -->
+          <div class="card">             
+            <div class="box-body">
+              <div class="card-block table-border-style">
+                <div class="col-xl-12 col-xl-6">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs md-tabs" role="tablist" id="training_tab">
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#reqtab" role="tab">Request</a>
+                      <div class="slide"></div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#attab" role="tab">My Trainings</a>
+                      <div class="slide"></div>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#rejtab" role="tab">Rejected</a>
+                      <div class="slide"></div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <!--Vendor Table-->
+                  <div class="card container tab-pane fade" id="reqtab">
+                     <?php include 'training_request.php'; ?>  
+                  </div>
+                  <!--Deduction Table-->
+                  <div class="card container tab-pane fade show active" id="attab">
+                    <?php include 'training_list.php'; ?>
+                  </div>
+                  <!--Tax Table-->
+                  <div class="card container tab-pane fade" id="rejtab">
+                    <?php include 'training_reject.php'; ?>
+                  </div>
+                </div>
+                <!-- Tab panes **End** -->
+              </div>
+            </div>
+          </div>
+          <!-- Main-body end -->
+        </div>
+        <!--Pcoded Inner COntent **end**-->
+      </div>
+      <!--Pcoded  COntent **end**-->
     </div>
+  </div>
 
-
-    <?php 
-
-      require_once('includes/training_modal.php');
-      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/alert_modal.php");
-      require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/scripts.php");
-      require_once('includes/training_rate_modal.php');
-      
-    ?>   
-
+  <?php 
+    require_once('includes/training_modal.php');
+    require_once("../admin/includes/alert_modal.php");
+    require_once("../admin/includes/scripts.php");
+    require_once('includes/training_rate_modal.php');
+  ?>   
 
 <script>
 
@@ -172,7 +129,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
         $('.edit_note').val(response.internal_note);
         $('.from_view').val('From : '+ new Date(response.schedule_from).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric', hour:'numeric',minute:'numeric'}));
         $('.to_view').val('To : '+ new Date(response.schedule_to).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric', hour:'numeric',minute:'numeric'}));
-
       }
     });
   }
@@ -199,7 +155,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
         $('.from_view').val('From : '+ new Date(response.schedule_from).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric', hour:'numeric',minute:'numeric'}));
         $('.to_view').val('To : '+ new Date(response.schedule_to).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric', hour:'numeric',minute:'numeric'}));
       }
-
     });
   }
 
@@ -209,7 +164,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
     $("#rejtab").hide();
     $("#reqtab").hide();
   }
-
 
   $(document).ready(function() {
 
@@ -222,7 +176,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
       $('#table3').DataTable();
       $('#table4').DataTable();
     }//**end**
-
 
     // CHECK IF THERE IS STILL MODAL OPEN => TO SUPPORT SCROLLING EVEN IF WE CLOSE THE MODAL
     $('body').on('hidden.bs.modal', function () {
@@ -331,8 +284,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
       $('#trainingRev_edit').modal('show');
     });
 
-    
-
     //REQUEST TRAINING
     $(document).on('submit','#sendForm', function(e){
       e.preventDefault();
@@ -357,7 +308,6 @@ require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/header.php");
         }
       });
     });//**end**
-
 
     $("#attab").show();
 
