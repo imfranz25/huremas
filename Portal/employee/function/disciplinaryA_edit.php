@@ -3,6 +3,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
 
 	if (isset($_POST['edit_action'])) {
+
 		//basic info
 		$reference = $_POST['reference'];
 		$explanation = trim($_POST['explanation']);
@@ -19,18 +20,22 @@
 			$extension = pathinfo($_FILES["attachment"]["name"])['extension'];
 			//set filename
 			$new_filename = $reference.".".$extension;
-
+      // query
 			$attach_query = "attachment ='$new_filename',";
 		}else{ 
 			$attach_query ="";
 		}
 
-		$check = "SELECT state FROM disciplinary_action WHERE reference_id ='$reference'";
-		$query = $conn->query($check);
+    // prepared stmt
+		$check = $conn->query("SELECT state FROM disciplinary_action WHERE reference_id =?");
+    $check>bind_param('s',$reference);
+		$query = $check->get_result();
 		$row= $query->fetch_assoc();
+
 		$state_query = ($row['state']=='Reviewed') ? "" : ",state='Responded'";
 
-		$sql = "UPDATE disciplinary_action SET $attach_query explanation='$explanation' $state_query  WHERE reference_id ='$reference' ";
+		$sql = $conn->prepare("UPDATE disciplinary_action SET $attach_query explanation=? $state_query  WHERE reference_id =? ");
+    $sql->bind_param('ss',$explanation,$reference);
 
 		if ($attachment!='') {
 			if (!in_array($extension, $valid_extension)) {
@@ -46,11 +51,10 @@
 			if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/disciplinary/'.$new_filename)){
 				if (unlink($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/disciplinary/'.$new_filename)) {
 				}
-				
 			}
 			//move file
 			move_uploaded_file($_FILES["attachment"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/disciplinary/'.$new_filename);
-			if($conn->query($sql)){
+			if($sql->execute()){
 				$emp_id = $user['employee_id'];
 				$full = $user['firstname'].' '.$user['lastname'];
 				$title = $full." sent a reply regarding with disciplinary action";
@@ -61,9 +65,7 @@
 				$_SESSION['error'] = 'Connection Time-out';
 			}
 		}
-
-		
-		
+    
 	}else{
 		$_SESSION['error'] = 'Fill up add form first';
 	}	

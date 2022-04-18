@@ -1,20 +1,30 @@
 <?php 
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+  require_once("../../includes/path.php");
+	require_once("../../admin/includes/session.php");
+
 	if(isset($_POST['id'])){
-		// initilization shit
+
+		// get id
 		$id = $_POST['id'];
-		$progress = $conn->query("SELECT * FROM attendance_correction where attendance_id = '$id' order by unix_timestamp(date_created) desc ");
+    // prepared stmt
+		$progress = $conn->prepared("SELECT * FROM attendance_correction WHERE attendance_id = ? ORDER BY unix_timestamp(date_created) DESC ");
+    $progress->bind_param('s',$id);
+    $progress->execute();
+    $result = $progress->get_result();
 
 		
 		$rows=array();
 
 		if($progress->num_rows > 0){
-              while($row = $progress->fetch_assoc()){
-              	array_push($rows,$row);
-              }
+      while($row = $result->fetch_assoc()){
+      	array_push($rows,$row);
+      }
 		}
 		echo json_encode($rows);
-	}
+
+	} else {
+    header('location: ../dtr.php');
+  }
 
 
 
