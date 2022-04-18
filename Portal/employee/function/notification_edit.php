@@ -1,12 +1,18 @@
 <?php 
-
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
-
+  require_once("../../includes/path.php");
+	require_once("../../admin/includes/session.php");
 
 	if (isset($_POST['id'])) {
+
+    // get id
 		$id = $_POST['id'];
-		$sql = "UPDATE notification SET open=1 WHERE id= $id ";
-		echo ($conn->query($sql))?1:0;
-	}
+    // update prpared stmt
+		$sql = $conn->prepare("UPDATE notification SET open=1 WHERE id= ? ");
+    $sql->bind_param('d',$id);
+		echo ($sql->execute())?1:0;
+
+	} else {
+    header('location: ../profile.php');
+  }
 
 ?>

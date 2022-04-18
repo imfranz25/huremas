@@ -1,15 +1,22 @@
 <?php 
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+  require_once("../../includes/path.php");
+	require_once("../../admin/includes/session.php");
 
 	if(isset($_POST['id'])){
-		// initilization shit
+
+		// get id
 		$id = $_POST['id'];
-		$sql = "SELECT * FROM event_request  WHERE reference_id = '$id'";
-		$query = $conn->query($sql);
+    // prepared stmt
+		$sql = $conn->prepare("SELECT * FROM event_request  WHERE reference_id = ? ");
+    $sql->bind_param('s',$id);
+    $sql->execute();
+		$query = $sql->get_result();
 		$row = $query->fetch_assoc();
 
 		echo json_encode($row);
-	}
+	} else {
+    header('location: ../events.php');
+  }
 
 
 ?>

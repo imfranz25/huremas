@@ -1,6 +1,6 @@
 <?php 
-
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+  require_once("../../includes/path.php");
+	require_once("../../admin/includes/session.php");
 
 	//sample ID
 	$id =$_SESSION["id"];
@@ -15,11 +15,7 @@
 	$query = $conn->query($sql);
 	$row = $query->fetch_assoc();
 
-    //		LEFT JOIN schedules ON schedules.id=employees.schedule_id 
-	//$row['time_in'] =  (new Datetime($row['time_in']))->format('h:i A');
-	//$row['time_out'] = (new Datetime($row['time_out']))->format('h:i A');
-
-
+  
 	echo json_encode($row);
 
 

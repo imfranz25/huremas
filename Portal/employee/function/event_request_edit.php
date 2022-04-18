@@ -1,9 +1,10 @@
 <?php 
-
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+  require_once("../../includes/path.php");
+	require_once("../../admin/includes/session.php");
 
 	if (isset($_POST['edit'])) {
 
+    // get details
 		$id = $_POST['reference_id'];
 		$date = $_POST['event_date'];
 		$event_name = trim($_POST['event_name']);
@@ -29,7 +30,8 @@
 		}
 
 		
-		$sql = "UPDATE event_request SET event_name='$event_name', event_date='$date', event_from='$event_from', event_to='$event_to', event_venue='$venue', details = '$details' $image_query WHERE reference_id = '$id' ";
+		$sql = $conn->prepare("UPDATE event_request SET event_name=?, event_date=?, event_from=?, event_to=?, event_venue=?, details = ? $image_query WHERE reference_id = ? ");
+    $sql->bind_param('sssssss',$event_name,$date,$event_from,$event_to,$venue,$details,$id);
 
 
 
@@ -45,24 +47,25 @@
 
 
 			if ($valid) {
-				if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename)){
-					if (unlink($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename)) {
+				if(file_exists('../../admin/uploads/events/'.$new_filename)){
+					if (unlink('../../admin/uploads/events/'.$new_filename)) {
 					}
 				}
-				move_uploaded_file($_FILES["display"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/events/'.$new_filename);
+				move_uploaded_file($_FILES["display"]["tmp_name"],'../../admin/uploads/events/'.$new_filename);
 			}
 
 		}
 
 		if($valid){
-			if($conn->query($sql)){
+			if($sql->execute()){
 
+        // send notif
 				$emp_id = $user['employee_id'];
 				$full = $user['firstname'].' '.$user['lastname'];
 				$title = $full." updated a event request";
 				send_notif($conn, $emp_id, $title, 'events.php', 'admin');
-
 				$_SESSION['success'] = 'Event request updated successfully';
+
 			}
 			else{
 				$_SESSION['error'] = 'Connection Timeout';
