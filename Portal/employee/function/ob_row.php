@@ -1,15 +1,22 @@
 <?php 
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+  require_once("../../includes/path.php");
+  require_once("../../admin/includes/session.php");
 
 	if(isset($_POST['id'])){
-		// initilization shit
-		$id = $_POST['id'];
-		$sql = "SELECT *,a.id as otrid FROM allowance a  WHERE a.id = '$id'";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
 
+		// get id
+		$id = $_POST['id'];
+    // prepared stmt
+		$sql = $conn->prepare("SELECT *,a.id as otrid FROM allowance a  WHERE a.id = ? ");
+    $sql->bind_param('s',$id);
+    $sql->execute();
+		$query = $sql->get_result();
+		$row = $query->fetch_assoc();
 		echo json_encode($row);
-	}
+
+	} else {
+    header('location: ../official_business.php');
+  }
 
 
 ?>
