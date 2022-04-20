@@ -20,7 +20,7 @@ Project Modules:
 ### SETUP
 
 Software & Tool Requirements: 
-* Server -> XAMPP (Preferred) or WAMMP
+* Server -> XAMPP (Preferred) or WampServer
 
 Procedures: 
 * Open XAMPP and Start MySQL and Apache
