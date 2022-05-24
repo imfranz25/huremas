@@ -1,14 +1,24 @@
 <?php 
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+  require_once("../../includes/path.php");
+  require_once("../../admin/includes/session.php");
+
 	if(isset($_POST['id'])){
-		// initilization shit
+
+		// get id
 		$id = $_POST['id'];
-		$sql = "SELECT *, task.id as tid FROM task left join employees e on e.employee_id=task.employee_id WHERE task.id = '$id'";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+
+    //prepared stmt
+		$sql = $conn->prepare("SELECT *, task.id as tid FROM task left join employees e on e.employee_id=task.employee_id WHERE task.id = ? ");
+    $sql->bind_param('s',$id);
+    $sql->execute();
+    $result = $sql->get_result();
+		$row = $result->fetch_assoc();
 
 		echo json_encode($row);
-	}
+
+	} else {
+    header('location: ../tasks.php');
+  }
 
 ?>
 
