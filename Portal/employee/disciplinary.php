@@ -124,7 +124,7 @@
 function DA_row(id){
   $.ajax({
     type: 'POST',
-    url: '/Portal/admin/function/disciplinaryA_row.php',
+    url: '../admin/function/disciplinaryA_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
@@ -140,7 +140,7 @@ function DA_row(id){
       //attachment link
       $('.attachment_link_DA').html('');
       if (response.attachment!='') {
-        $('.attachment_link_DA').html('<i class="fa fa-paperclip mr-2"></i><label style="cursor: pointer;"><a target="_blank" href="/Portal/admin/uploads/disciplinary/'+response.attachment+'" class="attachment_DA">'+response.attachment+'</a></label>');
+        $('.attachment_link_DA').html('<i class="fa fa-paperclip mr-2"></i><label style="cursor: pointer;"><a target="_blank" href="../admin/uploads/disciplinary/'+response.attachment+'" class="attachment_DA">'+response.attachment+'</a></label>');
       }else{
         $('.attachment_link_DA').html('<label><a href="javascript:void(0)">No Attachment</a></label>');
       }

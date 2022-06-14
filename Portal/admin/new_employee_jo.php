@@ -68,7 +68,7 @@
 
         <div class="col-md-6">
           <div class="form-group d-flex justify-content-center align-items-center mb-3">
-            <img src="../assets/profile/avatar-blank.jpg" alt="Avatar" id="cimg" class="img-thumbnail img-fluid" width="143" height="143">
+            <img src="uploads/profile/profile.jpg" alt="Avatar" id="cimg" class="img-thumbnail img-fluid" width="143" height="143">
           </div>
           <hr>
           <div class="form-group ">

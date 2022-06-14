@@ -107,7 +107,7 @@
   function getRecord(code){
     $.ajax({
       type: 'POST',
-      url: '/Portal/admin/function/training_record_row.php',
+      url: '../admin/function/training_record_row.php',
       data: {record:code},
       dataType: 'json',
       success :function(response){

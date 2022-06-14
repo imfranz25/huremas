@@ -108,7 +108,7 @@
   function getRow(id){
     $.ajax({
       type: 'POST',
-      url: '/Portal/admin/function/benefits_row.php',
+      url: '../admin/function/benefits_row.php',
       data: {id:id},
       dataType: 'json',
       success: function(response){

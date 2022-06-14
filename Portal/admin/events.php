@@ -170,7 +170,7 @@
         $('.ereq_id').val(response.reference_id);
         $('.event_date_text').val((new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
         $('.event_display').html(response.display_image);
-        $('.event_display').attr('href','<?php echo $global_link; ?>/Portal/admin/uploads/events/'+response.display_image);
+        $('.event_display').attr('href','uploads/events/'+response.display_image);
         $('.event_name').val(response.event_name);
         $('.event_from').val(response.event_from);
         $('.event_to').val(response.event_to);

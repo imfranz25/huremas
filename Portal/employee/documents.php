@@ -148,7 +148,7 @@ function get_request(reference_id){
   $('#review_form')[0].reset();
   $.ajax({
     type: 'POST',
-    url: '/Portal/admin/function/document_request_row.php',
+    url: '../admin/function/document_request_row.php',
     dataType: 'json',
     data: {request_id:reference_id},
     success: function(response){

@@ -73,7 +73,7 @@ function event_request_row(id){
       //edit
       $('.event_reference').val(response.reference_id);
       $('.event_display').html(response.display_image);
-      $('.event_display').attr('href','/Portal/admin/uploads/events/'+response.display_image);
+      $('.event_display').attr('href','../admin/uploads/events/'+response.display_image);
       $('.event_date').val(response.event_date);
       $('.event_date_text').val((new Date(response.event_date)).toLocaleString('en-us',{month:'long',day:'numeric',year:'numeric'}));
       $('.event_name').val(response.event_name);

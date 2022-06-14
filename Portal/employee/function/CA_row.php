@@ -8,7 +8,8 @@
 		$id = $_POST['id'];
 	
     $sql = $conn->prepare("SELECT * FROM cash_advance WHERE id=? ");
-		$sql->bind_param('d',$id);
+    $sql->bind_param('d',$id);
+		$sql->execute();
 		$query = $sql->get_result();
 		$row = $query->fetch_assoc();
 

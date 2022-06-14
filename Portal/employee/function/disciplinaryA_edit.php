@@ -1,6 +1,7 @@
 <?php 
 
-	require_once($_SERVER['DOCUMENT_ROOT']."/Portal/admin/includes/session.php");
+  require_once("../../includes/path.php");
+  require_once("../../admin/includes/session.php");
 
 	if (isset($_POST['edit_action'])) {
 
@@ -27,8 +28,9 @@
 		}
 
     // prepared stmt
-		$check = $conn->query("SELECT state FROM disciplinary_action WHERE reference_id =?");
-    $check>bind_param('s',$reference);
+		$check = $conn->prepare("SELECT state FROM disciplinary_action WHERE reference_id =?");
+    $check->bind_param('s',$reference);
+    $check->execute();
 		$query = $check->get_result();
 		$row= $query->fetch_assoc();
 
@@ -48,12 +50,12 @@
 		}
 
 		if($valid){
-			if(file_exists($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/disciplinary/'.$new_filename)){
-				if (unlink($_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/disciplinary/'.$new_filename)) {
+			if(file_exists('../../admin/uploads/disciplinary/'.$new_filename)){
+				if (unlink('../../admin/uploads/disciplinary/'.$new_filename)) {
 				}
 			}
 			//move file
-			move_uploaded_file($_FILES["attachment"]["tmp_name"],$_SERVER['DOCUMENT_ROOT'].'/Portal/admin/uploads/disciplinary/'.$new_filename);
+			move_uploaded_file($_FILES["attachment"]["tmp_name"],'../../admin/uploads/disciplinary/'.$new_filename);
 			if($sql->execute()){
 				$emp_id = $user['employee_id'];
 				$full = $user['firstname'].' '.$user['lastname'];
