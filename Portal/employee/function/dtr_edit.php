@@ -11,7 +11,7 @@
 		$reason = $_POST['reason'];
 		
 		$sql = $conn->prepare("INSERT INTO `attendance_correction`( `attendance_id`, `req_in`, `req_out`, `status`, `reason`) VALUES (?,?,?,'0',?) ");
-    $sql->bind_param('ssss',$id,$in,$out,$reason);
+    $sql->bind_param('dsss',$id,$in,$out,$reason);
 		
 		if($sql->execute()){
 

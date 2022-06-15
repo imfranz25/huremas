@@ -25,11 +25,11 @@
     $insert->bind_param('s',$id);
 
     //get reference id
-    global $update,$id,$status,$get_id;
+    global $update_erequest,$id,$status,$get_id;
     $id = $_POST['reference_id'];
     $status = 1; // approved
 
-		if ($insert->execute() && $update->execute()) {
+		if ($insert->execute() && $update_erequest->execute()) {
 
 			$get_id->execute();
       $result = $get_id->get_result();
@@ -46,7 +46,7 @@
 	}else if(isset($_POST['reject'])){
 
     //initialize
-    global $update,$id,$status$get_id;
+    global $update_erequest,$id,$status,$get_id;
 		$id = $_POST['reference_id'];
     $status = 2; // rejected
 

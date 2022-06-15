@@ -196,7 +196,7 @@
             Object.keys(resp).map(k=>{
               var _progress = $('#clone_progress .post').clone()
               _progress.find('.pdesc').append(resp[k].progress)
-              _progress.find('.avatar').attr('src','../assets/images/'+resp[k].photo)
+              _progress.find('.avatar').attr('src','uploads/profile/'+resp[k].photo)
               _progress.find('.nf').text(resp[k].uname)
               _progress.find('.date').text(resp[k].date_created)
 

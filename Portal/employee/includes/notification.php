@@ -91,7 +91,7 @@
   function update_openlink(id,link){
     $.ajax({
       type: 'POST',
-      url: '/HUREMAS/Portal/employee/function/notification_edit.php',
+      url: '../function/notification_edit.php',
       data: {id:id},
       dataType: 'json',
       success: function(response){

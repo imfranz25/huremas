@@ -33,7 +33,7 @@
     onclick="location.replace($(this).data('link'));"
     style="border-bottom: 1px solid rgba(0, 0, 0, .3);">
       <div class="media">
-        <img class="d-flex align-self-center img-radius" src="/Portal/admin/images/<?php echo $row['photo']; ?>" alt="<?php echo $full; ?>">
+        <img class="d-flex align-self-center img-radius" src="uploads/profile/<?php echo $row['photo'] ? $row['photo'] : 'profile.jpg' ; ?>" alt="<?php echo $full; ?>">
           <div class="media-body">
             <h5 class="notification-user"><?php echo $full; ?></h5>
               <p class="notification-msg"><?php echo ucfirst($title); ?></p>

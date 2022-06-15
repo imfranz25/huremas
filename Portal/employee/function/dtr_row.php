@@ -7,7 +7,7 @@
 		// get id
 		$id = $_POST['id'];
     //prepared stmt
-		$sql = "SELECT * FROM attendance WHERE id = ? ";
+		$sql = $conn->prepare("SELECT * FROM attendance WHERE id = ? ");
     $sql->bind_param('s',$id);
     $sql->execute();
     $result = $sql->get_result();

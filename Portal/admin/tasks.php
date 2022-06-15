@@ -191,7 +191,7 @@ function getRow2(id){
           let dayy = new Date(response[i].data_created);
           var d = dayy.toDateString();
           block = block+  "<div class='accordion-desc'>"
-          +"</span><div><img class='img-radius img-thumbnail' style='border:solid gray 2px ;padding:1px;max-width: 40px;height: auto;' src='images/"+response[i].photo+"' alt='user image'><span class='username'><a href='#'>"+response[i].uname+"</a></span><br><span class='fa fa-calendar'></span><span><b>"+d+"</b></span></div></div><div><br><span class='description'>"+response[i].progress+"</span></div></div><p></p>";
+          +"</span><div><img class='img-radius img-thumbnail' style='border:solid gray 2px ;padding:1px;max-width: 40px;height: auto;' src='uploads/profile/"+response[i].photo+"' alt='user image'><span class='username'><a href='#'>"+response[i].uname+"</a></span><br><span class='fa fa-calendar'></span><span><b>"+d+"</b></span></div></div><div><br><span class='description'>"+response[i].progress+"</span></div></div><p></p>";
          }
      }else{
       block = block = "<div class='mb-2'><center><i>No Progress Yet</i></center></div>";
@@ -219,9 +219,9 @@ function getRow(id){
 
       if (stats==0){
         statsstring="<span class='badge badge-info'>Pending</span>";
-      }else if(status==1){
+      }else if(stats==1){
         statsstring="<span class='badge badge-primary'>On-Progress</span>";
-      }else if(status==2){
+      }else if(stats==2){
         statsstring="<span class='badge badge-success'>Complete</span>";
       }
 
