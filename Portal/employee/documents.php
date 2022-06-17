@@ -184,7 +184,7 @@ function get_request(reference_id){
         $('.request_file_upload').attr('required',false);
         $('.view_request_file').attr('target','_blank');
         $('.view_request_file').html(response.request_file);
-        $('.view_request_file').attr('href','/Documents/request/?reference_id='+response.file_hash);
+        $('.view_request_file').attr('href','../../Documents/request/?reference_id='+response.file_hash);
         if (response.request_status==3) {
           $('.validated_reply').addClass('d-none');  
         }

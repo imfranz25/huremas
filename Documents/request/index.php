@@ -7,7 +7,7 @@
 <?php 
 
 	session_start();
-	include '../../Portal/admin/includes/conn.php';
+	include '../../Database/conn.php';
 
 	$valid = false;
 	$isImage = false;

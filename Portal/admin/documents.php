@@ -371,6 +371,7 @@ function get_document(document_id){
         let ext = (response.document_file).split('.').pop();
         let folder = (response.folder_name==null)?response.document_folder:response.folder_name;
         let href = (response.document_type=='document')? "../../Documents/index.php?document_id="+response.document_hash : response.document_file;
+        let slink = (response.document_type=='document')? "Documents/index.php?document_id="+response.document_hash : response.document_file;
 
         // SET INFOS
         $('.view_upload_folder').val(folder);
@@ -394,7 +395,7 @@ function get_document(document_id){
           $('.label_docu').html('File');
           $('.view_upload_name').html('Document Name');
           $('#download').removeClass('d-none');
-          var domain ="localhost";
+          var domain ="localhost/HUREMAS/";
         }
 
         //document properties
@@ -402,8 +403,8 @@ function get_document(document_id){
         $('#starred').data('document_starred',response.document_starred);
         $('#edit_document_id').val(response.document_id);
         $('#download').attr('download',response.document_file);
-        $('#download').attr('href',href);
-        $('#share').attr('href',domain+href); //temporary -> localhost
+        $('#download').attr('href','../../Documents/'+response.document_id+'.'+ext);
+        $('#share').attr('href',domain+slink); //temporary -> localhost
         $('.docu_folder_id').val(response.document_id); //temporary -> localhost
         //lock
         $('.lock_folder_name').html(response.document_name); 
@@ -709,7 +710,7 @@ function get_request(reference_id){
         if(response.request_file!=null){
           $('.view_request_file').attr('target','_blank');
           $('.view_request_file').html(response.request_file);
-          $('.view_request_file').attr('href','/Documents/request/?reference_id='+response.file_hash);
+          $('.view_request_file').attr('href','../../Documents/request/?reference_id='+response.file_hash);
         }
         
 
@@ -725,7 +726,7 @@ function get_request(reference_id){
       $('.view_request_status').val(set_req_status(response.request_status));
       $('.view_request_comment').val(response.request_comment);
       $('.request_file').html(response.request_file);
-      $('.request_file').attr('href','/Documents/request/index.php?reference_id='+response.file_hash);
+      $('.request_file').attr('href','../../Documents/request/index.php?reference_id='+response.file_hash);
 
       //view employee
       $('.view_request_date').val(new Date(response.request_date).toLocaleString('en-us',{month:'long', year:'numeric', day:'numeric'}));

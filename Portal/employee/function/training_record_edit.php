@@ -9,7 +9,7 @@
 		$note = trim($_POST['note']);
 
     // prepared stmt
-		$sql = $conn->bind_param("UPDATE training_record SET internal_note=? WHERE reference_no =? ");	
+		$sql = $conn->prepare("UPDATE training_record SET internal_note=? WHERE reference_no =? ");	
     $sql->bind_param('ss',$note,$reference_no);
 
 		if ($sql->execute()) {

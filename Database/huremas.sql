@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2022 at 03:08 PM
+-- Generation Time: Jun 15, 2022 at 08:03 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.0
 
@@ -42,8 +42,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `employee_id`, `username`, `password`, `default_password`, `type`, `date_created`) VALUES
-(1, 'CVSUEJT052613497', 'admin', '$2y$10$AbmOsNdjTbmA2lff.TwwDOUSCEWjVXE9sbMZb6/dFcP5A.X8hwN8a', 'admin123', 'admin', '2021-12-12 16:15:30'),
-(73, 'CVSUKNC085291637', 'bellon.randolf_1637', '$2y$10$jZLAD1KOVie.bFWBJwDcTuUXm4x/zthwPq.vzZxpzUtQmq4scUYpK', '12SN4589670B', 'employee', '2022-04-16 20:23:31');
+(1, 'CVSUEJT052613497', 'admin', '$2y$10$PGq350JU2WPmet6ykdcTGemHVPwnwR83frQp4rlolsiItXrrYmb/2', 'admin123', 'admin', '2021-12-12 16:15:30'),
+(73, 'CVSUKNC085291637', 'bellon.randolf_1637', '$2y$10$19xVoabUt2m2LWW7I.j.2OlWKUVMZJEGZl9aX8QWI0rt1ILU7JGhK', '12SN4589670B', 'employee', '2022-04-16 20:23:31'),
+(74, 'CVSUPOR895461732', 'forge.anya_1732', '$2y$10$CJpgWO9Jht1X5.S4rrOswOCDgc27Njo.bKMoHyfxgxlDTpAB3kz/y', 'G31OS7890624', 'employee', '2022-06-14 23:36:12'),
+(75, 'CVSUXHL9203875461209', 'cruz.juan_1209', '$2y$10$NPM7KrdAxBN8Jsgil7COruxQW2WCLmluEKkJbjlhprapr1fLM3ULa', 'J412793I6G05', 'employee', '2022-06-15 13:13:21');
 
 -- --------------------------------------------------------
 
@@ -82,6 +84,13 @@ CREATE TABLE `allowance` (
   `notes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `allowance`
+--
+
+INSERT INTO `allowance` (`id`, `employee_id`, `date`, `start`, `end`, `details`, `status`, `evaluated_by`, `cash`, `notes`) VALUES
+(3, 'CVSUKNC085291637', '2022-06-02', '08:21:00', '12:21:00', 'Sample', '0', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -108,9 +117,8 @@ CREATE TABLE `applicant` (
 --
 
 INSERT INTO `applicant` (`id`, `applicant_no`, `job_code`, `application_date`, `first_name`, `middle_name`, `last_name`, `email`, `contact`, `attachment`, `stage`, `notes`) VALUES
-(5, 2022126795840, 'CVSUJOBAYH207981536', '2022-04-16 02:01:50', 'Juan', 'Dela', 'Cruz', 'francis.ong25@gmail.com', '094546545456', '2022126795840.pdf', 'On-Board', 'Successfully Onboarded'),
-(9, 2022830146275, 'CVSUJOBAYH207981536', '2022-04-16 13:26:06', 'James', 'Dela', 'Cruz', 'james@gmail.com', '086435132', '2022830146275.pdf', 'Disqualified', ''),
-(33, 2022064985712, 'CVSUJOBAYH207981536', '2022-04-16 15:27:03', 'Henry', 'Dela', 'Cruz', 'francis.ong25@gmail.com', '09867435432', '2022064985712.pdf', 'New Candidates', '');
+(34, 2022073682145, 'CVSUJOBJBT924760831', '2022-06-15 05:08:22', 'Juan', 'Dela', 'Cruz', 'francis.ong25@gmail.com', '09565245845', '2022073682145.pdf', 'On-Board', 'keen to work for 10 hours'),
+(35, 2022106798542, 'CVSUJOBJBT924760831', '2022-06-15 05:40:42', 'Jose', 'M.', 'Manalo', 'francis.ong25@gmail.com', '054654165456', '2022106798542.pdf', 'New Candidates', '');
 
 -- --------------------------------------------------------
 
@@ -131,7 +139,9 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`id`, `employee_id`, `date_created`, `time_in`, `time_out`) VALUES
-(9, 'CVSUEJT052613497', '2022-04-15 22:44:23', '2022-04-15 08:00:00', '2022-04-15 16:00:00');
+(9, 'CVSUEJT052613497', '2022-04-15 22:44:23', '2022-04-15 08:00:00', '2022-04-15 16:00:00'),
+(10, 'CVSUKNC085291637', '2022-06-01 00:19:07', '2022-06-01 00:19:07', NULL),
+(11, 'CVSUPOR895461732', '2022-06-15 08:54:23', '2022-06-15 08:54:00', '2022-06-15 09:42:00');
 
 -- --------------------------------------------------------
 
@@ -149,6 +159,16 @@ CREATE TABLE `attendance_correction` (
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `reviewed_by` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `attendance_correction`
+--
+
+INSERT INTO `attendance_correction` (`id`, `attendance_id`, `req_in`, `req_out`, `status`, `reason`, `date_created`, `reviewed_by`) VALUES
+(6, 0, '2022-06-15 08:49:00', '2022-06-15 10:49:00', '0', 'Sample', '2022-06-15 09:49:39', NULL),
+(7, 11, '2022-06-15 08:54:00', '2022-06-15 09:42:00', '2', 'Sample', '2022-06-15 09:55:36', 'Francis Ong'),
+(8, 11, '2022-06-15 08:54:00', '2022-06-15 09:42:00', '1', 'Sample', '2022-06-15 09:56:24', 'Francis Ong'),
+(9, 11, '2022-06-15 08:54:00', '2022-06-15 09:42:00', '2', 'Sample ', '2022-06-15 09:59:34', 'Francis Ong');
 
 -- --------------------------------------------------------
 
@@ -183,6 +203,13 @@ CREATE TABLE `benefit_record` (
   `date_applied` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `benefit_record`
+--
+
+INSERT INTO `benefit_record` (`id`, `benefit_id`, `employee_id`, `date_applied`) VALUES
+(5, 'CVSUBENVJI258140739', 'CVSUPOR895461732', '2022-06-14');
+
 -- --------------------------------------------------------
 
 --
@@ -202,6 +229,15 @@ CREATE TABLE `cash_advance` (
   `reviewed_by` varchar(100) DEFAULT NULL,
   `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cash_advance`
+--
+
+INSERT INTO `cash_advance` (`id`, `reference_id`, `employee_id`, `req_date`, `ca_type`, `ca_reason`, `ca_account`, `amount`, `status`, `reviewed_by`, `notes`) VALUES
+(6, 'CAQCZ063854917', 'CVSUKNC085291637', '2022-06-10', 'Cash', 'Sample', '', '300', 'Pending', NULL, ''),
+(7, 'CAGUZ461873052', 'CVSUPOR895461732', '2022-06-14', 'Cash', 'Sample', '', '500', 'Approved', 'Francis Ong', 'Sample'),
+(8, 'CAZEQ431875620', 'CVSUPOR895461732', '2022-06-15', 'Cash', 'Sample', '', '300', 'Rejected', 'Francis Ong', 'Sample');
 
 -- --------------------------------------------------------
 
@@ -316,7 +352,8 @@ CREATE TABLE `disciplinary_action` (
 --
 
 INSERT INTO `disciplinary_action` (`id`, `reference_id`, `employee_id`, `issued_date`, `reason`, `internal_note`, `attachment`, `explanation`, `action`, `action_details`, `issued_by`, `state`) VALUES
-(2, 'CVSUDALRX026543798', 'CVSUKNC085291637', '2022-02-11', 2, 'Sample', '', '', '', '', 'Francis Ong', 'Draft');
+(2, 'CVSUDALRX026543798', 'CVSUKNC085291637', '2022-02-11', 2, 'Sample', 'CVSUDALRX026543798.pdf', 'Sample', '3 Days Suspension', 'Sample', 'Francis Ong', 'Reviewed'),
+(4, 'CVSUDAMZH803972145', 'CVSUPOR895461732', '2022-06-15', 4, 'Sample', 'CVSUDAMZH803972145.docx', 'Sample', '1 Day suspension', 'Sample', 'Francis Ong', 'Reviewed');
 
 -- --------------------------------------------------------
 
@@ -337,7 +374,8 @@ CREATE TABLE `disciplinary_category` (
 --
 
 INSERT INTO `disciplinary_category` (`id`, `title`, `code`, `cat_type`, `details`) VALUES
-(2, 'Verbal Abuse', '', 'Mild', 'Sample Details');
+(2, 'Verbal Abuse', '', 'Mild', 'Sample Details'),
+(4, 'Damage to Property', '', 'Mild', 'Sample');
 
 -- --------------------------------------------------------
 
@@ -366,8 +404,10 @@ CREATE TABLE `documents` (
 --
 
 INSERT INTO `documents` (`id`, `document_id`, `document_name`, `document_type`, `document_owner`, `document_folder`, `document_date`, `document_details`, `document_created`, `document_status`, `document_file`, `document_archive`, `document_starred`) VALUES
-(2, 'CVSUDOXCCSD247916358', 'AWS Academy Certificate - Francis Ong', 'document', 'Francis Ong', 'Institutional Records', '2022-04-16', 'Sample', 'CVSUEJT052613497', 0, 'AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20220403-46-2nwhrv.pdf', 0, 1),
-(3, 'CVSULINKPHL713069524', 'AWS - Francics Ong', 'url', 'Francis Ong', 'CVSUFOLDXDU253096714', '2022-04-16', 'AWS Link', 'CVSUEJT052613497', 0, 'https://www.credly.com/badges/a8bfd27c-f99f-43ee-9120-b87596f8860e/public_url', 0, 0);
+(2, 'CVSUDOXCCSD247916358', 'AWS Certificate - Francis Ong', 'document', 'Francis Ong', 'Institutional Records', '2022-04-16', 'Sample', 'CVSUEJT052613497', 0, 'AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20220403-46-2nwhrv.pdf', 0, 1),
+(3, 'CVSULINKPHL713069524', 'AWS - Francics Ong', 'url', 'Francis Ong', 'CVSUFOLDXDU253096714', '2022-04-16', 'AWS Link', 'CVSUEJT052613497', 0, 'https://www.credly.com/badges/a8bfd27c-f99f-43ee-9120-b87596f8860e/public_url', 0, 0),
+(4, 'CVSUDOXCFLI184073296', 'Cert OJT', 'document', 'Anya Forge', 'Human Resource', '2022-06-15', 'Cert of OJT', 'CVSUEJT052613497', 0, 'certificate- Ong, Francis.docx.pdf', 0, 0),
+(5, 'CVSUDOXCAND563401298', 'Sample', 'document', 'Francis Ong', 'Institutional Records', '2022-06-15', 'Sample', 'CVSUEJT052613497', 0, 'ABT77780D0A495FA6A3DB9511A94831CE7D0B6A2C6F631C7B2CB58980FE09D12F4D.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -390,7 +430,8 @@ CREATE TABLE `document_folder` (
 --
 
 INSERT INTO `document_folder` (`id`, `folder_id`, `folder_name`, `folder_date`, `folder_details`, `folder_created_by`, `folder_archive`) VALUES
-(15, 'CVSUFOLDXDU253096714', 'Personal', '2022-04-16', 'Sample Folder', 'CVSUEJT052613497', 0);
+(15, 'CVSUFOLDXDU253096714', 'Personal', '2022-04-16', 'Sample Folder', 'CVSUEJT052613497', 0),
+(16, 'CVSUFOLDJKM546287039', 'Clearance', '2022-06-15', 'Folder for Clearance', 'CVSUEJT052613497', 0);
 
 -- --------------------------------------------------------
 
@@ -411,6 +452,14 @@ CREATE TABLE `document_request` (
   `request_by` varchar(10) NOT NULL,
   `folder_id` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `document_request`
+--
+
+INSERT INTO `document_request` (`id`, `reference_id`, `employee_id`, `request_date`, `request_name`, `request_note`, `request_file`, `request_status`, `request_comment`, `request_by`, `folder_id`) VALUES
+(0, 'CVSUREQAAXD579643812', 'CVSUPOR895461732', '2022-06-15', 'OJT Cert', 'Sample Docu Request', 'certificate-   Ong, Francis.docx.pdf', 1, 'Here is the Document\r\n\r\nThank you!', 'employee', NULL),
+(0, 'CVSUREQAXTF930214587', 'CVSUPOR895461732', '2022-06-15', 'Cert OJT', 'Request Copy for OJT Cert 101', 'certificate- Ong, Francis.docx.pdf', 3, 'Copy of Cert', 'admin', 'Human Resource');
 
 -- --------------------------------------------------------
 
@@ -455,11 +504,14 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `middlename`, `lastname`, `suffix`, `address`, `birthdate`, `mobile_no`, `contact_info`, `email`, `sex`, `photo`, `position_id`, `department_id`, `schedule_id`, `category_id`, `date_hired`, `sss_id`, `pagibig_id`, `philhealth_id`, `tin_num`, `sss_prem`, `philhealth_prem`, `pagibig_prem`, `created_date`, `employee_archive`) VALUES
 (3, 'CVSUEJT052613497', 'Francis', 'Condino', 'Ong', '', 'Bacoor City, Cavite', '2000-05-13', '09362387135', '4763233', 'francis.ong25@gmail.com', 'Male', 'CVSUEJT052613497.jpg', 7, 1, 3, 1, '2013-06-04', '34-6581234-4', '121253674428', '082504598536', '439-126-266-0488', '338.00', '112.50', '100.00', '2021-10-04', 0),
 (72, 'CVSUDZH231690758', 'Juan', 'Dela', 'Cruz', '', 'Salinas 1', '2000-01-14', '0987465123', '2323-232-3', 'juandelacruz123123@gmail.com', 'Male', 'CVSUDZH231690758.jpg', 9, 1, 0, 2, '2022-02-08', '439-126-456-0475', '439-126-456-0475', '439-126-456-0475', '439-126-456-0475', NULL, NULL, NULL, '2022-02-08', 0),
-(73, 'CVSUGDQ792531486', '22222', '22222', '22222', '2222', 'sadasd22222', '2000-01-26', '313123', '12312', 'francis.ong25@gmail.com', 'Male', 'CVSUGDQ792531486.png', 1, 2, 0, 2, '2022-02-08', '12312322', '1231232222', '1232222', '123123222', NULL, NULL, NULL, '2022-02-08', 0),
+(73, 'CVSUGDQ792531486', '22222', '22222', '22222', '2222', 'sadasd22222', '2000-01-26', '313123', '12312', 'francis.ong25@gmail.com', 'Male', 'CVSUGDQ792531486.png', 1, 2, 0, 2, '2022-02-08', '12312322', '1231232222', '1232222', '123123222', NULL, NULL, NULL, '2022-02-08', 1),
 (74, 'CVSUMKY260375198', 'George', 'Dela', 'Frizz', '', 'Salinas 1', '2000-01-06', '098453132', '123-123123', 'webhost025@gmail.com', 'Male', 'CVSUMKY260375198.jpg', 9, 1, 0, 2, '2022-02-10', '439-126-456-0475', '439-126-456-0475', '439-126-456-0475', '439-126-456-0475', NULL, NULL, NULL, '2022-02-10', 0),
 (75, 'CVSUKNC085291637', 'Randolf', 'Cada', 'Bellon', '', 'Salinas 1', '2000-01-06', '087454654', '232-323-23', 'francis.ong25@gmail.com', 'Male', '', 1, 1, 0, 1, '2022-02-10', '439-126-456-0475', '439-126-456-0475', '439-126-456-0475', '439-126-456-0475', NULL, NULL, NULL, '2022-02-10', 0),
-(76, 'CVSUHFE671280435', 'asdasd', 'asd', 'asda', 'adas', 'sadasd', '2000-01-07', '09564525862', 'asdas', 'francis.ong25@gmail.com', 'Male', 'CVSUHFE671280435.jpg', 1, 2, 0, 2, '2022-04-14', '123123', '12313', '123123123', '123123', NULL, NULL, NULL, '2022-04-14', 0),
-(82, 'CVSUQND5468792302733', 'Juan', 'Dela', 'Cruz', '', 'asdasd', '2000-02-23', '094546545456', '094546545456', 'francis.ong25@gmail.com', 'Male', 'CVSUQND5468792302733.png', 1, 7, 0, 1, '2022-04-16', '439-126-456-0475', '439-126-456-0475', '3123-12312-32', '439-126-266-0488', NULL, NULL, NULL, '2022-04-16', 0);
+(76, 'CVSUHFE671280435', 'asdasd', 'asd', 'asda', 'adas', 'sadasd', '2000-01-07', '09564525862', 'asdas', 'francis.ong25@gmail.com', 'Male', 'CVSUHFE671280435.jpg', 1, 2, 0, 2, '2022-04-14', '123123', '12313', '123123123', '123123', NULL, NULL, NULL, '2022-04-14', 1),
+(82, 'CVSUQND5468792302733', 'Juan', 'Dela', 'Cruz', '', 'asdasd', '2000-02-23', '094546545456', '094546545456', 'francis.ong25@gmail.com', 'Male', 'CVSUQND5468792302733.png', 1, 7, 0, 1, '2022-04-16', '439-126-456-0475', '439-126-456-0475', '3123-12312-32', '439-126-266-0488', NULL, NULL, NULL, '2022-04-16', 0),
+(83, 'CVSUZWY276935180', 'Francis', 'sda', '123', '12312', '12312', '2000-12-03', '123123', '12312', 'francis.ong25@gmail.com', 'Male', 'CVSUZWY276935180.jpg', 9, 1, 0, 2, '2022-05-31', '12312', '123', '12312', '123', NULL, NULL, NULL, '2022-06-01', 1),
+(84, 'CVSUPOR895461732', 'Anya', 'S.', 'Forge', '', 'Bacoor City', '2000-01-13', '09565585259', '09565585259', 'francis.ong25@gmail.com', 'Female', 'CVSUPOR895461732.jpg', 9, 1, 0, 2, '2022-06-14', '12312-232', '12312-232', '12312-232', '12312-232', NULL, NULL, NULL, '2022-06-14', 0),
+(85, 'CVSUXHL9203875461209', 'Juan', 'Dela', 'Cruz', 'Jr.', 'Bacoor', '2000-07-13', '09457851254', '09565245845', 'francis.ong25@gmail.com', 'Male', 'CVSUXHL9203875461209.jpg', 1, 1, 0, 1, '2022-06-15', '12312', '123123', '1312', '31231', NULL, NULL, NULL, '2022-06-15', 0);
 
 -- --------------------------------------------------------
 
@@ -531,7 +583,10 @@ INSERT INTO `emp_max_hours` (`id`, `employee_id`, `Monday`, `Tuesday`, `Wednesda
 (40, 'CVSUPRU6538947217907', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
 (41, 'CVSUIBP2305416797907', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
 (42, 'CVSUUEG2491536877606', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
-(43, 'CVSUQND5468792302733', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00');
+(43, 'CVSUQND5468792302733', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
+(44, 'CVSUZWY276935180', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
+(45, 'CVSUPOR895461732', '3.00', '0.00', '0.00', '0.00', '0.00', '0.00'),
+(46, 'CVSUXHL9203875461209', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -555,7 +610,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `reference_id`, `event_name`, `display_image`, `event_date`, `event_from`, `event_to`, `event_venue`) VALUES
-(6, 'CVSUEVZBV473162859', 'asdasd', 'CVSUEVZBV473162859.png', '2022-04-28', '09:47:00', '21:47:00', 'sadsadas');
+(6, 'CVSUEVZBV473162859', 'asdasd', 'CVSUEVZBV473162859.png', '2022-04-28', '09:47:00', '21:47:00', 'sadsadas'),
+(7, 'CVSUEVHAG328506719', 'Sample Event', 'CVSUEVHAG328506719.jpg', '2022-06-24', '08:00:00', '17:52:00', 'CVSU'),
+(9, 'CVSUEVLUG631852740', 'Sample', 'CVSUEVLUG631852740.jpg', '2022-06-21', '01:15:00', '00:18:00', 'Sample');
 
 -- --------------------------------------------------------
 
@@ -577,6 +634,14 @@ CREATE TABLE `event_request` (
   `request_date` date NOT NULL DEFAULT current_timestamp(),
   `details` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `event_request`
+--
+
+INSERT INTO `event_request` (`id`, `reference_id`, `event_name`, `display_image`, `event_date`, `event_from`, `event_to`, `event_venue`, `request_status`, `employee_id`, `request_date`, `details`) VALUES
+(5, 'CVSUEVLUG631852740', 'Sample', 'CVSUEVLUG631852740.jpg', '2022-06-21', '01:15:00', '00:18:00', 'Sample', 1, 'CVSUPOR895461732', '2022-06-15', 'CVSU'),
+(6, 'CVSUEVITP386715402', 'Francis Programming Contest', 'CVSUEVITP386715402.png', '2022-06-19', '01:23:00', '02:24:00', 'CVSU', 2, 'CVSUPOR895461732', '2022-06-15', 'Sample');
 
 -- --------------------------------------------------------
 
@@ -605,7 +670,7 @@ CREATE TABLE `job` (
 --
 
 INSERT INTO `job` (`id`, `job_code`, `job_title`, `job_position`, `job_recruit`, `job_dept`, `job_term`, `job_type`, `job_exp`, `job_grade`, `job_desc`, `job_status`, `job_date`) VALUES
-(4, 'CVSUJOBAYH207981536', 'Instructor with 10k signing BONUS', 1, 23, 7, 'Contract', 'null', 'No Experience Needed', 12, 'Sample Description', 'active', '2022-04-16 01:54:49');
+(6, 'CVSUJOBJBT924760831', 'Instructor I', 1, 10, 1, 'Contract', 'null', '2 Years + of Experience', 30, 'Sample', 'active', '2022-06-15 05:06:37');
 
 -- --------------------------------------------------------
 
@@ -627,7 +692,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `reference_id`, `news_date`, `news_headline`, `display_image`, `news_details`) VALUES
-(21, 'CVSUNEWSPZX014376825', '2022-04-28', '11111', 'CVSUNEWSPZX014376825.jpg', 'Sample');
+(21, 'CVSUNEWSPZX014376825', '2022-04-28', '11111', 'CVSUNEWSPZX014376825.jpg', 'Sample'),
+(24, 'CVSUNEWSOLE103958274', '2022-06-14', 'Sunset', 'CVSUNEWSOLE103958274.jpg', 'Sunset View');
 
 -- --------------------------------------------------------
 
@@ -655,7 +721,53 @@ INSERT INTO `notification` (`id`, `employee_id`, `title`, `date`, `link`, `open`
 (3, 'CVSUEJT052613497', 'Your attendance record has been updated', '2022-04-15', 'dtr.php', 0, 'employee'),
 (4, 'CVSUKNC085291637', 'You have new task - Check it out', '2022-04-15', 'tasks.php', 0, 'employee'),
 (5, 'CVSUKNC085291637', 'Your task has been updated', '2022-04-15', 'tasks.php', 0, 'employee'),
-(6, 'CVSUGDQ792531486', 'You have new task - Check it out', '2022-04-15', 'tasks.php', 0, 'employee');
+(6, 'CVSUGDQ792531486', 'You have new task - Check it out', '2022-04-15', 'tasks.php', 0, 'employee'),
+(7, 'CVSUKNC085291637', 'Randolf Bellonhas timed-in', '2022-06-01', 'dtr.php', 1, 'admin'),
+(8, 'CVSUKNC085291637', 'Randolf Bellon sent a request for attendance correction', '2022-06-01', 'record_correction.php', 1, 'admin'),
+(9, 'CVSUKNC085291637', 'Randolf Bellon send a overtime request', '2022-06-01', 'overtime.php', 0, 'admin'),
+(10, 'CVSUKNC085291637', 'Randolf Bellon sent a official business request', '2022-06-01', 'official_business.php', 0, 'admin'),
+(11, 'CVSUKNC085291637', 'Randolf Bellon send a cash advance request', '2022-06-01', 'cash_advance.php', 0, 'admin'),
+(12, 'CVSUKNC085291637', 'Randolf Bellon send a cash advance request', '2022-06-10', 'cash_advance.php', 0, 'admin'),
+(13, 'CVSUKNC085291637', 'Randolf Bellon sent a reply regarding with disciplinary action', '2022-06-10', 'disciplinary.php', 0, 'admin'),
+(14, 'CVSUKNC085291637', 'Randolf Bellon sent a reply regarding with disciplinary action', '2022-06-10', 'disciplinary.php', 0, 'admin'),
+(15, 'CVSUKNC085291637', 'Randolf Bellon send a task progress', '2022-06-10', 'tasks.php', 0, 'admin'),
+(16, 'CVSUPOR895461732', 'Anya Forge send a cash advance request', '2022-06-14', 'cash_advance.php', 0, 'admin'),
+(17, 'CVSUPOR895461732', 'Anya Forge send a event request', '2022-06-14', 'events.php', 0, 'admin'),
+(18, 'CVSUPOR895461732', 'Anya Forge send a event request', '2022-06-15', 'events.php', 1, 'admin'),
+(19, 'CVSUPOR895461732', 'Your event request has been approved', '2022-06-15', 'events.php', 0, 'employee'),
+(20, 'CVSUPOR895461732', 'Anya Forge send a event request', '2022-06-15', 'events.php', 0, 'admin'),
+(21, 'CVSUPOR895461732', 'Your event request has been rejected', '2022-06-15', 'events.php', 0, 'employee'),
+(22, 'CVSUPOR895461732', 'Your cash advance request has been approved', '2022-06-15', 'cash_advance.php', 0, 'employee'),
+(23, 'CVSUPOR895461732', 'Anya Forge send a cash advance request', '2022-06-15', 'cash_advance.php', 0, 'admin'),
+(24, 'CVSUPOR895461732', 'Your cash advance request has been rejected', '2022-06-15', 'cash_advance.php', 0, 'employee'),
+(25, 'CVSUPOR895461732', 'Anya Forgehas timed-in', '2022-06-15', 'dtr.php', 0, 'admin'),
+(26, 'CVSUKNC085291637', 'Disciplinary record update', '2022-06-15', 'disciplinary.php', 0, 'employee'),
+(27, 'CVSUPOR895461732', 'You have new disciplinary record', '2022-06-15', 'disciplinary.php', 1, 'employee'),
+(28, 'CVSUPOR895461732', 'Disciplinary record update', '2022-06-15', 'disciplinary.php', 0, 'employee'),
+(29, 'CVSUPOR895461732', 'Anya Forge sent a reply regarding with disciplinary action', '2022-06-15', 'disciplinary.php', 0, 'admin'),
+(30, 'CVSUPOR895461732', 'Disciplinary record update', '2022-06-15', 'disciplinary.php', 0, 'employee'),
+(31, 'CVSUPOR895461732', 'Anya Forgehas timed-out', '2022-06-15', 'dtr.php', 0, 'admin'),
+(32, 'CVSUPOR895461732', 'Anya Forge sent a request for attendance correction', '2022-06-15', 'record_correction.php', 0, 'admin'),
+(33, 'CVSUPOR895461732', 'Anya Forge sent a request for attendance correction', '2022-06-15', 'record_correction.php', 0, 'admin'),
+(34, 'CVSUPOR895461732', 'Anya Forge sent a request for attendance correction', '2022-06-15', 'record_correction.php', 0, 'admin'),
+(35, 'CVSUPOR895461732', 'Anya Forge sent a request for attendance correction', '2022-06-15', 'record_correction.php', 0, 'admin'),
+(36, 'CVSUPOR895461732', 'Your attendance correction has been evaluated', '2022-06-15', 'dtr.php', 0, 'employee'),
+(37, 'CVSUPOR895461732', 'Anya Forge sent a request for attendance correction', '2022-06-15', 'record_correction.php', 0, 'admin'),
+(38, 'CVSUPOR895461732', 'Anya Forge sent a request for attendance correction', '2022-06-15', 'record_correction.php', 0, 'admin'),
+(39, 'CVSUPOR895461732', 'Your attendance correction has been evaluated', '2022-06-15', 'dtr.php', 0, 'employee'),
+(40, 'CVSUPOR895461732', 'Your attendance correction has been evaluated', '2022-06-15', 'dtr.php', 0, 'employee'),
+(41, 'CVSUPOR895461732', 'You have new task - Check it out', '2022-06-15', 'tasks.php', 0, 'employee'),
+(42, 'CVSUPOR895461732', 'Anya Forge send a task progress', '2022-06-15', 'tasks.php', 0, 'admin'),
+(43, 'CVSUPOR895461732', 'Anya Forge send a task progress', '2022-06-15', 'tasks.php', 0, 'admin'),
+(44, 'CVSUPOR895461732', 'Anya Forge send a task progress', '2022-06-15', 'tasks.php', 0, 'admin'),
+(45, 'CVSUPOR895461732', 'Your task evaluation has been evaluated', '2022-06-15', 'tasks.php', 0, 'employee'),
+(46, 'CVSUPOR895461732', 'Anya Forge sent a training request', '2022-06-15', 'training_list.php', 0, 'admin'),
+(47, 'CVSUPOR895461732', 'Anya Forge updated a training request', '2022-06-15', 'training_list.php', 0, 'admin'),
+(48, 'CVSUPOR895461732', 'Anya Forge send a document request', '2022-06-15', 'documents.php', 0, 'admin'),
+(49, 'CVSUPOR895461732', 'Document Request has been evaluated', '2022-06-15', 'documents.php', 0, 'employee'),
+(50, 'CVSUPOR895461732', 'You have new document request from HR', '2022-06-15', 'documents.php', 0, 'employee'),
+(51, 'CVSUPOR895461732', 'Document Request from HR has been updated', '2022-06-15', 'documents.php', 0, 'employee'),
+(52, 'CVSUPOR895461732', 'Anya Forge sent a reply for the document request', '2022-06-15', 'documents.php', 0, 'admin');
 
 -- --------------------------------------------------------
 
@@ -696,6 +808,13 @@ CREATE TABLE `overtime_request` (
   `overtime_code` varchar(20) DEFAULT NULL,
   `notes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `overtime_request`
+--
+
+INSERT INTO `overtime_request` (`id`, `employee_id`, `date`, `start`, `end`, `reason`, `status`, `evaluated_by`, `overtime_code`, `notes`) VALUES
+(3, 'CVSUKNC085291637', '2022-06-01', '18:20:00', '19:40:00', 'Sample', '0', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -792,6 +911,13 @@ CREATE TABLE `ratings` (
   `remarks` text NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `employee_id`, `task_id`, `efficiency`, `timeliness`, `quality`, `accuracy`, `remarks`, `date_created`) VALUES
+(8, 'CVSUPOR895461732', 11, 5, 5, 5, 5, 'Very Good', '2022-06-15 10:28:58');
 
 -- --------------------------------------------------------
 
@@ -2686,7 +2812,476 @@ INSERT INTO `schedules` (`id`, `employee_id`, `time_in`, `time_out`, `day`, `isC
 (1869, 'CVSUQND5468792302733', '18:00:00', '18:30:00', 'Saturday', 0),
 (1870, 'CVSUQND5468792302733', '18:30:00', '19:00:00', 'Saturday', 0),
 (1871, 'CVSUQND5468792302733', '19:00:00', '19:30:00', 'Saturday', 0),
-(1872, 'CVSUQND5468792302733', '19:30:00', '20:00:00', 'Saturday', 0);
+(1872, 'CVSUQND5468792302733', '19:30:00', '20:00:00', 'Saturday', 0),
+(1873, 'CVSUZWY276935180', '07:00:00', '07:30:00', 'Monday', 0),
+(1874, 'CVSUZWY276935180', '07:30:00', '08:00:00', 'Monday', 0),
+(1875, 'CVSUZWY276935180', '08:00:00', '08:30:00', 'Monday', 0),
+(1876, 'CVSUZWY276935180', '08:30:00', '09:00:00', 'Monday', 0),
+(1877, 'CVSUZWY276935180', '09:00:00', '09:30:00', 'Monday', 0),
+(1878, 'CVSUZWY276935180', '09:30:00', '10:00:00', 'Monday', 0),
+(1879, 'CVSUZWY276935180', '10:00:00', '10:30:00', 'Monday', 0),
+(1880, 'CVSUZWY276935180', '10:30:00', '11:00:00', 'Monday', 0),
+(1881, 'CVSUZWY276935180', '11:00:00', '11:30:00', 'Monday', 0),
+(1882, 'CVSUZWY276935180', '11:30:00', '12:00:00', 'Monday', 0),
+(1883, 'CVSUZWY276935180', '12:00:00', '12:30:00', 'Monday', 0),
+(1884, 'CVSUZWY276935180', '12:30:00', '13:00:00', 'Monday', 0),
+(1885, 'CVSUZWY276935180', '13:00:00', '13:30:00', 'Monday', 0),
+(1886, 'CVSUZWY276935180', '13:30:00', '14:00:00', 'Monday', 0),
+(1887, 'CVSUZWY276935180', '14:00:00', '14:30:00', 'Monday', 0),
+(1888, 'CVSUZWY276935180', '14:30:00', '15:00:00', 'Monday', 0),
+(1889, 'CVSUZWY276935180', '15:00:00', '15:30:00', 'Monday', 0),
+(1890, 'CVSUZWY276935180', '15:30:00', '16:00:00', 'Monday', 0),
+(1891, 'CVSUZWY276935180', '16:00:00', '16:30:00', 'Monday', 0),
+(1892, 'CVSUZWY276935180', '16:30:00', '17:00:00', 'Monday', 0),
+(1893, 'CVSUZWY276935180', '17:00:00', '17:30:00', 'Monday', 0),
+(1894, 'CVSUZWY276935180', '17:30:00', '18:00:00', 'Monday', 0),
+(1895, 'CVSUZWY276935180', '18:00:00', '18:30:00', 'Monday', 0),
+(1896, 'CVSUZWY276935180', '18:30:00', '19:00:00', 'Monday', 0),
+(1897, 'CVSUZWY276935180', '19:00:00', '19:30:00', 'Monday', 0),
+(1898, 'CVSUZWY276935180', '19:30:00', '20:00:00', 'Monday', 0),
+(1899, 'CVSUZWY276935180', '07:00:00', '07:30:00', 'Tuesday', 0),
+(1900, 'CVSUZWY276935180', '07:30:00', '08:00:00', 'Tuesday', 0),
+(1901, 'CVSUZWY276935180', '08:00:00', '08:30:00', 'Tuesday', 0),
+(1902, 'CVSUZWY276935180', '08:30:00', '09:00:00', 'Tuesday', 0),
+(1903, 'CVSUZWY276935180', '09:00:00', '09:30:00', 'Tuesday', 0),
+(1904, 'CVSUZWY276935180', '09:30:00', '10:00:00', 'Tuesday', 0),
+(1905, 'CVSUZWY276935180', '10:00:00', '10:30:00', 'Tuesday', 0),
+(1906, 'CVSUZWY276935180', '10:30:00', '11:00:00', 'Tuesday', 0),
+(1907, 'CVSUZWY276935180', '11:00:00', '11:30:00', 'Tuesday', 0),
+(1908, 'CVSUZWY276935180', '11:30:00', '12:00:00', 'Tuesday', 0),
+(1909, 'CVSUZWY276935180', '12:00:00', '12:30:00', 'Tuesday', 0),
+(1910, 'CVSUZWY276935180', '12:30:00', '13:00:00', 'Tuesday', 0),
+(1911, 'CVSUZWY276935180', '13:00:00', '13:30:00', 'Tuesday', 0),
+(1912, 'CVSUZWY276935180', '13:30:00', '14:00:00', 'Tuesday', 0),
+(1913, 'CVSUZWY276935180', '14:00:00', '14:30:00', 'Tuesday', 0),
+(1914, 'CVSUZWY276935180', '14:30:00', '15:00:00', 'Tuesday', 0),
+(1915, 'CVSUZWY276935180', '15:00:00', '15:30:00', 'Tuesday', 0),
+(1916, 'CVSUZWY276935180', '15:30:00', '16:00:00', 'Tuesday', 0),
+(1917, 'CVSUZWY276935180', '16:00:00', '16:30:00', 'Tuesday', 0),
+(1918, 'CVSUZWY276935180', '16:30:00', '17:00:00', 'Tuesday', 0),
+(1919, 'CVSUZWY276935180', '17:00:00', '17:30:00', 'Tuesday', 0),
+(1920, 'CVSUZWY276935180', '17:30:00', '18:00:00', 'Tuesday', 0),
+(1921, 'CVSUZWY276935180', '18:00:00', '18:30:00', 'Tuesday', 0),
+(1922, 'CVSUZWY276935180', '18:30:00', '19:00:00', 'Tuesday', 0),
+(1923, 'CVSUZWY276935180', '19:00:00', '19:30:00', 'Tuesday', 0),
+(1924, 'CVSUZWY276935180', '19:30:00', '20:00:00', 'Tuesday', 0),
+(1925, 'CVSUZWY276935180', '07:00:00', '07:30:00', 'Wednesday', 0),
+(1926, 'CVSUZWY276935180', '07:30:00', '08:00:00', 'Wednesday', 0),
+(1927, 'CVSUZWY276935180', '08:00:00', '08:30:00', 'Wednesday', 0),
+(1928, 'CVSUZWY276935180', '08:30:00', '09:00:00', 'Wednesday', 0),
+(1929, 'CVSUZWY276935180', '09:00:00', '09:30:00', 'Wednesday', 0),
+(1930, 'CVSUZWY276935180', '09:30:00', '10:00:00', 'Wednesday', 0),
+(1931, 'CVSUZWY276935180', '10:00:00', '10:30:00', 'Wednesday', 0),
+(1932, 'CVSUZWY276935180', '10:30:00', '11:00:00', 'Wednesday', 0),
+(1933, 'CVSUZWY276935180', '11:00:00', '11:30:00', 'Wednesday', 0),
+(1934, 'CVSUZWY276935180', '11:30:00', '12:00:00', 'Wednesday', 0),
+(1935, 'CVSUZWY276935180', '12:00:00', '12:30:00', 'Wednesday', 0),
+(1936, 'CVSUZWY276935180', '12:30:00', '13:00:00', 'Wednesday', 0),
+(1937, 'CVSUZWY276935180', '13:00:00', '13:30:00', 'Wednesday', 0),
+(1938, 'CVSUZWY276935180', '13:30:00', '14:00:00', 'Wednesday', 0),
+(1939, 'CVSUZWY276935180', '14:00:00', '14:30:00', 'Wednesday', 0),
+(1940, 'CVSUZWY276935180', '14:30:00', '15:00:00', 'Wednesday', 0),
+(1941, 'CVSUZWY276935180', '15:00:00', '15:30:00', 'Wednesday', 0),
+(1942, 'CVSUZWY276935180', '15:30:00', '16:00:00', 'Wednesday', 0),
+(1943, 'CVSUZWY276935180', '16:00:00', '16:30:00', 'Wednesday', 0),
+(1944, 'CVSUZWY276935180', '16:30:00', '17:00:00', 'Wednesday', 0),
+(1945, 'CVSUZWY276935180', '17:00:00', '17:30:00', 'Wednesday', 0),
+(1946, 'CVSUZWY276935180', '17:30:00', '18:00:00', 'Wednesday', 0),
+(1947, 'CVSUZWY276935180', '18:00:00', '18:30:00', 'Wednesday', 0),
+(1948, 'CVSUZWY276935180', '18:30:00', '19:00:00', 'Wednesday', 0),
+(1949, 'CVSUZWY276935180', '19:00:00', '19:30:00', 'Wednesday', 0),
+(1950, 'CVSUZWY276935180', '19:30:00', '20:00:00', 'Wednesday', 0),
+(1951, 'CVSUZWY276935180', '07:00:00', '07:30:00', 'Thursday', 0),
+(1952, 'CVSUZWY276935180', '07:30:00', '08:00:00', 'Thursday', 0),
+(1953, 'CVSUZWY276935180', '08:00:00', '08:30:00', 'Thursday', 0),
+(1954, 'CVSUZWY276935180', '08:30:00', '09:00:00', 'Thursday', 0),
+(1955, 'CVSUZWY276935180', '09:00:00', '09:30:00', 'Thursday', 0),
+(1956, 'CVSUZWY276935180', '09:30:00', '10:00:00', 'Thursday', 0),
+(1957, 'CVSUZWY276935180', '10:00:00', '10:30:00', 'Thursday', 0),
+(1958, 'CVSUZWY276935180', '10:30:00', '11:00:00', 'Thursday', 0),
+(1959, 'CVSUZWY276935180', '11:00:00', '11:30:00', 'Thursday', 0),
+(1960, 'CVSUZWY276935180', '11:30:00', '12:00:00', 'Thursday', 0),
+(1961, 'CVSUZWY276935180', '12:00:00', '12:30:00', 'Thursday', 0),
+(1962, 'CVSUZWY276935180', '12:30:00', '13:00:00', 'Thursday', 0),
+(1963, 'CVSUZWY276935180', '13:00:00', '13:30:00', 'Thursday', 0),
+(1964, 'CVSUZWY276935180', '13:30:00', '14:00:00', 'Thursday', 0),
+(1965, 'CVSUZWY276935180', '14:00:00', '14:30:00', 'Thursday', 0),
+(1966, 'CVSUZWY276935180', '14:30:00', '15:00:00', 'Thursday', 0),
+(1967, 'CVSUZWY276935180', '15:00:00', '15:30:00', 'Thursday', 0),
+(1968, 'CVSUZWY276935180', '15:30:00', '16:00:00', 'Thursday', 0),
+(1969, 'CVSUZWY276935180', '16:00:00', '16:30:00', 'Thursday', 0),
+(1970, 'CVSUZWY276935180', '16:30:00', '17:00:00', 'Thursday', 0),
+(1971, 'CVSUZWY276935180', '17:00:00', '17:30:00', 'Thursday', 0),
+(1972, 'CVSUZWY276935180', '17:30:00', '18:00:00', 'Thursday', 0),
+(1973, 'CVSUZWY276935180', '18:00:00', '18:30:00', 'Thursday', 0),
+(1974, 'CVSUZWY276935180', '18:30:00', '19:00:00', 'Thursday', 0),
+(1975, 'CVSUZWY276935180', '19:00:00', '19:30:00', 'Thursday', 0),
+(1976, 'CVSUZWY276935180', '19:30:00', '20:00:00', 'Thursday', 0),
+(1977, 'CVSUZWY276935180', '07:00:00', '07:30:00', 'Friday', 0),
+(1978, 'CVSUZWY276935180', '07:30:00', '08:00:00', 'Friday', 0),
+(1979, 'CVSUZWY276935180', '08:00:00', '08:30:00', 'Friday', 0),
+(1980, 'CVSUZWY276935180', '08:30:00', '09:00:00', 'Friday', 0),
+(1981, 'CVSUZWY276935180', '09:00:00', '09:30:00', 'Friday', 0),
+(1982, 'CVSUZWY276935180', '09:30:00', '10:00:00', 'Friday', 0),
+(1983, 'CVSUZWY276935180', '10:00:00', '10:30:00', 'Friday', 0),
+(1984, 'CVSUZWY276935180', '10:30:00', '11:00:00', 'Friday', 0),
+(1985, 'CVSUZWY276935180', '11:00:00', '11:30:00', 'Friday', 0),
+(1986, 'CVSUZWY276935180', '11:30:00', '12:00:00', 'Friday', 0),
+(1987, 'CVSUZWY276935180', '12:00:00', '12:30:00', 'Friday', 0),
+(1988, 'CVSUZWY276935180', '12:30:00', '13:00:00', 'Friday', 0),
+(1989, 'CVSUZWY276935180', '13:00:00', '13:30:00', 'Friday', 0),
+(1990, 'CVSUZWY276935180', '13:30:00', '14:00:00', 'Friday', 0),
+(1991, 'CVSUZWY276935180', '14:00:00', '14:30:00', 'Friday', 0),
+(1992, 'CVSUZWY276935180', '14:30:00', '15:00:00', 'Friday', 0),
+(1993, 'CVSUZWY276935180', '15:00:00', '15:30:00', 'Friday', 0),
+(1994, 'CVSUZWY276935180', '15:30:00', '16:00:00', 'Friday', 0),
+(1995, 'CVSUZWY276935180', '16:00:00', '16:30:00', 'Friday', 0),
+(1996, 'CVSUZWY276935180', '16:30:00', '17:00:00', 'Friday', 0),
+(1997, 'CVSUZWY276935180', '17:00:00', '17:30:00', 'Friday', 0),
+(1998, 'CVSUZWY276935180', '17:30:00', '18:00:00', 'Friday', 0),
+(1999, 'CVSUZWY276935180', '18:00:00', '18:30:00', 'Friday', 0),
+(2000, 'CVSUZWY276935180', '18:30:00', '19:00:00', 'Friday', 0),
+(2001, 'CVSUZWY276935180', '19:00:00', '19:30:00', 'Friday', 0),
+(2002, 'CVSUZWY276935180', '19:30:00', '20:00:00', 'Friday', 0),
+(2003, 'CVSUZWY276935180', '07:00:00', '07:30:00', 'Saturday', 0),
+(2004, 'CVSUZWY276935180', '07:30:00', '08:00:00', 'Saturday', 0),
+(2005, 'CVSUZWY276935180', '08:00:00', '08:30:00', 'Saturday', 0),
+(2006, 'CVSUZWY276935180', '08:30:00', '09:00:00', 'Saturday', 0),
+(2007, 'CVSUZWY276935180', '09:00:00', '09:30:00', 'Saturday', 0),
+(2008, 'CVSUZWY276935180', '09:30:00', '10:00:00', 'Saturday', 0),
+(2009, 'CVSUZWY276935180', '10:00:00', '10:30:00', 'Saturday', 0),
+(2010, 'CVSUZWY276935180', '10:30:00', '11:00:00', 'Saturday', 0),
+(2011, 'CVSUZWY276935180', '11:00:00', '11:30:00', 'Saturday', 0),
+(2012, 'CVSUZWY276935180', '11:30:00', '12:00:00', 'Saturday', 0),
+(2013, 'CVSUZWY276935180', '12:00:00', '12:30:00', 'Saturday', 0),
+(2014, 'CVSUZWY276935180', '12:30:00', '13:00:00', 'Saturday', 0),
+(2015, 'CVSUZWY276935180', '13:00:00', '13:30:00', 'Saturday', 0),
+(2016, 'CVSUZWY276935180', '13:30:00', '14:00:00', 'Saturday', 0),
+(2017, 'CVSUZWY276935180', '14:00:00', '14:30:00', 'Saturday', 0),
+(2018, 'CVSUZWY276935180', '14:30:00', '15:00:00', 'Saturday', 0),
+(2019, 'CVSUZWY276935180', '15:00:00', '15:30:00', 'Saturday', 0),
+(2020, 'CVSUZWY276935180', '15:30:00', '16:00:00', 'Saturday', 0),
+(2021, 'CVSUZWY276935180', '16:00:00', '16:30:00', 'Saturday', 0),
+(2022, 'CVSUZWY276935180', '16:30:00', '17:00:00', 'Saturday', 0),
+(2023, 'CVSUZWY276935180', '17:00:00', '17:30:00', 'Saturday', 0),
+(2024, 'CVSUZWY276935180', '17:30:00', '18:00:00', 'Saturday', 0),
+(2025, 'CVSUZWY276935180', '18:00:00', '18:30:00', 'Saturday', 0),
+(2026, 'CVSUZWY276935180', '18:30:00', '19:00:00', 'Saturday', 0),
+(2027, 'CVSUZWY276935180', '19:00:00', '19:30:00', 'Saturday', 0),
+(2028, 'CVSUZWY276935180', '19:30:00', '20:00:00', 'Saturday', 0),
+(2029, 'CVSUPOR895461732', '07:00:00', '07:30:00', 'Monday', 1),
+(2030, 'CVSUPOR895461732', '07:30:00', '08:00:00', 'Monday', 1),
+(2031, 'CVSUPOR895461732', '08:00:00', '08:30:00', 'Monday', 1),
+(2032, 'CVSUPOR895461732', '08:30:00', '09:00:00', 'Monday', 1),
+(2033, 'CVSUPOR895461732', '09:00:00', '09:30:00', 'Monday', 1),
+(2034, 'CVSUPOR895461732', '09:30:00', '10:00:00', 'Monday', 1),
+(2035, 'CVSUPOR895461732', '10:00:00', '10:30:00', 'Monday', 0),
+(2036, 'CVSUPOR895461732', '10:30:00', '11:00:00', 'Monday', 0),
+(2037, 'CVSUPOR895461732', '11:00:00', '11:30:00', 'Monday', 0),
+(2038, 'CVSUPOR895461732', '11:30:00', '12:00:00', 'Monday', 0),
+(2039, 'CVSUPOR895461732', '12:00:00', '12:30:00', 'Monday', 0),
+(2040, 'CVSUPOR895461732', '12:30:00', '13:00:00', 'Monday', 0),
+(2041, 'CVSUPOR895461732', '13:00:00', '13:30:00', 'Monday', 0),
+(2042, 'CVSUPOR895461732', '13:30:00', '14:00:00', 'Monday', 0),
+(2043, 'CVSUPOR895461732', '14:00:00', '14:30:00', 'Monday', 0),
+(2044, 'CVSUPOR895461732', '14:30:00', '15:00:00', 'Monday', 0),
+(2045, 'CVSUPOR895461732', '15:00:00', '15:30:00', 'Monday', 0),
+(2046, 'CVSUPOR895461732', '15:30:00', '16:00:00', 'Monday', 0),
+(2047, 'CVSUPOR895461732', '16:00:00', '16:30:00', 'Monday', 0),
+(2048, 'CVSUPOR895461732', '16:30:00', '17:00:00', 'Monday', 0),
+(2049, 'CVSUPOR895461732', '17:00:00', '17:30:00', 'Monday', 0),
+(2050, 'CVSUPOR895461732', '17:30:00', '18:00:00', 'Monday', 0),
+(2051, 'CVSUPOR895461732', '18:00:00', '18:30:00', 'Monday', 0),
+(2052, 'CVSUPOR895461732', '18:30:00', '19:00:00', 'Monday', 0),
+(2053, 'CVSUPOR895461732', '19:00:00', '19:30:00', 'Monday', 0),
+(2054, 'CVSUPOR895461732', '19:30:00', '20:00:00', 'Monday', 0),
+(2055, 'CVSUPOR895461732', '07:00:00', '07:30:00', 'Tuesday', 0),
+(2056, 'CVSUPOR895461732', '07:30:00', '08:00:00', 'Tuesday', 0),
+(2057, 'CVSUPOR895461732', '08:00:00', '08:30:00', 'Tuesday', 0),
+(2058, 'CVSUPOR895461732', '08:30:00', '09:00:00', 'Tuesday', 0),
+(2059, 'CVSUPOR895461732', '09:00:00', '09:30:00', 'Tuesday', 0),
+(2060, 'CVSUPOR895461732', '09:30:00', '10:00:00', 'Tuesday', 0),
+(2061, 'CVSUPOR895461732', '10:00:00', '10:30:00', 'Tuesday', 0),
+(2062, 'CVSUPOR895461732', '10:30:00', '11:00:00', 'Tuesday', 0),
+(2063, 'CVSUPOR895461732', '11:00:00', '11:30:00', 'Tuesday', 0),
+(2064, 'CVSUPOR895461732', '11:30:00', '12:00:00', 'Tuesday', 0),
+(2065, 'CVSUPOR895461732', '12:00:00', '12:30:00', 'Tuesday', 0),
+(2066, 'CVSUPOR895461732', '12:30:00', '13:00:00', 'Tuesday', 0),
+(2067, 'CVSUPOR895461732', '13:00:00', '13:30:00', 'Tuesday', 0),
+(2068, 'CVSUPOR895461732', '13:30:00', '14:00:00', 'Tuesday', 0),
+(2069, 'CVSUPOR895461732', '14:00:00', '14:30:00', 'Tuesday', 0),
+(2070, 'CVSUPOR895461732', '14:30:00', '15:00:00', 'Tuesday', 0),
+(2071, 'CVSUPOR895461732', '15:00:00', '15:30:00', 'Tuesday', 0),
+(2072, 'CVSUPOR895461732', '15:30:00', '16:00:00', 'Tuesday', 0),
+(2073, 'CVSUPOR895461732', '16:00:00', '16:30:00', 'Tuesday', 0),
+(2074, 'CVSUPOR895461732', '16:30:00', '17:00:00', 'Tuesday', 0),
+(2075, 'CVSUPOR895461732', '17:00:00', '17:30:00', 'Tuesday', 0),
+(2076, 'CVSUPOR895461732', '17:30:00', '18:00:00', 'Tuesday', 0),
+(2077, 'CVSUPOR895461732', '18:00:00', '18:30:00', 'Tuesday', 0),
+(2078, 'CVSUPOR895461732', '18:30:00', '19:00:00', 'Tuesday', 0),
+(2079, 'CVSUPOR895461732', '19:00:00', '19:30:00', 'Tuesday', 0),
+(2080, 'CVSUPOR895461732', '19:30:00', '20:00:00', 'Tuesday', 0),
+(2081, 'CVSUPOR895461732', '07:00:00', '07:30:00', 'Wednesday', 0),
+(2082, 'CVSUPOR895461732', '07:30:00', '08:00:00', 'Wednesday', 0),
+(2083, 'CVSUPOR895461732', '08:00:00', '08:30:00', 'Wednesday', 0),
+(2084, 'CVSUPOR895461732', '08:30:00', '09:00:00', 'Wednesday', 0),
+(2085, 'CVSUPOR895461732', '09:00:00', '09:30:00', 'Wednesday', 0),
+(2086, 'CVSUPOR895461732', '09:30:00', '10:00:00', 'Wednesday', 0),
+(2087, 'CVSUPOR895461732', '10:00:00', '10:30:00', 'Wednesday', 0),
+(2088, 'CVSUPOR895461732', '10:30:00', '11:00:00', 'Wednesday', 0),
+(2089, 'CVSUPOR895461732', '11:00:00', '11:30:00', 'Wednesday', 0),
+(2090, 'CVSUPOR895461732', '11:30:00', '12:00:00', 'Wednesday', 0),
+(2091, 'CVSUPOR895461732', '12:00:00', '12:30:00', 'Wednesday', 0),
+(2092, 'CVSUPOR895461732', '12:30:00', '13:00:00', 'Wednesday', 0),
+(2093, 'CVSUPOR895461732', '13:00:00', '13:30:00', 'Wednesday', 0),
+(2094, 'CVSUPOR895461732', '13:30:00', '14:00:00', 'Wednesday', 0),
+(2095, 'CVSUPOR895461732', '14:00:00', '14:30:00', 'Wednesday', 0),
+(2096, 'CVSUPOR895461732', '14:30:00', '15:00:00', 'Wednesday', 0),
+(2097, 'CVSUPOR895461732', '15:00:00', '15:30:00', 'Wednesday', 0),
+(2098, 'CVSUPOR895461732', '15:30:00', '16:00:00', 'Wednesday', 0),
+(2099, 'CVSUPOR895461732', '16:00:00', '16:30:00', 'Wednesday', 0),
+(2100, 'CVSUPOR895461732', '16:30:00', '17:00:00', 'Wednesday', 0),
+(2101, 'CVSUPOR895461732', '17:00:00', '17:30:00', 'Wednesday', 0),
+(2102, 'CVSUPOR895461732', '17:30:00', '18:00:00', 'Wednesday', 0),
+(2103, 'CVSUPOR895461732', '18:00:00', '18:30:00', 'Wednesday', 0),
+(2104, 'CVSUPOR895461732', '18:30:00', '19:00:00', 'Wednesday', 0),
+(2105, 'CVSUPOR895461732', '19:00:00', '19:30:00', 'Wednesday', 0),
+(2106, 'CVSUPOR895461732', '19:30:00', '20:00:00', 'Wednesday', 0),
+(2107, 'CVSUPOR895461732', '07:00:00', '07:30:00', 'Thursday', 0),
+(2108, 'CVSUPOR895461732', '07:30:00', '08:00:00', 'Thursday', 0),
+(2109, 'CVSUPOR895461732', '08:00:00', '08:30:00', 'Thursday', 0),
+(2110, 'CVSUPOR895461732', '08:30:00', '09:00:00', 'Thursday', 0),
+(2111, 'CVSUPOR895461732', '09:00:00', '09:30:00', 'Thursday', 0),
+(2112, 'CVSUPOR895461732', '09:30:00', '10:00:00', 'Thursday', 0),
+(2113, 'CVSUPOR895461732', '10:00:00', '10:30:00', 'Thursday', 0),
+(2114, 'CVSUPOR895461732', '10:30:00', '11:00:00', 'Thursday', 0),
+(2115, 'CVSUPOR895461732', '11:00:00', '11:30:00', 'Thursday', 0),
+(2116, 'CVSUPOR895461732', '11:30:00', '12:00:00', 'Thursday', 0),
+(2117, 'CVSUPOR895461732', '12:00:00', '12:30:00', 'Thursday', 0),
+(2118, 'CVSUPOR895461732', '12:30:00', '13:00:00', 'Thursday', 0),
+(2119, 'CVSUPOR895461732', '13:00:00', '13:30:00', 'Thursday', 0),
+(2120, 'CVSUPOR895461732', '13:30:00', '14:00:00', 'Thursday', 0),
+(2121, 'CVSUPOR895461732', '14:00:00', '14:30:00', 'Thursday', 0),
+(2122, 'CVSUPOR895461732', '14:30:00', '15:00:00', 'Thursday', 0),
+(2123, 'CVSUPOR895461732', '15:00:00', '15:30:00', 'Thursday', 0),
+(2124, 'CVSUPOR895461732', '15:30:00', '16:00:00', 'Thursday', 0),
+(2125, 'CVSUPOR895461732', '16:00:00', '16:30:00', 'Thursday', 0),
+(2126, 'CVSUPOR895461732', '16:30:00', '17:00:00', 'Thursday', 0),
+(2127, 'CVSUPOR895461732', '17:00:00', '17:30:00', 'Thursday', 0),
+(2128, 'CVSUPOR895461732', '17:30:00', '18:00:00', 'Thursday', 0),
+(2129, 'CVSUPOR895461732', '18:00:00', '18:30:00', 'Thursday', 0),
+(2130, 'CVSUPOR895461732', '18:30:00', '19:00:00', 'Thursday', 0),
+(2131, 'CVSUPOR895461732', '19:00:00', '19:30:00', 'Thursday', 0),
+(2132, 'CVSUPOR895461732', '19:30:00', '20:00:00', 'Thursday', 0),
+(2133, 'CVSUPOR895461732', '07:00:00', '07:30:00', 'Friday', 0),
+(2134, 'CVSUPOR895461732', '07:30:00', '08:00:00', 'Friday', 0),
+(2135, 'CVSUPOR895461732', '08:00:00', '08:30:00', 'Friday', 0),
+(2136, 'CVSUPOR895461732', '08:30:00', '09:00:00', 'Friday', 0),
+(2137, 'CVSUPOR895461732', '09:00:00', '09:30:00', 'Friday', 0),
+(2138, 'CVSUPOR895461732', '09:30:00', '10:00:00', 'Friday', 0),
+(2139, 'CVSUPOR895461732', '10:00:00', '10:30:00', 'Friday', 0),
+(2140, 'CVSUPOR895461732', '10:30:00', '11:00:00', 'Friday', 0),
+(2141, 'CVSUPOR895461732', '11:00:00', '11:30:00', 'Friday', 0),
+(2142, 'CVSUPOR895461732', '11:30:00', '12:00:00', 'Friday', 0),
+(2143, 'CVSUPOR895461732', '12:00:00', '12:30:00', 'Friday', 0),
+(2144, 'CVSUPOR895461732', '12:30:00', '13:00:00', 'Friday', 0),
+(2145, 'CVSUPOR895461732', '13:00:00', '13:30:00', 'Friday', 0),
+(2146, 'CVSUPOR895461732', '13:30:00', '14:00:00', 'Friday', 0),
+(2147, 'CVSUPOR895461732', '14:00:00', '14:30:00', 'Friday', 0),
+(2148, 'CVSUPOR895461732', '14:30:00', '15:00:00', 'Friday', 0),
+(2149, 'CVSUPOR895461732', '15:00:00', '15:30:00', 'Friday', 0),
+(2150, 'CVSUPOR895461732', '15:30:00', '16:00:00', 'Friday', 0),
+(2151, 'CVSUPOR895461732', '16:00:00', '16:30:00', 'Friday', 0),
+(2152, 'CVSUPOR895461732', '16:30:00', '17:00:00', 'Friday', 0),
+(2153, 'CVSUPOR895461732', '17:00:00', '17:30:00', 'Friday', 0),
+(2154, 'CVSUPOR895461732', '17:30:00', '18:00:00', 'Friday', 0),
+(2155, 'CVSUPOR895461732', '18:00:00', '18:30:00', 'Friday', 0),
+(2156, 'CVSUPOR895461732', '18:30:00', '19:00:00', 'Friday', 0),
+(2157, 'CVSUPOR895461732', '19:00:00', '19:30:00', 'Friday', 0),
+(2158, 'CVSUPOR895461732', '19:30:00', '20:00:00', 'Friday', 0),
+(2159, 'CVSUPOR895461732', '07:00:00', '07:30:00', 'Saturday', 0),
+(2160, 'CVSUPOR895461732', '07:30:00', '08:00:00', 'Saturday', 0),
+(2161, 'CVSUPOR895461732', '08:00:00', '08:30:00', 'Saturday', 0),
+(2162, 'CVSUPOR895461732', '08:30:00', '09:00:00', 'Saturday', 0),
+(2163, 'CVSUPOR895461732', '09:00:00', '09:30:00', 'Saturday', 0),
+(2164, 'CVSUPOR895461732', '09:30:00', '10:00:00', 'Saturday', 0),
+(2165, 'CVSUPOR895461732', '10:00:00', '10:30:00', 'Saturday', 0),
+(2166, 'CVSUPOR895461732', '10:30:00', '11:00:00', 'Saturday', 0),
+(2167, 'CVSUPOR895461732', '11:00:00', '11:30:00', 'Saturday', 0),
+(2168, 'CVSUPOR895461732', '11:30:00', '12:00:00', 'Saturday', 0),
+(2169, 'CVSUPOR895461732', '12:00:00', '12:30:00', 'Saturday', 0),
+(2170, 'CVSUPOR895461732', '12:30:00', '13:00:00', 'Saturday', 0),
+(2171, 'CVSUPOR895461732', '13:00:00', '13:30:00', 'Saturday', 0),
+(2172, 'CVSUPOR895461732', '13:30:00', '14:00:00', 'Saturday', 0),
+(2173, 'CVSUPOR895461732', '14:00:00', '14:30:00', 'Saturday', 0),
+(2174, 'CVSUPOR895461732', '14:30:00', '15:00:00', 'Saturday', 0),
+(2175, 'CVSUPOR895461732', '15:00:00', '15:30:00', 'Saturday', 0),
+(2176, 'CVSUPOR895461732', '15:30:00', '16:00:00', 'Saturday', 0),
+(2177, 'CVSUPOR895461732', '16:00:00', '16:30:00', 'Saturday', 0),
+(2178, 'CVSUPOR895461732', '16:30:00', '17:00:00', 'Saturday', 0),
+(2179, 'CVSUPOR895461732', '17:00:00', '17:30:00', 'Saturday', 0),
+(2180, 'CVSUPOR895461732', '17:30:00', '18:00:00', 'Saturday', 0),
+(2181, 'CVSUPOR895461732', '18:00:00', '18:30:00', 'Saturday', 0),
+(2182, 'CVSUPOR895461732', '18:30:00', '19:00:00', 'Saturday', 0),
+(2183, 'CVSUPOR895461732', '19:00:00', '19:30:00', 'Saturday', 0),
+(2184, 'CVSUPOR895461732', '19:30:00', '20:00:00', 'Saturday', 0),
+(2185, 'CVSUXHL9203875461209', '07:00:00', '07:30:00', 'Monday', 0),
+(2186, 'CVSUXHL9203875461209', '07:30:00', '08:00:00', 'Monday', 0),
+(2187, 'CVSUXHL9203875461209', '08:00:00', '08:30:00', 'Monday', 0),
+(2188, 'CVSUXHL9203875461209', '08:30:00', '09:00:00', 'Monday', 0),
+(2189, 'CVSUXHL9203875461209', '09:00:00', '09:30:00', 'Monday', 0),
+(2190, 'CVSUXHL9203875461209', '09:30:00', '10:00:00', 'Monday', 0),
+(2191, 'CVSUXHL9203875461209', '10:00:00', '10:30:00', 'Monday', 0),
+(2192, 'CVSUXHL9203875461209', '10:30:00', '11:00:00', 'Monday', 0),
+(2193, 'CVSUXHL9203875461209', '11:00:00', '11:30:00', 'Monday', 0),
+(2194, 'CVSUXHL9203875461209', '11:30:00', '12:00:00', 'Monday', 0),
+(2195, 'CVSUXHL9203875461209', '12:00:00', '12:30:00', 'Monday', 0),
+(2196, 'CVSUXHL9203875461209', '12:30:00', '13:00:00', 'Monday', 0),
+(2197, 'CVSUXHL9203875461209', '13:00:00', '13:30:00', 'Monday', 0),
+(2198, 'CVSUXHL9203875461209', '13:30:00', '14:00:00', 'Monday', 0),
+(2199, 'CVSUXHL9203875461209', '14:00:00', '14:30:00', 'Monday', 0),
+(2200, 'CVSUXHL9203875461209', '14:30:00', '15:00:00', 'Monday', 0),
+(2201, 'CVSUXHL9203875461209', '15:00:00', '15:30:00', 'Monday', 0),
+(2202, 'CVSUXHL9203875461209', '15:30:00', '16:00:00', 'Monday', 0),
+(2203, 'CVSUXHL9203875461209', '16:00:00', '16:30:00', 'Monday', 0),
+(2204, 'CVSUXHL9203875461209', '16:30:00', '17:00:00', 'Monday', 0),
+(2205, 'CVSUXHL9203875461209', '17:00:00', '17:30:00', 'Monday', 0),
+(2206, 'CVSUXHL9203875461209', '17:30:00', '18:00:00', 'Monday', 0),
+(2207, 'CVSUXHL9203875461209', '18:00:00', '18:30:00', 'Monday', 0),
+(2208, 'CVSUXHL9203875461209', '18:30:00', '19:00:00', 'Monday', 0),
+(2209, 'CVSUXHL9203875461209', '19:00:00', '19:30:00', 'Monday', 0),
+(2210, 'CVSUXHL9203875461209', '19:30:00', '20:00:00', 'Monday', 0),
+(2211, 'CVSUXHL9203875461209', '07:00:00', '07:30:00', 'Tuesday', 0),
+(2212, 'CVSUXHL9203875461209', '07:30:00', '08:00:00', 'Tuesday', 0),
+(2213, 'CVSUXHL9203875461209', '08:00:00', '08:30:00', 'Tuesday', 0),
+(2214, 'CVSUXHL9203875461209', '08:30:00', '09:00:00', 'Tuesday', 0),
+(2215, 'CVSUXHL9203875461209', '09:00:00', '09:30:00', 'Tuesday', 0),
+(2216, 'CVSUXHL9203875461209', '09:30:00', '10:00:00', 'Tuesday', 0),
+(2217, 'CVSUXHL9203875461209', '10:00:00', '10:30:00', 'Tuesday', 0),
+(2218, 'CVSUXHL9203875461209', '10:30:00', '11:00:00', 'Tuesday', 0),
+(2219, 'CVSUXHL9203875461209', '11:00:00', '11:30:00', 'Tuesday', 0),
+(2220, 'CVSUXHL9203875461209', '11:30:00', '12:00:00', 'Tuesday', 0),
+(2221, 'CVSUXHL9203875461209', '12:00:00', '12:30:00', 'Tuesday', 0),
+(2222, 'CVSUXHL9203875461209', '12:30:00', '13:00:00', 'Tuesday', 0),
+(2223, 'CVSUXHL9203875461209', '13:00:00', '13:30:00', 'Tuesday', 0),
+(2224, 'CVSUXHL9203875461209', '13:30:00', '14:00:00', 'Tuesday', 0),
+(2225, 'CVSUXHL9203875461209', '14:00:00', '14:30:00', 'Tuesday', 0),
+(2226, 'CVSUXHL9203875461209', '14:30:00', '15:00:00', 'Tuesday', 0),
+(2227, 'CVSUXHL9203875461209', '15:00:00', '15:30:00', 'Tuesday', 0),
+(2228, 'CVSUXHL9203875461209', '15:30:00', '16:00:00', 'Tuesday', 0),
+(2229, 'CVSUXHL9203875461209', '16:00:00', '16:30:00', 'Tuesday', 0),
+(2230, 'CVSUXHL9203875461209', '16:30:00', '17:00:00', 'Tuesday', 0),
+(2231, 'CVSUXHL9203875461209', '17:00:00', '17:30:00', 'Tuesday', 0),
+(2232, 'CVSUXHL9203875461209', '17:30:00', '18:00:00', 'Tuesday', 0),
+(2233, 'CVSUXHL9203875461209', '18:00:00', '18:30:00', 'Tuesday', 0),
+(2234, 'CVSUXHL9203875461209', '18:30:00', '19:00:00', 'Tuesday', 0),
+(2235, 'CVSUXHL9203875461209', '19:00:00', '19:30:00', 'Tuesday', 0),
+(2236, 'CVSUXHL9203875461209', '19:30:00', '20:00:00', 'Tuesday', 0),
+(2237, 'CVSUXHL9203875461209', '07:00:00', '07:30:00', 'Wednesday', 0),
+(2238, 'CVSUXHL9203875461209', '07:30:00', '08:00:00', 'Wednesday', 0),
+(2239, 'CVSUXHL9203875461209', '08:00:00', '08:30:00', 'Wednesday', 0),
+(2240, 'CVSUXHL9203875461209', '08:30:00', '09:00:00', 'Wednesday', 0),
+(2241, 'CVSUXHL9203875461209', '09:00:00', '09:30:00', 'Wednesday', 0),
+(2242, 'CVSUXHL9203875461209', '09:30:00', '10:00:00', 'Wednesday', 0),
+(2243, 'CVSUXHL9203875461209', '10:00:00', '10:30:00', 'Wednesday', 0),
+(2244, 'CVSUXHL9203875461209', '10:30:00', '11:00:00', 'Wednesday', 0),
+(2245, 'CVSUXHL9203875461209', '11:00:00', '11:30:00', 'Wednesday', 0),
+(2246, 'CVSUXHL9203875461209', '11:30:00', '12:00:00', 'Wednesday', 0),
+(2247, 'CVSUXHL9203875461209', '12:00:00', '12:30:00', 'Wednesday', 0),
+(2248, 'CVSUXHL9203875461209', '12:30:00', '13:00:00', 'Wednesday', 0),
+(2249, 'CVSUXHL9203875461209', '13:00:00', '13:30:00', 'Wednesday', 0),
+(2250, 'CVSUXHL9203875461209', '13:30:00', '14:00:00', 'Wednesday', 0),
+(2251, 'CVSUXHL9203875461209', '14:00:00', '14:30:00', 'Wednesday', 0),
+(2252, 'CVSUXHL9203875461209', '14:30:00', '15:00:00', 'Wednesday', 0),
+(2253, 'CVSUXHL9203875461209', '15:00:00', '15:30:00', 'Wednesday', 0),
+(2254, 'CVSUXHL9203875461209', '15:30:00', '16:00:00', 'Wednesday', 0),
+(2255, 'CVSUXHL9203875461209', '16:00:00', '16:30:00', 'Wednesday', 0),
+(2256, 'CVSUXHL9203875461209', '16:30:00', '17:00:00', 'Wednesday', 0),
+(2257, 'CVSUXHL9203875461209', '17:00:00', '17:30:00', 'Wednesday', 0),
+(2258, 'CVSUXHL9203875461209', '17:30:00', '18:00:00', 'Wednesday', 0),
+(2259, 'CVSUXHL9203875461209', '18:00:00', '18:30:00', 'Wednesday', 0),
+(2260, 'CVSUXHL9203875461209', '18:30:00', '19:00:00', 'Wednesday', 0),
+(2261, 'CVSUXHL9203875461209', '19:00:00', '19:30:00', 'Wednesday', 0),
+(2262, 'CVSUXHL9203875461209', '19:30:00', '20:00:00', 'Wednesday', 0),
+(2263, 'CVSUXHL9203875461209', '07:00:00', '07:30:00', 'Thursday', 0),
+(2264, 'CVSUXHL9203875461209', '07:30:00', '08:00:00', 'Thursday', 0),
+(2265, 'CVSUXHL9203875461209', '08:00:00', '08:30:00', 'Thursday', 0),
+(2266, 'CVSUXHL9203875461209', '08:30:00', '09:00:00', 'Thursday', 0),
+(2267, 'CVSUXHL9203875461209', '09:00:00', '09:30:00', 'Thursday', 0),
+(2268, 'CVSUXHL9203875461209', '09:30:00', '10:00:00', 'Thursday', 0),
+(2269, 'CVSUXHL9203875461209', '10:00:00', '10:30:00', 'Thursday', 0),
+(2270, 'CVSUXHL9203875461209', '10:30:00', '11:00:00', 'Thursday', 0),
+(2271, 'CVSUXHL9203875461209', '11:00:00', '11:30:00', 'Thursday', 0),
+(2272, 'CVSUXHL9203875461209', '11:30:00', '12:00:00', 'Thursday', 0),
+(2273, 'CVSUXHL9203875461209', '12:00:00', '12:30:00', 'Thursday', 0),
+(2274, 'CVSUXHL9203875461209', '12:30:00', '13:00:00', 'Thursday', 0),
+(2275, 'CVSUXHL9203875461209', '13:00:00', '13:30:00', 'Thursday', 0),
+(2276, 'CVSUXHL9203875461209', '13:30:00', '14:00:00', 'Thursday', 0),
+(2277, 'CVSUXHL9203875461209', '14:00:00', '14:30:00', 'Thursday', 0),
+(2278, 'CVSUXHL9203875461209', '14:30:00', '15:00:00', 'Thursday', 0),
+(2279, 'CVSUXHL9203875461209', '15:00:00', '15:30:00', 'Thursday', 0);
+INSERT INTO `schedules` (`id`, `employee_id`, `time_in`, `time_out`, `day`, `isCheck`) VALUES
+(2280, 'CVSUXHL9203875461209', '15:30:00', '16:00:00', 'Thursday', 0),
+(2281, 'CVSUXHL9203875461209', '16:00:00', '16:30:00', 'Thursday', 0),
+(2282, 'CVSUXHL9203875461209', '16:30:00', '17:00:00', 'Thursday', 0),
+(2283, 'CVSUXHL9203875461209', '17:00:00', '17:30:00', 'Thursday', 0),
+(2284, 'CVSUXHL9203875461209', '17:30:00', '18:00:00', 'Thursday', 0),
+(2285, 'CVSUXHL9203875461209', '18:00:00', '18:30:00', 'Thursday', 0),
+(2286, 'CVSUXHL9203875461209', '18:30:00', '19:00:00', 'Thursday', 0),
+(2287, 'CVSUXHL9203875461209', '19:00:00', '19:30:00', 'Thursday', 0),
+(2288, 'CVSUXHL9203875461209', '19:30:00', '20:00:00', 'Thursday', 0),
+(2289, 'CVSUXHL9203875461209', '07:00:00', '07:30:00', 'Friday', 0),
+(2290, 'CVSUXHL9203875461209', '07:30:00', '08:00:00', 'Friday', 0),
+(2291, 'CVSUXHL9203875461209', '08:00:00', '08:30:00', 'Friday', 0),
+(2292, 'CVSUXHL9203875461209', '08:30:00', '09:00:00', 'Friday', 0),
+(2293, 'CVSUXHL9203875461209', '09:00:00', '09:30:00', 'Friday', 0),
+(2294, 'CVSUXHL9203875461209', '09:30:00', '10:00:00', 'Friday', 0),
+(2295, 'CVSUXHL9203875461209', '10:00:00', '10:30:00', 'Friday', 0),
+(2296, 'CVSUXHL9203875461209', '10:30:00', '11:00:00', 'Friday', 0),
+(2297, 'CVSUXHL9203875461209', '11:00:00', '11:30:00', 'Friday', 0),
+(2298, 'CVSUXHL9203875461209', '11:30:00', '12:00:00', 'Friday', 0),
+(2299, 'CVSUXHL9203875461209', '12:00:00', '12:30:00', 'Friday', 0),
+(2300, 'CVSUXHL9203875461209', '12:30:00', '13:00:00', 'Friday', 0),
+(2301, 'CVSUXHL9203875461209', '13:00:00', '13:30:00', 'Friday', 0),
+(2302, 'CVSUXHL9203875461209', '13:30:00', '14:00:00', 'Friday', 0),
+(2303, 'CVSUXHL9203875461209', '14:00:00', '14:30:00', 'Friday', 0),
+(2304, 'CVSUXHL9203875461209', '14:30:00', '15:00:00', 'Friday', 0),
+(2305, 'CVSUXHL9203875461209', '15:00:00', '15:30:00', 'Friday', 0),
+(2306, 'CVSUXHL9203875461209', '15:30:00', '16:00:00', 'Friday', 0),
+(2307, 'CVSUXHL9203875461209', '16:00:00', '16:30:00', 'Friday', 0),
+(2308, 'CVSUXHL9203875461209', '16:30:00', '17:00:00', 'Friday', 0),
+(2309, 'CVSUXHL9203875461209', '17:00:00', '17:30:00', 'Friday', 0),
+(2310, 'CVSUXHL9203875461209', '17:30:00', '18:00:00', 'Friday', 0),
+(2311, 'CVSUXHL9203875461209', '18:00:00', '18:30:00', 'Friday', 0),
+(2312, 'CVSUXHL9203875461209', '18:30:00', '19:00:00', 'Friday', 0),
+(2313, 'CVSUXHL9203875461209', '19:00:00', '19:30:00', 'Friday', 0),
+(2314, 'CVSUXHL9203875461209', '19:30:00', '20:00:00', 'Friday', 0),
+(2315, 'CVSUXHL9203875461209', '07:00:00', '07:30:00', 'Saturday', 0),
+(2316, 'CVSUXHL9203875461209', '07:30:00', '08:00:00', 'Saturday', 0),
+(2317, 'CVSUXHL9203875461209', '08:00:00', '08:30:00', 'Saturday', 0),
+(2318, 'CVSUXHL9203875461209', '08:30:00', '09:00:00', 'Saturday', 0),
+(2319, 'CVSUXHL9203875461209', '09:00:00', '09:30:00', 'Saturday', 0),
+(2320, 'CVSUXHL9203875461209', '09:30:00', '10:00:00', 'Saturday', 0),
+(2321, 'CVSUXHL9203875461209', '10:00:00', '10:30:00', 'Saturday', 0),
+(2322, 'CVSUXHL9203875461209', '10:30:00', '11:00:00', 'Saturday', 0),
+(2323, 'CVSUXHL9203875461209', '11:00:00', '11:30:00', 'Saturday', 0),
+(2324, 'CVSUXHL9203875461209', '11:30:00', '12:00:00', 'Saturday', 0),
+(2325, 'CVSUXHL9203875461209', '12:00:00', '12:30:00', 'Saturday', 0),
+(2326, 'CVSUXHL9203875461209', '12:30:00', '13:00:00', 'Saturday', 0),
+(2327, 'CVSUXHL9203875461209', '13:00:00', '13:30:00', 'Saturday', 0),
+(2328, 'CVSUXHL9203875461209', '13:30:00', '14:00:00', 'Saturday', 0),
+(2329, 'CVSUXHL9203875461209', '14:00:00', '14:30:00', 'Saturday', 0),
+(2330, 'CVSUXHL9203875461209', '14:30:00', '15:00:00', 'Saturday', 0),
+(2331, 'CVSUXHL9203875461209', '15:00:00', '15:30:00', 'Saturday', 0),
+(2332, 'CVSUXHL9203875461209', '15:30:00', '16:00:00', 'Saturday', 0),
+(2333, 'CVSUXHL9203875461209', '16:00:00', '16:30:00', 'Saturday', 0),
+(2334, 'CVSUXHL9203875461209', '16:30:00', '17:00:00', 'Saturday', 0),
+(2335, 'CVSUXHL9203875461209', '17:00:00', '17:30:00', 'Saturday', 0),
+(2336, 'CVSUXHL9203875461209', '17:30:00', '18:00:00', 'Saturday', 0),
+(2337, 'CVSUXHL9203875461209', '18:00:00', '18:30:00', 'Saturday', 0),
+(2338, 'CVSUXHL9203875461209', '18:30:00', '19:00:00', 'Saturday', 0),
+(2339, 'CVSUXHL9203875461209', '19:00:00', '19:30:00', 'Saturday', 0),
+(2340, 'CVSUXHL9203875461209', '19:30:00', '20:00:00', 'Saturday', 0);
 
 -- --------------------------------------------------------
 
@@ -2768,7 +3363,8 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`id`, `task`, `description`, `employee_id`, `due_date`, `completed`, `status`, `date_created`) VALUES
-(9, 'Sample Task', 'Sample Task Edit', 'CVSUKNC085291637', '2022-04-22', '0000-00-00', 0, '2022-04-15 22:45:33');
+(9, 'Sample Task', 'Sample Task Edit', 'CVSUKNC085291637', '2022-04-22', '2022-06-10', 2, '2022-04-15 22:45:33'),
+(11, 'Develop Todo APP', 'Create a Todo App', 'CVSUPOR895461732', '2022-06-30', '2022-06-15', 2, '2022-06-15 10:17:30');
 
 -- --------------------------------------------------------
 
@@ -2784,6 +3380,16 @@ CREATE TABLE `task_progress` (
   `is_complete` tinyint(1) NOT NULL COMMENT '0=no,1=Yes	',
   `data_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `task_progress`
+--
+
+INSERT INTO `task_progress` (`id`, `task_id`, `progress`, `document`, `is_complete`, `data_created`) VALUES
+(21, 9, 'Sample', NULL, 1, '2022-06-10 14:40:49'),
+(22, 11, 'Created UI', NULL, 0, '2022-06-15 10:19:16'),
+(23, 11, 'Functionality Created', NULL, 0, '2022-06-15 10:19:31'),
+(24, 11, 'Testing Done', NULL, 1, '2022-06-15 10:20:46');
 
 -- --------------------------------------------------------
 
@@ -2824,7 +3430,8 @@ CREATE TABLE `training_course` (
 --
 
 INSERT INTO `training_course` (`id`, `course_code`, `course_title`, `course_details`) VALUES
-(8, 'PWE-235', 'Sample Course', 'Sample Course 102');
+(8, 'PWE-235', 'Sample Course', 'Sample Course 102'),
+(9, 'Code101', 'Web Development 2022', 'Bootcamp 2022');
 
 -- --------------------------------------------------------
 
@@ -2855,7 +3462,8 @@ CREATE TABLE `training_list` (
 --
 
 INSERT INTO `training_list` (`id`, `training_code`, `training_title`, `training_objective`, `training_course`, `batch_size`, `schedule_from`, `schedule_to`, `training_mode`, `training_details`, `training_duration`, `training_vendor`, `training_trainer`, `training_experience`, `training_status`) VALUES
-(8, 'CVSUTRAZCS021983754', 'Sample Training', 'Sample Objective', 8, 5, '2022-04-16 22:58:00', '2022-04-17 22:58:00', 'Online', 'Zoom Meeting :  sample link', '24', 6, 'Francis Ong', 'Web Developer', 'inactive');
+(8, 'CVSUTRAZCS021983754', 'Sample Training', 'Sample Objective', 8, 5, '2022-04-16 22:58:00', '2022-04-17 22:58:00', 'Online', 'Zoom Meeting :  sample link', '24', 6, 'Francis Ong', 'Web Developer', 'inactive'),
+(9, 'CVSUTRANBY832176490', 'Web Development 101', 'upskill web development', 9, 20, '2022-06-23 10:33:00', '2022-06-30 10:33:00', 'Hybrid', 'Monday - Friday 8-5pm', '168', 7, 'Francis Ong Jr.', 'Web Development', 'active');
 
 -- --------------------------------------------------------
 
@@ -2880,7 +3488,8 @@ CREATE TABLE `training_record` (
 --
 
 INSERT INTO `training_record` (`id`, `reference_no`, `employee_id`, `training_code`, `internal_note`, `status`, `review`, `request_date`, `comment`) VALUES
-(29, 'CVSUATTSOR846721903', 'CVSUKNC085291637', 'CVSUTRAZCS021983754', '', 'Finished', 0, '2022-04-15', '');
+(29, 'CVSUATTSOR846721903', 'CVSUKNC085291637', 'CVSUTRAZCS021983754', '', 'Finished', 0, '2022-04-15', ''),
+(30, 'CVSUATTTIM912463507', 'CVSUPOR895461732', 'CVSUTRANBY832176490', 'Sample (Edited)', 'On-going', 0, '2022-06-15', '');
 
 -- --------------------------------------------------------
 
@@ -2903,7 +3512,8 @@ CREATE TABLE `training_vendor` (
 --
 
 INSERT INTO `training_vendor` (`id`, `vendor_code`, `vendor_name`, `email`, `contact`, `experience`, `contact_person`) VALUES
-(6, 'CVSUTVZLX819570264', 'CVSU', 'vendor@cvsu.edu.ph', '087354132423', 'Sample Exeperience', 'Juan Dela Cruz');
+(6, 'CVSUTVZLX819570264', 'CVSU', 'vendor@cvsu.edu.ph', '087354132423', 'Sample Exeperience', 'Juan Dela Cruz'),
+(7, 'CVSUTVYBQ530749186', 'Juan Academy 101', 'francis.ong25@gmail.com', '09542565236', 'Web Development', 'Francis Ong Jr.');
 
 --
 -- Indexes for dumped tables
@@ -3162,31 +3772,31 @@ ALTER TABLE `training_vendor`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `allowance`
 --
 ALTER TABLE `allowance`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `applicant`
 --
 ALTER TABLE `applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `attendance_correction`
 --
 ALTER TABLE `attendance_correction`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `benefits`
@@ -3198,13 +3808,13 @@ ALTER TABLE `benefits`
 -- AUTO_INCREMENT for table `benefit_record`
 --
 ALTER TABLE `benefit_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cash_advance`
 --
 ALTER TABLE `cash_advance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `deduction`
@@ -3234,31 +3844,31 @@ ALTER TABLE `department_category`
 -- AUTO_INCREMENT for table `disciplinary_action`
 --
 ALTER TABLE `disciplinary_action`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `disciplinary_category`
 --
 ALTER TABLE `disciplinary_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `document_folder`
 --
 ALTER TABLE `document_folder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `employment_category`
@@ -3270,37 +3880,37 @@ ALTER TABLE `employment_category`
 -- AUTO_INCREMENT for table `emp_max_hours`
 --
 ALTER TABLE `emp_max_hours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `event_request`
 --
 ALTER TABLE `event_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `overtime`
@@ -3312,7 +3922,7 @@ ALTER TABLE `overtime`
 -- AUTO_INCREMENT for table `overtime_request`
 --
 ALTER TABLE `overtime_request`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `payroll_coverage_table`
@@ -3336,13 +3946,13 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1873;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2341;
 
 --
 -- AUTO_INCREMENT for table `ssl_table`
@@ -3354,13 +3964,13 @@ ALTER TABLE `ssl_table`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `task_progress`
 --
 ALTER TABLE `task_progress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tax`
@@ -3372,25 +3982,25 @@ ALTER TABLE `tax`
 -- AUTO_INCREMENT for table `training_course`
 --
 ALTER TABLE `training_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `training_list`
 --
 ALTER TABLE `training_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `training_record`
 --
 ALTER TABLE `training_record`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `training_vendor`
 --
 ALTER TABLE `training_vendor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

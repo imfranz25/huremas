@@ -13,7 +13,7 @@
 		//creating reference_id
 		$reference_id = "CVSUREQA".generate_id();
 
-		$sql = $conn->execute("INSERT INTO document_request (reference_id,employee_id,request_name,request_note,request_by) VALUES (?,?,?,?,?)");
+		$sql = $conn->prepare("INSERT INTO document_request (reference_id,employee_id,request_name,request_note,request_by) VALUES (?,?,?,?,?)");
     $sql->bind_param('sssss',$reference_id,$employee_id,$request_name,$details,$request_by);
 
     //send notif

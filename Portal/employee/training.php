@@ -37,7 +37,7 @@
         </div>
         <!-- Page-header end -->
                         
-        <div class="pcoded-inner-content">
+        <div class="pcoded-inner-content h-100">
           <?php include_once '../admin/includes/session_alert.php'; ?>         
           <!-- Main-body start -->
           <div class="card">             
@@ -67,7 +67,7 @@
                      <?php include 'training_request.php'; ?>  
                   </div>
                   <!--Deduction Table-->
-                  <div class="card container tab-pane fade show active" id="attab">
+                  <div class="card container tab-pane fade show" id="attab">
                     <?php include 'training_list.php'; ?>
                   </div>
                   <!--Tax Table-->
@@ -137,7 +137,7 @@
   function getTraining(id){
     $.ajax({
       type: 'POST',
-      url: '/Portal/admin/function/training_list_row.php',
+      url: '../admin/function/training_list_row.php',
       data: {id:id},
       dataType: 'json',
       success :function(response){
@@ -200,12 +200,6 @@
     }
     //ACTIVE TAB **END**
 
-    // ensure that the other tab pane is hidden when the other one is shown :)
-    $('.nav-tabs a').on('shown.bs.tab', function(){
-      var showTab = $(this).attr('href');
-      hide_ttab();
-      $(showTab).show();
-    });//**end**
 
     // ensure that the other tab pane is hidden when the other one is shown :)
     $(document).on('shown.bs.tab','.nav-tabs a', function(){
